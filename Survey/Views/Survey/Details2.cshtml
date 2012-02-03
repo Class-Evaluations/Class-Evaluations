@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Survey.Models.BuildSurvey_Result>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<center><h2>Raleigh Parks and Recreation Participant Evaluation</h2></center>
+<br />
+<h4>@Html.Label("Name of Program:")</h4>                     
+<h4>@Html.Label("Facility Used:")</h4>
+<h4>@Html.Label("Date of Parogram(mm/dd/yyyy):")</h4>
+<br/>   
+<p><b>"The goal of Raleigh Parks and Recreation is to offer the best programming possible. The pupose of this survey is to gather information from residents in the community concerning various programs offered. We are interested in improving services and programs offered in the future and value your input. Please take the time to answer the following questions and be as honest as possible. All answers to this survey will remain anonymous." </b></p>
+
+@*<table>
+    <tr>
+        <th>    
+            Section Id
+        </th>
+        <th>
+            Title
+        </th>
+        <th>
+           Question Text
+        </th>
+        <th>
+            Answer Type
+        </th>
+        <th>
+            Answer Type Name
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+    @if (item.section_id > (0))
+    { 
+        @sectionid == item.section_id  
+        <td>
+            @Html.DisplayFor(modelItem => item.title)
+        </td>
+        
+        @while (item.section_id) = @sectionid
+        <td>
+            @Html.DisplayFor(modelItem => item.question_text)
+        </td>
+
+   
+    }
+        <td>
+            @Html.DisplayFor(modelItem => item.answer_type_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.answer_type_name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+    <tr></tr>
+    <tr></tr>
+}
+</table>*@
+<div></div>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

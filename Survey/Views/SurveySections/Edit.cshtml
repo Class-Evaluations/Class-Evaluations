@@ -1,0 +1,51 @@
+﻿@model Survey.Models.SURVEY_QUESTIONS
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>SURVEY_QUESTIONS</legend>
+
+        @Html.HiddenFor(model => model.survey_questions_id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.survey_id, "SURVEY")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("survey_id", String.Empty)
+            @Html.ValidationMessageFor(model => model.survey_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.question_id, "QUESTION")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("question_id", String.Empty)
+            @Html.ValidationMessageFor(model => model.question_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.section_id, "SURVEY_SECTION")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("section_id", String.Empty)
+            @Html.ValidationMessageFor(model => model.section_id)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

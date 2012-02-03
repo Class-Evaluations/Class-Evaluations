@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/class_extensions/!svn/ver/57/Survey/trunk/Survey/Views/UserMailer
+END
+_Layout.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/class_extensions/!svn/ver/56/Survey/trunk/Survey/Views/UserMailer/_Layout.cshtml
+END
+PasswordReset.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/class_extensions/!svn/ver/56/Survey/trunk/Survey/Views/UserMailer/PasswordReset.cshtml
+END

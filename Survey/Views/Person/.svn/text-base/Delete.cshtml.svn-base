@@ -1,0 +1,38 @@
+﻿@model Survey.Models.QUESTION
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>QUESTION</legend>
+
+    <div class="display-label">Question Text</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.question_text)
+    </div>
+
+    <div class="display-label">Answer Type ID</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.answer_type_id)
+    </div>
+
+    <div class="display-label">Date Stamp</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.datestamp)
+    </div>
+
+    <div class="display-label">Created By</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.user_stamp)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

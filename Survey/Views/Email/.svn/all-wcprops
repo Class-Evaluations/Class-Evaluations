@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/class_extensions/!svn/ver/102/Survey/trunk/Survey/Views/Email
+END
+WelcomeEmail.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/class_extensions/!svn/ver/58/Survey/trunk/Survey/Views/Email/WelcomeEmail.cshtml
+END
+Register.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/class_extensions/!svn/ver/56/Survey/trunk/Survey/Views/Email/Register.cshtml
+END
+sendWelcome.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/class_extensions/!svn/ver/102/Survey/trunk/Survey/Views/Email/sendWelcome.cshtml
+END

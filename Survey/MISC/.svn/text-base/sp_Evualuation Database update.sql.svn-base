@@ -1,0 +1,1 @@
+select * from CLASS_701.dbo.REGISTRATION

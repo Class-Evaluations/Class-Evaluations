@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/class_extensions/!svn/ver/5/Survey/trunk/Survey/MISC
+END
+SurveySampleScript.sql
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/class_extensions/!svn/ver/5/Survey/trunk/Survey/MISC/SurveySampleScript.sql
+END
+sp_Evualuation Database update.sql
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/class_extensions/!svn/ver/5/Survey/trunk/Survey/MISC/sp_Evualuation%20Database%20update.sql
+END
+Script Survey_DB.sql
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/class_extensions/!svn/ver/5/Survey/trunk/Survey/MISC/Script%20Survey_DB.sql
+END
+spGetSurveyQuestions.sql
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/class_extensions/!svn/ver/5/Survey/trunk/Survey/MISC/spGetSurveyQuestions.sql
+END
+CreateDatabaseScript.sql
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/class_extensions/!svn/ver/5/Survey/trunk/Survey/MISC/CreateDatabaseScript.sql
+END
+sp_GetCourseInfo.sql
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/class_extensions/!svn/ver/5/Survey/trunk/Survey/MISC/sp_GetCourseInfo.sql
+END

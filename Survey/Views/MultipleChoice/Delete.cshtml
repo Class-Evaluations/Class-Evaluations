@@ -1,0 +1,28 @@
+﻿@model Survey.Models.QUESTION_MULTIPLE_CHOICE
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>QUESTION_MULTIPLE_CHOICE</legend>
+
+    <div class="display-label">QUESTION</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.QUESTION.question_text)
+    </div>
+
+    <div class="display-label">choice_text</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.choice_text)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/class_extensions/!svn/ver/123/Survey/trunk/Survey/Views/Person
+END
+Index.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/class_extensions/!svn/ver/123/Survey/trunk/Survey/Views/Person/Index.cshtml
+END
+Delete.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/class_extensions/!svn/ver/94/Survey/trunk/Survey/Views/Person/Delete.cshtml
+END
+Details.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/class_extensions/!svn/ver/104/Survey/trunk/Survey/Views/Person/Details.cshtml
+END
+Edit.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/class_extensions/!svn/ver/57/Survey/trunk/Survey/Views/Person/Edit.cshtml
+END
+sendWelcome.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/class_extensions/!svn/ver/103/Survey/trunk/Survey/Views/Person/sendWelcome.cshtml
+END

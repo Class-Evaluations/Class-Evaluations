@@ -1,0 +1,30 @@
+﻿@model Survey.Models.SURVEY_QUESTIONS
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>SURVEY_QUESTIONS</legend>
+
+    <div class="display-label">SURVEY</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SURVEY.title)
+    </div>
+
+    <div class="display-label">QUESTION</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.QUESTION.question_text)
+    </div>
+
+    <div class="display-label">SURVEY_SECTION</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SURVEY_SECTION.title)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.survey_questions_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
