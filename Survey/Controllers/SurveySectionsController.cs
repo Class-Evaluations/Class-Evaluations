@@ -42,7 +42,7 @@ namespace Survey.Controllers
             ViewBag.question_id = new SelectList(db.QUESTIONs, "question_id", "question_text");
             ViewBag.section_id = new SelectList(db.SURVEY_SECTION, "survey_section_id", "title");
             return View();
-        } 
+        }
 
 
         //
@@ -50,12 +50,25 @@ namespace Survey.Controllers
         [HttpPost]
         public ActionResult Create(SURVEY_QUESTIONS survey_questions)
         {
+            if (survey_questions.survey_id == 0)
+            { ModelState.AddModelError("survey_id", "Survey is a required field."); }
+            if (survey_questions.question_id == 0)
+            { ModelState.AddModelError("question_id", "Question is a required field."); }
+            if (survey_questions.section_id == 0)
+            { ModelState.AddModelError("section_id", "Survey Section is a required field."); }
+            //check if the question already exits in the survey
+            if (survey_questions.question_id > 0 && survey_questions.survey_id > 0)
+            {
+                SURVEY_QUESTIONS survey_questions_check = db.SURVEY_QUESTIONS.Single(s => s.survey_id == survey_questions.survey_id && s.question_id == survey_questions.question_id);
+                if (survey_questions_check.question_id == survey_questions.question_id) { ModelState.AddModelError("survey_id", "Dupicate questions are not allowed on the same survey."); }
+            }
+            //if (survey_questions_check.question_id == survey_questions.question_id) {ModelState.AddModelError("survey_id", "Dupicate questions are not allowed on the same survey."); }
             if (ModelState.IsValid)
             {
                 db.SURVEY_QUESTIONS.AddObject(survey_questions);
                 db.SaveChanges();
                 //return RedirectToAction("Details", "Survey", survey_questions.survey_id);
-                return RedirectToAction("Details", new RouteValueDictionary(new { controller = "Survey", action = "Details", Id = survey_questions.survey_id })); 
+                return RedirectToAction("Details", new RouteValueDictionary(new { controller = "Survey", action = "Details", Id = survey_questions.survey_id }));
             }
 
             ViewBag.question_id = new SelectList(db.QUESTIONs, "question_id", "question_text", survey_questions.question_id);

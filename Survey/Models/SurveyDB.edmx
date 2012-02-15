@@ -470,7 +470,8 @@
           </FunctionImport>
           <FunctionImport Name="GetCourseList" />
           <FunctionImport Name="spGetCoursesWithSurveyStatus" />
-          <FunctionImport Name="GetCoursesWithStatus" ReturnType="Collection(Survey_DBModel.GetCoursesWithStatus_Result)" />
+          <FunctionImport Name="GetCoursesWithStatus" />
+          <FunctionImport Name="GetCoursesWithSurveyStatus" ReturnType="Collection(Survey_DBModel.spGetCoursesWithSurveyStatus_Result)" />
         </EntityContainer>
         <EntityType Name="ANSWER">
           <Key>
@@ -823,7 +824,7 @@
           <Property Type="Int32" Name="answer_type_id" Nullable="true" />
           <Property Type="String" Name="answer_type_name" Nullable="true" MaxLength="40" />
         </ComplexType>
-        <ComplexType Name="GetCoursesWithStatus_Result">
+        <ComplexType Name="spGetCoursesWithSurveyStatus_Result">
           <Property Type="Int32" Name="course_id" Nullable="false" />
           <Property Type="Int32" Name="activity_id" Nullable="false" />
           <Property Type="String" Name="course_status_id" Nullable="false" MaxLength="1" />
@@ -835,6 +836,9 @@
           <Property Type="String" Name="description" Nullable="true" MaxLength="2000" />
           <Property Type="String" Name="activityTile" Nullable="false" MaxLength="60" />
           <Property Type="String" Name="course_status" Nullable="true" MaxLength="2" />
+          <Property Type="DateTime" Name="date_sent" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="lifetime" Nullable="true" />
+          <Property Type="DateTime" Name="survey_expires" Nullable="true" Precision="23" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -983,8 +987,10 @@
           <FunctionImportMapping FunctionImportName="spGetCoursesWithSurveyStatus" FunctionName="Survey_DBModel.Store.spGetCoursesWithSurveyStatus">
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetCoursesWithStatus" FunctionName="Survey_DBModel.Store.spGetCoursesWithSurveyStatus">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCoursesWithSurveyStatus" FunctionName="Survey_DBModel.Store.spGetCoursesWithSurveyStatus">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="Survey_DBModel.GetCoursesWithStatus_Result">
+              <ComplexTypeMapping TypeName="Survey_DBModel.spGetCoursesWithSurveyStatus_Result">
                 <ScalarProperty Name="course_id" ColumnName="course_id" />
                 <ScalarProperty Name="activity_id" ColumnName="activity_id" />
                 <ScalarProperty Name="course_status_id" ColumnName="course_status_id" />
@@ -996,6 +1002,9 @@
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="activityTile" ColumnName="activityTile" />
                 <ScalarProperty Name="course_status" ColumnName="course_status" />
+                <ScalarProperty Name="date_sent" ColumnName="date_sent" />
+                <ScalarProperty Name="lifetime" ColumnName="lifetime" />
+                <ScalarProperty Name="survey_expires" ColumnName="survey_expires" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

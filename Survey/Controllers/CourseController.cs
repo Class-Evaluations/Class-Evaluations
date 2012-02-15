@@ -33,7 +33,8 @@ namespace Survey.Controllers
                 page = 1;
             }
 
-            var CourseDetails = survey_db.GetCoursesWithStatus().ToList();
+            //var CourseDetails = survey_db.GetCoursesWithStatus().ToList();
+            var CourseDetails = survey_db.GetCoursesWithSurveyStatus().ToList();
 
 
             ////searching functionality

@@ -533,9 +533,17 @@ namespace Survey.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectResult<GetCoursesWithStatus_Result> GetCoursesWithStatus()
+        public int GetCoursesWithStatus()
         {
-            return base.ExecuteFunction<GetCoursesWithStatus_Result>("GetCoursesWithStatus");
+            return base.ExecuteFunction("GetCoursesWithStatus");
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectResult<spGetCoursesWithSurveyStatus_Result> GetCoursesWithSurveyStatus()
+        {
+            return base.ExecuteFunction<spGetCoursesWithSurveyStatus_Result>("GetCoursesWithSurveyStatus");
         }
 
         #endregion
@@ -4297,28 +4305,28 @@ namespace Survey.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmComplexTypeAttribute(NamespaceName="Survey_DBModel", Name="GetCoursesWithStatus_Result")]
+    [EdmComplexTypeAttribute(NamespaceName="Survey_DBModel", Name="spGetCoursesWithSurveyStatus_Result")]
     [DataContractAttribute(IsReference=true)]
     [Serializable()]
-    public partial class GetCoursesWithStatus_Result : ComplexObject
+    public partial class spGetCoursesWithSurveyStatus_Result : ComplexObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new GetCoursesWithStatus_Result object.
+        /// Create a new spGetCoursesWithSurveyStatus_Result object.
         /// </summary>
         /// <param name="course_id">Initial value of the course_id property.</param>
         /// <param name="activity_id">Initial value of the activity_id property.</param>
         /// <param name="course_status_id">Initial value of the course_status_id property.</param>
         /// <param name="activityTile">Initial value of the activityTile property.</param>
-        public static GetCoursesWithStatus_Result CreateGetCoursesWithStatus_Result(global::System.Int32 course_id, global::System.Int32 activity_id, global::System.String course_status_id, global::System.String activityTile)
+        public static spGetCoursesWithSurveyStatus_Result CreatespGetCoursesWithSurveyStatus_Result(global::System.Int32 course_id, global::System.Int32 activity_id, global::System.String course_status_id, global::System.String activityTile)
         {
-            GetCoursesWithStatus_Result getCoursesWithStatus_Result = new GetCoursesWithStatus_Result();
-            getCoursesWithStatus_Result.course_id = course_id;
-            getCoursesWithStatus_Result.activity_id = activity_id;
-            getCoursesWithStatus_Result.course_status_id = course_status_id;
-            getCoursesWithStatus_Result.activityTile = activityTile;
-            return getCoursesWithStatus_Result;
+            spGetCoursesWithSurveyStatus_Result spGetCoursesWithSurveyStatus_Result = new spGetCoursesWithSurveyStatus_Result();
+            spGetCoursesWithSurveyStatus_Result.course_id = course_id;
+            spGetCoursesWithSurveyStatus_Result.activity_id = activity_id;
+            spGetCoursesWithSurveyStatus_Result.course_status_id = course_status_id;
+            spGetCoursesWithSurveyStatus_Result.activityTile = activityTile;
+            return spGetCoursesWithSurveyStatus_Result;
         }
 
         #endregion
@@ -4587,6 +4595,78 @@ namespace Survey.Models
         private global::System.String _course_status;
         partial void Oncourse_statusChanging(global::System.String value);
         partial void Oncourse_statusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> date_sent
+        {
+            get
+            {
+                return _date_sent;
+            }
+            set
+            {
+                Ondate_sentChanging(value);
+                ReportPropertyChanging("date_sent");
+                _date_sent = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("date_sent");
+                Ondate_sentChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _date_sent;
+        partial void Ondate_sentChanging(Nullable<global::System.DateTime> value);
+        partial void Ondate_sentChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> lifetime
+        {
+            get
+            {
+                return _lifetime;
+            }
+            set
+            {
+                OnlifetimeChanging(value);
+                ReportPropertyChanging("lifetime");
+                _lifetime = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("lifetime");
+                OnlifetimeChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _lifetime;
+        partial void OnlifetimeChanging(Nullable<global::System.Int32> value);
+        partial void OnlifetimeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> survey_expires
+        {
+            get
+            {
+                return _survey_expires;
+            }
+            set
+            {
+                Onsurvey_expiresChanging(value);
+                ReportPropertyChanging("survey_expires");
+                _survey_expires = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("survey_expires");
+                Onsurvey_expiresChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _survey_expires;
+        partial void Onsurvey_expiresChanging(Nullable<global::System.DateTime> value);
+        partial void Onsurvey_expiresChanged();
 
         #endregion
     }

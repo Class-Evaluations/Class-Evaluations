@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<Survey.Models.GetCoursesWithStatus_Result>
+﻿@model PagedList.IPagedList<Survey.Models.spGetCoursesWithSurveyStatus_Result>
            
 @{
     ViewBag.Title = "Courses";
@@ -49,7 +49,7 @@
             <strong> Activity ID </strong>
         </th>
         <th>
-            <strong> Title </strong>
+            <strong> Activity Title - Course Title </strong>
         </th>
         <th>
             <strong> Course Number </strong>
@@ -86,19 +86,32 @@
         {
             <td>
                 <font style="color:red">
-                @Html.Raw("Not Available")</font>
+                Survey expires @Html.DisplayFor(ModelItem => item.survey_expires)</font>
             </td> 
         }
 @*        <td>             
             <input type="checkbox" name="deleteInputs" value="@item.course_id" />         
         </td>
-*@        <td>
+*@
+        <td>
             @Html.DisplayFor(ModelItem => item.activity_id)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.activityTile)  
-            @Html.DisplayFor(modelItem => item.courseTitle)
-        </td>
+        
+        @if (item.course_status == null)
+        {
+            <td>
+                @Html.DisplayFor(ModelItem => item.activityTile) -
+                
+                @Html.DisplayFor(ModleItem => item.courseTitle)
+            </td>
+        }
+        else
+        {
+            <td> 
+                @Html.ActionLink(item.activityTile + "-" + item.courseTitle, "PrintCustomers")
+            </td>
+        }
+
         <td>
             @Html.DisplayFor(modelItem => item.course_id)
         </td>

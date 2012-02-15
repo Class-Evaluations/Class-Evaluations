@@ -108,7 +108,10 @@ namespace Survey.Controllers
        public ViewResult sendWelcome(FormCollection col)
         {
 
-            int survey_id = Convert.ToInt32(col["survey_id"]);
+            if (col["survey_id"] == "")
+            { ModelState.AddModelError("survey_id", "You must select a survey."); }
+            
+            int survey_id = Convert.ToInt32(col["survey_id"]); 
 
            //Get the values sent by form that are comma delimited and put them in an
            //array, this will help when the ability to select more than one course to send out.

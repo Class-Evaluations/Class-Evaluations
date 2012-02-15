@@ -11,7 +11,6 @@
             @Html.DropDownList("survey_id", (SelectList)ViewBag.survey, "Select a survey to send")
         </div>
 
- 
     <h2>Particpate information</h2>
     
 <table>
@@ -54,6 +53,9 @@
     }
     </table>
 <tr>
+
+    @if ("survey_id" == "")
+    { <script type="text/javascript">alert("Your must select a survey to send.");</script> } 
 
     <div>
         <h5>Send emails to the participates listed below that have email addresses and the private flag is not set.</h5>
