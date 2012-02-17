@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<Survey.Models.spGetCoursesWithSurveyStatus_Result>
+﻿@model PagedList.IPagedList<Survey.Models.GetCoursesWithSurveyStatus_Result>
            
 @{
     ViewBag.Title = "Courses";
@@ -79,14 +79,14 @@
         @if (item.course_status == null)
         {
             <td>
-                @Html.ActionLink("Select", "../Person/Details", new { id = item.course_id })
+                @Html.ActionLink("Select", "../QuickView/Details", new { id = item.course_id })
             </td>
         }
         else 
         {
             <td>
                 <font style="color:red">
-                Survey expires @Html.DisplayFor(ModelItem => item.survey_expires)</font>
+                Survey expires @Html.DisplayFor(ModelItem => item.survey_exp_date)</font>
             </td> 
         }
 @*        <td>             

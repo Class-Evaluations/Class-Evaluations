@@ -16,7 +16,6 @@
     <EntitySet Name="SURVEY_QUESTIONS" EntityType="Survey_DBModel.SURVEY_QUESTIONS" />
     <EntitySet Name="SURVEY_REQUEST_SENT" EntityType="Survey_DBModel.SURVEY_REQUEST_SENT" />
     <EntitySet Name="SURVEY_SECTION" EntityType="Survey_DBModel.SURVEY_SECTION" />
-    <EntitySet Name="sysdiagrams" EntityType="Survey_DBModel.sysdiagram" />
     <EntitySet Name="USERS" EntityType="Survey_DBModel.USER" />
     <AssociationSet Name="FK_ANSWER_LONG_ANSWER" Association="Survey_DBModel.FK_ANSWER_LONG_ANSWER">
       <End Role="ANSWER" EntitySet="ANSWERs" />
@@ -70,9 +69,7 @@
       <Parameter Name="survey_id" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="GetCourseList" />
-    <FunctionImport Name="spGetCoursesWithSurveyStatus" />
-    <FunctionImport Name="GetCoursesWithStatus" />
-    <FunctionImport Name="GetCoursesWithSurveyStatus" ReturnType="Collection(Survey_DBModel.spGetCoursesWithSurveyStatus_Result)" />
+    <FunctionImport Name="GetCoursesWithSurveyStatus" ReturnType="Collection(Survey_DBModel.GetCoursesWithSurveyStatus_Result)" />
   </EntityContainer>
   <EntityType Name="ANSWER">
     <Key>
@@ -162,6 +159,7 @@
     <Property Name="course_status_id" Type="Int32" Nullable="false" />
     <Property Name="course_id" Type="Int32" Nullable="false" />
     <Property Name="course_status1" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Type="DateTime" Name="survey_exp_date" />
   </EntityType>
   <EntityType Name="QUESTION">
     <Key>
@@ -250,16 +248,6 @@
     <Property Name="datestamp" Type="DateTime" Nullable="false" />
     <Property Name="user_stamp" Type="Int32" Nullable="false" />
     <NavigationProperty Name="SURVEY_QUESTIONS" Relationship="Survey_DBModel.FK_SURVEY_QUESTIONS_SURVEY_SECTION" FromRole="SURVEY_SECTION" ToRole="SURVEY_QUESTIONS" />
-  </EntityType>
-  <EntityType Name="sysdiagram">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="USER">
     <Key>
@@ -425,7 +413,7 @@
     <Property Type="Int32" Name="answer_type_id" Nullable="true" />
     <Property Type="String" Name="answer_type_name" Nullable="true" MaxLength="40" />
   </ComplexType>
-  <ComplexType Name="spGetCoursesWithSurveyStatus_Result">
+  <ComplexType Name="GetCoursesWithSurveyStatus_Result">
     <Property Type="Int32" Name="course_id" Nullable="false" />
     <Property Type="Int32" Name="activity_id" Nullable="false" />
     <Property Type="String" Name="course_status_id" Nullable="false" MaxLength="1" />
@@ -437,8 +425,6 @@
     <Property Type="String" Name="description" Nullable="true" MaxLength="2000" />
     <Property Type="String" Name="activityTile" Nullable="false" MaxLength="60" />
     <Property Type="String" Name="course_status" Nullable="true" MaxLength="2" />
-    <Property Type="DateTime" Name="date_sent" Nullable="true" Precision="23" />
-    <Property Type="Int32" Name="lifetime" Nullable="true" />
-    <Property Type="DateTime" Name="survey_expires" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="survey_exp_date" Nullable="true" Precision="23" />
   </ComplexType>
 </Schema>

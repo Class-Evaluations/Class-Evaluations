@@ -21,7 +21,6 @@
           <EntitySet Name="SURVEY_QUESTIONS" EntityType="Survey_DBModel.Store.SURVEY_QUESTIONS" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SURVEY_REQUEST_SENT" EntityType="Survey_DBModel.Store.SURVEY_REQUEST_SENT" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SURVEY_SECTION" EntityType="Survey_DBModel.Store.SURVEY_SECTION" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="sysdiagrams" EntityType="Survey_DBModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="USERS" EntityType="Survey_DBModel.Store.USERS" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_ANSWER_LONG_ANSWER" Association="Survey_DBModel.Store.FK_ANSWER_LONG_ANSWER">
             <End Role="ANSWER" EntitySet="ANSWER" />
@@ -149,6 +148,7 @@
           <Property Name="course_status_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="course_id" Type="int" Nullable="false" />
           <Property Name="course_status" Type="char" Nullable="false" MaxLength="2" />
+          <Property Name="survey_exp_date" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="QUESTION">
           <Key>
@@ -224,16 +224,6 @@
           <Property Name="section_id_order" Type="int" Nullable="false" />
           <Property Name="datestamp" Type="datetime" Nullable="false" />
           <Property Name="user_stamp" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="USERS">
           <Key>
@@ -415,7 +405,6 @@
           <EntitySet Name="SURVEY_QUESTIONS" EntityType="Survey_DBModel.SURVEY_QUESTIONS" />
           <EntitySet Name="SURVEY_REQUEST_SENT" EntityType="Survey_DBModel.SURVEY_REQUEST_SENT" />
           <EntitySet Name="SURVEY_SECTION" EntityType="Survey_DBModel.SURVEY_SECTION" />
-          <EntitySet Name="sysdiagrams" EntityType="Survey_DBModel.sysdiagram" />
           <EntitySet Name="USERS" EntityType="Survey_DBModel.USER" />
           <AssociationSet Name="FK_ANSWER_LONG_ANSWER" Association="Survey_DBModel.FK_ANSWER_LONG_ANSWER">
             <End Role="ANSWER" EntitySet="ANSWERs" />
@@ -469,9 +458,7 @@
           <Parameter Name="survey_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetCourseList" />
-          <FunctionImport Name="spGetCoursesWithSurveyStatus" />
-          <FunctionImport Name="GetCoursesWithStatus" />
-          <FunctionImport Name="GetCoursesWithSurveyStatus" ReturnType="Collection(Survey_DBModel.spGetCoursesWithSurveyStatus_Result)" />
+          <FunctionImport Name="GetCoursesWithSurveyStatus" ReturnType="Collection(Survey_DBModel.GetCoursesWithSurveyStatus_Result)" />
         </EntityContainer>
         <EntityType Name="ANSWER">
           <Key>
@@ -561,6 +548,7 @@
           <Property Name="course_status_id" Type="Int32" Nullable="false" />
           <Property Name="course_id" Type="Int32" Nullable="false" />
           <Property Name="course_status1" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="true" />
+          <Property Type="DateTime" Name="survey_exp_date" />
         </EntityType>
         <EntityType Name="QUESTION">
           <Key>
@@ -649,16 +637,6 @@
           <Property Name="datestamp" Type="DateTime" Nullable="false" />
           <Property Name="user_stamp" Type="Int32" Nullable="false" />
           <NavigationProperty Name="SURVEY_QUESTIONS" Relationship="Survey_DBModel.FK_SURVEY_QUESTIONS_SURVEY_SECTION" FromRole="SURVEY_SECTION" ToRole="SURVEY_QUESTIONS" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="USER">
           <Key>
@@ -824,7 +802,7 @@
           <Property Type="Int32" Name="answer_type_id" Nullable="true" />
           <Property Type="String" Name="answer_type_name" Nullable="true" MaxLength="40" />
         </ComplexType>
-        <ComplexType Name="spGetCoursesWithSurveyStatus_Result">
+        <ComplexType Name="GetCoursesWithSurveyStatus_Result">
           <Property Type="Int32" Name="course_id" Nullable="false" />
           <Property Type="Int32" Name="activity_id" Nullable="false" />
           <Property Type="String" Name="course_status_id" Nullable="false" MaxLength="1" />
@@ -836,9 +814,7 @@
           <Property Type="String" Name="description" Nullable="true" MaxLength="2000" />
           <Property Type="String" Name="activityTile" Nullable="false" MaxLength="60" />
           <Property Type="String" Name="course_status" Nullable="true" MaxLength="2" />
-          <Property Type="DateTime" Name="date_sent" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="lifetime" Nullable="true" />
-          <Property Type="DateTime" Name="survey_expires" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="survey_exp_date" Nullable="true" Precision="23" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -896,7 +872,8 @@
             <ScalarProperty Name="user_stamp" ColumnName="user_stamp" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="COURSE_STATUS"><EntityTypeMapping TypeName="Survey_DBModel.COURSE_STATUS"><MappingFragment StoreEntitySet="COURSE_STATUS">
-            <ScalarProperty Name="course_status_id" ColumnName="course_status_id" />
+            <ScalarProperty Name="survey_exp_date" ColumnName="survey_exp_date" />
+                <ScalarProperty Name="course_status_id" ColumnName="course_status_id" />
             <ScalarProperty Name="course_id" ColumnName="course_id" />
             <ScalarProperty Name="course_status1" ColumnName="course_status" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
@@ -954,13 +931,6 @@
             <ScalarProperty Name="datestamp" ColumnName="datestamp" />
             <ScalarProperty Name="user_stamp" ColumnName="user_stamp" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams"><EntityTypeMapping TypeName="Survey_DBModel.sysdiagram"><MappingFragment StoreEntitySet="sysdiagrams">
-            <ScalarProperty Name="name" ColumnName="name" />
-            <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-            <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-            <ScalarProperty Name="version" ColumnName="version" />
-            <ScalarProperty Name="definition" ColumnName="definition" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="USERS"><EntityTypeMapping TypeName="Survey_DBModel.USER"><MappingFragment StoreEntitySet="USERS">
             <ScalarProperty Name="user_id" ColumnName="user_id" />
             <ScalarProperty Name="user_name" ColumnName="user_name" />
@@ -984,13 +954,9 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetCourseList" FunctionName="Survey_DBModel.Store.spGetCoursesWithSurveyStatus">
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="spGetCoursesWithSurveyStatus" FunctionName="Survey_DBModel.Store.spGetCoursesWithSurveyStatus">
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetCoursesWithStatus" FunctionName="Survey_DBModel.Store.spGetCoursesWithSurveyStatus">
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetCoursesWithSurveyStatus" FunctionName="Survey_DBModel.Store.spGetCoursesWithSurveyStatus">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="Survey_DBModel.spGetCoursesWithSurveyStatus_Result">
+              <ComplexTypeMapping TypeName="Survey_DBModel.GetCoursesWithSurveyStatus_Result">
                 <ScalarProperty Name="course_id" ColumnName="course_id" />
                 <ScalarProperty Name="activity_id" ColumnName="activity_id" />
                 <ScalarProperty Name="course_status_id" ColumnName="course_status_id" />
@@ -1002,9 +968,7 @@
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="activityTile" ColumnName="activityTile" />
                 <ScalarProperty Name="course_status" ColumnName="course_status" />
-                <ScalarProperty Name="date_sent" ColumnName="date_sent" />
-                <ScalarProperty Name="lifetime" ColumnName="lifetime" />
-                <ScalarProperty Name="survey_expires" ColumnName="survey_expires" />
+                <ScalarProperty Name="survey_exp_date" ColumnName="survey_exp_date" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1028,7 +992,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="SurveyDB">
+      <Diagram Name="SurveyDB" ZoomLevel="89">
         <EntityTypeShape EntityType="Survey_DBModel.ANSWER" Width="1.5" PointX="3" PointY="8.375" Height="2.8726042054096865" IsExpanded="true" />
         <EntityTypeShape EntityType="Survey_DBModel.ANSWER_LONG" Width="1.5" PointX="5.25" PointY="3.375" Height="1.9377083571751914" IsExpanded="true" />
         <EntityTypeShape EntityType="Survey_DBModel.ANSWER_MULTIPLE_CHOICE" Width="1.5" PointX="5.25" PointY="6.125" Height="1.9377083571751914" IsExpanded="true" />
@@ -1036,7 +1000,7 @@
         <EntityTypeShape EntityType="Survey_DBModel.ANSWER_SHORT" Width="1.5" PointX="5.25" PointY="11.5" Height="1.9377083571751896" IsExpanded="true" />
         <EntityTypeShape EntityType="Survey_DBModel.ANSWER_TRUE_FALSE" Width="1.5" PointX="5.25" PointY="14.125" Height="1.9377083571751896" IsExpanded="true" />
         <EntityTypeShape EntityType="Survey_DBModel.ANSWER_TYPE" Width="1.5" PointX="0.75" PointY="0.75" Height="2.8726042054096865" IsExpanded="true" />
-        <EntityTypeShape EntityType="Survey_DBModel.COURSE_STATUS" Width="1.5" PointX="2.75" PointY="0.75" Height="1.563750017881393" IsExpanded="true" />
+        <EntityTypeShape EntityType="Survey_DBModel.COURSE_STATUS" Width="1.5" PointX="2.625" PointY="0.5" Height="1.7507291875282927" IsExpanded="true" />
         <EntityTypeShape EntityType="Survey_DBModel.QUESTION" Width="1.5" PointX="0.75" PointY="11.25" Height="2.6856250357627864" IsExpanded="true" />
         <EntityTypeShape EntityType="Survey_DBModel.QUESTION_MULTIPLE_CHOICE" Width="1.5" PointX="3" PointY="16.875" Height="1.7507291875282931" IsExpanded="true" />
         <EntityTypeShape EntityType="Survey_DBModel.QUESTION_SCALE" Width="1.5" PointX="3" PointY="19.375" Height="2.3116666964689969" IsExpanded="true" />
@@ -1044,8 +1008,7 @@
         <EntityTypeShape EntityType="Survey_DBModel.SURVEY_QUESTIONS" Width="1.5" PointX="3" PointY="12.375" Height="2.31166669646899" IsExpanded="true" />
         <EntityTypeShape EntityType="Survey_DBModel.SURVEY_REQUEST_SENT" Width="1.5" PointX="3" PointY="4.75" Height="2.68562503576279" IsExpanded="true" />
         <EntityTypeShape EntityType="Survey_DBModel.SURVEY_SECTION" Width="1.5" PointX="0.5" PointY="15" Height="2.1246875268220933" IsExpanded="true" />
-        <EntityTypeShape EntityType="Survey_DBModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" Height="1.9377083571751967" IsExpanded="true" />
-        <EntityTypeShape EntityType="Survey_DBModel.USER" Width="1.5" PointX="4.75" PointY="0.75" Height="1.7507291875282931" IsExpanded="true" />
+        <EntityTypeShape EntityType="Survey_DBModel.USER" Width="1.5" PointX="5" PointY="0.5" Height="1.7507291875282931" IsExpanded="true" />
         <AssociationConnector Association="Survey_DBModel.FK_ANSWER_LONG_ANSWER" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="8.383075923076925" />
           <ConnectorPoint PointX="4.90625" PointY="7.976825923076925" />

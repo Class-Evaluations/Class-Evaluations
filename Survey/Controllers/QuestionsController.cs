@@ -161,6 +161,11 @@ namespace Survey.Controllers
         [HttpPost]
         public ActionResult Create(QUESTION question)
         {
+            if (question.question_text == "")
+            { ModelState.AddModelError("question_text", "This is a required field."); }
+            if (question.answer_type_id == 0)
+            { ModelState.AddModelError("answer_type_id", "This is a required field."); }
+
             question.user_stamp = 1;
             question.datestamp = DateTime.Now;
             int answerType = question.answer_type_id;

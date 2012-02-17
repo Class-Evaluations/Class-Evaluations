@@ -16,7 +16,6 @@
     <EntitySet Name="SURVEY_QUESTIONS" EntityType="Survey_DBModel.Store.SURVEY_QUESTIONS" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="SURVEY_REQUEST_SENT" EntityType="Survey_DBModel.Store.SURVEY_REQUEST_SENT" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="SURVEY_SECTION" EntityType="Survey_DBModel.Store.SURVEY_SECTION" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="sysdiagrams" EntityType="Survey_DBModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="USERS" EntityType="Survey_DBModel.Store.USERS" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_ANSWER_LONG_ANSWER" Association="Survey_DBModel.Store.FK_ANSWER_LONG_ANSWER">
       <End Role="ANSWER" EntitySet="ANSWER" />
@@ -144,6 +143,7 @@
     <Property Name="course_status_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="course_id" Type="int" Nullable="false" />
     <Property Name="course_status" Type="char" Nullable="false" MaxLength="2" />
+    <Property Name="survey_exp_date" Type="datetime" />
   </EntityType>
   <EntityType Name="QUESTION">
     <Key>
@@ -219,16 +219,6 @@
     <Property Name="section_id_order" Type="int" Nullable="false" />
     <Property Name="datestamp" Type="datetime" Nullable="false" />
     <Property Name="user_stamp" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="USERS">
     <Key>

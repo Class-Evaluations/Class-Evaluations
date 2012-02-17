@@ -324,22 +324,6 @@ namespace Survey.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<sysdiagram> sysdiagrams
-        {
-            get
-            {
-                if ((_sysdiagrams == null))
-                {
-                    _sysdiagrams = base.CreateObjectSet<sysdiagram>("sysdiagrams");
-                }
-                return _sysdiagrams;
-            }
-        }
-        private ObjectSet<sysdiagram> _sysdiagrams;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<USER> USERS
         {
             get
@@ -477,14 +461,6 @@ namespace Survey.Models
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the sysdiagrams EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddTosysdiagrams(sysdiagram sysdiagram)
-        {
-            base.AddObject("sysdiagrams", sysdiagram);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the USERS EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToUSERS(USER uSER)
@@ -525,25 +501,9 @@ namespace Survey.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public int spGetCoursesWithSurveyStatus()
+        public ObjectResult<GetCoursesWithSurveyStatus_Result> GetCoursesWithSurveyStatus()
         {
-            return base.ExecuteFunction("spGetCoursesWithSurveyStatus");
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public int GetCoursesWithStatus()
-        {
-            return base.ExecuteFunction("GetCoursesWithStatus");
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectResult<spGetCoursesWithSurveyStatus_Result> GetCoursesWithSurveyStatus()
-        {
-            return base.ExecuteFunction<spGetCoursesWithSurveyStatus_Result>("GetCoursesWithSurveyStatus");
+            return base.ExecuteFunction<GetCoursesWithSurveyStatus_Result>("GetCoursesWithSurveyStatus");
         }
 
         #endregion
@@ -2123,6 +2083,30 @@ namespace Survey.Models
         private global::System.String _course_status1;
         partial void Oncourse_status1Changing(global::System.String value);
         partial void Oncourse_status1Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> survey_exp_date
+        {
+            get
+            {
+                return _survey_exp_date;
+            }
+            set
+            {
+                Onsurvey_exp_dateChanging(value);
+                ReportPropertyChanging("survey_exp_date");
+                _survey_exp_date = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("survey_exp_date");
+                Onsurvey_exp_dateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _survey_exp_date;
+        partial void Onsurvey_exp_dateChanging(Nullable<global::System.DateTime> value);
+        partial void Onsurvey_exp_dateChanged();
 
         #endregion
     
@@ -3771,161 +3755,6 @@ namespace Survey.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Survey_DBModel", Name="sysdiagram")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class sysdiagram : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new sysdiagram object.
-        /// </summary>
-        /// <param name="name">Initial value of the name property.</param>
-        /// <param name="principal_id">Initial value of the principal_id property.</param>
-        /// <param name="diagram_id">Initial value of the diagram_id property.</param>
-        public static sysdiagram Createsysdiagram(global::System.String name, global::System.Int32 principal_id, global::System.Int32 diagram_id)
-        {
-            sysdiagram sysdiagram = new sysdiagram();
-            sysdiagram.name = name;
-            sysdiagram.principal_id = principal_id;
-            sysdiagram.diagram_id = diagram_id;
-            return sysdiagram;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String name
-        {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                OnnameChanging(value);
-                ReportPropertyChanging("name");
-                _name = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("name");
-                OnnameChanged();
-            }
-        }
-        private global::System.String _name;
-        partial void OnnameChanging(global::System.String value);
-        partial void OnnameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 principal_id
-        {
-            get
-            {
-                return _principal_id;
-            }
-            set
-            {
-                Onprincipal_idChanging(value);
-                ReportPropertyChanging("principal_id");
-                _principal_id = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("principal_id");
-                Onprincipal_idChanged();
-            }
-        }
-        private global::System.Int32 _principal_id;
-        partial void Onprincipal_idChanging(global::System.Int32 value);
-        partial void Onprincipal_idChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 diagram_id
-        {
-            get
-            {
-                return _diagram_id;
-            }
-            set
-            {
-                if (_diagram_id != value)
-                {
-                    Ondiagram_idChanging(value);
-                    ReportPropertyChanging("diagram_id");
-                    _diagram_id = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("diagram_id");
-                    Ondiagram_idChanged();
-                }
-            }
-        }
-        private global::System.Int32 _diagram_id;
-        partial void Ondiagram_idChanging(global::System.Int32 value);
-        partial void Ondiagram_idChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> version
-        {
-            get
-            {
-                return _version;
-            }
-            set
-            {
-                OnversionChanging(value);
-                ReportPropertyChanging("version");
-                _version = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("version");
-                OnversionChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _version;
-        partial void OnversionChanging(Nullable<global::System.Int32> value);
-        partial void OnversionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.Byte[] definition
-        {
-            get
-            {
-                return StructuralObject.GetValidValue(_definition);
-            }
-            set
-            {
-                OndefinitionChanging(value);
-                ReportPropertyChanging("definition");
-                _definition = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("definition");
-                OndefinitionChanged();
-            }
-        }
-        private global::System.Byte[] _definition;
-        partial void OndefinitionChanging(global::System.Byte[] value);
-        partial void OndefinitionChanged();
-
-        #endregion
-    
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="Survey_DBModel", Name="USER")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -4305,28 +4134,28 @@ namespace Survey.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmComplexTypeAttribute(NamespaceName="Survey_DBModel", Name="spGetCoursesWithSurveyStatus_Result")]
+    [EdmComplexTypeAttribute(NamespaceName="Survey_DBModel", Name="GetCoursesWithSurveyStatus_Result")]
     [DataContractAttribute(IsReference=true)]
     [Serializable()]
-    public partial class spGetCoursesWithSurveyStatus_Result : ComplexObject
+    public partial class GetCoursesWithSurveyStatus_Result : ComplexObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new spGetCoursesWithSurveyStatus_Result object.
+        /// Create a new GetCoursesWithSurveyStatus_Result object.
         /// </summary>
         /// <param name="course_id">Initial value of the course_id property.</param>
         /// <param name="activity_id">Initial value of the activity_id property.</param>
         /// <param name="course_status_id">Initial value of the course_status_id property.</param>
         /// <param name="activityTile">Initial value of the activityTile property.</param>
-        public static spGetCoursesWithSurveyStatus_Result CreatespGetCoursesWithSurveyStatus_Result(global::System.Int32 course_id, global::System.Int32 activity_id, global::System.String course_status_id, global::System.String activityTile)
+        public static GetCoursesWithSurveyStatus_Result CreateGetCoursesWithSurveyStatus_Result(global::System.Int32 course_id, global::System.Int32 activity_id, global::System.String course_status_id, global::System.String activityTile)
         {
-            spGetCoursesWithSurveyStatus_Result spGetCoursesWithSurveyStatus_Result = new spGetCoursesWithSurveyStatus_Result();
-            spGetCoursesWithSurveyStatus_Result.course_id = course_id;
-            spGetCoursesWithSurveyStatus_Result.activity_id = activity_id;
-            spGetCoursesWithSurveyStatus_Result.course_status_id = course_status_id;
-            spGetCoursesWithSurveyStatus_Result.activityTile = activityTile;
-            return spGetCoursesWithSurveyStatus_Result;
+            GetCoursesWithSurveyStatus_Result getCoursesWithSurveyStatus_Result = new GetCoursesWithSurveyStatus_Result();
+            getCoursesWithSurveyStatus_Result.course_id = course_id;
+            getCoursesWithSurveyStatus_Result.activity_id = activity_id;
+            getCoursesWithSurveyStatus_Result.course_status_id = course_status_id;
+            getCoursesWithSurveyStatus_Result.activityTile = activityTile;
+            return getCoursesWithSurveyStatus_Result;
         }
 
         #endregion
@@ -4601,72 +4430,24 @@ namespace Survey.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> date_sent
+        public Nullable<global::System.DateTime> survey_exp_date
         {
             get
             {
-                return _date_sent;
+                return _survey_exp_date;
             }
             set
             {
-                Ondate_sentChanging(value);
-                ReportPropertyChanging("date_sent");
-                _date_sent = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("date_sent");
-                Ondate_sentChanged();
+                Onsurvey_exp_dateChanging(value);
+                ReportPropertyChanging("survey_exp_date");
+                _survey_exp_date = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("survey_exp_date");
+                Onsurvey_exp_dateChanged();
             }
         }
-        private Nullable<global::System.DateTime> _date_sent;
-        partial void Ondate_sentChanging(Nullable<global::System.DateTime> value);
-        partial void Ondate_sentChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> lifetime
-        {
-            get
-            {
-                return _lifetime;
-            }
-            set
-            {
-                OnlifetimeChanging(value);
-                ReportPropertyChanging("lifetime");
-                _lifetime = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("lifetime");
-                OnlifetimeChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _lifetime;
-        partial void OnlifetimeChanging(Nullable<global::System.Int32> value);
-        partial void OnlifetimeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> survey_expires
-        {
-            get
-            {
-                return _survey_expires;
-            }
-            set
-            {
-                Onsurvey_expiresChanging(value);
-                ReportPropertyChanging("survey_expires");
-                _survey_expires = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("survey_expires");
-                Onsurvey_expiresChanged();
-            }
-        }
-        private Nullable<global::System.DateTime> _survey_expires;
-        partial void Onsurvey_expiresChanging(Nullable<global::System.DateTime> value);
-        partial void Onsurvey_expiresChanged();
+        private Nullable<global::System.DateTime> _survey_exp_date;
+        partial void Onsurvey_exp_dateChanging(Nullable<global::System.DateTime> value);
+        partial void Onsurvey_exp_dateChanged();
 
         #endregion
     }

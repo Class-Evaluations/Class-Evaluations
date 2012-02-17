@@ -8,8 +8,9 @@
 @using (Html.BeginForm("sendWelcome", "Person", FormMethod.Post))
 {
         <div class="editor-field">
-            @Html.DropDownList("survey_id", (SelectList)ViewBag.survey, "Select a survey to send")
-        </div>
+@*            @Html.DropDownList("survey_id", (SelectList)ViewBag.survey, "Select a survey to send")*@
+            @Html.DropDownList("survey_id", ViewBag.survey as SelectList, "Select a survey to send", new { rel = "0", @class = "required" }) 
+       </div>
 
     <h2>Particpate information</h2>
     
@@ -53,9 +54,6 @@
     }
     </table>
 <tr>
-
-    @if ("survey_id" == "")
-    { <script type="text/javascript">alert("Your must select a survey to send.");</script> } 
 
     <div>
         <h5>Send emails to the participates listed below that have email addresses and the private flag is not set.</h5>
