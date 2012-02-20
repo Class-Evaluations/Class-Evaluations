@@ -47,6 +47,7 @@ namespace Survey.WebPages
         int scale;
         int multi;
         int tlong;
+        int true_false;
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -218,14 +219,14 @@ namespace Survey.WebPages
                         //Answer_short                            
                         //True_False 
                         //determine what answer type
-                       
+
                         switch (answerTypeName.Trim())
                         {
                             case "Scale":
                                 scale = answerTypeId;
                                 RadioButtonList RadioButtonList1 = new RadioButtonList();
-                                RadioButtonList1.ID = Convert.ToString(questionId); 
-                                //RadioButtonList1.AutoPostBack = true;
+                                RadioButtonList1.ID = Convert.ToString(questionId);
+                                RadioButtonList1.AutoPostBack = true;
                                 RadioButtonList1.Items.Add(new ListItem("Strongly Agree", "5"));
                                 RadioButtonList1.Items.Add(new ListItem("Agree", "4"));
                                 RadioButtonList1.Items.Add(new ListItem("Neutral", "3"));
@@ -240,7 +241,7 @@ namespace Survey.WebPages
                                 scale = answerTypeId;
                                 RadioButtonList RadioButtonList2 = new RadioButtonList();
                                 RadioButtonList2.ID = Convert.ToString(questionId);
-                                //RadioButtonList2.AutoPostBack = true;
+                                RadioButtonList2.AutoPostBack = true;
 
                                 //Get the choice values.
                                 using (SqlConnection conn1 = new SqlConnection(dsn))
@@ -261,12 +262,12 @@ namespace Survey.WebPages
                                 panelContent.Controls.Add(RadioButtonList2);
                                 panelContent.Controls.Add(new LiteralControl("<br /> <br /> <br />"));
                                 break;
-                            case "Mulit-Choice-multi":
-                                multi = answerTypeID;
+                            case "Multi-Choice-multi":
+                                multi = answerTypeId;
                                 CheckBoxList CheckBoxList1 = new CheckBoxList();
                                 CheckBoxList1.ID = Convert.ToString(questionId);
                                 //CheckBoxList1.SelectionMode = multiple;
-                                //CheckBoxList1.AutoPostBack = true;
+                                CheckBoxList1.AutoPostBack = true;
 
                                 //Get the choice values.
                                 using (SqlConnection conn2 = new SqlConnection(dsn))
@@ -290,7 +291,7 @@ namespace Survey.WebPages
                             case "Answer_short":
                                 TextBox TextBox1 = new TextBox();
                                 TextBox1.ID = Convert.ToString(questionId);
-                                //TextBox1.AutoPostBack = true;
+                                TextBox1.AutoPostBack = true;
                                 TextBox1.Style["BorderStyle"] = "Solid";
                                 TextBox1.Style["Height"] = "61px";
                                 TextBox1.Style["Width"] = "620px";
@@ -298,10 +299,10 @@ namespace Survey.WebPages
                                 panelContent.Controls.Add(new LiteralControl("<br /> <br /> <br />"));
                                 break;
                             case "Answer_long":
-                                tlong = answerTypeID;
+                                tlong = answerTypeId;
                                 TextBox TextBox2 = new TextBox();
                                 TextBox2.ID = Convert.ToString(questionId);
-                                //TextBox2.AutoPostBack = true;
+                                TextBox2.AutoPostBack = true;
                                 TextBox2.Style["BorderStyle"] = "Solid";
                                 TextBox2.Style["Height"] = "61px";
                                 TextBox2.Style["Width"] = "620px";
@@ -309,9 +310,9 @@ namespace Survey.WebPages
                                 panelContent.Controls.Add(new LiteralControl("<br /> <br /> <br />"));
                                 break;
                             case "True_False":
-                                scale = answerTypeId;
+                                true_false = answerTypeId;
                                 RadioButtonList RadioButtonList3 = new RadioButtonList();
-                                //RadioButtonList3.AutoPostBack = true;
+                                RadioButtonList3.AutoPostBack = true;
                                 RadioButtonList3.ID = Convert.ToString(questionId);
                                 RadioButtonList3.Items.Insert(0, new ListItem("False", "0"));
                                 RadioButtonList3.Items.Insert(1, new ListItem("True", "1"));
@@ -357,21 +358,18 @@ namespace Survey.WebPages
                     Panel chp = ((System.Web.UI.WebControls.Panel)ctrl);
                     foreach (Control ctrl2 in chp.Controls)
                     {
+
                         if (ctrl2 is TextBox)
                         {
                             questionID = Convert.ToInt32(ctrl2.ID);
                             TextBox answer = ((System.Web.UI.WebControls.TextBox)ctrl2);
                             answerText = answer.Text;
 
+                            answerTypeID = GetAnswerType();
+
                             if (!String.IsNullOrEmpty(answerText))
                             { answerText = (answerText).Replace("'", "''"); }
-                            answerTypeID = 5;
-                            if (tlong == 0)
-                            {
-                                answerTypeID = 6;
-                            }
-
-                            string aname = answerTypeName;
+                            //string aname = answerTypeName;
                             InsertAnswer();
                         }
 
@@ -381,6 +379,8 @@ namespace Survey.WebPages
                         if (ctrl2 is CheckBoxList)
                         {
                             questionID = Convert.ToInt32(ctrl2.ID);
+
+                            answerTypeID = GetAnswerType();
 
                             CheckBoxList answer = ((System.Web.UI.WebControls.CheckBoxList)ctrl2);
                             answerText = answer.SelectedValue;
@@ -394,7 +394,7 @@ namespace Survey.WebPages
                                         //answerText = answer.SelectedValue;
                                         answerText = answer.Items[i].Text;
                                         answerText = (answerText).Replace("'", "''");
-                                        answerTypeID = 4;
+                                        //answerTypeID = 4;
                                         InsertAnswer();
                                     }
 
@@ -408,7 +408,9 @@ namespace Survey.WebPages
                             questionID = Convert.ToInt32(ctrl2.ID);
                             RadioButtonList answer = ((System.Web.UI.WebControls.RadioButtonList)ctrl2);
 
-                            switch (scale)
+                            answerTypeID = GetAnswerType();
+
+                            switch (answerTypeID)
                             {
                                 case 2:
                                     answerInt = Convert.ToInt32(answer.SelectedIndex);
@@ -416,26 +418,26 @@ namespace Survey.WebPages
                                 case 3:
                                     answerText = answer.SelectedValue;
                                     break;
-                                case 7:
-                                    answerInt = answerInt = Convert.ToInt32(answer.SelectedIndex);
-                                    break;
+                                //case 7:
+                                //    answerInt = answerInt = Convert.ToInt32(answer.SelectedIndex);
+                                //    break;
                                 default:
                                     break;
                             }
-                            answerTypeID = scale;
+                            //answerTypeID = scale;
                             InsertAnswer();
                         }
                     }
                 }
             }
-            Response.Redirect("~/WebPages/ThankYou.aspx", true); 
+            Response.Redirect("~/WebPages/ThankYou.aspx", true);
         }
 
 
-        protected void InsertAnswer() 
+        protected void InsertAnswer()
         {
-            
-            
+
+
             //INSERT INTO THE ANSWER TABLE THEN RETRIEVE THE ANSWER ID
             string dsn = "Data Source=10.6.5.69;Initial Catalog=Survey_DB;User Id=surveyhelper; Password=helpme";
 
@@ -447,7 +449,7 @@ namespace Survey.WebPages
             }
 
 
-            //gO GET THE ANSWER TYPE NAME TO DETERMINE THE TABLE TO INSERT ANSWER AND GET THE ANSWER ID FOR ALL INSERTS
+            //GET THE ANSWER TYPE NAME TO DETERMINE THE TABLE TO INSERT ANSWER AND GET THE ANSWER ID FOR ALL INSERTS
             using (SqlConnection conn = new SqlConnection(dsn))
             using (SqlCommand cmd5 = new SqlCommand("SELECT answer_id, question_id FROM ANSWER WHERE question_id = " + questionID, conn))
             {
@@ -486,7 +488,7 @@ namespace Survey.WebPages
                     tablename = "ANSWER_MULTIPLE_CHOICE";
                     condition = "(" + answerID + ", '" + answerText + "', " + survey_request_sentID + ")";
                     break;
-                case "Mulit-Choice-multi":
+                case "Multi-Choice-multi":
                     tablename = "ANSWER_MULTIPLE_CHOICE";
                     condition = "(" + answerID + ", '" + answerText + "', " + survey_request_sentID + ")";
                     break;
@@ -515,6 +517,24 @@ namespace Survey.WebPages
                 SqlDataReader reader = cmd6.ExecuteReader();
             }
 
+        }
+
+        public int GetAnswerType()
+        {
+            //add a query to get the answer type.   
+            string dsn = "Data Source=10.6.5.69;Initial Catalog=Survey_DB;User Id=surveyhelper; Password=helpme";
+            using (SqlConnection conn = new SqlConnection(dsn))
+            using (SqlCommand cmd = new SqlCommand("SELECT answer_type_id FROM QUESTION WHERE question_id = " + questionID, conn))
+            {
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    answerTypeID = reader.GetInt32(0);
+                }
+            }
+            return answerTypeID;
         }
     }
 }

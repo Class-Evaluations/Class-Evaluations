@@ -79,7 +79,7 @@
         @if (item.course_status == null)
         {
             <td>
-                @Html.ActionLink("Select", "../QuickView/Details", new { id = item.course_id })
+                @Html.ActionLink("Select", "../Person/Details", new { id = item.course_id })
             </td>
         }
         else 
@@ -108,7 +108,7 @@
         else
         {
             <td> 
-                @Html.ActionLink(item.activityTile + "-" + item.courseTitle, "PrintCustomers")
+                @Html.ActionLink(item.activityTile + "-" + item.courseTitle,"../Index")
             </td>
         }
 

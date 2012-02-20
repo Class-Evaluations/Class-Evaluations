@@ -148,7 +148,7 @@
           <Property Name="course_status_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="course_id" Type="int" Nullable="false" />
           <Property Name="course_status" Type="char" Nullable="false" MaxLength="2" />
-          <Property Name="survey_exp_date" Type="datetime" Nullable="false" />
+          <Property Name="survey_exp_date" Type="datetime" />
         </EntityType>
         <EntityType Name="QUESTION">
           <Key>
