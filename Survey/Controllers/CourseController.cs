@@ -72,5 +72,18 @@ namespace Survey.Controllers
             int pageIndex = (page ?? 1) - 1;
             return View(CourseDetails.ToPagedList(pageIndex, pageSize));
         }
+
+        public ViewResult AnswerDetails(int id)
+        {
+
+
+            var answerDetails = from a in survey_db.SURVEY_REQUEST_SENT
+                                join b in survey_db.ANSWER_SCALE on a.survey_request_sent_id equals b.survey_request_sent_id
+                                where a.course_id == id
+                                select b;
+
+            return View(answerDetails);
+
+        }
    }
 }

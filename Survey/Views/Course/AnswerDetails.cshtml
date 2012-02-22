@@ -1,18 +1,16 @@
 ﻿@model IEnumerable<Survey.Models.ANSWER_SCALE>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "AnswerDetails";
 }
 
-<h2>Index</h2>
+<h2>AnswerDetails</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table>
     <tr>
         <th>
-            ANSWER
+            answer_id
         </th>
         <th>
             submitted_answer
@@ -26,7 +24,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.ANSWER.answer_id)
+            @Html.DisplayFor(modelItem => item.answer_id)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.submitted_answer)
@@ -34,11 +32,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.survey_request_sent_id)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.answer_scale_id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.answer_scale_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.answer_scale_id })
-        </td>
+
     </tr>
 }
 

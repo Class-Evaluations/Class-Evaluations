@@ -85,7 +85,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\QuickViewController.cs" />
     <Compile Include="ViewModels\CourseList.cs" />
     <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Controllers\QuestionsController.cs" />
@@ -118,7 +117,6 @@
     <Compile Include="ViewModels\QuestionDetails.cs" />
     <Compile Include="ViewModels\Questions_Multiple_Choice.cs" />
     <Compile Include="ViewModels\SurveySection.cs" />
-    <Compile Include="ViewModels\UpdateEmailRequestSent.cs" />
     <Compile Include="WebPages\AlreadyAnswered.aspx.cs">
       <DependentUpon>AlreadyAnswered.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -362,19 +360,7 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\QuickView\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\QuickView\Details.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\QuickView\Create.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\QuickView\Edit.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\QuickView\Delete.cshtml" />
+    <Content Include="Views\Course\AnswerDetails.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

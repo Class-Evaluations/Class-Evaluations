@@ -108,7 +108,7 @@
         else
         {
             <td> 
-                @Html.ActionLink(item.activityTile + "-" + item.courseTitle,"../Index")
+                @Html.ActionLink(item.activityTile + "-" + item.courseTitle, "AnswerDetails", new {id = item.course_id});
             </td>
         }
 
