@@ -36,7 +36,7 @@
         <span class="notranslate">&nbsp;</span></p>
     <p>
         <img alt="Parks and Recreations" class="style2" 
-            src="../Content/themes/base/images/small%20pr%20logo.jpg" /></p>
+            src="../Content/Images/logo.png" /></p>
     <div>
     
     </div>

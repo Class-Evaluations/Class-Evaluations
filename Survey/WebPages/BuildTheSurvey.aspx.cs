@@ -52,6 +52,7 @@ namespace Survey.WebPages
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Page.MaintainScrollPositionOnPostBack = true;
             //ListControlCollections();
             string sPath = System.Web.HttpContext.Current.Request.Url.AbsolutePath;
 

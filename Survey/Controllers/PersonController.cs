@@ -188,11 +188,9 @@ namespace Survey.Controllers
                         string emailBody = "";
                         devemail.Subject = subjectline;
 
-
-                        devemail.Priority = System.Net.Mail.MailPriority.High;
                         devemail.IsBodyHtml = true;
 
-                        string SurveyUrl = String.Concat("http://localhost:1777/WebPages/BuildTheSurvey.aspx/", personhash);
+                        string SurveyUrl = String.Concat("http://reclinkdev:8080/WebPages/BuildTheSurvey.aspx/", personhash);
 
                         emailBody = "<p> Hello " + item.first_name + ", </p> <p></P> <p>The goal of Raleigh Parks and Recreation is to offer the best" +
                                     " programming possible. The purpose of this survey is to gather information from residents in the community concerning" +
