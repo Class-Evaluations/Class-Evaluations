@@ -59,10 +59,15 @@ namespace Survey.Controllers
             //check if the question already exits in the survey
             if (survey_questions.question_id > 0 && survey_questions.survey_id > 0)
             {
-                SURVEY_QUESTIONS survey_questions_check = db.SURVEY_QUESTIONS.Single(s => s.survey_id == survey_questions.survey_id && s.question_id == survey_questions.question_id);
-                if (survey_questions_check.question_id == survey_questions.question_id) { ModelState.AddModelError("survey_id", "Dupicate questions are not allowed on the same survey."); }
+                SURVEY_QUESTIONS survey_questions_check = db.SURVEY_QUESTIONS.SingleOrDefault(s => s.survey_id == survey_questions.survey_id && s.question_id == survey_questions.question_id);
+                string checkforNulls = Convert.ToString(survey_questions_check);
+                if (!String.IsNullOrEmpty(checkforNulls))
+                {
+                    //var survey_quesinons_check 
+                    if (survey_questions_check.question_id == survey_questions.question_id) { ModelState.AddModelError("survey_id", "Dupicate questions are not allowed on the same survey."); }
+                }
             }
-            //if (survey_questions_check.question_id == survey_questions.question_id) {ModelState.AddModelError("survey_id", "Dupicate questions are not allowed on the same survey."); }
+
             if (ModelState.IsValid)
             {
                 db.SURVEY_QUESTIONS.AddObject(survey_questions);
@@ -75,8 +80,7 @@ namespace Survey.Controllers
             ViewBag.survey_id = new SelectList(db.SURVEYs, "survey_id", "title", survey_questions.survey_id);
             ViewBag.section_id = new SelectList(db.SURVEY_SECTION, "survey_section_id", "title", survey_questions.section_id);
             return View(survey_questions);
-        }
-        
+        }        
         //
         // GET: /SurveySections/Edit/5
  
