@@ -26,13 +26,13 @@
             <End Role="ANSWER" EntitySet="ANSWER" />
             <End Role="ANSWER_LONG" EntitySet="ANSWER_LONG" />
           </AssociationSet>
+          <AssociationSet Name="FK_ANSWER_LONG_SURVEY_SENT" Association="Survey_DBModel.Store.FK_ANSWER_LONG_SURVEY_SENT">
+            <End Role="SURVEY_REQUEST_SENT" EntitySet="SURVEY_REQUEST_SENT" />
+            <End Role="ANSWER_LONG" EntitySet="ANSWER_LONG" />
+          </AssociationSet>
           <AssociationSet Name="FK_ANSWER_MULTIPLE_CHOIC_ANSWER" Association="Survey_DBModel.Store.FK_ANSWER_MULTIPLE_CHOIC_ANSWER">
             <End Role="ANSWER" EntitySet="ANSWER" />
             <End Role="ANSWER_MULTIPLE_CHOICE" EntitySet="ANSWER_MULTIPLE_CHOICE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ANSWER_QUESTION" Association="Survey_DBModel.Store.FK_ANSWER_QUESTION">
-            <End Role="QUESTION" EntitySet="QUESTION" />
-            <End Role="ANSWER" EntitySet="ANSWER" />
           </AssociationSet>
           <AssociationSet Name="FK_ANSWER_SCALE_ANSWER1" Association="Survey_DBModel.Store.FK_ANSWER_SCALE_ANSWER1">
             <End Role="ANSWER" EntitySet="ANSWER" />
@@ -246,6 +246,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ANSWER_LONG_SURVEY_SENT">
+          <End Role="SURVEY_REQUEST_SENT" Type="Survey_DBModel.Store.SURVEY_REQUEST_SENT" Multiplicity="1" />
+          <End Role="ANSWER_LONG" Type="Survey_DBModel.Store.ANSWER_LONG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SURVEY_REQUEST_SENT">
+              <PropertyRef Name="survey_request_sent_id" />
+            </Principal>
+            <Dependent Role="ANSWER_LONG">
+              <PropertyRef Name="survey_request_sent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ANSWER_MULTIPLE_CHOIC_ANSWER">
           <End Role="ANSWER" Type="Survey_DBModel.Store.ANSWER" Multiplicity="1" />
           <End Role="ANSWER_MULTIPLE_CHOICE" Type="Survey_DBModel.Store.ANSWER_MULTIPLE_CHOICE" Multiplicity="*" />
@@ -255,18 +267,6 @@
             </Principal>
             <Dependent Role="ANSWER_MULTIPLE_CHOICE">
               <PropertyRef Name="answer_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ANSWER_QUESTION">
-          <End Role="QUESTION" Type="Survey_DBModel.Store.QUESTION" Multiplicity="1" />
-          <End Role="ANSWER" Type="Survey_DBModel.Store.ANSWER" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="QUESTION">
-              <PropertyRef Name="question_id" />
-            </Principal>
-            <Dependent Role="ANSWER">
-              <PropertyRef Name="answer_type_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -459,6 +459,10 @@
           </FunctionImport>
           <FunctionImport Name="GetCourseList" />
           <FunctionImport Name="GetCoursesWithSurveyStatus" ReturnType="Collection(Survey_DBModel.GetCoursesWithSurveyStatus_Result)" />
+          <AssociationSet Name="FK_ANSWER_LONG_SURVEY_SENT" Association="Survey_DBModel.FK_ANSWER_LONG_SURVEY_SENT">
+            <End Role="SURVEY_REQUEST_SENT" EntitySet="SURVEY_REQUEST_SENT" />
+            <End Role="ANSWER_LONG" EntitySet="ANSWER_LONG" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ANSWER">
           <Key>
@@ -484,6 +488,7 @@
           <Property Name="submitted_answer" Type="String" Nullable="false" MaxLength="2000" Unicode="true" FixedLength="true" />
           <Property Name="survey_request_sent_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ANSWER" Relationship="Survey_DBModel.FK_ANSWER_LONG_ANSWER" FromRole="ANSWER_LONG" ToRole="ANSWER" />
+          <NavigationProperty Name="SURVEY_REQUEST_SENT" Relationship="Survey_DBModel.FK_ANSWER_LONG_SURVEY_SENT" FromRole="ANSWER_LONG" ToRole="SURVEY_REQUEST_SENT" />
         </EntityType>
         <EntityType Name="ANSWER_MULTIPLE_CHOICE">
           <Key>
@@ -626,6 +631,7 @@
           <Property Name="user_stamp" Type="Int32" Nullable="false" />
           <Property Name="course_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="SURVEY" Relationship="Survey_DBModel.FK_SURVEY_REQUEST_SENT_SURVEY" FromRole="SURVEY_REQUEST_SENT" ToRole="SURVEY" />
+          <NavigationProperty Name="ANSWER_LONG" Relationship="Survey_DBModel.FK_ANSWER_LONG_SURVEY_SENT" FromRole="SURVEY_REQUEST_SENT" ToRole="ANSWER_LONG" />
         </EntityType>
         <EntityType Name="SURVEY_SECTION">
           <Key>
@@ -816,6 +822,18 @@
           <Property Type="String" Name="course_status" Nullable="true" MaxLength="2" />
           <Property Type="DateTime" Name="survey_exp_date" Nullable="true" Precision="23" />
         </ComplexType>
+        <Association Name="FK_ANSWER_LONG_SURVEY_SENT">
+          <End Type="Survey_DBModel.SURVEY_REQUEST_SENT" Role="SURVEY_REQUEST_SENT" Multiplicity="1" />
+          <End Type="Survey_DBModel.ANSWER_LONG" Role="ANSWER_LONG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SURVEY_REQUEST_SENT">
+              <PropertyRef Name="survey_request_sent_id" />
+            </Principal>
+            <Dependent Role="ANSWER_LONG">
+              <PropertyRef Name="survey_request_sent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1010,10 +1028,10 @@
         <EntityTypeShape EntityType="Survey_DBModel.SURVEY_SECTION" Width="1.5" PointX="0.5" PointY="15" Height="2.1246875268220933" IsExpanded="true" />
         <EntityTypeShape EntityType="Survey_DBModel.USER" Width="1.5" PointX="5" PointY="0.5" Height="1.7507291875282931" IsExpanded="true" />
         <AssociationConnector Association="Survey_DBModel.FK_ANSWER_LONG_ANSWER" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="8.383075923076925" />
-          <ConnectorPoint PointX="4.90625" PointY="7.976825923076925" />
-          <ConnectorPoint PointX="4.90625" PointY="4.3438541785875957" />
-          <ConnectorPoint PointX="5.25" PointY="4.3438541785875957" />
+          <ConnectorPoint PointX="4.5" PointY="8.3761528461538468" />
+          <ConnectorPoint PointX="4.875" PointY="8.0011528461538468" />
+          <ConnectorPoint PointX="4.875" PointY="4.4373437634110449" />
+          <ConnectorPoint PointX="5.25" PointY="4.4373437634110449" />
         </AssociationConnector>
         <AssociationConnector Association="Survey_DBModel.FK_ANSWER_MULTIPLE_CHOIC_ANSWER" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="8.4015374615384619" />
@@ -1067,8 +1085,8 @@
           <ConnectorPoint PointX="3" PointY="14.54578353129244" />
         </AssociationConnector>
         <AssociationConnector Association="Survey_DBModel.FK_SURVEY_REQUEST_SENT_SURVEY" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.625" PointY="6.467812517881395" />
-          <ConnectorPoint PointX="3" PointY="6.467812517881395" />
+          <ConnectorPoint PointX="2.625" PointY="6.5613021027048424" />
+          <ConnectorPoint PointX="3" PointY="6.5613021027048424" />
         </AssociationConnector>
         <AssociationConnector Association="Survey_DBModel.FK_SURVEY_QUESTIONS_SURVEY_SECTION" ManuallyRouted="false">
           <ConnectorPoint PointX="0.59375" PointY="15" />
@@ -1078,6 +1096,12 @@
           <ConnectorPoint PointX="2.3854166666666665" PointY="14.342395366115888" />
           <ConnectorPoint PointX="2.5520833333333335" PointY="14.342395366115888" />
           <ConnectorPoint PointX="3" PointY="14.342395366115888" />
+        </AssociationConnector>
+        <AssociationConnector Association="Survey_DBModel.FK_ANSWER_LONG_SURVEY_SENT" >
+          <ConnectorPoint PointX="4.5" PointY="5.1248437634110449" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="5.124843763411044" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="5.1248437634110449" />
+          <ConnectorPoint PointX="5.25" PointY="5.1248437634110449" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

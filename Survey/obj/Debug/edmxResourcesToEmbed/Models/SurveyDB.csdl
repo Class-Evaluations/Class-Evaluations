@@ -70,6 +70,10 @@
     </FunctionImport>
     <FunctionImport Name="GetCourseList" />
     <FunctionImport Name="GetCoursesWithSurveyStatus" ReturnType="Collection(Survey_DBModel.GetCoursesWithSurveyStatus_Result)" />
+    <AssociationSet Name="FK_ANSWER_LONG_SURVEY_SENT" Association="Survey_DBModel.FK_ANSWER_LONG_SURVEY_SENT">
+      <End Role="SURVEY_REQUEST_SENT" EntitySet="SURVEY_REQUEST_SENT" />
+      <End Role="ANSWER_LONG" EntitySet="ANSWER_LONG" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="ANSWER">
     <Key>
@@ -95,6 +99,7 @@
     <Property Name="submitted_answer" Type="String" Nullable="false" MaxLength="2000" Unicode="true" FixedLength="true" />
     <Property Name="survey_request_sent_id" Type="Int32" Nullable="false" />
     <NavigationProperty Name="ANSWER" Relationship="Survey_DBModel.FK_ANSWER_LONG_ANSWER" FromRole="ANSWER_LONG" ToRole="ANSWER" />
+    <NavigationProperty Name="SURVEY_REQUEST_SENT" Relationship="Survey_DBModel.FK_ANSWER_LONG_SURVEY_SENT" FromRole="ANSWER_LONG" ToRole="SURVEY_REQUEST_SENT" />
   </EntityType>
   <EntityType Name="ANSWER_MULTIPLE_CHOICE">
     <Key>
@@ -237,6 +242,7 @@
     <Property Name="user_stamp" Type="Int32" Nullable="false" />
     <Property Name="course_id" Type="Int32" Nullable="false" />
     <NavigationProperty Name="SURVEY" Relationship="Survey_DBModel.FK_SURVEY_REQUEST_SENT_SURVEY" FromRole="SURVEY_REQUEST_SENT" ToRole="SURVEY" />
+    <NavigationProperty Name="ANSWER_LONG" Relationship="Survey_DBModel.FK_ANSWER_LONG_SURVEY_SENT" FromRole="SURVEY_REQUEST_SENT" ToRole="ANSWER_LONG" />
   </EntityType>
   <EntityType Name="SURVEY_SECTION">
     <Key>
@@ -427,4 +433,16 @@
     <Property Type="String" Name="course_status" Nullable="true" MaxLength="2" />
     <Property Type="DateTime" Name="survey_exp_date" Nullable="true" Precision="23" />
   </ComplexType>
+  <Association Name="FK_ANSWER_LONG_SURVEY_SENT">
+    <End Type="Survey_DBModel.SURVEY_REQUEST_SENT" Role="SURVEY_REQUEST_SENT" Multiplicity="1" />
+    <End Type="Survey_DBModel.ANSWER_LONG" Role="ANSWER_LONG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SURVEY_REQUEST_SENT">
+        <PropertyRef Name="survey_request_sent_id" />
+      </Principal>
+      <Dependent Role="ANSWER_LONG">
+        <PropertyRef Name="survey_request_sent_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

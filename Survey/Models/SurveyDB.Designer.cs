@@ -30,6 +30,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("Survey_DBModel", "FK_SURVEY_QUESTIONS_SURVEY", "SURVEY", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Survey.Models.SURVEY), "SURVEY_QUESTIONS", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Survey.Models.SURVEY_QUESTIONS), true)]
 [assembly: EdmRelationshipAttribute("Survey_DBModel", "FK_SURVEY_REQUEST_SENT_SURVEY", "SURVEY", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Survey.Models.SURVEY), "SURVEY_REQUEST_SENT", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Survey.Models.SURVEY_REQUEST_SENT), true)]
 [assembly: EdmRelationshipAttribute("Survey_DBModel", "FK_SURVEY_QUESTIONS_SURVEY_SECTION", "SURVEY_SECTION", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Survey.Models.SURVEY_SECTION), "SURVEY_QUESTIONS", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Survey.Models.SURVEY_QUESTIONS), true)]
+[assembly: EdmRelationshipAttribute("Survey_DBModel", "FK_ANSWER_LONG_SURVEY_SENT", "SURVEY_REQUEST_SENT", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Survey.Models.SURVEY_REQUEST_SENT), "ANSWER_LONG", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Survey.Models.ANSWER_LONG), true)]
 
 #endregion
 
@@ -965,6 +966,44 @@ namespace Survey.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ANSWER>("Survey_DBModel.FK_ANSWER_LONG_ANSWER", "ANSWER", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Survey_DBModel", "FK_ANSWER_LONG_SURVEY_SENT", "SURVEY_REQUEST_SENT")]
+        public SURVEY_REQUEST_SENT SURVEY_REQUEST_SENT
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SURVEY_REQUEST_SENT>("Survey_DBModel.FK_ANSWER_LONG_SURVEY_SENT", "SURVEY_REQUEST_SENT").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SURVEY_REQUEST_SENT>("Survey_DBModel.FK_ANSWER_LONG_SURVEY_SENT", "SURVEY_REQUEST_SENT").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<SURVEY_REQUEST_SENT> SURVEY_REQUEST_SENTReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SURVEY_REQUEST_SENT>("Survey_DBModel.FK_ANSWER_LONG_SURVEY_SENT", "SURVEY_REQUEST_SENT");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SURVEY_REQUEST_SENT>("Survey_DBModel.FK_ANSWER_LONG_SURVEY_SENT", "SURVEY_REQUEST_SENT", value);
                 }
             }
         }
@@ -3561,6 +3600,28 @@ namespace Survey.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SURVEY>("Survey_DBModel.FK_SURVEY_REQUEST_SENT_SURVEY", "SURVEY", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Survey_DBModel", "FK_ANSWER_LONG_SURVEY_SENT", "ANSWER_LONG")]
+        public EntityCollection<ANSWER_LONG> ANSWER_LONG
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ANSWER_LONG>("Survey_DBModel.FK_ANSWER_LONG_SURVEY_SENT", "ANSWER_LONG");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ANSWER_LONG>("Survey_DBModel.FK_ANSWER_LONG_SURVEY_SENT", "ANSWER_LONG", value);
                 }
             }
         }

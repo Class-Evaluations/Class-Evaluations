@@ -16,16 +16,16 @@ namespace Survey.Controllers
         public ActionResult Index()
         {
             ViewBag.Message = "Survey Results Matrix will be here.";
-            var data = from courses in _db.COURSE_STATUS
-                       group courses by courses.course_status1 into courseStatusGroup
-                       select new CourseStatusGroup()
-                       {
-                           CourseStatus = courseStatusGroup.Key,
-                           CourseCount = courseStatusGroup.Count()
+            //var data = from courses in _db.COURSE_STATUS
+            //           group courses by courses.course_status1 into courseStatusGroup
+            //           select new CourseStatusGroup()
+            //           {
+            //               CourseStatus = courseStatusGroup.Key,
+            //               CourseCount = courseStatusGroup.Count()
 
 
-                       };
-            return View(data);
+            //           };
+            return View();
 
        }
 

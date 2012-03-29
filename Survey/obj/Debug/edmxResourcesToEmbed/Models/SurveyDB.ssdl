@@ -21,13 +21,13 @@
       <End Role="ANSWER" EntitySet="ANSWER" />
       <End Role="ANSWER_LONG" EntitySet="ANSWER_LONG" />
     </AssociationSet>
+    <AssociationSet Name="FK_ANSWER_LONG_SURVEY_SENT" Association="Survey_DBModel.Store.FK_ANSWER_LONG_SURVEY_SENT">
+      <End Role="SURVEY_REQUEST_SENT" EntitySet="SURVEY_REQUEST_SENT" />
+      <End Role="ANSWER_LONG" EntitySet="ANSWER_LONG" />
+    </AssociationSet>
     <AssociationSet Name="FK_ANSWER_MULTIPLE_CHOIC_ANSWER" Association="Survey_DBModel.Store.FK_ANSWER_MULTIPLE_CHOIC_ANSWER">
       <End Role="ANSWER" EntitySet="ANSWER" />
       <End Role="ANSWER_MULTIPLE_CHOICE" EntitySet="ANSWER_MULTIPLE_CHOICE" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ANSWER_QUESTION" Association="Survey_DBModel.Store.FK_ANSWER_QUESTION">
-      <End Role="QUESTION" EntitySet="QUESTION" />
-      <End Role="ANSWER" EntitySet="ANSWER" />
     </AssociationSet>
     <AssociationSet Name="FK_ANSWER_SCALE_ANSWER1" Association="Survey_DBModel.Store.FK_ANSWER_SCALE_ANSWER1">
       <End Role="ANSWER" EntitySet="ANSWER" />
@@ -241,6 +241,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ANSWER_LONG_SURVEY_SENT">
+    <End Role="SURVEY_REQUEST_SENT" Type="Survey_DBModel.Store.SURVEY_REQUEST_SENT" Multiplicity="1" />
+    <End Role="ANSWER_LONG" Type="Survey_DBModel.Store.ANSWER_LONG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SURVEY_REQUEST_SENT">
+        <PropertyRef Name="survey_request_sent_id" />
+      </Principal>
+      <Dependent Role="ANSWER_LONG">
+        <PropertyRef Name="survey_request_sent_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ANSWER_MULTIPLE_CHOIC_ANSWER">
     <End Role="ANSWER" Type="Survey_DBModel.Store.ANSWER" Multiplicity="1" />
     <End Role="ANSWER_MULTIPLE_CHOICE" Type="Survey_DBModel.Store.ANSWER_MULTIPLE_CHOICE" Multiplicity="*" />
@@ -250,18 +262,6 @@
       </Principal>
       <Dependent Role="ANSWER_MULTIPLE_CHOICE">
         <PropertyRef Name="answer_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ANSWER_QUESTION">
-    <End Role="QUESTION" Type="Survey_DBModel.Store.QUESTION" Multiplicity="1" />
-    <End Role="ANSWER" Type="Survey_DBModel.Store.ANSWER" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="QUESTION">
-        <PropertyRef Name="question_id" />
-      </Principal>
-      <Dependent Role="ANSWER">
-        <PropertyRef Name="answer_type_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

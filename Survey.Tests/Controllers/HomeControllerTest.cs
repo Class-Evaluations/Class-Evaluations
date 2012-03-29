@@ -22,7 +22,7 @@ namespace Survey.Tests.Controllers
             ViewResult result = controller.Index() as ViewResult;
 
             // Assert
-            Assert.AreEqual("Welcome to ASP.NET MVC!", result.ViewBag.Message);
+            Assert.AreEqual("Survey Results Matrix will be here.", result.ViewBag.Message);
         }
 
         [TestMethod]

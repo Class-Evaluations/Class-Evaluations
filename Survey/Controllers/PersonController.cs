@@ -23,9 +23,9 @@ namespace Survey.Controllers
         int surveyLife;
         DateTime expDate;
 
-        private Class_701Entities _db = new Class_701Entities();
+        private CLASSEntities _db = new CLASSEntities();
         private Survey_DBEntities Surveydb = new Survey_DBEntities();
-
+        
         // GET: /Person/
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
