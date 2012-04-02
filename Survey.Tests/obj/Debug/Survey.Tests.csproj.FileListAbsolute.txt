@@ -5,7 +5,6 @@ C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\GIT 
 C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\GIT Survey\Survey.Tests\bin\Debug\Mvc.Mailer.dll
 C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\GIT Survey\Survey.Tests\bin\Debug\PagedList.dll
 C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\GIT Survey\Survey.Tests\bin\Debug\Survey.pdb
-C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\GIT Survey\Survey.Tests\bin\Debug\PagedList.pdb
 C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\GIT Survey\Survey.Tests\bin\Debug\PagedList.xml
 C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\GIT Survey\Survey.Tests\obj\Debug\ResolveAssemblyReference.cache
 C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\GIT Survey\Survey.Tests\obj\Debug\Survey.Tests.dll

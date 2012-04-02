@@ -82,11 +82,12 @@ namespace Survey.Controllers
 
             CourseViewModel context = new CourseViewModel();
 
+            var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
+
+            var onePageOfCourses = CourseDetails.ToPagedList(pageNumber, 25); // will only contain 25 products max because of the pageSize
             ViewBag.CourseList = CourseDetails;
             ViewBag.SurveyStatus = SurveyStatus;
 
-            var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
-            var onePageOfCourses = CourseDetails.ToPagedList(pageNumber, 25); // will only contain 25 products max because of the pageSize
 
             ViewBag.onePageOfCourses = onePageOfCourses;
 

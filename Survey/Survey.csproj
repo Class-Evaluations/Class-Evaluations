@@ -50,8 +50,12 @@
     <Reference Include="Mvc.Mailer">
       <HintPath>..\packages\MvcMailer.1.1\lib\40\Mvc.Mailer.dll</HintPath>
     </Reference>
-    <Reference Include="PagedList">
-      <HintPath>..\packages\PagedList.1.5.0.0\lib\40\PagedList.dll</HintPath>
+    <Reference Include="PagedList, Version=1.13.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PagedList.1.13\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc">
+      <HintPath>..\packages\PagedList.Mvc.3.13\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="SanitizerProviders">
       <HintPath>..\packages\AjaxControlToolkit.4.1.51116\lib\40\SanitizerProviders\SanitizerProviders.dll</HintPath>
@@ -148,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site_Testing.css" />
     <Content Include="Content\Images\logo2.jpg" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -195,6 +200,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
+    <Content Include="Scripts\PagedList\PagedList.Mvc.js" />
+    <Content Include="Scripts\PagedList\PagedList.Mvc.Template.html" />
     <Content Include="WebPages\AlreadyAnswered.aspx" />
     <Content Include="WebPages\BuildTheSurvey.aspx" />
     <Content Include="Web.config">
@@ -381,7 +388,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>1777</DevelopmentServerPort>
+          <DevelopmentServerPort>3678</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

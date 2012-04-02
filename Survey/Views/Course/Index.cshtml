@@ -1,7 +1,9 @@
 ﻿@{ 
     ViewBag.Title = "Courses Available to Survey"; 
-}  
-@using PagedList; //import this so we can cast our list to IPagedList (only necessary because ViewBag is dynamic)
+} 
+
+@using PagedList.Mvc;
+@using PagedList; 
 
 <script src="@Url.Content("~/Scripts/jquery-ui-1.8.11.custom.min.js")" type="text/javascript"></script>
 
@@ -64,7 +66,7 @@
         <th></th>
     </tr>
 
-@foreach (var item in ViewBag.CourseList) 
+@foreach (var item in ViewBag.OnePageOfCourses) 
 {
     var StatusOfSurvey = "";
     var ExpirationDate = "";
@@ -139,4 +141,5 @@
  }
 </table>
 
-@Html.Partial("_Paging")
+   @Html.PagedListPager((IPagedList)ViewBag.OnePageOfCourses, page => Url.Action("Index", new { page = page}))
+

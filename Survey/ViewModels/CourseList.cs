@@ -20,6 +20,11 @@ namespace Survey.ViewModels
         public string lastStartdate { get; set; }
         //[DataType(DataType.Date)]
         public string lastEnddate { get; set; }
+
+        internal static object ToPagedList(int pageNumber, int p)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class CourseStatus 

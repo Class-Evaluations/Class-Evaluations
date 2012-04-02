@@ -8,7 +8,6 @@ C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\GIT 
 C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\GIT Survey\Survey\bin\PagedList.dll
 C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\GIT Survey\Survey\bin\SanitizerProviders.dll
 C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\GIT Survey\Survey\bin\EntityFramework.xml
-C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\GIT Survey\Survey\bin\PagedList.pdb
 C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\GIT Survey\Survey\bin\PagedList.xml
 C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\GIT Survey\Survey\bin\ar\AjaxControlToolkit.resources.dll
 C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\GIT Survey\Survey\bin\cs\AjaxControlToolkit.resources.dll
@@ -29,3 +28,5 @@ C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\GIT 
 C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\GIT Survey\Survey\obj\Debug\ResolveAssemblyReference.cache
 C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\GIT Survey\Survey\obj\Debug\Survey.dll
 C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\GIT Survey\Survey\obj\Debug\Survey.pdb
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\GIT Survey\Survey\bin\PagedList.Mvc.dll
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\GIT Survey\Survey\bin\PagedList.Mvc.xml
