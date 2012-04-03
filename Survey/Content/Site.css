@@ -331,3 +331,15 @@ div#title {
 .tri-state {
     width: 6em;
 }
+
+/* Paged list style
+----------------------------------------------------------*/
+
+.PagedList-pager > ul{
+	display: inline-block;
+	margin: 0;
+	padding: 0;}
+
+.PagedList-goToPage > fieldset{
+	border: 0;
+}
