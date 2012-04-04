@@ -1,4 +1,9 @@
-﻿@model PagedList.IPagedList<Survey.ViewModels.QuestionDetails>
+﻿@model IEnumerable<Survey.ViewModels.QuestionDetails>
+
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" /
+
+@using PagedList.Mvc;
+@using PagedList; 
 
 @{
     ViewBag.Title = "List of all available questions";
@@ -26,18 +31,20 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in ViewBag.onePageOfQuestions)
+{
+    var createdDate = item.dateCreated.ToString("MM/dd/yyyy");
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.questionText)
+            @item.questionText
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.answerTypeName)
+            @item.answerTypeName
         </td>
         <th></th>
         <th></th>
         <td>
-            @Html.DisplayFor(modelItem => item.dateCreated)
+            @createdDate
         </td>
 @*        <td>
             @Html.ActionLink("Details", "Details", new { id=item.questionID })  
@@ -46,4 +53,4 @@
 }
 
 </table>
-@Html.Partial("_Paging")
+@Html.PagedListPager((IPagedList)ViewBag.onePageOfQuestions, page => Url.Action("Index", new { page = page }))

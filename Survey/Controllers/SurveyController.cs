@@ -46,10 +46,13 @@ namespace Survey.Controllers
                     query = query.OrderBy(s => s.header_text);
                     break;
             }
+            
             var survey = query.ToList();
-            int pageSize = 10;
-            int pageIndex = (page ?? 1) - 1;
-            return View(survey.ToPagedList(pageIndex, pageSize));
+            var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
+            var onePageOfSurveys = survey.ToPagedList(pageNumber, 25); // will only contain 25 people max because of the pageSize
+            ViewBag.onePageOfSurveys = onePageOfSurveys;
+
+            return View(survey);
         }
 
         //

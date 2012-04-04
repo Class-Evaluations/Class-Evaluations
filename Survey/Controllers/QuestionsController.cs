@@ -39,6 +39,7 @@ namespace Survey.Controllers
 
             var question_list = from q in db.QUESTIONs
                             join at in db.ANSWER_TYPE on q.answer_type_id equals at.answer_type_id
+                            orderby q.question_id
                             select new QuestionDetails
                             {
                                 questionID = q.question_id,
@@ -48,10 +49,13 @@ namespace Survey.Controllers
                                 dateCreated = q.datestamp
                             };
 
-            //return View(question_list.ToList());
-            int pageSize = 10;
-            int pageIndex = (page ?? 1) - 1;
-            return View(question_list.ToPagedList(pageIndex, pageSize));
+            var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
+
+            var onePageOfQuestions = question_list.ToPagedList(pageNumber, 25); // will only contain 25 products max because of the pageSize
+            ViewBag.onePageOfQuestions = onePageOfQuestions;
+
+
+            return View(question_list);
         }
 
         //

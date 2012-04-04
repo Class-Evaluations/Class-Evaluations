@@ -1,4 +1,9 @@
-﻿@model PagedList.IPagedList<Survey.Models.SURVEY>
+﻿@model IEnumerable<Survey.Models.SURVEY>
+
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" /
+
+@using PagedList.Mvc;
+@using PagedList; 
 
 <h2>Available Surveys</h2>
 
@@ -35,17 +40,17 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) 
+@foreach (var item in ViewBag.onePageOfSurveys) 
 {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.title)
+            @item.title
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.header_text)
+            @item.header_text
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.survey_status)
+            @item.survey_status
         </td>
         <td>
             @Html.ActionLink("Survey Details", "Details", new { id = item.survey_id })
@@ -54,4 +59,4 @@
 }
 </table>
 
-@Html.Partial("_Paging")
+   @Html.PagedListPager((IPagedList)ViewBag.onePageOfSurveys, page => Url.Action("Index", new { page = page }))

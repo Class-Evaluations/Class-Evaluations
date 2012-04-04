@@ -68,9 +68,12 @@ namespace Survey.Controllers
             }
             var people = query.ToList();
             //setting a limit for testing, will need to decide how to exclude the older
-            int pageSize = 10;
-            int pageIndex = (page ?? 1) - 1;
-            return View(people.ToPagedList(pageIndex, pageSize));
+
+            var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
+            var onePageOfPeople = people.ToPagedList(pageNumber, 25); // will only contain 25 people max because of the pageSize
+            ViewBag.onePageOfPeople = onePageOfPeople;
+
+            return View(people);
         }
 
         //passing the selelcted courseID and get the clients

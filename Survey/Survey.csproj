@@ -153,7 +153,6 @@
   <ItemGroup>
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\PagedList.css" />
-    <Content Include="Content\Site_Testing.css" />
     <Content Include="Content\Images\logo2.jpg" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -286,7 +285,7 @@
     <Content Include="Views\Person\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Person\sendWelcome.cshtml" />
+    <Content Include="Views\Shared\sendWelcome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Questions\Index.cshtml" />

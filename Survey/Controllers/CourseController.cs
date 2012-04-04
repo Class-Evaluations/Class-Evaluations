@@ -20,7 +20,7 @@ namespace Survey.Controllers
 
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-           //sorting functionality functionality
+            //sorting functionality functionality
             //ViewBag.CurrentSort = sortOrder;
             //ViewBag.ActivitySortParam = String.IsNullOrEmpty(sortOrder)? "Activity Desc" : "";
             //ViewBag.TitleSortParm = String.IsNullOrEmpty(sortOrder) ? "Title Desc" : "";
@@ -41,12 +41,12 @@ namespace Survey.Controllers
             //if (!String.IsNullOrEmpty(searchString))
             //{
             //    courses = courses.Where(s => s.barcode_number.Contains(searchString));
-            //}
+           // }
             //else
             //{
             //    courses = courses.Where(s => s.course_id > 111460);
-            //    //For testing we cut down the amount of records returned.
-            //    //courses = courses.Where(s => s.cancel_reason = Convert.ToChar('Course Completed')) or (s => s.last_end_datetime > DateTime.Today.AddDays(+7); 
+                //For testing we cut down the amount of records returned.
+                //courses = courses.Where(s => s.cancel_reason = Convert.ToChar('Course Completed')) or (s => s.last_end_datetime > DateTime.Today.AddDays(+7); 
             //}
 
 
