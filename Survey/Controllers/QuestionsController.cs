@@ -14,13 +14,10 @@ namespace Survey.Controllers
 { 
     public class QuestionsController : Controller
     {
-        private Survey_DBEntities db = new Survey_DBEntities();
+       private Survey_DBEntities db = new Survey_DBEntities();
 
-        //
         // GET: /Questions/
-
-        //public ViewResult Index()
-        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+       public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             //sorting functionality 
             ViewBag.CurrentSort = sortOrder;
@@ -30,15 +27,9 @@ namespace Survey.Controllers
             {
                 searchString = currentFilter;
             }
-            else
-            {
-                page = 1;
-            }
-
-           //View(db.QUESTIONs.ToList());
 
             var question_list = from q in db.QUESTIONs
-                            join at in db.ANSWER_TYPE on q.answer_type_id equals at.answer_type_id
+                            join at in db.ANSWER_TYPE on q.answer_type_id equals at.answer_type_id 
                             orderby q.question_id
                             select new QuestionDetails
                             {
@@ -50,17 +41,13 @@ namespace Survey.Controllers
                             };
 
             var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
-
             var onePageOfQuestions = question_list.ToPagedList(pageNumber, 25); // will only contain 25 products max because of the pageSize
             ViewBag.onePageOfQuestions = onePageOfQuestions;
-
 
             return View(question_list);
         }
 
-        //
         // GET: /Questions/Details/5
-
         public ViewResult Details(Int32 id)
         {
             QUESTION question_details = db.QUESTIONs.Single(q => q.question_id == id);
@@ -68,6 +55,7 @@ namespace Survey.Controllers
         }
 
 
+        //Defines a questions multiple choices if applies
         public ActionResult MultipleChoiceCreate(MultipleChoiceItem choices)
         {
 
@@ -149,19 +137,14 @@ namespace Survey.Controllers
             return View(choices);
         }
 
-        //
         // GET: /Questions/Create
-
         public ActionResult Create()
         {
-            //ViewBag.question = new (db.QUESTIONs, "question_id", "question_text");
             ViewBag.answer_type_id = new SelectList(db.ANSWER_TYPE, "answer_type_id", "answer_type_name");
             return View();
         } 
 
-        //
         // POST: /Questions/Create
-
         [HttpPost]
         public ActionResult Create(QUESTION question)
         {
@@ -192,12 +175,9 @@ namespace Survey.Controllers
             return RedirectToAction("Index"); 
         }
         
-        //
         // GET: /Questions/Edit/5
- 
         public ActionResult Edit(int id)
         {
-            
             
             ViewBag.answer_type_id = new SelectList(db.ANSWER_TYPE, "answer_type_id", "answer_type_name");
 
@@ -206,9 +186,7 @@ namespace Survey.Controllers
             return View(question);
         }
 
-        //
         // POST: /Questions/Edit/5
-
         [HttpPost]
         public ActionResult Edit(QUESTION question)
         {
@@ -223,18 +201,14 @@ namespace Survey.Controllers
             return View(question);
         }
 
-        //
         // GET: /Questions/Delete/5
- 
         public ActionResult Delete(int id)
         {
             QUESTION question = db.QUESTIONs.Single(q => q.question_id == id);
             return View(question);
         }
 
-        //
         // POST: /Questions/Delete/5
-
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {            
