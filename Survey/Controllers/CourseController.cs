@@ -74,13 +74,13 @@ namespace Survey.Controllers
 
             var CourseDetails = from c in _db.COURSEs
                                 where c.session_title_id == 9 && (c.cancel_reason == "Course Completed" || EntityFunctions.AddDays(c.last_end_datetime, 7) < Today)
-                                orderby c.course_id
+                                orderby c.barcode_number descending
                                 select c;
 
             var SurveyStatus = from k in survey_db.COURSE_STATUS
                                select k;
 
-            CourseViewModel context = new CourseViewModel();
+            //CourseViewModel context = new CourseViewModel();
 
             var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
 
@@ -95,16 +95,38 @@ namespace Survey.Controllers
             return View();
         }
 
-        public ViewResult AnswerDetails(int id)
+        public ViewResult AnswerDetails(int id, int? survey)
         {
+            var surveyid = 1;
+            var questionid = 0;
+
+            var surveySent = from s in survey_db.SURVEY_REQUEST_SENT
+                             where s.course_id == id
+                             select new { surveyid = s.survey_id };
 
 
-            var answerDetails = from a in survey_db.SURVEY_REQUEST_SENT
-                                join b in survey_db.ANSWER_SCALE on a.survey_request_sent_id equals b.survey_request_sent_id
-                                where a.course_id == id
-                                select b;
+            var answerDetails = from a in survey_db.SURVEY_QUESTIONS
+                                join q in survey_db.QUESTIONs on a.question_id equals q.question_id
+                                where a.survey_id == surveyid
+                                orderby a.question_id ascending
+                                select new SurveyReponses
+                                {
+                                    questionID = a.question_id,
+                                    questionText = q.question_text
+                                };
 
             return View(answerDetails);
+
+//Select	l.answer_id,
+//        l.submitted_answer as LongAnswer, 
+//        s.answer_id,
+//        s.submitted_answer as ShortAnswer,
+//        s.answer_id,
+//        mc.submitted_answer as Multiple_CHIOCE 
+//from Survey_DB.dbo.ANSWER_LONG l
+//join Survey_DB.dbo.ANSWER_SHORT s ON s.survey_request_sent_id = l.survey_request_sent_id  
+//join Survey_DB.dbo.ANSWER_MULTPLE_CHOICE mc ON s.survey_request_sent_id = mc.survey_request_sent_id  
+//where l.survey_request_sent_id in (83,84)
 
         }
 

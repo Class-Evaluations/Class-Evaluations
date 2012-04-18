@@ -9,14 +9,19 @@
 <fieldset>
     <legend>EmailStats</legend>
 
-    <div class="display-label">EmailCountSent</div>
+    <div class="display-label">Emails Sent</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.EmailCountSent)
     </div>
 
-    <div class="display-label">NoEmailAdddress</div>
+    <div class="display-label">No Email Adddress</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.NoEmailAdddress)
+    </div>
+
+    <div class="display-label">Email Privacy Flag Set</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EmailPrivacyFlag)
     </div>
 </fieldset>
 <p>

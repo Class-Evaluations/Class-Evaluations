@@ -1,19 +1,62 @@
-﻿@model Survey.ViewModels.EmailStats 
+﻿@model IEnumerable<Survey.ViewModels.PeopleToManuallyMail>
 
-<h2>Emails Sent</h2>
+<script src="@Url.Content("~/Scripts/jquery-ui-1.8.11.custom.min.js")" type="text/javascript"></script>
 
-<h5>Emails successfully sent out = @(Model.EmailCountSent) </h5>
+<h2>Email Information</h2>
 
-<h5>Participates that does not have an email or the privacy flag is set = @(Model.NoEmailAdddress)</h5>
+<h5>Emails successfully sent out = @(ViewBag.EmailCountSent) </h5>
+
+<h5>Participates that did not have an email = @(ViewBag.NoEmailAdddress)</h5>
+
+<h5>Participates that have the email privacy flag set = @(ViewBag.EmailPrivacyFlag)</h5>
 
     <div>
-        The participates that do not have an email address can be manually printed.
-         
-        Click the Print button to print these survey in a PDF format.
+        The following participates have an email address or they have the email privacy flag set, these surveys can be manually printed.
+        Click on the button at the bottom of this page to print these surveys in a PDF format.</div>
 
 
+<h2>Participates Without Email</h2>
+<p></p>
 
-        <p></p>
-        <input type="submit" name="button" value="Print Surveys" />
-        <p></p>
-    </div>
+@using (Html.BeginForm("printPDF", "Person", FormMethod.Post))
+{
+<table>
+    <tr>
+        <th>
+            <strong> Last Name</strong> 
+        </th>
+        <th>
+            <strong>First Name</strong>
+        </th>
+        <th> 
+            <strong>Email Address </strong>
+        </th> 
+        <th>
+            <strong> Email Privacy </strong>
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(ModelItem => item.lastName)
+        </td>
+        <td>
+            @Html.DisplayFor(ModelItem => item.firstName)
+        </td>
+        <td>
+            @Html.DisplayFor(ModelItem => item.email)
+        </td>
+        <td>
+            @Html.DisplayFor(ModelItem => item.emailPrivate)
+        </td>
+    </tr>
+}
+</table>
+
+<p></p>
+     <input type="submit" name="button" value="Print Surveys for Manual Mailing" />
+<p></p>
+}

@@ -15,7 +15,8 @@
 
 <p>
 </p>
-
+@using (Html.BeginForm("sendWelcome", "Person", FormMethod.Post))
+{
 <table>
     <tr>
         <th>
@@ -68,24 +69,24 @@
         <th></th>
     </tr>
 
-@foreach (var item in ViewBag.OnePageOfCourses) 
+@foreach (var item in ViewBag.OnePageOfCourses)
 {
     var StatusOfSurvey = "";
     var ExpirationDate = "";
     var start_date = item.last_start_datetime.ToString("MM/dd/yyyy");
     var last_date = item.last_end_datetime.ToString("MM/dd/yyyy");
     var Title = "";
-    Title = @item.ACTIVITY.title + "-" + @item.title;    
- 
-    
+    Title = @item.ACTIVITY.title + "-" + @item.title;
+
+
     foreach (var survey in ViewBag.SurveyStatus)
     {
         if (item.course_id == survey.course_id)
         {
             StatusOfSurvey = survey.course_status1;
-            ExpirationDate = survey.survey_exp_date.ToString("MM/dd/yyyy");  
+            ExpirationDate = survey.survey_exp_date.ToString("MM/dd/yyyy");
         }
-        
+
     }
     <tr>
         @if (StatusOfSurvey == "")
@@ -94,7 +95,7 @@
                 @Html.ActionLink("Select", "../Person/Details", new { id = item.course_id })
             </td>
         }
-        else 
+        else
         {
             <td>
                 <font style="color:red">
@@ -140,8 +141,8 @@
             </strong>
         </td>
     </tr>
- }
+}
 </table>
-
+}
    @Html.PagedListPager((IPagedList)ViewBag.OnePageOfCourses, page => Url.Action("Index", new { page = page}))
 

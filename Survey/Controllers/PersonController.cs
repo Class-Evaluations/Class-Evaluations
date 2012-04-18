@@ -124,7 +124,7 @@ namespace Survey.Controllers
 
             int id = Convert.ToInt32(values[0]);
             var person = from r in _db.REGISTRATIONs
-                            where r.course_id == id
+                            where r.course_id == id 
                             select new
                             {
                                 person_id = r.CLIENT.PERSON.person_id,
@@ -134,9 +134,27 @@ namespace Survey.Controllers
                                 course_title = r.COURSE.title,
                                 course_id = r.COURSE.course_id,
                                 email_address = r.CLIENT.PERSON.email_address,
+                                address_id = r.CLIENT.PERSON.address_id,
                                 email_private = r.CLIENT.PERSON.email_private,
                                 barcode_number = r.COURSE.barcode_number
                             };
+
+
+            var personsToPrint = from p in person
+                                 where (string.IsNullOrEmpty(p.email_address)) || p.email_private > 0
+                                 select new PeopleToManuallyMail
+                                 {
+                                     personID = p.person_id,
+                                     firstName = p.first_name,
+                                     lastName = p.last_name,
+                                     email = p.email_address,
+                                     emailPrivate = p.email_private,
+                                     barcode = p.barcode_number,
+                                     courseID = p.course_id,
+                                     addressID = p.address_id
+
+                                 };
+                                 
 
 
             byte[] data = new byte[256];
@@ -144,7 +162,9 @@ namespace Survey.Controllers
             // This is one implementation of the abstract class SHA1.
             //result = sha.ComputeHash();
             int EmptyAddresses = 0;
-            int EmailsSent = 0;
+            int EmailsSent = 0;;
+            int EmailPrivacy = 0;
+
             foreach (var item in person)
             {
                 if (string.IsNullOrEmpty(item.email_address))
@@ -205,7 +225,8 @@ namespace Survey.Controllers
                         //FileReader returns an array of recipients from a text file
 
                         //string recipients = "dtaylor1852@gmail.com; donna.taylor@raleighnc.gov";
-                        string recipients = item.email_address;
+                        //string recipients = item.email_address;
+                        string recipients = "donna.taylor@raleighnc.gov";
 
                         devemail.To.Add(recipients);
 
@@ -215,7 +236,7 @@ namespace Survey.Controllers
 
                         SURVEY lifetime = new SURVEY();
                         surveyLife = lifetime.lifetime;
-                                                
+
                         //Insert into tables after email is sent.
 
                         SURVEY_REQUEST_SENT EmailSurvey = new SURVEY_REQUEST_SENT();
@@ -235,10 +256,14 @@ namespace Survey.Controllers
                         Surveydb.SaveChanges();
                         EmailsSent++;
                     }
-
+                    else
+                    {
+                        EmailPrivacy++;
+                    }
                 }
 
             }
+
             //after the emails are sent out update the Course Status table that survey for this course was sent.
             COURSE_STATUS CourseSurveySent = new COURSE_STATUS();
             CourseSurveySent.course_id = Convert.ToInt32(id);
@@ -247,11 +272,22 @@ namespace Survey.Controllers
             Surveydb.AddToCOURSE_STATUS(CourseSurveySent);
             Surveydb.SaveChanges();
 
-            var emailview = new EmailStats();
-            emailview.EmailCountSent = EmailsSent;
-            emailview.NoEmailAdddress = EmptyAddresses;
-           
-            return View(emailview);
+            //var emailview = new EmailStats();
+            ViewBag.EmailCountSent = EmailsSent;
+            ViewBag.NoEmailAdddress = EmptyAddresses;
+            ViewBag.EmailPrivacyFlag = EmailPrivacy;
+
+            //ViewBag.people = personsToPrint;
+            return View(personsToPrint);
         }
-    }
+    
+       [HttpPost]
+       public ViewResult printPDF( object peopleToPrint)
+        {
+
+           //Also the Course Status table will need to be updated as well.  
+           return View();
+            
+        }
+   }
 }
