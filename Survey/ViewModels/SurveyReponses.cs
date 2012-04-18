@@ -9,6 +9,6 @@ namespace Survey.ViewModels
     {
         public Int32? questionID { get; set; }
         public string questionText { get; set; }
-
+        public Int32? answerID { get; set; }
     }
 }
