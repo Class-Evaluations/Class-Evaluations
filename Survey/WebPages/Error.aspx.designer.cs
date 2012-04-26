@@ -10,7 +10,7 @@
 namespace Survey.WebPages {
     
     
-    public partial class ThankYou {
+    public partial class Error {
         
         /// <summary>
         /// Head1 control.

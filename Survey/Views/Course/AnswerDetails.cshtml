@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Survey.ViewModels.SurveyReponses>
+﻿@model IEnumerable<Survey.ViewModels.ReportData>
 @{
     ViewBag.Title = "Answer Details";
 }
@@ -10,7 +10,6 @@
 
 <table>
     <tr>
-
         <th>
             Question ID
         </th>
@@ -27,12 +26,14 @@
     <tr>
 
         <td>
-            @Html.DisplayFor(model=> item.questionID)
+            @item.questionID
         </td>
         <td>
-            @Html.DisplayFor(model=> item.questionText)
+            @item.questionText
         </td>
-
+        <td>
+            @item.responseStat
+        </td>
     </tr>
 }
 

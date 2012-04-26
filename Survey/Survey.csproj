@@ -121,6 +121,7 @@
     <Compile Include="ViewModels\PeopleToManuallyMail.cs" />
     <Compile Include="ViewModels\QuestionDetails.cs" />
     <Compile Include="ViewModels\Questions_Multiple_Choice.cs" />
+    <Compile Include="ViewModels\ReportDate.cs" />
     <Compile Include="ViewModels\SurveyReponses.cs" />
     <Compile Include="ViewModels\SurveySection.cs" />
     <Compile Include="WebPages\AlreadyAnswered.aspx.cs">
@@ -136,6 +137,13 @@
     </Compile>
     <Compile Include="WebPages\BuildTheSurvey.aspx.designer.cs">
       <DependentUpon>BuildTheSurvey.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebPages\Error.aspx.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebPages\Error.aspx.designer.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebPages\SurveyExpired.aspx.cs">
       <DependentUpon>SurveyExpired.aspx</DependentUpon>
@@ -277,6 +285,7 @@
     <Content Include="Views\UserMailer\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="WebPages\Error.aspx" />
     <Content Include="WebPages\SurveyExpired.aspx" />
     <Content Include="WebPages\ThankYou.aspx" />
   </ItemGroup>

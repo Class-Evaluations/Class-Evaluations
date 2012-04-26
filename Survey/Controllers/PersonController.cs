@@ -213,7 +213,7 @@ namespace Survey.Controllers
 
                         devemail.IsBodyHtml = true;
 
-                        string SurveyUrl = String.Concat("http://reclinkdev:8080/WebPages/BuildTheSurvey.aspx/", personhash);
+                        string SurveyUrl = String.Concat("http://reclink.raleighnc.gov/Survey/BuildTheSurvey.aspx/", personhash);
 
                         emailBody = "<p> Hello " + item.first_name + ", </p> <p></P> <p>The goal of Raleigh Parks and Recreation is to offer the best" +
                                     " programming possible. The purpose of this survey is to gather information from residents in the community concerning" +
@@ -224,26 +224,29 @@ namespace Survey.Controllers
 
                         //FileReader returns an array of recipients from a text file
 
-                        //string recipients = "dtaylor1852@gmail.com; donna.taylor@raleighnc.gov";
-                        //string recipients = item.email_address;
+                        //REMOVE BEFORE SAVING UP TO GIT  TESTING ONLY
                         string recipients = "donna.taylor@raleighnc.gov";
 
                         devemail.To.Add(recipients);
 
                         mailClient.Send(devemail);
 
-                        //Get the survey lifetime from Survey
-
-                        SURVEY lifetime = new SURVEY();
-                        surveyLife = lifetime.lifetime;
-
                         //Insert into tables after email is sent.
-
                         SURVEY_REQUEST_SENT EmailSurvey = new SURVEY_REQUEST_SENT();
+
+                        //Get the survey lifetime from Survey
+                        //Get lifetime from database is not working need to working on this
+
+                        var surveyInfo = from a in Surveydb.SURVEYs
+                                         where a.survey_id == survey_id
+                                         select a;
+
+
+                        //int lifetimeInDay = surveyInfo.;
 
                         EmailSurvey.survey_id = survey_id;
                         EmailSurvey.person_hash = personhash;
-                        EmailSurvey.expiration_date = DateTime.Now.AddDays(surveyLife);
+                        EmailSurvey.expiration_date = DateTime.Now.AddDays(30);
                         expDate = DateTime.Now.AddDays(surveyLife);
                         EmailSurvey.status_flag = "S";
                         EmailSurvey.date_sent = DateTime.Now;
@@ -289,5 +292,11 @@ namespace Survey.Controllers
            return View();
             
         }
+
+       public ViewResult EmailPreview(int id)
+       {
+
+           return View();
+       }
    }
 }

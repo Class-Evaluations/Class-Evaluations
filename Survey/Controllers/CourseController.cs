@@ -98,35 +98,102 @@ namespace Survey.Controllers
         public ViewResult AnswerDetails(int id, int? survey)
         {
             var surveyid = 1;
-            var questionid = 0;
 
             var surveySent = from s in survey_db.SURVEY_REQUEST_SENT
-                             where s.course_id == id
-                             select new { surveyid = s.survey_id };
+                             where s.course_id == id && s.survey_id == surveyid
+                             select s.survey_request_sent_id;
+
+            //var surveysAnswered = from sa in survey_db.ANSWERs
+            //                      where sa.survey_request_sent_id in surveySent
+            //                      group by 
+            //                      select sa;
 
 
             var answerDetails = from a in survey_db.SURVEY_QUESTIONS
                                 join q in survey_db.QUESTIONs on a.question_id equals q.question_id
+                                join an in survey_db.ANSWERs on a.question_id equals an.question_id
+                                join at in survey_db.ANSWER_TYPE on an.answer_type_id equals at.answer_type_id 
                                 where a.survey_id == surveyid
                                 orderby a.question_id ascending
                                 select new SurveyReponses
                                 {
                                     questionID = a.question_id,
-                                    questionText = q.question_text
+                                    questionText = q.question_text,
+                                    answerID = an.answer_id,
+                                    answerType = at.answer_type_name
+
                                 };
 
-            return View(answerDetails);
+        //iterate through the answerDetails to calculate the answer statistics
+        //public Int32? questionID { get; set; }
+        //public string questionText { get; set; }
+        //public Int32? answerID { get; set; }
+        //public string answerType { get; set; }
+        //public string responseStat { get; set; }
 
-//Select	l.answer_id,
-//        l.submitted_answer as LongAnswer, 
-//        s.answer_id,
-//        s.submitted_answer as ShortAnswer,
-//        s.answer_id,
-//        mc.submitted_answer as Multiple_CHIOCE 
-//from Survey_DB.dbo.ANSWER_LONG l
-//join Survey_DB.dbo.ANSWER_SHORT s ON s.survey_request_sent_id = l.survey_request_sent_id  
-//join Survey_DB.dbo.ANSWER_MULTPLE_CHOICE mc ON s.survey_request_sent_id = mc.survey_request_sent_id  
-//where l.survey_request_sent_id in (83,84)
+            foreach (var item in answerDetails)
+            {
+                switch ((item.answerType).Trim())
+                {
+                    case "Scale":
+                        {   var d = from x in survey_db.ANSWER_SCALE
+                                    where surveySent.Contains(x.survey_request_sent_id)
+                                    group x by x.submitted_answer into g
+                                    select new ReportData
+                                    {   questionID = item.questionID,
+                                        questionText = item.questionText,
+                                        responseStat = g.Average(x => x.submitted_answer)};
+                            break; }
+                    case "Multi-Choice":
+                    //    {  var d = from x in survey_db.ANSWER_MULTIPLE_CHOICE
+                    //                where surveySent.Contains(x.survey_request_sent_id)
+                    //                group x by x.submitted_answer into g
+                    //                select new {averageAnswer = g.Count(x => x.submitted_answer)};
+                        {   break; }
+                    case "Multi-Choice-multi":
+                        //{  var d = from x in survey_db.ANSWER_MULTIPLE_CHOICE
+                        //            where surveySent.Contains(x.survey_request_sent_id)
+                        //            group x by x.submitted_answer into g
+                        //            select new {averageAnswer = g.Average(x => x.submitted_answer)};
+                        {   break; }
+                    case "Answer_long":
+                        //{  var d = from x in survey_db.ANSWER_SCALE
+                        //            where surveySent.Contains(x.survey_request_sent_id)
+                        //            select new {averageAnswer = x.submitted_answer};
+
+                        //    ViewBag.questionID = item.questionID;
+                        //    ViewBag.questionText = item.questionText;
+                        //    ViewBag.responseStat = x.submitted_answer;
+
+                        {   break; }
+                    case "Answer_short":
+                        //{  var d = from x in survey_db.ANSWER_SCALE
+                        //            where surveySent.Contains(x.survey_request_sent_id)
+                        //            select new { averageAnswer = x.submitted_answer };
+
+                        //    ViewBag.questionID = item.questionID;
+                        //    ViewBag.questionText = item.questionText;
+                        //    ViewBag.responseStat = x.submitted_answer;
+
+                        {  break; }
+                    case "True_False":
+                        //{  var d = from x in survey_db.ANSWER_SCALE
+                        //            where surveySent.Contains(x.survey_request_sent_id)
+                        //            group x by x.submitted_answer into g
+                        //            select new {averageAnswer = g.Count(x => x.submitted_answer)};
+                        {break; }
+                }
+            }
+
+            return View();
+
+            //ReportData
+
+            //var categories =
+            //    from p in products
+            //    group p by p.Category into g
+            //    select new { Category = g.Key, AveragePrice = g.Average(p => p.UnitPrice) }; 
+
 
         }
 

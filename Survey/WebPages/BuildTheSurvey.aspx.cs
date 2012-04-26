@@ -64,6 +64,7 @@ namespace Survey.WebPages
             //CHECK THE USER unique identifyier to see if the survey has already been answered
 
             string dsn = "Data Source=10.6.5.69;Initial Catalog=Survey_DB;User Id=surveyhelper; Password=helpme";
+            string class_dsn = "Data Source=bigmaude2;initial catalog=CLASS;user id=surveyhelper;password=helpmesurveyplease";
 
             //get the unique identifier for the answer tables for this user.
             using (SqlConnection conn = new SqlConnection(dsn))
@@ -78,6 +79,10 @@ namespace Survey.WebPages
                     courseID = reader.GetInt32(1);
                     surveyID = reader.GetInt32(2);
                     statusFlag = reader.GetString(3);
+                }
+                else
+                {
+                    Response.Redirect("~/WebPages/Error.aspx", true);
                 }
 
                 if (statusFlag == "X")
@@ -109,9 +114,9 @@ namespace Survey.WebPages
 
             //Get the program information and populate the page fields
 
-            using (SqlConnection conn = new SqlConnection(dsn))
-            using (SqlCommand cmdtitle = new SqlCommand("SELECT	f.facility_name, c.booking_start_date, c.title FROM Class_701.dbo.REGISTRATION r " +
-                                                        "JOIN Class_701.dbo.COURSE c ON c.course_id = r.course_id join Class_701.dbo.FACILITY f ON f.facility_id = first_facility " +
+            using (SqlConnection conn = new SqlConnection(class_dsn))
+            using (SqlCommand cmdtitle = new SqlCommand("SELECT	f.facility_name, c.booking_start_date, c.title FROM Class.dbo.REGISTRATION r " +
+                                                        "JOIN Class.dbo.COURSE c ON c.course_id = r.course_id join Class.dbo.FACILITY f ON f.facility_id = first_facility " +
                                                         "WHERE c.course_id = " + courseID, conn))
             {
                 conn.Open();
