@@ -1,0 +1,5 @@
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\SurveyEntry\SurveyEntry\bin\SurveyEntry.dll
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\SurveyEntry\SurveyEntry\bin\SurveyEntry.pdb
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\SurveyEntry\SurveyEntry\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\SurveyEntry\SurveyEntry\obj\Debug\SurveyEntry.dll
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\SurveyEntry\SurveyEntry\obj\Debug\SurveyEntry.pdb

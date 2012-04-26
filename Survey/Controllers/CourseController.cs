@@ -76,17 +76,42 @@ namespace Survey.Controllers
                                 where c.session_title_id == 9 && (c.cancel_reason == "Course Completed" || EntityFunctions.AddDays(c.last_end_datetime, 7) < Today)
                                 orderby c.barcode_number descending
                                 select c;
+            //Need to check the expiration date to expire the survey
+            var SurveyExpiration = from x in survey_db.SURVEY_REQUEST_SENT
+                                   select x;
+            foreach (var item in SurveyExpiration)
+            {
+                if (item.expiration_date < DateTime.Now.Date)
+                {
+                    item.status_flag = "X";
+                }
+            }
+
+            // Submit the changes to the database.
+            try
+            {
+                survey_db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                // Provide for exceptions.
+            }
+
 
             var SurveyStatus = from k in survey_db.COURSE_STATUS
                                select k;
 
-            //CourseViewModel context = new CourseViewModel();
+
+            var SurveyExp = from x in survey_db.SURVEY_REQUEST_SENT
+                                   select x;
 
             var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
 
             var onePageOfCourses = CourseDetails.ToPagedList(pageNumber, 25); // will only contain 25 products max because of the pageSize
             ViewBag.CourseList = CourseDetails;
             ViewBag.SurveyStatus = SurveyStatus;
+            ViewBag.SurveyExp = SurveyExp;
 
 
             ViewBag.onePageOfCourses = onePageOfCourses;

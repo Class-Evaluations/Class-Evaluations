@@ -247,7 +247,7 @@ namespace Survey.Controllers
                         EmailSurvey.survey_id = survey_id;
                         EmailSurvey.person_hash = personhash;
                         EmailSurvey.expiration_date = DateTime.Now.AddDays(30);
-                        expDate = DateTime.Now.AddDays(surveyLife);
+                        expDate = EmailSurvey.expiration_date;
                         EmailSurvey.status_flag = "S";
                         EmailSurvey.date_sent = DateTime.Now;
                         EmailSurvey.user_stamp = 1;
