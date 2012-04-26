@@ -7,7 +7,7 @@
 <head id="Head1" runat="server">
    
     <style type="text/css">
-        .style1
+        .style1 
         {
             text-align: center;
         }
