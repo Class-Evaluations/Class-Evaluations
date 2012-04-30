@@ -19,6 +19,7 @@ namespace SurveyEntry
         int survey_request_sentID;
         int questionID;
         string answerName;
+        string personHash;
         int answerTypeID;
         string tablename;
         string userHash;
@@ -72,17 +73,30 @@ namespace SurveyEntry
             
             //get the unique identifier for the answer tables for this user.
             using (SqlConnection conn = new SqlConnection(surveyConn))
-            using (SqlCommand cmd = new SqlCommand("SELECT survey_request_sent_id, course_id, survey_id, status_flag FROM SURVEY_REQUEST_SENT WHERE person_hash = '" + userHash + "'", conn))
+            using (SqlCommand cmd = new SqlCommand("SELECT survey_request_sent_id, course_id, survey_id, status_flag, person_hash FROM SURVEY_REQUEST_SENT WHERE person_hash = '" + userHash + "'", conn))
             {
                 conn.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 if (reader.Read())
                 {
-                    survey_request_sentID = reader.GetInt32(0);
-                    courseID = reader.GetInt32(1);
-                    surveyID = reader.GetInt32(2);
-                    statusFlag = reader.GetString(3);
+                    try
+                    {
+                        survey_request_sentID = reader.GetInt32(0);
+                        courseID = reader.GetInt32(1);
+                        surveyID = reader.GetInt32(2);
+                        statusFlag = reader.GetString(3);
+                        personHash = reader.GetString(4);
+                    }
+                    catch
+                    {
+                       Response.Redirect("~/Error.aspx", true);
+                    }
+                }
+
+                if(String.IsNullOrEmpty(personHash))
+                {
+                    Response.Redirect("~/Error.aspx", true);
                 }
 
                 if (statusFlag == "X")
@@ -128,35 +142,20 @@ namespace SurveyEntry
                 SqlDataReader reader = cmdtitle.ExecuteReader();
 
                 if (reader.Read())
-
                 {
-
                     try
-
                     {
-
                         facilityUsed = reader.GetString(0);
-
                         activityTitle = reader.GetString(1);
-
                         programDate = reader.GetDateTime(2);
-
                         programName = reader.GetString(2);
-
                     }
-
                     catch { }
-
                 }
-
                 string pname = activityTitle + " " + programName;
-
                 txtprogramName.Text = pname; // programName;
-
                 txtfacilityUsed.Text = facilityUsed;
-
                 txtprogramDates.Text = Convert.ToString(programDate);
-
             }
 
             //Build the survey based on the items returned from the Survey_DB tables
