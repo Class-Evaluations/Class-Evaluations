@@ -122,7 +122,7 @@ namespace SurveyEntry
             using (SqlConnection conn = new SqlConnection(classConn))
             using (SqlCommand cmdtitle = new SqlCommand("SELECT f.facility_name, c.booking_start_date, c.title, a.title FROM CLASS.dbo.REGISTRATION r " +
                                                         "JOIN CLASS.dbo.COURSE c ON c.course_id = r.course_id JOIN CLASS.dbo.ACTIVITY a ON a.activity_id = c.activity_id " +
-                                                        "JOIN CLASS.dbo.FACILITY f ON f.facility_id = first_facility WHERE c.course_id" + courseID, conn))
+                                                        "JOIN CLASS.dbo.FACILITY f ON f.facility_id = first_facility WHERE c.course_id = " + courseID, conn))
             {
                 conn.Open();
                 SqlDataReader reader = cmdtitle.ExecuteReader();
