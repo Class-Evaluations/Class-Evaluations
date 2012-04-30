@@ -19,6 +19,7 @@ namespace Survey.WebPages
         int survey_request_sentID;
         int questionID;
         string answerName;
+        string activityTitle;
         int answerTypeID;
         string tablename;
         string userHash;
@@ -124,16 +125,22 @@ namespace Survey.WebPages
 
                 if (reader.Read())
                 {
-                    facilityUsed = reader.GetString(0);
-                    programDate = reader.GetDateTime(1);
-                    programName = reader.GetString(2);
+                    try
+                    {
+                        facilityUsed = reader.GetString(0);
+                        activityTitle = reader.GetString(1);
+                        programDate = reader.GetDateTime(2);
+                        programName = reader.GetString(2);
+                    }
+                    catch { }
+
                 }
 
-                txtprogramName.Text = programName;
+                string pname = activityTitle + " " + programName;
+                txtprogramName.Text = pname; // programName;
                 txtfacilityUsed.Text = facilityUsed;
                 txtprogramDates.Text = Convert.ToString(programDate);
             }
-
 
             //Build the survey based on the items returned from the Survey_DB tables
             using (SqlConnection conn = new SqlConnection(dsn))

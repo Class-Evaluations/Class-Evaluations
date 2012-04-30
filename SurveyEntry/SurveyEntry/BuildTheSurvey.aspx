@@ -69,7 +69,6 @@
                 <br />
 
                 <asp:Panel ID="panelContent" runat="server"></asp:Panel>
-                <asp:PlaceHolder
                 <asp:PlaceHolder ID="PlaceHolder1" runat="server"></asp:PlaceHolder>
                 <br />
         </div>
@@ -77,14 +76,11 @@
     <p>
         <span class="notranslate">&nbsp;</span></p>
     <p>
-        <img alt="Parks and Recreation" class="style9" 
-            longdesc="Parks and Recreation Logo" src="../Styles/Images/logo.png" /></p>
+        <img alt="Parks and Recreation" class="style9" src="../Styles/Images/logo.png" /></p>
 
 
-        <hr style="height: 2px; margin-top: 8px" />
-        <p class="style1" style="font-weight: 700"
-            <asp:Button ID="Button2" runat="server" Text="Submit Survey" 
-                onclick="Button2_Click"></asp:Button>
+        <p> 
+           <asp:Button ID="Button2" runat="server" Text="Submit Survey" onclick="Button2_Click"></asp:Button>
         </p>
     <p class="style1" style="font-weight: 700">
         Thank you for helping Raleigh Parks and Recreation Server You Better!</p>

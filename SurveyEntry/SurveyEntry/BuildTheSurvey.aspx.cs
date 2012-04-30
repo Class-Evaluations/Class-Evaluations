@@ -50,6 +50,8 @@ namespace SurveyEntry
         int multi;
         int tlong;
         int true_false;
+        string courseTitle;
+        string activityTitle;
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -118,9 +120,9 @@ namespace SurveyEntry
             //Get the program information and populate the page fields
 
             using (SqlConnection conn = new SqlConnection(classConn))
-            using (SqlCommand cmdtitle = new SqlCommand("SELECT	f.facility_name, c.booking_start_date, c.title FROM Class.dbo.REGISTRATION r " +
-                                                        "JOIN Class.dbo.COURSE c ON c.course_id = r.course_id join Class.dbo.FACILITY f ON f.facility_id = first_facility " +
-                                                        "WHERE c.course_id = " + courseID, conn))
+            using (SqlCommand cmdtitle = new SqlCommand("SELECT f.facility_name, c.booking_start_date, c.title, a.title FROM CLASS.dbo.REGISTRATION r " +
+                                                        "JOIN CLASS.dbo.COURSE c ON c.course_id = r.course_id JOIN CLASS.dbo.ACTIVITY a ON a.activity_id = c.activity_id " +
+                                                        "JOIN CLASS.dbo.FACILITY f ON f.facility_id = first_facility WHERE c.course_id" + courseID, conn))
             {
                 conn.Open();
                 SqlDataReader reader = cmdtitle.ExecuteReader();
@@ -129,8 +131,26 @@ namespace SurveyEntry
                 {
                     facilityUsed = reader.GetString(0);
                     programDate = reader.GetDateTime(1);
-                    programName = reader.GetString(2);
+                    if (!String.IsNullOrEmpty(reader.GetString(2)))
+                    {
+                        courseTitle = reader.GetString(2);
+                    }
+                    else
+                    {
+                        courseTitle = " ";
+                    }
+                    if (!String.IsNullOrEmpty(reader.GetString(3)))
+                    {
+                        activityTitle = reader.GetString(3);
+                    }
+                    else 
+                    {
+                        activityTitle = " ";
+                    }
                 }
+
+                programName = (courseTitle).Trim() + (activityTitle).Trim();
+
 
                 txtprogramName.Text = programName;
                 txtfacilityUsed.Text = facilityUsed;
