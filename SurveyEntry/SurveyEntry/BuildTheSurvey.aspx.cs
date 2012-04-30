@@ -128,35 +128,36 @@ namespace SurveyEntry
                 SqlDataReader reader = cmdtitle.ExecuteReader();
 
                 if (reader.Read())
+
                 {
-                    facilityUsed = reader.GetString(0);
-                    programDate = reader.GetDateTime(1);
-                    if (!String.IsNullOrEmpty(reader.GetString(2)))
+
+                    try
+
                     {
-                        courseTitle = reader.GetString(2);
+
+                        facilityUsed = reader.GetString(0);
+
+                        activityTitle = reader.GetString(1);
+
+                        programDate = reader.GetDateTime(2);
+
+                        programName = reader.GetString(2);
+
                     }
-                    else
-                    {
-                        courseTitle = " ";
-                    }
-                    if (!String.IsNullOrEmpty(reader.GetString(3)))
-                    {
-                        activityTitle = reader.GetString(3);
-                    }
-                    else 
-                    {
-                        activityTitle = " ";
-                    }
+
+                    catch { }
+
                 }
 
-                programName = (courseTitle).Trim() + (activityTitle).Trim();
+                string pname = activityTitle + " " + programName;
 
+                txtprogramName.Text = pname; // programName;
 
-                txtprogramName.Text = programName;
                 txtfacilityUsed.Text = facilityUsed;
-                txtprogramDates.Text = Convert.ToString(programDate);
-            }
 
+                txtprogramDates.Text = Convert.ToString(programDate);
+
+            }
 
             //Build the survey based on the items returned from the Survey_DB tables
             using (SqlConnection conn = new SqlConnection(surveyConn))
