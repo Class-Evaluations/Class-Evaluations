@@ -127,12 +127,6 @@ namespace Survey.Controllers
                              where s.course_id == id && s.survey_id == surveyid
                              select s.survey_request_sent_id;
 
-            //var surveysAnswered = from sa in survey_db.ANSWERs
-            //                      where sa.survey_request_sent_id in surveySent
-            //                      group by 
-            //                      select sa;
-
-
             var answerDetails = from a in survey_db.SURVEY_QUESTIONS
                                 join q in survey_db.QUESTIONs on a.question_id equals q.question_id
                                 join an in survey_db.ANSWERs on a.question_id equals an.question_id

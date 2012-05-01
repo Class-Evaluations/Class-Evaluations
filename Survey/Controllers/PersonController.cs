@@ -289,7 +289,7 @@ namespace Survey.Controllers
        public ViewResult printPDF( object peopleToPrint)
         {
 
-           //Also the Course Status table will need to be updated as well.  
+           //Also the Course Status table will need to be updated as survey sent or printed.  
            return View();
             
         }

@@ -53,7 +53,7 @@
     <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App.config" />
+    <Content Include="Properties\App.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Survey\Survey.csproj">

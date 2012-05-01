@@ -441,7 +441,9 @@ namespace SurveyEntry
                             switch (answerTypeID)
                             {
                                 case 2:
-                                    answerInt = Convert.ToInt32(answer.SelectedIndex);
+                                    if (!String.IsNullOrEmpty(answer.SelectedValue))
+                                    { answerInt = Convert.ToInt32(answer.SelectedValue); }
+                                    else { answerInt = -1; }
                                     break;
                                 case 3:
                                     answerText = answer.SelectedValue;
