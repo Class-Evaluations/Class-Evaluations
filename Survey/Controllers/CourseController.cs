@@ -116,7 +116,6 @@ namespace Survey.Controllers
 
             ViewBag.onePageOfCourses = onePageOfCourses;
 
-
             return View();
         }
 

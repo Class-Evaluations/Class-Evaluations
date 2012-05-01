@@ -38,7 +38,6 @@
 
     @foreach (var item in Model)
     {
-       
           <tr>
             @Html.HiddenFor(modelItem => item.course_id)
             <td>
@@ -57,15 +56,22 @@
         </tr>
     }
     </table>
-<tr>
-
     <div>
         <h5>Send emails to the participates listed below that have email addresses and the private flag is not set.</h5>
         <p></p>
-
-        <input type="submit" name="button" value="Preview Email Content" /> <br /> <br /> <input type="submit" name="button" value="Send Emails" />
-    
+            <input type="button" name="button" title="Preview Email" value="Preview Email" onclick="location.href='@Url.Action("EmailPreview", "Person", new { id = ViewBag.course })'" />
+            <input type="submit" name="button" value="Send Emails" />
         <p></p>
     </div>
-</tr>
-}
+    
+@*    @Ajax.ActionLink("Peview Email", "EmailPreview", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "result", InsertionMode = InsertionMode.Replace, OnSuccess = "openPopup" })<br />  
+
+    <div id="result" style="display:none;"></div>  
+    <script type="text/javascript">
+        $(document).ready(function () 
+        {
+            $("#result").dialog({ autoOpen: true, title: 'Title', width: 500, height: 'auto', modal: true }); 
+        
+        function openPopup() { $("#result").dialog("open"); } 
+    </script>
+*@}

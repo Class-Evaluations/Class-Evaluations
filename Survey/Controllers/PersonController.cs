@@ -98,8 +98,8 @@ namespace Survey.Controllers
                              email_private = r.CLIENT.PERSON.email_private,
                              barcode_number = r.COURSE.barcode_number
                          };
-
-              return View(person);
+            ViewBag.course = id;
+            return View(person);
        }
 
 
@@ -112,7 +112,7 @@ namespace Survey.Controllers
 
        [HttpPost]
        public ViewResult sendWelcome(FormCollection col)
-        {
+       {
 
             int survey_id = Convert.ToInt32(col["survey_id"]);
 
@@ -279,6 +279,7 @@ namespace Survey.Controllers
             ViewBag.EmailCountSent = EmailsSent;
             ViewBag.NoEmailAdddress = EmptyAddresses;
             ViewBag.EmailPrivacyFlag = EmailPrivacy;
+            ViewBag.courseID = id;
 
             //ViewBag.people = personsToPrint;
             return View(personsToPrint);
@@ -295,7 +296,24 @@ namespace Survey.Controllers
 
        public ViewResult EmailPreview(int id)
        {
+           string subjectline = "Park and Recreation Survey  for ...Course Name ";
+           string emailBody = "";
+           string SurveyUrl = String.Concat("http://reclink.raleighnc.gov/Survey/BuildTheSurvey.aspx/");
+           string Greeting = "Hello (First Name)";
 
+           emailBody = " The goal of Raleigh Parks and Recreation is to offer the best" +
+                       " programming possible. The purpose of this survey is to gather information from residents in the community concerning" +
+                       " various programs offered. We are interested in improving services and programs offered in the future and value your input." +
+                       " Please take the time to answer the following questions and be as honest as possible. All answers to this survey will" +
+                       " remain anonymous. Click on the link below to begin your survey." + SurveyUrl;
+           string recipients = "donna.taylor@raleighnc.gov";
+
+           ViewBag.subjectline = subjectline;
+           ViewBag.greeting = Greeting;
+           ViewBag.emailBody = emailBody;
+           ViewBag.recipents = recipients;
+           ViewBag.SurveyUrl = SurveyUrl;
+           ViewBag.courseid = id;
            return View();
        }
    }
