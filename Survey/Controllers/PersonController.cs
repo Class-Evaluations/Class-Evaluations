@@ -301,11 +301,12 @@ namespace Survey.Controllers
            string SurveyUrl = String.Concat("http://reclink.raleighnc.gov/Survey/BuildTheSurvey.aspx/");
            string Greeting = "Hello (First Name)";
 
-           emailBody = " The goal of Raleigh Parks and Recreation is to offer the best" +
-                       " programming possible. The purpose of this survey is to gather information from residents in the community concerning" +
-                       " various programs offered. We are interested in improving services and programs offered in the future and value your input." +
-                       " Please take the time to answer the following questions and be as honest as possible. All answers to this survey will" +
-                       " remain anonymous. Click on the link below to begin your survey." + SurveyUrl;
+           emailBody = " Thank you for participating in a Raleigh Parks and Recreation program.  In an effort to " +
+                       "provide outstanding programs and service, we would appreciate your valuable input.  All " +
+                       "answers will remain anonymous unless you indicate that you would like to be contacted. " +
+                       "                                                                                        " +
+                       "Click on the link below to begin your survey: " + SurveyUrl;
+
            string recipients = "donna.taylor@raleighnc.gov";
 
            ViewBag.subjectline = subjectline;

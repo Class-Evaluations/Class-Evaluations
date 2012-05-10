@@ -1,12 +1,14 @@
-﻿@model IEnumerable<Survey.ViewModels.ReportData>
+﻿@model IEnumerable<Survey.ViewModels.SurveyReponses>
 @{
     ViewBag.Title = "Answer Details";
+    
 }
 
 <script src="@Url.Content("~/Scripts/jquery-ui-1.8.11.custom.min.js")" type="text/javascript"></script>
 
-<h2>Answer Details</h2>
-<h3>This is just an example of a quick view for the answers, this view only displays what was answered for the Scale questions.</h3>
+<h2>Survey Answer Stats</h2>
+<h3>There were  @ViewBag.surveyAnswered  surveys answered.</h3>
+
 
 <table>
     <tr>
@@ -17,7 +19,10 @@
             Question
         </th>
         <th>
-            Responses
+            Answer ID
+        </th>
+        <th>
+            Average Answer
         </th>
         <th></th>
     </tr>
@@ -32,7 +37,10 @@
             @item.questionText
         </td>
         <td>
-            @item.responseStat
+            @item.answerID
+        </td>
+        <td>
+            @item.submittedAnswer
         </td>
     </tr>
 }

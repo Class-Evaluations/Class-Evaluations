@@ -124,41 +124,6 @@
     <Compile Include="ViewModels\ReportDate.cs" />
     <Compile Include="ViewModels\SurveyReponses.cs" />
     <Compile Include="ViewModels\SurveySection.cs" />
-    <Compile Include="WebPages\AlreadyAnswered.aspx.cs">
-      <DependentUpon>AlreadyAnswered.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebPages\AlreadyAnswered.aspx.designer.cs">
-      <DependentUpon>AlreadyAnswered.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebPages\BuildTheSurvey.aspx.cs">
-      <DependentUpon>BuildTheSurvey.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebPages\BuildTheSurvey.aspx.designer.cs">
-      <DependentUpon>BuildTheSurvey.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebPages\Error.aspx.cs">
-      <DependentUpon>Error.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebPages\Error.aspx.designer.cs">
-      <DependentUpon>Error.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebPages\SurveyExpired.aspx.cs">
-      <DependentUpon>SurveyExpired.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebPages\SurveyExpired.aspx.designer.cs">
-      <DependentUpon>SurveyExpired.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebPages\ThankYou.aspx.cs">
-      <DependentUpon>ThankYou.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebPages\ThankYou.aspx.designer.cs">
-      <DependentUpon>ThankYou.aspx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Images\logo.png" />
@@ -212,8 +177,6 @@
     <Content Include="Scripts\modernizr-1.7.min.js" />
     <Content Include="Scripts\PagedList\PagedList.Mvc.js" />
     <Content Include="Scripts\PagedList\PagedList.Mvc.Template.html" />
-    <Content Include="WebPages\AlreadyAnswered.aspx" />
-    <Content Include="WebPages\BuildTheSurvey.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -284,11 +247,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\UserMailer\_Layout.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="WebPages\Error.aspx" />
-    <Content Include="WebPages\SurveyExpired.aspx" />
-    <Content Include="WebPages\ThankYou.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\UserMailer\PasswordReset.cshtml" />

@@ -26,9 +26,14 @@
     <p>
         &nbsp;</p>
     <p>
-        <span class="notranslate"><span class="style1">Thank you for spending time to 
-        reflect on your expereince with this course/activity and sharing your 
-        insightfulness with us. Your feedback helps us improve our course/activities.</span>
+        <span class="notranslate"><span class="style1"> Thank you for helping Raleigh Parks and Recreation Department 
+                        better serve you! For more information about Raleigh Parks and Recreation Department 
+                        <p></p>
+                        <br />
+                        <a href= "http://www.parks.raleighnc.gov"> www.parks.raleighnc.gov</a><br />
+                        <a href= "http://www.facebook.com/raleighparks"> www.facebook.com/raleighparks</a><br />
+                        <a href= "http://www.twitter.com/raleighparks"> www.twitter.com/raleighparks</a><br />
+        </span>
         </span>
     </p>
     <p>
