@@ -134,7 +134,7 @@ namespace SurveyEntry
             //Get the program information and populate the page fields
 
             using (SqlConnection conn = new SqlConnection(classConn))
-            using (SqlCommand cmdtitle = new SqlCommand("SELECT f.facility_name, c.booking_start_date, c.title, a.title FROM CLASS.dbo.REGISTRATION r " +
+            using (SqlCommand cmdtitle = new SqlCommand("SELECT f.facility_name, c.booking_start_date, c.title + ' ' + a.title FROM CLASS.dbo.REGISTRATION r " +
                                                         "JOIN CLASS.dbo.COURSE c ON c.course_id = r.course_id JOIN CLASS.dbo.ACTIVITY a ON a.activity_id = c.activity_id " +
                                                         "JOIN CLASS.dbo.FACILITY f ON f.facility_id = first_facility WHERE c.course_id = " + courseID, conn))
             {
@@ -146,16 +146,15 @@ namespace SurveyEntry
                     try
                     {
                         facilityUsed = reader.GetString(0);
-                        activityTitle = reader.GetString(1);
-                        programDate = reader.GetDateTime(2);
-                        programName = reader.GetString(2);
+                        programDate = reader.GetDateTime(1);
+                        activityTitle = reader.GetString(2);
                     }
                     catch { }
                 }
-                string pname = activityTitle + " " + programName;
-                txtprogramName.Text = pname; // programName;
-                txtfacilityUsed.Text = facilityUsed;
-                txtprogramDates.Text = Convert.ToString(programDate);
+                //string pname = activityTitle;
+                //txtprogramName.Text = (pname).Trim(); // programName;
+                //txtfacilityUsed.Text = facilityUsed;
+                //txtprogramDates.Text = Convert.ToString(programDate);
             }
 
             //Build the survey based on the items returned from the Survey_DB tables
@@ -475,9 +474,9 @@ namespace SurveyEntry
             }
 
 
-            //GET THE ANSWER TYPE NAME TO DETERMINE THE TABLE TO INSERT ANSWER AND GET THE ANSWER ID FOR ALL INSERTS
+            //Get the last row inserted into answer for the answer id.
             using (SqlConnection conn = new SqlConnection(surveyConn))
-            using (SqlCommand cmd5 = new SqlCommand("SELECT answer_id, question_id FROM ANSWER WHERE question_id = " + questionID, conn))
+            using (SqlCommand cmd5 = new SqlCommand("SELECT MAX(answer_id) FROM ANSWER WHERE question_id = " + questionID + "AND survey_request_sent_id = " + survey_request_sentID, conn))
             {
                 conn.Open();
                 SqlDataReader reader = cmd5.ExecuteReader();
