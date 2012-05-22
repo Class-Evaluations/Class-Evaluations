@@ -134,7 +134,7 @@ namespace SurveyEntry
             //Get the program information and populate the page fields
 
             using (SqlConnection conn = new SqlConnection(classConn))
-            using (SqlCommand cmdtitle = new SqlCommand("SELECT f.facility_name, c.booking_start_date, c.title + ' ' + a.title FROM CLASS.dbo.REGISTRATION r " +
+            using (SqlCommand cmdtitle = new SqlCommand("SELECT f.facility_name, c.booking_start_date, RTRIM(c.title), RTRIM(a.title) FROM CLASS.dbo.REGISTRATION r " +
                                                         "JOIN CLASS.dbo.COURSE c ON c.course_id = r.course_id JOIN CLASS.dbo.ACTIVITY a ON a.activity_id = c.activity_id " +
                                                         "JOIN CLASS.dbo.FACILITY f ON f.facility_id = first_facility WHERE c.course_id = " + courseID, conn))
             {
@@ -145,16 +145,31 @@ namespace SurveyEntry
                 {
                     try
                     {
+                        if (!reader.IsDBNull(3))
+                        {
+                            activityTitle = reader.GetString(3);
+                        }
+                        if (!reader.IsDBNull(2))
+                        {
+                            courseTitle = reader.GetString(2);
+                        }
                         facilityUsed = reader.GetString(0);
                         programDate = reader.GetDateTime(1);
-                        activityTitle = reader.GetString(2);
                     }
-                    catch { }
+                    catch { activityTitle = "SOME ERROR"; }
                 }
-                //string pname = activityTitle;
-                //txtprogramName.Text = (pname).Trim(); // programName;
-                //txtfacilityUsed.Text = facilityUsed;
-                //txtprogramDates.Text = Convert.ToString(programDate);
+                string pname;
+                if (String.IsNullOrEmpty(courseTitle))
+                {
+                    pname = activityTitle;
+                }
+                else
+                {
+                    pname = activityTitle + ", " + courseTitle;
+                }
+                txtprogramName.Text = pname;                // programName;
+                txtfacilityUsed.Text = facilityUsed;
+                txtprogramDates.Text = Convert.ToString(programDate);
             }
 
             //Build the survey based on the items returned from the Survey_DB tables
@@ -254,7 +269,7 @@ namespace SurveyEntry
                                 scale = answerTypeId;
                                 RadioButtonList RadioButtonList1 = new RadioButtonList();
                                 RadioButtonList1.ID = Convert.ToString(questionId);
-                                RadioButtonList1.AutoPostBack = true;
+                                RadioButtonList1.AutoPostBack = false;
                                 RadioButtonList1.Items.Add(new ListItem("Strongly Agree", "5"));
                                 RadioButtonList1.Items.Add(new ListItem("Agree", "4"));
                                 RadioButtonList1.Items.Add(new ListItem("Neutral", "3"));
@@ -269,7 +284,7 @@ namespace SurveyEntry
                                 scale = answerTypeId;
                                 RadioButtonList RadioButtonList2 = new RadioButtonList();
                                 RadioButtonList2.ID = Convert.ToString(questionId);
-                                RadioButtonList2.AutoPostBack = true;
+                                RadioButtonList2.AutoPostBack = false;
 
                                 //Get the choice values.
                                 using (SqlConnection conn1 = new SqlConnection(surveyConn))
@@ -295,7 +310,7 @@ namespace SurveyEntry
                                 CheckBoxList CheckBoxList1 = new CheckBoxList();
                                 CheckBoxList1.ID = Convert.ToString(questionId);
                                 //CheckBoxList1.SelectionMode = multiple;
-                                CheckBoxList1.AutoPostBack = true;
+                                CheckBoxList1.AutoPostBack = false;
 
                                 //Get the choice values.
                                 using (SqlConnection conn2 = new SqlConnection(surveyConn))
@@ -319,7 +334,7 @@ namespace SurveyEntry
                             case "Answer_short":
                                 TextBox TextBox1 = new TextBox();
                                 TextBox1.ID = Convert.ToString(questionId);
-                                TextBox1.AutoPostBack = true;
+                                TextBox1.AutoPostBack = false;
                                 TextBox1.Style["BorderStyle"] = "Solid";
                                 TextBox1.Style["Height"] = "61px";
                                 TextBox1.Style["Width"] = "620px";
@@ -330,7 +345,7 @@ namespace SurveyEntry
                                 tlong = answerTypeId;
                                 TextBox TextBox2 = new TextBox();
                                 TextBox2.ID = Convert.ToString(questionId);
-                                TextBox2.AutoPostBack = true;
+                                TextBox2.AutoPostBack = false;
                                 TextBox2.Style["BorderStyle"] = "Solid";
                                 TextBox2.Style["Height"] = "61px";
                                 TextBox2.Style["Width"] = "620px";
@@ -340,7 +355,7 @@ namespace SurveyEntry
                             case "True_False":
                                 true_false = answerTypeId;
                                 RadioButtonList RadioButtonList3 = new RadioButtonList();
-                                RadioButtonList3.AutoPostBack = true;
+                                RadioButtonList3.AutoPostBack = false;
                                 RadioButtonList3.ID = Convert.ToString(questionId);
                                 RadioButtonList3.Items.Insert(0, new ListItem("False", "0"));
                                 RadioButtonList3.Items.Insert(1, new ListItem("True", "1"));
