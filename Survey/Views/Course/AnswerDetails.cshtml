@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Survey.ViewModels.SurveyReponses>
+﻿@model IEnumerable<Survey.App_Data.SurveyReportDataContext>
+
 @{
     ViewBag.Title = "Answer Details";
     
@@ -10,39 +11,15 @@
 <h3>There were  @ViewBag.surveyAnswered  surveys answered.</h3>
 
 
-<table>
-    <tr>
-        <th>
-            Question ID
-        </th>
-        <th>
-            Question
-        </th>
-        <th>
-            Answer ID
-        </th>
-        <th>
-            Average Answer
-        </th>
-        <th></th>
-    </tr>
+<strong>Question / Answer</strong> 
 
-@foreach (var item in Model) {
-    <tr>
-
-        <td>
-            @item.questionID
-        </td>
-        <td>
-            @item.questionText
-        </td>
-        <td>
-            @item.answerID
-        </td>
-        <td>
-            @item.submittedAnswer
-        </td>
-    </tr>
+@foreach (var item in Model)
+{
+    var qid = item.Questions.question_id;
+    <h4>@item.Questions.question_id. @item.Questions.question_text </h4>
+    
+    if (item.Questions.question_id == qid)
+    {
+        @item.Answers.answer_type_id
+    }
 }
-
-</table>

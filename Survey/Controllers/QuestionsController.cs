@@ -162,7 +162,11 @@ namespace Survey.Controllers
                 db.QUESTIONs.AddObject(question);
                 db.SaveChanges();
 
-                if ((answerType == 3) || (answerType == 4))
+                //NEEDS to bE FIXED
+                //this needs to check the answer type name and not in index in the database
+                //there is no guarentee the numbers are the same
+
+                if ((answerType == 2) || (answerType == 3))
                 {
                     var choices = new Survey.Models.MultipleChoiceItem();
                     choices.QID = question.question_id;

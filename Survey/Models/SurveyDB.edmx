@@ -1017,7 +1017,7 @@
         <EntityTypeShape EntityType="Survey_DBModel.ANSWER_SCALE" Width="1.5" PointX="5.25" PointY="8.75" Height="1.9377083571751896" IsExpanded="true" />
         <EntityTypeShape EntityType="Survey_DBModel.ANSWER_SHORT" Width="1.5" PointX="5.25" PointY="11.5" Height="1.9377083571751896" IsExpanded="true" />
         <EntityTypeShape EntityType="Survey_DBModel.ANSWER_TRUE_FALSE" Width="1.5" PointX="5.25" PointY="14.125" Height="1.9377083571751896" IsExpanded="true" />
-        <EntityTypeShape EntityType="Survey_DBModel.ANSWER_TYPE" Width="1.5" PointX="0.75" PointY="0.75" Height="2.8726042054096865" IsExpanded="true" />
+        <EntityTypeShape EntityType="Survey_DBModel.ANSWER_TYPE" Width="1.5" PointX="0.75" PointY="0.875" Height="3.0595833750565844" IsExpanded="true" />
         <EntityTypeShape EntityType="Survey_DBModel.COURSE_STATUS" Width="1.5" PointX="2.625" PointY="0.5" Height="1.7507291875282927" IsExpanded="true" />
         <EntityTypeShape EntityType="Survey_DBModel.QUESTION" Width="1.5" PointX="0.75" PointY="11.25" Height="2.6856250357627864" IsExpanded="true" />
         <EntityTypeShape EntityType="Survey_DBModel.QUESTION_MULTIPLE_CHOICE" Width="1.5" PointX="3" PointY="16.875" Height="1.7507291875282931" IsExpanded="true" />

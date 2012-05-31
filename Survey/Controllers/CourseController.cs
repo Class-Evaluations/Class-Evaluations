@@ -8,6 +8,8 @@ using PagedList;
 using Survey.ViewModels;
 using System.Data.Objects;
 using System.Data.EntityModel;
+using Survey.App_Data;
+
 
 namespace Survey.Controllers
 {
@@ -15,6 +17,7 @@ namespace Survey.Controllers
     {
         private CLASSEntities _db = new CLASSEntities();
         private Survey_DBEntities survey_db = new Survey_DBEntities();
+
         
         //Set up paging for the list of courses
 
@@ -71,33 +74,37 @@ namespace Survey.Controllers
 
 
             DateTime Today = DateTime.Now.Date;
-
+            //set the lower boundry to 110000.
             var CourseDetails = from c in _db.COURSEs
+                                //where c.course_id >= 110000 && (c.cancel_reason == "Course Completed" || EntityFunctions.AddDays(c.last_end_datetime, 7) < Today)
                                 where c.session_title_id == 9 && (c.cancel_reason == "Course Completed" || EntityFunctions.AddDays(c.last_end_datetime, 7) < Today)
                                 orderby c.barcode_number descending
                                 select c;
             //Need to check the expiration date to expire the survey
             var SurveyExpiration = from x in survey_db.SURVEY_REQUEST_SENT
                                    select x;
-            foreach (var item in SurveyExpiration)
+
+            if (SurveyExpiration.Count() > 0)
             {
-                if (item.expiration_date < DateTime.Now.Date)
+                foreach (var item in SurveyExpiration)
                 {
-                    item.status_flag = "X";
+                    if (item.expiration_date < DateTime.Now.Date)
+                    {
+                        item.status_flag = "X";
+                    }
+                }
+
+                // Submit the changes to the database.
+                try
+                {
+                    survey_db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    // Provide for exceptions.
                 }
             }
-
-            // Submit the changes to the database.
-            try
-            {
-                survey_db.SaveChanges();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                // Provide for exceptions.
-            }
-
 
             var SurveyStatus = from k in survey_db.COURSE_STATUS
                                select k;
@@ -119,113 +126,36 @@ namespace Survey.Controllers
             return View();
         }
 
-        public ViewResult AnswerDetails(int id, int? surveyid)
+        public ViewResult AnswerDetails(int id)
         {
-            surveyid = 1;
+            //need to pull this from the database
+            var surveyid = (from s in survey_db.SURVEY_REQUEST_SENT
+                            where s.course_id == id
+                            select s.survey_id).First(); 
             
-            var surveySent =  (from s in survey_db.SURVEY_REQUEST_SENT
+            var surveySent =  from s in survey_db.SURVEY_REQUEST_SENT
                           where s.course_id == id 
-                          select s).ToList();
+                          select s.survey_request_sent_id;
 
             var surveyCount = surveySent.Count();
 
-            var answerDetails = from a in survey_db.SURVEY_QUESTIONS
-                                join q in survey_db.QUESTIONs on a.question_id equals q.question_id
-                                join an in survey_db.ANSWERs on a.question_id equals an.question_id
-                                join at in survey_db.ANSWER_TYPE on an.answer_type_id equals at.answer_type_id
-                                join sa in survey_db.ANSWER_SCALE on an.answer_id equals sa.answer_id 
-                                where a.survey_id == surveyid
-                                orderby sa.survey_request_sent_id ascending
-                                select new SurveyReponses
-                                {
-                                    questionID = a.question_id,
-                                    questionText = q.question_text,
-                                    answerID = an.answer_id,
-                                    answerType = at.answer_type_name,
-                                    submittedAnswer = sa.submitted_answer,
-                                    surveyRequestID = sa.survey_request_sent_id
-                                };
+            
+            
+            SurveyReportDataContext ReportData = new SurveyReportDataContext();
 
-        //iterate through the answerDetails to calculate the answer statistics
+            var answerDetails = from results in ReportData.Questions
+                                orderby results.question_id
+                                select results;
+                                 //{
+                                 //   QID =      
+                                 //   Text = question.Questions.questionText,
+                                 //   AverageScale = (scale.submittedAnswer)
+                                 //};
 
-            int? currentQuestion = 0;
-            foreach (var item in answerDetails)
-            {
-                currentQuestion = item.questionID;
-
-                switch ((item.answerType).Trim())
-                {
-                    case "Scale":
-                        {
-                            var d = from x in survey_db.ANSWER_SCALE
-                                    join s in survey_db.ANSWERs on x.answer_id equals s.answer_id
-                                    //where surveySent.Contains(x.survey_request_sent_id) && 
-                                    where x.submitted_answer > 0 && s.question_id == item.questionID
-                                    orderby s.question_id
-                                    group x by x.submitted_answer into g
-                                    select new ReportData
-                                    {
-                                        questionID = item.questionID,
-                                        questionText = item.questionText,
-                                        responseStat = g.Average(x => x.submitted_answer)
-                                    };
-                        }
-                        //ViewBag.questionID = item.questionID;
-                        //ViewBag.questionText = item.questionText;
-                        //ViewBag.responseStat = ReportData.responseStat;
-
-                        break;
-                    case "Multi-Choice":
-                        //    {  var d = from x in survey_db.ANSWER_MULTIPLE_CHOICE
-                        //                where surveySent.Contains(x.survey_request_sent_id)
-                        //                group x by x.submitted_answer into g
-                        //                select new {averageAnswer = g.Count(x => x.submitted_answer)};
-                        { break; }
-                    case "Multi-Choice-multi":
-                        //{  var d = from x in survey_db.ANSWER_MULTIPLE_CHOICE
-                        //            where surveySent.Contains(x.survey_request_sent_id)
-                        //            group x by x.submitted_answer into g
-                        //            select new {averageAnswer = g.Average(x => x.submitted_answer)};
-                        { break; }
-                    case "Answer_long":
-                        //{  var d = from x in survey_db.ANSWER_SCALE
-                        //            where surveySent.Contains(x.survey_request_sent_id)
-                        //            select new {averageAnswer = x.submitted_answer};
-
-                        //    ViewBag.questionID = item.questionID;
-                        //    ViewBag.questionText = item.questionText;
-                        //    ViewBag.responseStat = x.submitted_answer;
-
-                        { break; }
-                    case "Answer_short":
-                        //{  var d = from x in survey_db.ANSWER_SCALE
-                        //            where surveySent.Contains(x.survey_request_sent_id)
-                        //            select new { averageAnswer = x.submitted_answer };
-
-                        //    ViewBag.questionID = item.questionID;
-                        //    ViewBag.questionText = item.questionText;
-                        //    ViewBag.responseStat = x.submitted_answer;
-
-                        { break; }
-                    case "True_False":
-                        //{  var d = from x in survey_db.ANSWER_SCALE
-                        //            where surveySent.Contains(x.survey_request_sent_id)
-                        //            group x by x.submitted_answer into g
-                        //            select new {averageAnswer = g.Count(x => x.submitted_answer)};
-                        { break; }
-                }
-            }
-
-            ViewBag.surveyAnswered = surveySent;
-            return View(answerDetails);
-
-            //ReportData
-
-            //var categories =
-            //    from p in products
-            //    group p by p.Category into g
-            //    select new { Category = g.Key, AveragePrice = g.Average(p => p.UnitPrice) }; 
-
+                        
+            ViewBag.surveyAnswered = surveyCount;
+         
+          return View(answerDetails);
 
         }
 

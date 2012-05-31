@@ -134,7 +134,7 @@ namespace SurveyEntry
             //Get the program information and populate the page fields
 
             using (SqlConnection conn = new SqlConnection(classConn))
-            using (SqlCommand cmdtitle = new SqlCommand("SELECT f.facility_name, c.booking_start_date, c.title + ' ' + a.title FROM CLASS.dbo.REGISTRATION r " +
+            using (SqlCommand cmdtitle = new SqlCommand("SELECT f.facility_name, c.booking_start_date, c.title, a.title FROM CLASS.dbo.REGISTRATION r " +
                                                         "JOIN CLASS.dbo.COURSE c ON c.course_id = r.course_id JOIN CLASS.dbo.ACTIVITY a ON a.activity_id = c.activity_id " +
                                                         "JOIN CLASS.dbo.FACILITY f ON f.facility_id = first_facility WHERE c.course_id = " + courseID, conn))
             {
@@ -143,20 +143,33 @@ namespace SurveyEntry
 
                 if (reader.Read())
                 {
-                    try
+                    facilityUsed = reader.GetString(0);
+                    programDate = reader.GetDateTime(1);
+                    if (!String.IsNullOrEmpty(reader.GetString(2)))
                     {
-                        facilityUsed = reader.GetString(0);
-                        programDate = reader.GetDateTime(1);
-                        activityTitle = reader.GetString(2);
+                        courseTitle = reader.GetString(2);
                     }
-                    catch { }
+                    else
+                    {
+                        courseTitle = " ";
+                    }
+                    if (!String.IsNullOrEmpty(reader.GetString(3)))
+                    {
+                        activityTitle = reader.GetString(3);
+                    }
+                    else
+                    {
+                        activityTitle = " ";
+                    }
                 }
-                //string pname = activityTitle;
-                //txtprogramName.Text = (pname).Trim(); // programName;
-                //txtfacilityUsed.Text = facilityUsed;
-                //txtprogramDates.Text = Convert.ToString(programDate);
-            }
 
+                programName = (courseTitle).Trim() + (activityTitle).Trim();
+
+
+                txtprogramName.Text = programName;
+                txtfacilityUsed.Text = facilityUsed;
+                txtprogramDates.Text = Convert.ToString(programDate);
+            }
             //Build the survey based on the items returned from the Survey_DB tables
             using (SqlConnection conn = new SqlConnection(surveyConn))
             using (SqlCommand cmdTitle = new SqlCommand("Select survey_id, title, header_text, survey_introduction, number_of_sections From SURVEY WHERE survey_id = " + surveyID, conn))
@@ -439,12 +452,12 @@ namespace SurveyEntry
 
                             switch (answerTypeID)
                             {
-                                case 2:
+                                case 1:
                                     if (!String.IsNullOrEmpty(answer.SelectedValue))
                                     { answerInt = Convert.ToInt32(answer.SelectedValue); }
                                     else { answerInt = -1; }
                                     break;
-                                case 3:
+                                case 2:
                                     answerText = answer.SelectedValue;
                                     break;
                                 //case 7:
@@ -547,7 +560,7 @@ namespace SurveyEntry
         public int GetAnswerType()
         {
             //add a query to get the answer type.   
-            string dsn = "Data Source=10.6.5.69;Initial Catalog=Survey_DB;User Id=surveyhelper; Password=helpme";
+            //string dsn = "Data Source=10.6.5.69;Initial Catalog=Survey_DB;User Id=surveyhelper; Password=helpme";
             using (SqlConnection conn = new SqlConnection(surveyConn))
             using (SqlCommand cmd = new SqlCommand("SELECT answer_type_id FROM QUESTION WHERE question_id = " + questionID, conn))
             {
