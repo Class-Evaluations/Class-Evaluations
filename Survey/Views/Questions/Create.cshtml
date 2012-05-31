@@ -36,12 +36,6 @@
     </fieldset>
 }
 
-@*@if ((Model.answer_type_id == 3) || (Model.answer_type_id == 4))
-{   
-    @Html.Partial("_MultiAnswerQuestion");
-}
-
-            *@
 <div>   
     @Html.ActionLink("Cancel/Back to Question List", "Index")
 </div> 

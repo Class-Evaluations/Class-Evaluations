@@ -562,7 +562,7 @@ namespace SurveyEntry
         public int GetAnswerType()
         {
             //add a query to get the answer type.   
-            string dsn = "Data Source=10.6.5.69;Initial Catalog=Survey_DB;User Id=surveyhelper; Password=helpme";
+            //string dsn = "Data Source=10.6.5.69;Initial Catalog=Survey_DB;User Id=surveyhelper; Password=helpme";
             using (SqlConnection conn = new SqlConnection(surveyConn))
             using (SqlCommand cmd = new SqlCommand("SELECT answer_type_id FROM QUESTION WHERE question_id = " + questionID, conn))
             {
