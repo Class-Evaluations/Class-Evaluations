@@ -134,7 +134,7 @@ namespace SurveyEntry
             //Get the program information and populate the page fields
 
             using (SqlConnection conn = new SqlConnection(classConn))
-            using (SqlCommand cmdtitle = new SqlCommand("SELECT f.facility_name, c.booking_start_date, c.title, a.title FROM CLASS.dbo.REGISTRATION r " +
+            using (SqlCommand cmdtitle = new SqlCommand("SELECT f.facility_name, c.booking_start_date, RTRIM(c.title), RTRIM(a.title) FROM CLASS.dbo.REGISTRATION r " +
                                                         "JOIN CLASS.dbo.COURSE c ON c.course_id = r.course_id JOIN CLASS.dbo.ACTIVITY a ON a.activity_id = c.activity_id " +
                                                         "JOIN CLASS.dbo.FACILITY f ON f.facility_id = first_facility WHERE c.course_id = " + courseID, conn))
             {
@@ -143,33 +143,35 @@ namespace SurveyEntry
 
                 if (reader.Read())
                 {
-                    facilityUsed = reader.GetString(0);
-                    programDate = reader.GetDateTime(1);
-                    if (!String.IsNullOrEmpty(reader.GetString(2)))
+                    try
                     {
-                        courseTitle = reader.GetString(2);
+                        if (!reader.IsDBNull(3))
+                        {
+                            activityTitle = reader.GetString(3);
+                        }
+                        if (!reader.IsDBNull(2))
+                        {
+                            courseTitle = reader.GetString(2);
+                        }
+                        facilityUsed = reader.GetString(0);
+                        programDate = reader.GetDateTime(1);
                     }
-                    else
-                    {
-                        courseTitle = " ";
-                    }
-                    if (!String.IsNullOrEmpty(reader.GetString(3)))
-                    {
-                        activityTitle = reader.GetString(3);
-                    }
-                    else
-                    {
-                        activityTitle = " ";
-                    }
+                    catch { activityTitle = "SOME ERROR"; }
                 }
-
-                programName = (courseTitle).Trim() + (activityTitle).Trim();
-
-
-                txtprogramName.Text = programName;
+                string pname;
+                if (String.IsNullOrEmpty(courseTitle))
+                {
+                    pname = activityTitle;
+                }
+                else
+                {
+                    pname = activityTitle + ", " + courseTitle;
+                }
+                txtprogramName.Text = pname;                // programName;
                 txtfacilityUsed.Text = facilityUsed;
                 txtprogramDates.Text = Convert.ToString(programDate);
             }
+
             //Build the survey based on the items returned from the Survey_DB tables
             using (SqlConnection conn = new SqlConnection(surveyConn))
             using (SqlCommand cmdTitle = new SqlCommand("Select survey_id, title, header_text, survey_introduction, number_of_sections From SURVEY WHERE survey_id = " + surveyID, conn))
@@ -267,7 +269,7 @@ namespace SurveyEntry
                                 scale = answerTypeId;
                                 RadioButtonList RadioButtonList1 = new RadioButtonList();
                                 RadioButtonList1.ID = Convert.ToString(questionId);
-                                RadioButtonList1.AutoPostBack = true;
+                                RadioButtonList1.AutoPostBack = false;
                                 RadioButtonList1.Items.Add(new ListItem("Strongly Agree", "5"));
                                 RadioButtonList1.Items.Add(new ListItem("Agree", "4"));
                                 RadioButtonList1.Items.Add(new ListItem("Neutral", "3"));
@@ -282,7 +284,7 @@ namespace SurveyEntry
                                 scale = answerTypeId;
                                 RadioButtonList RadioButtonList2 = new RadioButtonList();
                                 RadioButtonList2.ID = Convert.ToString(questionId);
-                                RadioButtonList2.AutoPostBack = true;
+                                RadioButtonList2.AutoPostBack = false;
 
                                 //Get the choice values.
                                 using (SqlConnection conn1 = new SqlConnection(surveyConn))
@@ -308,7 +310,7 @@ namespace SurveyEntry
                                 CheckBoxList CheckBoxList1 = new CheckBoxList();
                                 CheckBoxList1.ID = Convert.ToString(questionId);
                                 //CheckBoxList1.SelectionMode = multiple;
-                                CheckBoxList1.AutoPostBack = true;
+                                CheckBoxList1.AutoPostBack = false;
 
                                 //Get the choice values.
                                 using (SqlConnection conn2 = new SqlConnection(surveyConn))
@@ -332,7 +334,7 @@ namespace SurveyEntry
                             case "Answer_short":
                                 TextBox TextBox1 = new TextBox();
                                 TextBox1.ID = Convert.ToString(questionId);
-                                TextBox1.AutoPostBack = true;
+                                TextBox1.AutoPostBack = false;
                                 TextBox1.Style["BorderStyle"] = "Solid";
                                 TextBox1.Style["Height"] = "61px";
                                 TextBox1.Style["Width"] = "620px";
@@ -343,7 +345,7 @@ namespace SurveyEntry
                                 tlong = answerTypeId;
                                 TextBox TextBox2 = new TextBox();
                                 TextBox2.ID = Convert.ToString(questionId);
-                                TextBox2.AutoPostBack = true;
+                                TextBox2.AutoPostBack = false;
                                 TextBox2.Style["BorderStyle"] = "Solid";
                                 TextBox2.Style["Height"] = "61px";
                                 TextBox2.Style["Width"] = "620px";
@@ -353,7 +355,7 @@ namespace SurveyEntry
                             case "True_False":
                                 true_false = answerTypeId;
                                 RadioButtonList RadioButtonList3 = new RadioButtonList();
-                                RadioButtonList3.AutoPostBack = true;
+                                RadioButtonList3.AutoPostBack = false;
                                 RadioButtonList3.ID = Convert.ToString(questionId);
                                 RadioButtonList3.Items.Insert(0, new ListItem("False", "0"));
                                 RadioButtonList3.Items.Insert(1, new ListItem("True", "1"));
@@ -452,12 +454,12 @@ namespace SurveyEntry
 
                             switch (answerTypeID)
                             {
-                                case 1:
+                                case 2:
                                     if (!String.IsNullOrEmpty(answer.SelectedValue))
                                     { answerInt = Convert.ToInt32(answer.SelectedValue); }
                                     else { answerInt = -1; }
                                     break;
-                                case 2:
+                                case 3:
                                     answerText = answer.SelectedValue;
                                     break;
                                 //case 7:
@@ -560,7 +562,7 @@ namespace SurveyEntry
         public int GetAnswerType()
         {
             //add a query to get the answer type.   
-            //string dsn = "Data Source=10.6.5.69;Initial Catalog=Survey_DB;User Id=surveyhelper; Password=helpme";
+            string dsn = "Data Source=10.6.5.69;Initial Catalog=Survey_DB;User Id=surveyhelper; Password=helpme";
             using (SqlConnection conn = new SqlConnection(surveyConn))
             using (SqlCommand cmd = new SqlCommand("SELECT answer_type_id FROM QUESTION WHERE question_id = " + questionID, conn))
             {
