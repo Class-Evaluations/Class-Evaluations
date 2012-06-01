@@ -225,7 +225,8 @@ namespace Survey.Controllers
                         //FileReader returns an array of recipients from a text file
 
                         //REMOVE BEFORE SAVING UP TO GIT  TESTING ONLY
-                        string recipients = "donna.taylor@raleighnc.gov";
+                        //string recipients = "donna.taylor@raleighnc.gov";
+                        string recipients = item.email_address;
 
                         devemail.To.Add(recipients);
 

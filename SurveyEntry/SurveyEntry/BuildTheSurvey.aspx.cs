@@ -357,8 +357,8 @@ namespace SurveyEntry
                                 RadioButtonList RadioButtonList3 = new RadioButtonList();
                                 RadioButtonList3.AutoPostBack = false;
                                 RadioButtonList3.ID = Convert.ToString(questionId);
-                                RadioButtonList3.Items.Insert(0, new ListItem("False", "0"));
-                                RadioButtonList3.Items.Insert(1, new ListItem("True", "1"));
+                                RadioButtonList3.Items.Insert(0, new ListItem("True", "1"));
+                                RadioButtonList3.Items.Insert(1, new ListItem("False", "0"));
 
                                 panelContent.Controls.Add(RadioButtonList3);
                                 panelContent.Controls.Add(new LiteralControl("<br /> <br /> <br />"));
@@ -462,9 +462,11 @@ namespace SurveyEntry
                                 case 2:
                                     answerText = answer.SelectedValue;
                                     break;
-                                //case 7:
-                                //    answerInt = answerInt = Convert.ToInt32(answer.SelectedIndex);
-                                //    break;
+                                case 6:
+                                     //System.Console.WriteLine("The answer is " + answerInt);
+                                     answerInt = Convert.ToInt32(answer.SelectedValue);
+                                    
+                                    break;
                                 default:
                                     break;
                             }
@@ -542,6 +544,14 @@ namespace SurveyEntry
                     break;
                 case "True_False":
                     tablename = "ANSWER_TRUE_FALSE";
+                    //if (answerInt != 0)
+                    //{
+                    //    condition = "(" + answerID + ", 1, " + survey_request_sentID + ")";
+                    //}
+                    //else
+                    //{
+                    //    condition = "(" + answerID + ", 0, " + survey_request_sentID + ")";
+                    //}
                     condition = "(" + answerID + ", " + answerInt + ", " + survey_request_sentID + ")";
                     break;
                 default:

@@ -76,8 +76,8 @@ namespace Survey.Controllers
             DateTime Today = DateTime.Now.Date;
             //set the lower boundry to 110000.
             var CourseDetails = from c in _db.COURSEs
-                                //where c.course_id >= 110000 && (c.cancel_reason == "Course Completed" || EntityFunctions.AddDays(c.last_end_datetime, 7) < Today)
-                                where c.session_title_id == 9 && (c.cancel_reason == "Course Completed" || EntityFunctions.AddDays(c.last_end_datetime, 7) < Today)
+                                where c.course_id >= 118000 && (c.cancel_reason == "Course Completed" || EntityFunctions.AddDays(c.last_end_datetime, 7) < Today)
+                                //where c.session_title_id == 9 && (c.cancel_reason == "Course Completed" || EntityFunctions.AddDays(c.last_end_datetime, 7) < Today)
                                 orderby c.barcode_number descending
                                 select c;
             //Need to check the expiration date to expire the survey
