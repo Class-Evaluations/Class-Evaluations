@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using Survey.Models;
+using PagedList;
 
 namespace Survey.ViewModels
 {

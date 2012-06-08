@@ -2,7 +2,7 @@
     ViewBag.Title = "Courses Available to Survey"; 
 } 
 
-<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" /
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @using PagedList.Mvc;
 @using PagedList; 
@@ -10,12 +10,18 @@
 <script src="@Url.Content("~/Scripts/jquery-ui-1.8.11.custom.min.js")" type="text/javascript"></script>
 
 <h2>This list of courses are set to complete or 7 days past the activities last end date. </h2>
-<h4>Not Available means the course participates have already been sent a survey or this course was disabled for surveying.</h4>
 
 <p>
 </p>
-@using (Html.BeginForm("sendWelcome", "Person", FormMethod.Post))
+@using (Html.BeginForm())
 {
+ 
+   <p> 
+        
+        Find by Barcode: @Html.TextBox("SearchString", ViewBag.currentFilter as string) &nbsp; 
+        <input type="submit" value="Search" />
+    </p>
+     
 <table>
     <tr>
         <th>
@@ -45,7 +51,7 @@
         </th>
         <th>
             <strong> Activity Title - Course Title </strong>
-        </>
+        </th>   
         <th>
             <strong> Course Number </strong>
         </th>
@@ -72,8 +78,10 @@
 {
     var StatusOfSurvey = "";
     var ExpirationDate = "";
-    var start_date = item.last_start_datetime.ToString("MM/dd/yyyy");
-    var last_date = item.last_end_datetime.ToString("MM/dd/yyyy");
+    @*Need to format the date time to a date*@
+    var start_date = (item.last_start_datetime == null ? string.Empty : item.last_start_datetime);
+    var last_date = (item.last_end_datetime == null ? string.Empty : item.last_end_datetime);
+
     var Title = "";
     Title = @item.ACTIVITY.title + "-" + @item.title;
 

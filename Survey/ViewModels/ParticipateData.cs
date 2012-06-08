@@ -15,6 +15,7 @@ namespace Survey.ViewModels
         public string course_title { get; set;}
         public Int32? course_id { get; set;}
         public string email_address { get; set; }
+        public string account_email { get; set; }
         public Int32? email_private { get; set; }
         public string barcode_number { get; set;}
 

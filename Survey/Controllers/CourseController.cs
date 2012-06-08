@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Survey.Models;
 using PagedList;
+using PagedList.Mvc;
 using Survey.ViewModels;
 using System.Data.Objects;
 using System.Data.EntityModel;
@@ -23,33 +24,57 @@ namespace Survey.Controllers
 
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
+            
             //sorting functionality functionality
-            //ViewBag.CurrentSort = sortOrder;
-            //ViewBag.ActivitySortParam = String.IsNullOrEmpty(sortOrder)? "Activity Desc" : "";
-            //ViewBag.TitleSortParm = String.IsNullOrEmpty(sortOrder) ? "Title Desc" : "";
-            //ViewBag.CourseSortParm = String.IsNullOrEmpty(sortOrder) ? "Course Desc" : ""; 
-            //ViewBag.BarcodeSortParm = String.IsNullOrEmpty(sortOrder)? "Barcode Desc" : "";
+            DateTime Today = DateTime.Now.Date;
+            ViewBag.CurrentSort = sortOrder;
+            //ViewBag.searchString = String.IsNullOrEmpty(searchString) ? "Search for Barcode" : "";
+            ViewBag.ActivitySortParam = String.IsNullOrEmpty(sortOrder) ? "Activity Desc" : "";
+            ViewBag.TitleSortParm = String.IsNullOrEmpty(sortOrder) ? "Title Desc" : "";
+            ViewBag.CourseSortParm = String.IsNullOrEmpty(sortOrder) ? "Course Desc" : "";
+            ViewBag.BarcodeSortParm = String.IsNullOrEmpty(sortOrder) ? "Barcode Desc" : "";
 
-            //if (Request.HttpMethod == "GET")
-            //{
-            //    searchString = currentFilter;
-            //}
-            //else
-            //{
-            //    page = 1;
-            //}
+            if (Request.HttpMethod == "GET")
+            {
+                searchString = currentFilter;
+            }
+            else
+            {
+                page = 1;
+            }
+            //string[] statusIDs = ('X', 'A', 'I');
+            var query = from c in _db.COURSEs where c.course_id >= 118000 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 7) < Today) && c.course_status_id != "X") select c;
+            
+            //searching functionality
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                query = from c in _db.COURSEs where c.course_id >= 118000 && (c.course_status_id == "C" || EntityFunctions.AddDays(c.last_end_datetime, 7) < Today) && c.barcode_number == searchString select c;
+            }
 
+            //switch (sortOrder)
+            //{
+            //    case "Last Name Desc":
+            //        query = query.OrderByDescending(s => s.last_name);
+            //        break;
+            //    case "Email Desc":
+            //        query = query.OrderByDescending(s => s.email_address);
+            //        break;
+            //    default:
+            //        query = query.OrderBy(s => s.person_id);
+            //        break;
+            //}
+            var CourseDetails = query.ToList();
 
             //searching functionality
             //if (!String.IsNullOrEmpty(searchString))
             //{
             //    courses = courses.Where(s => s.barcode_number.Contains(searchString));
-           // }
+            //}
             //else
             //{
             //    courses = courses.Where(s => s.course_id > 111460);
-                //For testing we cut down the amount of records returned.
-                //courses = courses.Where(s => s.cancel_reason = Convert.ToChar('Course Completed')) or (s => s.last_end_datetime > DateTime.Today.AddDays(+7); 
+            //    For testing we cut down the amount of records returned.
+            //    courses = courses.Where(s => s.cancel_reason = Convert.ToChar('Course Completed')) or (s => s.last_end_datetime > DateTime.Today.AddDays(+7); 
             //}
 
 
@@ -73,13 +98,47 @@ namespace Survey.Controllers
             //}
 
 
-            DateTime Today = DateTime.Now.Date;
+            //DateTime Today = DateTime.Now.Date;
             //set the lower boundry to 110000.
-            var CourseDetails = from c in _db.COURSEs
-                                where c.course_id >= 118000 && (c.cancel_reason == "Course Completed" || EntityFunctions.AddDays(c.last_end_datetime, 7) < Today)
-                                //where c.session_title_id == 9 && (c.cancel_reason == "Course Completed" || EntityFunctions.AddDays(c.last_end_datetime, 7) < Today)
-                                orderby c.barcode_number descending
-                                select c;
+            //var CourseDetails = from c in _db.COURSEs
+            //                    where c.course_id >= 118000 && (c.cancel_reason == "Course Completed" || EntityFunctions.AddDays(c.last_end_datetime, 7) < Today)
+            //                    //enabled when testing...
+            //                    //where c.session_title_id == 9 && (c.cancel_reason == "Course Completed" || EntityFunctions.AddDays(c.last_end_datetime, 7) < Today)
+            //                    orderby c.barcode_number descending
+            //                    select c;
+            //var option = where c.course_id >= 118000 && (c.cancel_reason == "Course Completed" || EntityFunctions.AddDays(c.last_end_datetime, 7) < Today)" 
+            //searching functionality
+            
+            //var CourseDetails;
+            //if (!String.IsNullOrEmpty(searchString))
+            //{
+            //        CourseDetails = from c in _db.COURSEs
+            //                    where c.barcode_number == searchString
+            //                    //enabled when testing...
+            //                    //where c.session_title_id == 9 && (c.cancel_reason == "Course Completed" || EntityFunctions.AddDays(c.last_end_datetime, 7) < Today)
+            //                    //orderby c.barcode_number descending
+            //                    select c;
+                
+            //}
+            //else
+            //{
+            //        CourseDetails = from c in _db.COURSEs
+            //                    where c.course_id >= 118000 && (c.cancel_reason == "Course Completed" || EntityFunctions.AddDays(c.last_end_datetime, 7) < Today)
+            //                    //enabled when testing...
+            //                    //where c.session_title_id == 9 && (c.cancel_reason == "Course Completed" || EntityFunctions.AddDays(c.last_end_datetime, 7) < Today)
+            //                    orderby c.barcode_number descending
+            //                    select c;
+
+            //}
+
+
+            //CourseDetails = from c in _db.COURSEs
+            //                    where c.course_id >= 118000 && (c.cancel_reason == "Course Completed" || EntityFunctions.AddDays(c.last_end_datetime, 7) < Today)
+            //                    //enabled when testing...
+            //                    //where c.session_title_id == 9 && (c.cancel_reason == "Course Completed" || EntityFunctions.AddDays(c.last_end_datetime, 7) < Today)
+            //                    orderby c.barcode_number descending
+            //                    select c;
+
             //Need to check the expiration date to expire the survey
             var SurveyExpiration = from x in survey_db.SURVEY_REQUEST_SENT
                                    select x;
@@ -115,6 +174,7 @@ namespace Survey.Controllers
 
             var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
 
+            
             var onePageOfCourses = CourseDetails.ToPagedList(pageNumber, 25); // will only contain 25 products max because of the pageSize
             ViewBag.CourseList = CourseDetails;
             ViewBag.SurveyStatus = SurveyStatus;

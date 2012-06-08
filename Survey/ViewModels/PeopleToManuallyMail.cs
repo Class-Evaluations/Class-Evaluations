@@ -15,6 +15,8 @@ namespace Survey.ViewModels
         public string email {get; set; }
         public Byte? emailPrivate {get; set; }
         public string barcode {get; set; }
+        public string accountOwner { get; set; }
+        public string accountEmail { get; set; }
 
 
     }

@@ -28,7 +28,10 @@
             <h3>First Name</h3>
         </th>
         <th>
-            <h3>Email Addres</h3>
+            <h3>Participate Email Address</h3>
+        </th>
+        <th>
+            <h3>Account Email Address</h3>
         </th>
         <th>
             <h3>Privacy Flag</h3>
@@ -51,6 +54,9 @@
                 @Html.DisplayFor(modelItem => item.email_address)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.account_email)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.email_private)
             </td>
         </tr>
@@ -63,15 +69,5 @@
             <input type="submit" name="button" value="Send Emails" />
         <p></p>
     </div>
-    
-@*    @Ajax.ActionLink("Peview Email", "EmailPreview", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "result", InsertionMode = InsertionMode.Replace, OnSuccess = "openPopup" })<br />  
-
-    <div id="result" style="display:none;"></div>  
-    <script type="text/javascript">
-        $(document).ready(function () 
-        {
-            $("#result").dialog({ autoOpen: true, title: 'Title', width: 500, height: 'auto', modal: true }); 
-        
-        function openPopup() { $("#result").dialog("open"); } 
-    </script>
-*@}
+   
+}

@@ -95,6 +95,7 @@ namespace Survey.Controllers
                              course_title = r.COURSE.title,
                              course_id = r.COURSE.course_id,
                              email_address = r.CLIENT.PERSON.email_address,
+                             account_email = r.CLIENT.ACCOUNT.email_address,
                              email_private = r.CLIENT.PERSON.email_private,
                              barcode_number = r.COURSE.barcode_number
                          };
@@ -130,10 +131,12 @@ namespace Survey.Controllers
                                 person_id = r.CLIENT.PERSON.person_id,
                                 first_name = r.CLIENT.PERSON.first_name,
                                 last_name = r.CLIENT.PERSON.last_name,
+                                account_owner = r.CLIENT.ACCOUNT.title,
                                 activity_title = r.COURSE.ACTIVITY.title,
                                 course_title = r.COURSE.title,
                                 course_id = r.COURSE.course_id,
                                 email_address = r.CLIENT.PERSON.email_address,
+                                account_email = r.CLIENT.ACCOUNT.email_address,
                                 address_id = r.CLIENT.PERSON.address_id,
                                 email_private = r.CLIENT.PERSON.email_private,
                                 barcode_number = r.COURSE.barcode_number
@@ -141,7 +144,7 @@ namespace Survey.Controllers
 
 
             var personsToPrint = from p in person
-                                 where (string.IsNullOrEmpty(p.email_address)) || p.email_private > 0
+                                 where ((string.IsNullOrEmpty(p.email_address) && string.IsNullOrEmpty(p.account_email))) || p.email_private > 0
                                  select new PeopleToManuallyMail
                                  {
                                      personID = p.person_id,
@@ -151,7 +154,9 @@ namespace Survey.Controllers
                                      emailPrivate = p.email_private,
                                      barcode = p.barcode_number,
                                      courseID = p.course_id,
-                                     addressID = p.address_id
+                                     addressID = p.address_id,
+                                     accountOwner = p.account_owner,
+                                     accountEmail = p.account_email
 
                                  };
                                  
@@ -167,7 +172,7 @@ namespace Survey.Controllers
 
             foreach (var item in person)
             {
-                if (string.IsNullOrEmpty(item.email_address))
+                if ((string.IsNullOrEmpty(item.email_address)) && (string.IsNullOrEmpty(item.account_email)))
                 { EmptyAddresses++; }
                 else
                 {
@@ -215,7 +220,21 @@ namespace Survey.Controllers
 
                         string SurveyUrl = String.Concat("http://reclink.raleighnc.gov/Survey/BuildTheSurvey.aspx/", personhash);
 
-                        emailBody = "<p> Hello " + item.first_name + ", </p> <p></P> <p>The goal of Raleigh Parks and Recreation is to offer the best" +
+                        //check id participate email address is NULL, is so change the  email verbage and use the account email address.
+                        var recipients = "";
+                        var toPerson = "";
+                        if (string.IsNullOrEmpty(item.email_address))
+                        {
+                            recipients = item.account_email;
+                            toPerson = item.account_owner;
+                        }
+                        else
+                        {
+                            recipients = item.email_address;
+                            toPerson = item.first_name;
+                        }
+                            
+                        emailBody = "<p> Hello " + (toPerson).Trim() + ": </p> <p></P> <p>The goal of Raleigh Parks and Recreation is to offer the best" +
                                     " programming possible. The purpose of this survey is to gather information from residents in the community concerning" +
                                     " various programs offered. We are interested in improving services and programs offered in the future and value your input." +
                                     " Please take the time to answer the following questions and be as honest as possible. All answers to this survey will" +
@@ -225,8 +244,7 @@ namespace Survey.Controllers
                         //FileReader returns an array of recipients from a text file
 
                         //REMOVE BEFORE SAVING UP TO GIT  TESTING ONLY
-                        //string recipients = "donna.taylor@raleighnc.gov";
-                        string recipients = item.email_address;
+                        recipients = "donna.taylor@raleighnc.gov";
 
                         devemail.To.Add(recipients);
 

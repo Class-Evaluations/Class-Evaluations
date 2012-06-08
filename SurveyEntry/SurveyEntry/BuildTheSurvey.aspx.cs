@@ -134,9 +134,9 @@ namespace SurveyEntry
             //Get the program information and populate the page fields
 
             using (SqlConnection conn = new SqlConnection(classConn))
-            using (SqlCommand cmdtitle = new SqlCommand("SELECT f.facility_name, c.booking_start_date, RTRIM(c.title), RTRIM(a.title) FROM CLASS.dbo.REGISTRATION r " +
-                                                        "JOIN CLASS.dbo.COURSE c ON c.course_id = r.course_id JOIN CLASS.dbo.ACTIVITY a ON a.activity_id = c.activity_id " +
-                                                        "JOIN CLASS.dbo.FACILITY f ON f.facility_id = first_facility WHERE c.course_id = " + courseID, conn))
+            using (SqlCommand cmdtitle = new SqlCommand("SELECT f.facility_name, c.booking_start_date, RTRIM(c.title), RTRIM(a.title) FROM REGISTRATION r " +
+                                                        "JOIN COURSE c ON c.course_id = r.course_id JOIN ACTIVITY a ON a.activity_id = c.activity_id " +
+                                                        "JOIN FACILITY f ON f.facility_id = first_facility WHERE c.course_id = " + courseID, conn))
             {
                 conn.Open();
                 SqlDataReader reader = cmdtitle.ExecuteReader();
@@ -200,7 +200,7 @@ namespace SurveyEntry
             using (SqlConnection conn = new SqlConnection(surveyConn))
             using (SqlCommand cmdSectionInfo = new SqlCommand("Select  ss.survey_section_id, ss.title, ss.section_id_order, sq.survey_id, " +
                                                                "q.question_id, q.question_text, at.answer_type_id, at.answer_type_name, at.controlName " +
-                                                               "from SURVEY_SECTION ss inner join dbo.SURVEY_QUESTIONS sq ON sq.section_id = ss.survey_section_id " +
+                                                               "from SURVEY_SECTION ss inner join SURVEY_QUESTIONS sq ON sq.section_id = ss.survey_section_id " +
                                                                "inner join QUESTION q ON q.question_id = sq.question_id inner join ANSWER_TYPE at ON at.answer_type_id = q.answer_type_id " +
                                                                "where sq.survey_id = " + surveyID + " order by section_id_order", conn))
             {
@@ -267,15 +267,46 @@ namespace SurveyEntry
                         {
                             case "Scale":
                                 scale = answerTypeId;
+                                var scale_top = "";
                                 RadioButtonList RadioButtonList1 = new RadioButtonList();
                                 RadioButtonList1.ID = Convert.ToString(questionId);
                                 RadioButtonList1.AutoPostBack = false;
-                                RadioButtonList1.Items.Add(new ListItem("Strongly Agree", "5"));
-                                RadioButtonList1.Items.Add(new ListItem("Agree", "4"));
-                                RadioButtonList1.Items.Add(new ListItem("Neutral", "3"));
-                                RadioButtonList1.Items.Add(new ListItem("Disagree", "2"));
-                                RadioButtonList1.Items.Add(new ListItem("Strongly Disagree", "1"));
-                                RadioButtonList1.Items.Add(new ListItem("NA", "-1"));
+
+                                //Get the scale values.
+                                using (SqlConnection conn1 = new SqlConnection(surveyConn))
+                                using (SqlCommand choiceValues = new SqlCommand("Select scale_top_text from QUESTION_SCALE Where question_id = " + questionId, conn1))
+                                {
+                                    conn1.Open();
+                                    SqlDataReader reader1 = choiceValues.ExecuteReader();
+
+                                    if (reader1.HasRows)
+                                    {
+                                        while (reader1.Read())
+                                        {
+                                            scale_top = reader1.GetString(0);
+                                        }
+                                    }
+                                }
+
+                                if ((scale_top).Trim() == "Very Satisfying")
+                                {
+                                    RadioButtonList1.Items.Add(new ListItem("Very Satisfying", "5"));
+                                    RadioButtonList1.Items.Add(new ListItem("Satisfying", "4"));
+                                    RadioButtonList1.Items.Add(new ListItem("Neutral", "3"));
+                                    RadioButtonList1.Items.Add(new ListItem("Unsatisfying", "2"));
+                                    RadioButtonList1.Items.Add(new ListItem("Very Unsatisfying", "1"));
+                                    RadioButtonList1.Items.Add(new ListItem("NA", "-1"));
+
+                                }
+                                else
+                                {
+                                    RadioButtonList1.Items.Add(new ListItem("Strongly Agree", "5"));
+                                    RadioButtonList1.Items.Add(new ListItem("Agree", "4"));
+                                    RadioButtonList1.Items.Add(new ListItem("Neutral", "3"));
+                                    RadioButtonList1.Items.Add(new ListItem("Disagree", "2"));
+                                    RadioButtonList1.Items.Add(new ListItem("Strongly Disagree", "1"));
+                                    RadioButtonList1.Items.Add(new ListItem("NA", "-1"));
+                                }
 
                                 panelContent.Controls.Add(RadioButtonList1);
                                 panelContent.Controls.Add(new LiteralControl("<br /> <br /> <br />"));
