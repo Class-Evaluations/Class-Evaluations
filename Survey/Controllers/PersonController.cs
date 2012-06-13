@@ -85,7 +85,7 @@ namespace Survey.Controllers
             ViewBag.survey_id = new SelectList(Surveydb.SURVEYs, "survey_id", "title", Surveydb.SURVEYs);
 
             var person = from r in _db.REGISTRATIONs
-                         where r.course_id == id
+                         where r.course_id == id && (r.registration_status_id == "A" || r.registration_status_id == "C")
                          select new ParticipateData
                          {
                              person_id = r.CLIENT.PERSON.person_id,
