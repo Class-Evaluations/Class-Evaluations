@@ -446,7 +446,7 @@ namespace Survey.App_Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Answer_Type_QUESTION", Storage="_Questions", ThisKey="answer_type_id", OtherKey="answer_type_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Answer_Type_Question", Storage="_Questions", ThisKey="answer_type_id", OtherKey="answer_type_id")]
 		public EntitySet<Question> Questions
 		{
 			get
@@ -619,7 +619,7 @@ namespace Survey.App_Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ANSWER_ANSWER_TRUE_FALSE", Storage="_Answer", ThisKey="answer_id", OtherKey="answer_id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Answer_Answer_TF", Storage="_Answer", ThisKey="answer_id", OtherKey="answer_id", IsForeignKey=true)]
 		public Answer Answer
 		{
 			get
@@ -653,7 +653,7 @@ namespace Survey.App_Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SURVEY_REQUEST_SENT_ANSWER_TRUE_FALSE", Storage="_Survey_Request_Sent", ThisKey="survey_request_sent_id", OtherKey="survey_request_sent_id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Survey_Request_Sent_Answer_TF", Storage="_Survey_Request_Sent", ThisKey="survey_request_sent_id", OtherKey="survey_request_sent_id", IsForeignKey=true)]
 		public Survey_Request_Sent Survey_Request_Sent
 		{
 			get
@@ -850,7 +850,7 @@ namespace Survey.App_Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ANSWER_ANSWER_TRUE_FALSE", Storage="_Answer_TFs", ThisKey="answer_id", OtherKey="answer_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Answer_Answer_TF", Storage="_Answer_TFs", ThisKey="answer_id", OtherKey="answer_id")]
 		public EntitySet<Answer_TF> Answer_TFs
 		{
 			get
@@ -863,7 +863,7 @@ namespace Survey.App_Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ANSWER_ANSWER_SHORT", Storage="_Answer_Shorts", ThisKey="answer_id", OtherKey="answer_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Answer_Answer_Short", Storage="_Answer_Shorts", ThisKey="answer_id", OtherKey="answer_id")]
 		public EntitySet<Answer_Short> Answer_Shorts
 		{
 			get
@@ -876,7 +876,7 @@ namespace Survey.App_Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ANSWER_ANSWER_SCALE", Storage="_Answer_Scales", ThisKey="answer_id", OtherKey="answer_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Answer_Answer_Scale", Storage="_Answer_Scales", ThisKey="answer_id", OtherKey="answer_id")]
 		public EntitySet<Answer_Scale> Answer_Scales
 		{
 			get
@@ -889,7 +889,7 @@ namespace Survey.App_Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ANSWER_ANSWER_MULTIPLE_CHOICE", Storage="_Answer_Multi_Choices", ThisKey="answer_id", OtherKey="answer_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Answer_Answer_Multi_Choice", Storage="_Answer_Multi_Choices", ThisKey="answer_id", OtherKey="answer_id")]
 		public EntitySet<Answer_Multi_Choice> Answer_Multi_Choices
 		{
 			get
@@ -902,7 +902,7 @@ namespace Survey.App_Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ANSWER_ANSWER_LONG", Storage="_Answer_Longs", ThisKey="answer_id", OtherKey="answer_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Answer_Answer_Long", Storage="_Answer_Longs", ThisKey="answer_id", OtherKey="answer_id")]
 		public EntitySet<Answer_Long> Answer_Longs
 		{
 			get
@@ -915,7 +915,7 @@ namespace Survey.App_Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SURVEY_REQUEST_SENT_ANSWER", Storage="_Survey_Request_Sent", ThisKey="survey_request_sent_id", OtherKey="survey_request_sent_id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Survey_Request_Sent_Answer", Storage="_Survey_Request_Sent", ThisKey="survey_request_sent_id", OtherKey="survey_request_sent_id", IsForeignKey=true)]
 		public Survey_Request_Sent Survey_Request_Sent
 		{
 			get
@@ -949,7 +949,7 @@ namespace Survey.App_Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="QUESTION_ANSWER", Storage="_Question", ThisKey="question_id", OtherKey="question_id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Question_Answer", Storage="_Question", ThisKey="question_id", OtherKey="question_id", IsForeignKey=true)]
 		public Question Question
 		{
 			get
@@ -1191,7 +1191,7 @@ namespace Survey.App_Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ANSWER_ANSWER_SHORT", Storage="_Answer", ThisKey="answer_id", OtherKey="answer_id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Answer_Answer_Short", Storage="_Answer", ThisKey="answer_id", OtherKey="answer_id", IsForeignKey=true)]
 		public Answer Answer
 		{
 			get
@@ -1225,7 +1225,7 @@ namespace Survey.App_Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SURVEY_REQUEST_SENT_ANSWER_SHORT", Storage="_Survey_Request_Sent", ThisKey="survey_request_sent_id", OtherKey="survey_request_sent_id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Survey_Request_Sent_Answer_Short", Storage="_Survey_Request_Sent", ThisKey="survey_request_sent_id", OtherKey="survey_request_sent_id", IsForeignKey=true)]
 		public Survey_Request_Sent Survey_Request_Sent
 		{
 			get
@@ -1407,7 +1407,7 @@ namespace Survey.App_Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ANSWER_ANSWER_SCALE", Storage="_Answer", ThisKey="answer_id", OtherKey="answer_id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Answer_Answer_Scale", Storage="_Answer", ThisKey="answer_id", OtherKey="answer_id", IsForeignKey=true)]
 		public Answer Answer
 		{
 			get
@@ -1441,7 +1441,7 @@ namespace Survey.App_Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SURVEY_REQUEST_SENT_ANSWER_SCALE", Storage="_Survey_Request_Sent", ThisKey="survey_request_sent_id", OtherKey="survey_request_sent_id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Survey_Request_Sent_Answer_Scale", Storage="_Survey_Request_Sent", ThisKey="survey_request_sent_id", OtherKey="survey_request_sent_id", IsForeignKey=true)]
 		public Survey_Request_Sent Survey_Request_Sent
 		{
 			get
@@ -1623,7 +1623,7 @@ namespace Survey.App_Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ANSWER_ANSWER_MULTIPLE_CHOICE", Storage="_Answer", ThisKey="answer_id", OtherKey="answer_id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Answer_Answer_Multi_Choice", Storage="_Answer", ThisKey="answer_id", OtherKey="answer_id", IsForeignKey=true)]
 		public Answer Answer
 		{
 			get
@@ -1657,7 +1657,7 @@ namespace Survey.App_Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SURVEY_REQUEST_SENT_ANSWER_MULTIPLE_CHOICE", Storage="_Survey_Request_Sent", ThisKey="survey_request_sent_id", OtherKey="survey_request_sent_id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Survey_Request_Sent_Answer_Multi_Choice", Storage="_Survey_Request_Sent", ThisKey="survey_request_sent_id", OtherKey="survey_request_sent_id", IsForeignKey=true)]
 		public Survey_Request_Sent Survey_Request_Sent
 		{
 			get
@@ -1839,7 +1839,7 @@ namespace Survey.App_Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ANSWER_ANSWER_LONG", Storage="_Answer", ThisKey="answer_id", OtherKey="answer_id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Answer_Answer_Long", Storage="_Answer", ThisKey="answer_id", OtherKey="answer_id", IsForeignKey=true)]
 		public Answer Answer
 		{
 			get
@@ -1873,7 +1873,7 @@ namespace Survey.App_Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SURVEY_REQUEST_SENT_ANSWER_LONG", Storage="_Survey_Request_Sent", ThisKey="survey_request_sent_id", OtherKey="survey_request_sent_id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Survey_Request_Sent_Answer_Long", Storage="_Survey_Request_Sent", ThisKey="survey_request_sent_id", OtherKey="survey_request_sent_id", IsForeignKey=true)]
 		public Survey_Request_Sent Survey_Request_Sent
 		{
 			get
@@ -2155,7 +2155,7 @@ namespace Survey.App_Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SURVEY_REQUEST_SENT_ANSWER_TRUE_FALSE", Storage="_Answer_TFs", ThisKey="survey_request_sent_id", OtherKey="survey_request_sent_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Survey_Request_Sent_Answer_TF", Storage="_Answer_TFs", ThisKey="survey_request_sent_id", OtherKey="survey_request_sent_id")]
 		public EntitySet<Answer_TF> Answer_TFs
 		{
 			get
@@ -2168,7 +2168,7 @@ namespace Survey.App_Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SURVEY_REQUEST_SENT_ANSWER", Storage="_Answers", ThisKey="survey_request_sent_id", OtherKey="survey_request_sent_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Survey_Request_Sent_Answer", Storage="_Answers", ThisKey="survey_request_sent_id", OtherKey="survey_request_sent_id")]
 		public EntitySet<Answer> Answers
 		{
 			get
@@ -2181,7 +2181,7 @@ namespace Survey.App_Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SURVEY_REQUEST_SENT_ANSWER_SHORT", Storage="_Answer_Shorts", ThisKey="survey_request_sent_id", OtherKey="survey_request_sent_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Survey_Request_Sent_Answer_Short", Storage="_Answer_Shorts", ThisKey="survey_request_sent_id", OtherKey="survey_request_sent_id")]
 		public EntitySet<Answer_Short> Answer_Shorts
 		{
 			get
@@ -2194,7 +2194,7 @@ namespace Survey.App_Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SURVEY_REQUEST_SENT_ANSWER_SCALE", Storage="_Answer_Scales", ThisKey="survey_request_sent_id", OtherKey="survey_request_sent_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Survey_Request_Sent_Answer_Scale", Storage="_Answer_Scales", ThisKey="survey_request_sent_id", OtherKey="survey_request_sent_id")]
 		public EntitySet<Answer_Scale> Answer_Scales
 		{
 			get
@@ -2207,7 +2207,7 @@ namespace Survey.App_Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SURVEY_REQUEST_SENT_ANSWER_MULTIPLE_CHOICE", Storage="_Answer_Multi_Choices", ThisKey="survey_request_sent_id", OtherKey="survey_request_sent_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Survey_Request_Sent_Answer_Multi_Choice", Storage="_Answer_Multi_Choices", ThisKey="survey_request_sent_id", OtherKey="survey_request_sent_id")]
 		public EntitySet<Answer_Multi_Choice> Answer_Multi_Choices
 		{
 			get
@@ -2220,7 +2220,7 @@ namespace Survey.App_Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SURVEY_REQUEST_SENT_ANSWER_LONG", Storage="_Answer_Longs", ThisKey="survey_request_sent_id", OtherKey="survey_request_sent_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Survey_Request_Sent_Answer_Long", Storage="_Answer_Longs", ThisKey="survey_request_sent_id", OtherKey="survey_request_sent_id")]
 		public EntitySet<Answer_Long> Answer_Longs
 		{
 			get
@@ -2473,7 +2473,7 @@ namespace Survey.App_Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="QUESTION_ANSWER", Storage="_Answers", ThisKey="question_id", OtherKey="question_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Question_Answer", Storage="_Answers", ThisKey="question_id", OtherKey="question_id")]
 		public EntitySet<Answer> Answers
 		{
 			get
@@ -2486,7 +2486,7 @@ namespace Survey.App_Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Answer_Type_QUESTION", Storage="_Answer_Type", ThisKey="answer_type_id", OtherKey="answer_type_id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Answer_Type_Question", Storage="_Answer_Type", ThisKey="answer_type_id", OtherKey="answer_type_id", IsForeignKey=true)]
 		public Answer_Type Answer_Type
 		{
 			get

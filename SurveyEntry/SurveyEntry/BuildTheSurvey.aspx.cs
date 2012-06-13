@@ -8,7 +8,10 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
 using System.Collections;
-
+using System.Net.Mail;
+using System.Text;
+using System.IO
+;
 
 namespace SurveyEntry
 {
@@ -53,7 +56,8 @@ namespace SurveyEntry
         int true_false;
         string courseTitle;
         string activityTitle;
-
+        //string EmailBuild;
+        
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -401,6 +405,24 @@ namespace SurveyEntry
                     }
 
                 }
+                uniqueID++;
+                Label LabelContact = new Label();
+                LabelContact.Style["align="] = "center";
+                LabelContact.ID = "LabelContact" + uniqueID;
+                LabelContact.Text = "If you would like us to respond to any concern, please provide your name and phone number.&nbsp; We will be happy to follow up with you!";
+                panelContent.Controls.Add(LabelContact);
+                panelContent.Controls.Add(new LiteralControl("<br /> <br />"));
+                
+                
+                TextBox txtContactMe = new TextBox();
+                txtContactMe.Style["align"] = "center";
+                txtContactMe.ID = "contactme";
+                txtContactMe.Style["BorderStyle"] = "Solid";
+                txtContactMe.Style["BorderWidth"] = "1px";
+                txtContactMe.Style["Height"] = "33px";
+                txtContactMe.Style["Width"] = "620px";
+                panelContent.Controls.Add(txtContactMe);
+                panelContent.Controls.Add(new LiteralControl("<br /> <br />"));
 
             }
         }
@@ -424,6 +446,12 @@ namespace SurveyEntry
 
             }
 
+            //StringBuilder SB = new StringBuilder();
+            //StringWriter SW = new StringWriter(SB);
+            //HtmlTextWriter htmlTW = new HtmlTextWriter(SW);
+            //htmlTW.WriteBeginTag("<form runat=server>");
+
+            //this.Form.Page.Response.Output(htmlTW);
             foreach (Control ctrl in this.Form.Controls)
             {
                 if (ctrl is Panel)
@@ -434,16 +462,33 @@ namespace SurveyEntry
 
                         if (ctrl2 is TextBox)
                         {
-                            questionID = Convert.ToInt32(ctrl2.ID);
-                            TextBox answer = ((System.Web.UI.WebControls.TextBox)ctrl2);
-                            answerText = answer.Text;
+                            
+                            //check if they want to be contacted and send to marketing if so.
+                            if(ctrl2.ID == "contactme")
+                            {
+                                string from = "noreply@raleighnc.gov";
+                                string to = "Marketing@raleighnc.gov";
+                                string bcc = "Sterling.Alexander@raleighnc.gov";
+                                string subject = "Contact Customer request for survey " + txtprogramName.Text;
+                                TextBox  contactme = ((System.Web.UI.WebControls.TextBox)ctrl2);
+                                string body = "<p>There is a request to be contacted within the above survey.  The request information " +
+                                              " is: </br>" + contactme.Text + "</p></br> The hash code needed to pull the survey reponses is : " + userHash;
 
-                            answerTypeID = GetAnswerType();
+                               
+                                Emailer.SendEmailToMarketing(from, to, bcc, subject, body);
+                            }
+                            else{
 
-                            if (!String.IsNullOrEmpty(answerText))
-                            { answerText = (answerText).Replace("'", "''"); }
-                            //string aname = answerTypeName;
-                            InsertAnswer();
+                                questionID = Convert.ToInt32(ctrl2.ID);
+                                TextBox answer = ((System.Web.UI.WebControls.TextBox)ctrl2);
+                                answerText = answer.Text;
+
+                                answerTypeID = GetAnswerType();
+
+                                if (!String.IsNullOrEmpty(answerText))
+                                { answerText = (answerText).Replace("'", "''"); }
+                                //string aname = answerTypeName;
+                                InsertAnswer();}
                         }
 
                         //Need to loop therough the checkboxes and concatenate the multiple selected answers.
@@ -478,6 +523,7 @@ namespace SurveyEntry
 
                         if (ctrl2 is RadioButtonList)
                         {
+
                             questionID = Convert.ToInt32(ctrl2.ID);
                             RadioButtonList answer = ((System.Web.UI.WebControls.RadioButtonList)ctrl2);
 
@@ -506,6 +552,7 @@ namespace SurveyEntry
                         }
                     }
                 }
+
             }
             Response.Redirect("~/ThankYou.aspx", true);
         }
@@ -575,14 +622,6 @@ namespace SurveyEntry
                     break;
                 case "True_False":
                     tablename = "ANSWER_TRUE_FALSE";
-                    //if (answerInt != 0)
-                    //{
-                    //    condition = "(" + answerID + ", 1, " + survey_request_sentID + ")";
-                    //}
-                    //else
-                    //{
-                    //    condition = "(" + answerID + ", 0, " + survey_request_sentID + ")";
-                    //}
                     condition = "(" + answerID + ", " + answerInt + ", " + survey_request_sentID + ")";
                     break;
                 default:
@@ -617,5 +656,27 @@ namespace SurveyEntry
             }
             return answerTypeID;
         }
+
+            public static class Emailer
+            {
+                public static void SendEmailToMarketing(string from, string to, string bcc, string subject, string body)
+                    {
+
+                       
+                        string emailserver = ConfigurationManager.AppSettings["mailSettings"];
+                        System.Net.Mail.MailMessage email = new System.Net.Mail.MailMessage();
+                        System.Net.Mail.SmtpClient mailClient = new System.Net.Mail.SmtpClient(emailserver);
+                        email.IsBodyHtml = true;
+                        email.Bcc.Add("sterling.alexander@raleighnc.gov");
+                        email.Bcc.Add("donna.taylor@ralieghnc.gov");
+                        email.To.Add(to);
+                        //email.From.Address.(from);
+                        email.Subject = subject;
+                        email.Body = body;
+                        
+                        mailClient.Send(email);
+                    }
+          }
+ 
+        }
     }
-}

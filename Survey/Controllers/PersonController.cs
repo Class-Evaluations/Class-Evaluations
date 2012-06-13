@@ -125,7 +125,7 @@ namespace Survey.Controllers
 
             int id = Convert.ToInt32(values[0]);
             var person = from r in _db.REGISTRATIONs
-                            where r.course_id == id 
+                            where r.course_id == id  && (r.registration_status_id == "A" || r.registration_status_id =="C")
                             select new
                             {
                                 person_id = r.CLIENT.PERSON.person_id,
@@ -244,10 +244,10 @@ namespace Survey.Controllers
                         //FileReader returns an array of recipients from a text file
 
                         //REMOVE BEFORE SAVING UP TO GIT  TESTING ONLY
-                        recipients = "donna.taylor@raleighnc.gov";
+                        //recipients = "donna.taylor@raleighnc.gov";
 
                         devemail.To.Add(recipients);
-
+                            
                         mailClient.Send(devemail);
 
                         //Insert into tables after email is sent.

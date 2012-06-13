@@ -42,7 +42,7 @@ namespace Survey.Controllers
             {
                 page = 1;
             }
-            //string[] statusIDs = ('X', 'A', 'I');
+            //statusIDs = X=cancelled, A=active, I=incomplete and c=complete
             var query = from c in _db.COURSEs where c.course_id >= 118000 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 7) < Today) && c.course_status_id != "X") select c;
             
             //searching functionality
@@ -96,48 +96,6 @@ namespace Survey.Controllers
             //        courses = courses.OrderBy(s => s.course_id);
             //        break;
             //}
-
-
-            //DateTime Today = DateTime.Now.Date;
-            //set the lower boundry to 110000.
-            //var CourseDetails = from c in _db.COURSEs
-            //                    where c.course_id >= 118000 && (c.cancel_reason == "Course Completed" || EntityFunctions.AddDays(c.last_end_datetime, 7) < Today)
-            //                    //enabled when testing...
-            //                    //where c.session_title_id == 9 && (c.cancel_reason == "Course Completed" || EntityFunctions.AddDays(c.last_end_datetime, 7) < Today)
-            //                    orderby c.barcode_number descending
-            //                    select c;
-            //var option = where c.course_id >= 118000 && (c.cancel_reason == "Course Completed" || EntityFunctions.AddDays(c.last_end_datetime, 7) < Today)" 
-            //searching functionality
-            
-            //var CourseDetails;
-            //if (!String.IsNullOrEmpty(searchString))
-            //{
-            //        CourseDetails = from c in _db.COURSEs
-            //                    where c.barcode_number == searchString
-            //                    //enabled when testing...
-            //                    //where c.session_title_id == 9 && (c.cancel_reason == "Course Completed" || EntityFunctions.AddDays(c.last_end_datetime, 7) < Today)
-            //                    //orderby c.barcode_number descending
-            //                    select c;
-                
-            //}
-            //else
-            //{
-            //        CourseDetails = from c in _db.COURSEs
-            //                    where c.course_id >= 118000 && (c.cancel_reason == "Course Completed" || EntityFunctions.AddDays(c.last_end_datetime, 7) < Today)
-            //                    //enabled when testing...
-            //                    //where c.session_title_id == 9 && (c.cancel_reason == "Course Completed" || EntityFunctions.AddDays(c.last_end_datetime, 7) < Today)
-            //                    orderby c.barcode_number descending
-            //                    select c;
-
-            //}
-
-
-            //CourseDetails = from c in _db.COURSEs
-            //                    where c.course_id >= 118000 && (c.cancel_reason == "Course Completed" || EntityFunctions.AddDays(c.last_end_datetime, 7) < Today)
-            //                    //enabled when testing...
-            //                    //where c.session_title_id == 9 && (c.cancel_reason == "Course Completed" || EntityFunctions.AddDays(c.last_end_datetime, 7) < Today)
-            //                    orderby c.barcode_number descending
-            //                    select c;
 
             //Need to check the expiration date to expire the survey
             var SurveyExpiration = from x in survey_db.SURVEY_REQUEST_SENT
@@ -203,9 +161,10 @@ namespace Survey.Controllers
             
             SurveyReportDataContext ReportData = new SurveyReportDataContext();
 
-            var answerDetails = from results in ReportData.Questions
-                                orderby results.question_id
-                                select results;
+            //var answerDetails = from results in ReportData.Questions
+            //                    where surveySent.Contains(
+            //                    orderby results.question_id
+            //                    select results;
                                  //{
                                  //   QID =      
                                  //   Text = question.Questions.questionText,
@@ -215,7 +174,7 @@ namespace Survey.Controllers
                         
             ViewBag.surveyAnswered = surveyCount;
          
-          return View(answerDetails);
+          return View();
 
         }
 
