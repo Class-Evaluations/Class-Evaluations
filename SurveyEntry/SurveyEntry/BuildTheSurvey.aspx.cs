@@ -466,16 +466,19 @@ namespace SurveyEntry
                             //check if they want to be contacted and send to marketing if so.
                             if(ctrl2.ID == "contactme")
                             {
-                                string from = "noreply@raleighnc.gov";
-                                string to = "Marketing@raleighnc.gov";
-                                string bcc = "Sterling.Alexander@raleighnc.gov";
-                                string subject = "Contact Customer request for survey " + txtprogramName.Text;
-                                TextBox  contactme = ((System.Web.UI.WebControls.TextBox)ctrl2);
-                                string body = "<p>There is a request to be contacted within the above survey.  The request information " +
-                                              " is: </br>" + contactme.Text + "</p></br> The hash code needed to pull the survey reponses is : " + userHash;
+                                TextBox contactme = ((System.Web.UI.WebControls.TextBox)ctrl2);
+                                if (contactme.Text != "")
+                                {
+                                    string from = "noreply@raleighnc.gov";
+                                    string to = "Marketing@raleighnc.gov";
+                                    string bcc = "Sterling.Alexander@raleighnc.gov";
+                                    string subject = "Contact Customer request for survey " + txtprogramName.Text;
+                                    string body = "<p>There is a request to be contacted within the above survey.  The request information " +
+                                                  " is: </br>" + contactme.Text + "</p></br> The hash code needed to pull the survey reponses is : " + userHash;
 
-                               
-                                Emailer.SendEmailToMarketing(from, to, bcc, subject, body);
+
+                                    Emailer.SendEmailToMarketing(from, to, bcc, subject, body);
+                                }
                             }
                             else{
 
@@ -668,7 +671,7 @@ namespace SurveyEntry
                         System.Net.Mail.SmtpClient mailClient = new System.Net.Mail.SmtpClient(emailserver);
                         email.IsBodyHtml = true;
                         email.Bcc.Add("sterling.alexander@raleighnc.gov");
-                        email.Bcc.Add("donna.taylor@ralieghnc.gov");
+                        email.Bcc.Add("donna.taylor@raleighnc.gov");
                         email.To.Add(to);
                         //email.From.Address.(from);
                         email.Subject = subject;
