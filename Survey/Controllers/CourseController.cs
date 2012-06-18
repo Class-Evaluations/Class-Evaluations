@@ -43,17 +43,20 @@ namespace Survey.Controllers
                 page = 1;
             }
             //statusIDs = X=cancelled, A=active, I=incomplete and c=complete
-            var query = from c in _db.COURSEs where c.course_id >= 118000 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 7) < Today) && c.course_status_id != "X") select c;
+            //Need to start the barcodes >= 120350
+            var query = from c in _db.COURSEs where c.course_id > 120350 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 7) < Today) && c.course_status_id != "X") select c;
             
             //searching functionality
             if (!String.IsNullOrEmpty(searchString))
             {
-                query = from c in _db.COURSEs where c.course_id >= 118000 && (c.course_status_id == "C" || EntityFunctions.AddDays(c.last_end_datetime, 7) < Today) && c.barcode_number == searchString select c;
+                query = from c in _db.COURSEs where c.course_id > 120350 && (c.course_status_id == "C" || EntityFunctions.AddDays(c.last_end_datetime, 7) < Today) && c.barcode_number == searchString select c;
             }
 
             //switch (sortOrder)
             //{
             //    case "Last Name Desc":
+
+            
             //        query = query.OrderByDescending(s => s.last_name);
             //        break;
             //    case "Email Desc":
@@ -146,36 +149,20 @@ namespace Survey.Controllers
 
         public ViewResult AnswerDetails(int id)
         {
-            //need to pull this from the database
-            var surveyid = (from s in survey_db.SURVEY_REQUEST_SENT
-                            where s.course_id == id
-                            select s.survey_id).First(); 
-            
-            var surveySent =  from s in survey_db.SURVEY_REQUEST_SENT
-                          where s.course_id == id 
-                          select s.survey_request_sent_id;
 
-            var surveyCount = surveySent.Count();
+            var Sent = (from requests in survey_db.SURVEY_REQUEST_SENT where requests.course_id == id select requests).Count();
 
-            
-            
-            SurveyReportDataContext ReportData = new SurveyReportDataContext();
+            var surveyAnswered = from s in survey_db.SURVEY_REQUEST_SENT where s.course_id == id select s.survey_request_sent_id;
 
-            //var answerDetails = from results in ReportData.Questions
-            //                    where surveySent.Contains(
-            //                    orderby results.question_id
-            //                    select results;
-                                 //{
-                                 //   QID =      
-                                 //   Text = question.Questions.questionText,
-                                 //   AverageScale = (scale.submittedAnswer)
-                                 //};
+            var Answered = (from answers in survey_db.ANSWERs where surveyAnswered.Contains(answers.survey_request_sent_id) select answers.survey_request_sent_id).Distinct().Count();
 
-                        
-            ViewBag.surveyAnswered = surveyCount;
-         
-          return View();
+            ViewBag.Answered = Answered;
+            ViewBag.Sent = Sent;
+            //calculate the percent answered
+            double percentAnswered = (Convert.ToDouble(Answered) / Convert.ToDouble(Sent)) * 100;
 
+            ViewBag.Percent = Math.Round(percentAnswered);
+            return View();
         }
 
     }

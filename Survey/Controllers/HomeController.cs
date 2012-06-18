@@ -15,18 +15,20 @@ namespace Survey.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.Message = "Survey Results Matrix will be here.";
-            //var data = from courses in _db.COURSE_STATUS
-            //           group courses by courses.course_status1 into courseStatusGroup
-            //           select new CourseStatusGroup()
-            //           {
-            //               CourseStatus = courseStatusGroup.Key,
-            //               CourseCount = courseStatusGroup.Count()
 
+            var Sent = (from requests in _db.SURVEY_REQUEST_SENT select requests).Count();
 
-            //           };
+            var surveyAnswered = from s in _db.SURVEY_REQUEST_SENT select s.survey_request_sent_id;
+
+            var Answered = (from answers in _db.ANSWERs where surveyAnswered.Contains(answers.survey_request_sent_id) select answers.survey_request_sent_id).Distinct().Count();
+
+            ViewBag.Answered = Answered;
+            ViewBag.Sent = Sent;
+            //calculate the percent answered
+            double percentAnswered = (Convert.ToDouble(Answered) / Convert.ToDouble(Sent)) * 100;
+
+            ViewBag.Percent = Math.Round(percentAnswered);
             return View();
-
        }
 
         public ActionResult About()
