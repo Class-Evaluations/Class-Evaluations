@@ -131,8 +131,8 @@ namespace Survey.Controllers
 
             var Answered = (from answers in survey_db.ANSWERs where surveyAnswered.Contains(answers.survey_request_sent_id) select answers.survey_request_sent_id).Distinct().Count();
 
-            ViewBag.Answered = Sent;
-            ViewBag.Sent = Answered;
+            ViewBag.Answered = Answered;
+            ViewBag.Sent = Sent;
             //calculate the percent answered
             double TotalpercentAnswered = (Convert.ToDouble(Answered) / Convert.ToDouble(Sent)) * 100;
             ViewBag.Percent = Math.Round(TotalpercentAnswered);
