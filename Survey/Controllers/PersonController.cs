@@ -223,6 +223,7 @@ namespace Survey.Controllers
                         //check id participate email address is NULL, is so change the  email verbage and use the account email address.
                         var recipients = "";
                         var toPerson = "";
+                        //var FromAccount = "noreply@raleighnc.gov";
                         if (string.IsNullOrEmpty(item.email_address))
                         {
                             recipients = item.account_email;
@@ -244,10 +245,11 @@ namespace Survey.Controllers
                         //FileReader returns an array of recipients from a text file
 
                         //REMOVE BEFORE SAVING UP TO GIT  TESTING ONLY
-                        //recipients = "donna.taylor@raleighnc.gov";
+                        recipients = "donna.taylor@raleighnc.gov";
 
                         devemail.To.Add(recipients);
-                            
+                        devemail.From.Address.Equals("noreply@raleighnc.gov");
+                               
                         mailClient.Send(devemail);
 
                         //Insert into tables after email is sent.

@@ -20,10 +20,10 @@ namespace Survey.Controllers
             var surveyAnswered = from s in _db.SURVEY_REQUEST_SENT select s.survey_request_sent_id;
             var TotalAnswered = (from answers in _db.ANSWERs where surveyAnswered.Contains(answers.survey_request_sent_id) select answers.survey_request_sent_id).Distinct().Count();
 
-            ViewBag.Answered = TotalSent;
-            ViewBag.Sent = TotalAnswered;
+            ViewBag.Answered = TotalAnswered;
+            ViewBag.Sent = TotalSent;
             //calculate the percent answered
-            double totpercentAnswered = (Convert.ToDouble(TotalSent) / Convert.ToDouble(TotalAnswered)) * 100;
+            double totpercentAnswered = (Convert.ToDouble(TotalAnswered) / Convert.ToDouble(TotalSent)) * 100;
 
             ViewBag.totPercent = Math.Round(totpercentAnswered);
 
