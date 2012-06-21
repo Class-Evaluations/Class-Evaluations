@@ -19,20 +19,11 @@ namespace Survey.Controllers
         private CLASSEntities _db = new CLASSEntities();
         private Survey_DBEntities survey_db = new Survey_DBEntities();
 
-        
-        //Set up paging for the list of courses
-
-        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        //[AcceptVerbs(HttpVerbs.Post)]
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, string Display, string SearchType, int? page)
         {
-            
-            //sorting functionality functionality
+            //sorting functionality
             DateTime Today = DateTime.Now.Date;
-            ViewBag.CurrentSort = sortOrder;
-            //ViewBag.searchString = String.IsNullOrEmpty(searchString) ? "Search for Barcode" : "";
-            ViewBag.ActivitySortParam = String.IsNullOrEmpty(sortOrder) ? "Activity Desc" : "";
-            ViewBag.TitleSortParm = String.IsNullOrEmpty(sortOrder) ? "Title Desc" : "";
-            ViewBag.CourseSortParm = String.IsNullOrEmpty(sortOrder) ? "Course Desc" : "";
-            ViewBag.BarcodeSortParm = String.IsNullOrEmpty(sortOrder) ? "Barcode Desc" : "";
 
             if (Request.HttpMethod == "GET")
             {
@@ -44,61 +35,45 @@ namespace Survey.Controllers
             }
             //statusIDs = X=cancelled, A=active, I=incomplete and c=complete
             //Need to start the barcodes >= 120350
-            var query = from c in _db.COURSEs where c.course_id > 120350 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 7) < Today) && c.course_status_id != "X") select c;
+            var query = from c in _db.COURSEs where c.course_id > 120350 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 7) < Today) && c.course_status_id != "X") orderby c.barcode_number select c;
             
             //searching functionality
             if (!String.IsNullOrEmpty(searchString))
             {
-                query = from c in _db.COURSEs where c.course_id > 120350 && (c.course_status_id == "C" || EntityFunctions.AddDays(c.last_end_datetime, 7) < Today) && c.barcode_number == searchString select c;
+                if (SearchType == "Barcode")
+                {
+                    query = from c in _db.COURSEs where c.course_id > 120350 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 7) < Today) && c.course_status_id != "X") && c.barcode_number == searchString orderby c.barcode_number select c;
+                }
+                if (SearchType == "Title")
+                {
+                    query = from c in _db.COURSEs where c.course_id > 120350 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 7) < Today) && c.course_status_id != "X") && (c.title).Contains(searchString) orderby c.barcode_number select c;
+                }
             }
 
-            //switch (sortOrder)
-            //{
-            //    case "Last Name Desc":
 
-            
-            //        query = query.OrderByDescending(s => s.last_name);
-            //        break;
-            //    case "Email Desc":
-            //        query = query.OrderByDescending(s => s.email_address);
-            //        break;
-            //    default:
-            //        query = query.OrderBy(s => s.person_id);
-            //        break;
-            //}
-            var CourseDetails = query.ToList();
-
-            //searching functionality
-            //if (!String.IsNullOrEmpty(searchString))
+            //switch (Display)
             //{
-            //    courses = courses.Where(s => s.barcode_number.Contains(searchString));
-            //}
-            //else
-            //{
-            //    courses = courses.Where(s => s.course_id > 111460);
-            //    For testing we cut down the amount of records returned.
-            //    courses = courses.Where(s => s.cancel_reason = Convert.ToChar('Course Completed')) or (s => s.last_end_datetime > DateTime.Today.AddDays(+7); 
-            //}
-
-
-            //switch (sortOrder)
-            //{
-            //    case "Title Desc":
-            //        courses = courses.OrderByDescending(s => s.title);
+            //    case "sent":
+            //        query = from c in _db.COURSEs where c. == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 7) < Today) && c.course_status_id != "X") orderby c.barcode_number select c;
             //        break;
-            //    case "Barcode Desc":
-            //        courses = courses.OrderByDescending(s => s.barcode_number);
-            //        break;
-            //    case "Activity Desc":
+            //    case "inProgress":
             //        courses = courses.OrderByDescending(s => s.activity_id);
             //        break;
-            //    case "Course Desc":
+            //    case "completed":
+            //        courses = courses.OrderByDescending(s => s.course_id);
+            //        break;
+            //    case "notSent":
+            //        courses = courses.OrderByDescending(s => s.course_id);
+            //        break;
+            //    case "doNotsent":
             //        courses = courses.OrderByDescending(s => s.course_id);
             //        break;
             //    default:
             //        courses = courses.OrderBy(s => s.course_id);
             //        break;
             //}
+
+            var CourseDetails = query.ToList();
 
             //Need to check the expiration date to expire the survey
             var SurveyExpiration = from x in survey_db.SURVEY_REQUEST_SENT
@@ -113,7 +88,7 @@ namespace Survey.Controllers
                         item.status_flag = "X";
                     }
                 }
-
+               
                 // Submit the changes to the database.
                 try
                 {
@@ -156,12 +131,12 @@ namespace Survey.Controllers
 
             var Answered = (from answers in survey_db.ANSWERs where surveyAnswered.Contains(answers.survey_request_sent_id) select answers.survey_request_sent_id).Distinct().Count();
 
-            ViewBag.Answered = Answered;
-            ViewBag.Sent = Sent;
+            ViewBag.Answered = Sent;
+            ViewBag.Sent = Answered;
             //calculate the percent answered
-            double percentAnswered = (Convert.ToDouble(Answered) / Convert.ToDouble(Sent)) * 100;
+            double TotalpercentAnswered = (Convert.ToDouble(Answered) / Convert.ToDouble(Sent)) * 100;
+            ViewBag.Percent = Math.Round(TotalpercentAnswered);
 
-            ViewBag.Percent = Math.Round(percentAnswered);
             return View();
         }
 

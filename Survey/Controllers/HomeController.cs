@@ -16,18 +16,20 @@ namespace Survey.Controllers
         public ActionResult Index()
         {
 
-            var Sent = (from requests in _db.SURVEY_REQUEST_SENT select requests).Count();
-
+            var TotalSent = (from requests in _db.SURVEY_REQUEST_SENT select requests).Count();
             var surveyAnswered = from s in _db.SURVEY_REQUEST_SENT select s.survey_request_sent_id;
+            var TotalAnswered = (from answers in _db.ANSWERs where surveyAnswered.Contains(answers.survey_request_sent_id) select answers.survey_request_sent_id).Distinct().Count();
 
-            var Answered = (from answers in _db.ANSWERs where surveyAnswered.Contains(answers.survey_request_sent_id) select answers.survey_request_sent_id).Distinct().Count();
-
-            ViewBag.Answered = Answered;
-            ViewBag.Sent = Sent;
+            ViewBag.Answered = TotalSent;
+            ViewBag.Sent = TotalAnswered;
             //calculate the percent answered
-            double percentAnswered = (Convert.ToDouble(Answered) / Convert.ToDouble(Sent)) * 100;
+            double totpercentAnswered = (Convert.ToDouble(TotalSent) / Convert.ToDouble(TotalAnswered)) * 100;
 
-            ViewBag.Percent = Math.Round(percentAnswered);
+            ViewBag.totPercent = Math.Round(totpercentAnswered);
+
+            //Get the course id number for all surveys sent
+            var courseSurveyded = from c in _db.COURSE_STATUS where c.course_status1 == "S" select c.course_id;
+
             return View();
        }
 

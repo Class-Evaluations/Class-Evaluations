@@ -1,14 +1,24 @@
 ﻿
-@{
-    ViewBag.Title = "Index";
-}
+<h3><a style="color:Maroon">Overall @ViewBag.totPercent % of survey completed as of: @DateTime.Now</h3></a>
 
-<h2>Survey Reponse Stats as of @DateTime.Now</h2>
-
-    <h5>
+    <h3><a style="color:orange">
         Surveys Sent = @ViewBag.Sent<br />
+        Surveys Answered = @ViewBag.Answered<br />
+    </h3></a>
 
-        Surveys answered = @ViewBag.Answered<br />
 
-        Percent complete = @ViewBag.Percent %<br />
-    </h5>
+<table>
+    <tr>
+        <th> % Complete </th>
+        <th> Barcode </th>
+        <th> # Sent </th>
+        <th> # Answered </th>
+        <th> Date Sent </th>
+        <th> Date Expires </th>
+    </tr>
+
+@*    @foreach(var item in ViewBag.CoursesSurevey)
+    {
+        
+    }*@ 
+</table>
