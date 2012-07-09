@@ -45,7 +45,6 @@ namespace Survey.Controllers
 
             //statusIDs = X=cancelled, A=active, I=incomplete and c=complete
             //Need to start the barcodes >= 120350 which is course is 120965 
-
             var query = from c in _db.COURSEs
                         where c.course_id > 120965 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 7) < Today) && c.course_status_id != "X")
                         orderby c.barcode_number
