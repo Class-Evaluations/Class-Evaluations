@@ -205,7 +205,7 @@ namespace Survey.Controllers
                         System.Net.Mail.MailMessage devemail = new System.Net.Mail.MailMessage();
                         System.Net.Mail.SmtpClient mailClient = new System.Net.Mail.SmtpClient(emailserver);
 
-                        string subjectline = "Park and Recreation Survey  for ";
+                        string subjectline = "Parks and Recreation Survey for ";
 
                         //check for nulls or empty names before using Trim
                         if (!String.IsNullOrEmpty(item.activity_title))
