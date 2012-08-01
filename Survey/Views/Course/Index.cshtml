@@ -11,7 +11,7 @@
 <script src="@Url.Content("~/Scripts/jquery-ui-1.8.11.custom.min.js")" type="text/javascript"></script>
 
 <h2>This list of courses are either set to complete or 7 days past the activities last end date. </h2>
-@*<h3>If you do not wish to have a course surveyed check the <a style="color:Blue"> do not survey </a>box to the left</h3>*@
+<h3>If you do not wish to have a course surveyed check the <a style="color:Blue"> do not survey </a>box to the left</h3>
 
 <p>
 </p>
@@ -35,7 +35,7 @@
             @Html.RadioButton("Display", "inProgress", false, new { onclick = "this.form.submit()" }) Surveys in progress
             @Html.RadioButton("Display", "completed", false, new { onclick = "this.form.submit()" }) Surveys completed
             @Html.RadioButton("Display", "notSent", false, new { onclick = "this.form.submit()" }) Surveys not sent
-            @*@Html.RadioButton("Display", "doNotsent", false, new { onclick = "this.form.submit()" }) Survey marked "Do not send"*@
+            @Html.RadioButton("Display", "doNotsent", false, new { onclick = "this.form.submit()" }) Survey marked "Do not send"
    </p>   
              
 <table>
@@ -60,22 +60,23 @@
             <strong> Last Start Date </strong>
         </th>
         <th>
-            <strong> Last End Date </strong>
+            <strong> Last End Date   </strong>
         </th>
         <th>
-            <strong> Course Status in CLASS </strong>
+            <strong> Course Status </strong>
         </th>
         <th>
             <strong> Course Survey Status </strong>
         </th>
- @*       <th>
+        <th>
             <strong> Do Not Survey </strong>
-        </th>*@
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in ViewBag.OnePageOfCourses)
 {
+    var cbDetails = false;
     var StatusOfSurvey = "";
     var ExpirationDate = "";
     @*Need to format the date time to a date*@
@@ -90,30 +91,45 @@
     {
         if (item.course_id == survey.course_id)
         {
+            ViewBag.course = item.course_id;
             StatusOfSurvey = (survey.course_status1).Trim();
             if (StatusOfSurvey == "N")
             {
                 ViewBag.Disable = true;
             }
-                
-            ExpirationDate = survey.survey_exp_date.ToString("MM/dd/yyyy");
+
+             ExpirationDate = survey.survey_exp_date.ToString("MM/dd/yyyy");
         }
 
     }
     <tr>
-        @if (StatusOfSurvey == "")
+        @switch (StatusOfSurvey)
         {
-            <td>
-                @Html.ActionLink("Select", "../Person/Details", new { id = item.course_id })
-            </td>
-        }
-        else
-        {
-            <td>
-                <font style="color:blue">
-                Survey expires 
-                @ExpirationDate </font>
-            </td> 
+            case "X":
+                <td>
+                    <font style="color:Red">
+                     Expired</font>
+
+                </td>
+                break; 
+            case "S": 
+                <td>
+                    <font style="color:Blue">
+                    Survey expires 
+                    @ExpirationDate </font>
+                </td>
+               break;
+            case "N": 
+                <td>
+                    <font style="color:Red">
+                    Disabled </font>
+                </td>
+               break;
+            default:
+                <td>
+                    @Html.ActionLink("Select", "../Person/Details", new { id = item.course_id })
+                </td>
+               break;
         }
         <td>
             @item.activity_id
@@ -146,32 +162,31 @@
         <td>
             @last_date
         </td>
-        <td>
-            @item.course_status_id   
+        <td><strong>
+            @item.course_status_id</strong>   
         </td>
         <td><strong>
-            @StatusOfSurvey
-            </strong>
+            @StatusOfSurvey</strong>
         </td>
-        @*<td><strong>
-               @if (ViewBag.Disable == true)
-               {
-                    @Html.CheckBox("Disable", true) 
-               }
-               else
-               {
-                    @Html.CheckBox("Disable", false) 
-               }
+        <td><strong>
+            @if (StatusOfSurvey != "S" && StatusOfSurvey !="X")
+            {
+               if (StatusOfSurvey == "N")
+                {
+                    cbDetails = true;
+                }
+                else
+                {
+                    cbDetails = false;
+                }
+               <input type="checkbox" name="applyChanges" value="@item.course_id" onclick="this.form.submit()"/> 
+            }
            </strong>
-        </td>*@
+        </td>
     </tr>
 }
 </table>
 
 }
 
-@Html.PagedListPager((PagedList.IPagedList)ViewBag.OnePageOfCourses, page => Url.Action("Index", new { page = page, SearchString = ViewBag.SearchString, SearchType = ViewBag.SearchType, Display = ViewBag.Display, Disable = ViewBag.Disable }))
-
-
-
-
+@Html.PagedListPager((PagedList.IPagedList)ViewBag.OnePageOfCourses, page => Url.Action("Index", new { course = ViewBag.course, page = page, SearchString = ViewBag.SearchString, SearchType = ViewBag.SearchType, Disable = ViewBag.Disable, Display = ViewBag.Display }))

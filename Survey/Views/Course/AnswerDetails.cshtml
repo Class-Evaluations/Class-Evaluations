@@ -1,9 +1,30 @@
-﻿
+﻿<style type="text/css">
+.button {
+border:1px solid #000;
+background:green;
+color:#FFF;
+font-weight:bold;
+}
+</style>
+
+<script type="text/javascript">
+    function setTable(what, button) {
+        if (document.getElementById(what).style.display == "none") {
+            document.getElementById(what).style.display = "block";
+        }
+        else if (document.getElementById(what).style.display == "block") {
+            document.getElementById(what).style.display = "none";
+        }
+    }
+</script>
+
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Survey Reponse Stats as of @DateTime.Now</h2>
+<br />
+<h3>Survey End Date = @ViewBag.ExpirationDate</h3>
 
     <h5>
         Surveys Sent = @ViewBag.Sent<br />
@@ -12,3 +33,106 @@
 
         Percent complete = @ViewBag.Percent %<br />
     </h5>
+
+<h3>Answer Details</h3>
+<table>
+<tr>
+    <th><strong> Question </strong></th>
+    <th><strong> Answer </strong></th>
+</tr>
+@foreach (var question in ViewBag.questiontext)
+{
+    <tr>
+        <td>
+        <strong> @question.questionText </strong>
+        </td>
+        
+        <td>
+            @{
+                string type = question.answerType;
+                switch (type.Trim())
+                {
+                    case "Scale":
+                        foreach (var a in ViewBag.Scale)
+                        {
+                            if (question.questionID == a.questionID)
+                            {
+                                @a.responseScale.ToString("n2")
+                                <text> Average out of 5 </text>
+                            }
+                        }
+                        break;
+                        
+                case "Answer_long":
+                <br />
+                <table id="@question.questionID" style="display:none;">
+                     @foreach (var a in ViewBag.Long)
+                        {
+                            <tr>
+                            @if (question.questionID == a.questionID)
+                            {
+                                <td>@a.responseLong</td>
+                            }
+                            </tr>
+                        }
+                </table>
+                <input class="button" type="button" value="Hide/View"   onclick="setTable('@question.questionID');return false" />
+                break;
+
+                case "Answer_short":
+                
+                <table id="@question.questionID" style="display:none;">
+                     @foreach (var a in ViewBag.Short)
+                     {
+                            <tr>
+                            @if (question.questionID == a.questionID)
+                            {
+                                <td>@a.responseShort</td>
+                            }
+                            </tr>
+                     }
+                </table>
+                <input class="button" type="button" value="Hide/View"   onclick="setTable('@question.questionID');return false" />
+                     break;
+
+                case "True_False":
+                   <br />
+                   <table>
+                   @foreach (var tf in ViewBag.TF)
+                   {
+                       <tr>
+                       @if (question.questionID == tf.questionID)
+                       {
+                                <td>@tf.responseTF</td>
+                                <td>@tf.count</td> 
+                       }
+                       </tr>
+                   }
+                   </table>
+                   break;
+
+                case "Multi-Choice":
+                case "Multi-Choice_multi":
+                    <br />
+                    <table>
+                        @foreach (var m in ViewBag.Multi)
+                        {
+                            <tr>
+                            @if (question.questionID == m.questionID)
+                            {
+                                <td>@m.responseMultiChoice</td>
+                                <td>@m.count</td> 
+                            }
+                            </tr>
+                        }
+                        </table>
+                        break;
+
+                default:
+                        break;
+                }
+}
+        </td>
+    </tr>
+}
+</table>  

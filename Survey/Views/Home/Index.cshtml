@@ -1,24 +1,12 @@
 ﻿
-<h3><a style="color:Maroon">Overall @ViewBag.totPercent % of survey completed as of: @DateTime.Now</h3></a>
+<h2><a style="color:Maroon">Overall @ViewBag.totPercent % of survey completed as of: @DateTime.Now</h2></a>
+<br />
 
-    <h3><a style="color:orange">
-        Surveys Sent = @ViewBag.Sent<br />
-        Surveys Answered = @ViewBag.Answered<br />
+    <h3><a style="color:blue">
+        Total Courses surveyed = @ViewBag.TotalCourses<br />
+        <br />
+        Total Surveys Sent = @ViewBag.Sent<br />
+        Total Surveys Completed = @ViewBag.Answered<br />
+        Total Survey Active = @ViewBag.Active<br />
+
     </h3></a>
-
-
-<table>
-    <tr>
-        <th> % Complete </th>
-        <th> Barcode </th>
-        <th> # Sent </th>
-        <th> # Answered </th>
-        <th> Date Sent </th>
-        <th> Date Expires </th>
-    </tr>
-
-@*    @foreach(var item in ViewBag.CoursesSurevey)
-    {
-        
-    }*@ 
-</table>
