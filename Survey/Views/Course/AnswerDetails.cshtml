@@ -24,14 +24,16 @@ font-weight:bold;
 
 <h2>Survey Reponse Stats as of @DateTime.Now</h2>
 <br />
-<h3>Survey End Date = @ViewBag.ExpirationDate</h3>
-
+@*<h3>Survey End Date = @ViewBag.ExpirationDate</h3>*@
+<h5><strong>Survey statistics: </strong></h5>
     <h5>
+    <ul>
         Surveys Sent = @ViewBag.Sent<br />
 
         Surveys answered = @ViewBag.Answered<br />
 
         Percent complete = @ViewBag.Percent %<br />
+    </ul>
     </h5>
 
 <h3>Answer Details</h3>
