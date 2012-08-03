@@ -69,7 +69,14 @@
             <strong> Course Survey Status </strong>
         </th>
         <th>
-            <strong> Do Not Survey </strong>
+            @if (ViewBag.display == "doNotsent")
+            {
+                <strong> Reactivate Survey </strong>    
+            }
+            else
+            {
+                <strong> Do Not Survey </strong>
+            }
         </th>
         <th></th>
     </tr>
@@ -98,7 +105,7 @@
                 ViewBag.Disable = true;
             }
 
-             ExpirationDate = survey.survey_exp_date.ToString("MM/dd/yyyy");
+            ExpirationDate = survey.survey_exp_date.ToString("MM/dd/yyyy");
         }
 
     }
@@ -111,7 +118,7 @@
                      Expired</font>
 
                 </td>
-                break; 
+                break;
             case "S": 
                 <td>
                     <font style="color:Blue">
@@ -169,9 +176,9 @@
             @StatusOfSurvey</strong>
         </td>
         <td><strong>
-            @if (StatusOfSurvey != "S" && StatusOfSurvey !="X")
+            @if (StatusOfSurvey != "S" && StatusOfSurvey != "X")
             {
-               if (StatusOfSurvey == "N")
+                if (StatusOfSurvey == "N")
                 {
                     cbDetails = true;
                 }

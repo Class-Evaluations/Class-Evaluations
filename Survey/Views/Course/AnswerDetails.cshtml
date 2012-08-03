@@ -28,76 +28,75 @@ font-weight:bold;
 <h5><strong>Survey statistics: </strong></h5>
     <h5>
     <ul>
-        Surveys Sent = @ViewBag.Sent<br />
-
-        Surveys answered = @ViewBag.Answered<br />
-
-        Percent complete = @ViewBag.Percent %<br />
+        Surveys Sent = @ViewBag.Sent</br>
+        Surveys answered = @ViewBag.Answered</br>
+        Percent complete = @ViewBag.Percent %</br>
     </ul>
     </h5>
 
 <h3>Answer Details</h3>
 <table>
 <tr>
-    <th><strong> Question </strong></th>
     <th><strong> Answer </strong></th>
+    <th><strong> Question </strong></th>
 </tr>
 @foreach (var question in ViewBag.questiontext)
 {
+    string buttonName = Convert.ToString(@question.questionID) + "button";
+    string hasTable = "";
     <tr>
-        <td>
-        <strong> @question.questionText </strong>
-        </td>
-        
-        <td>
-            @{
-                string type = question.answerType;
-                switch (type.Trim())
+      
+    <td>
+    @{
+    string type = question.answerType;
+    switch (type.Trim())
+    {
+        case "Scale":
+            foreach (var a in ViewBag.Scale)
+            {
+                if (question.questionID == a.questionID)
                 {
-                    case "Scale":
-                        foreach (var a in ViewBag.Scale)
-                        {
-                            if (question.questionID == a.questionID)
-                            {
-                                @a.responseScale.ToString("n2")
-                                <text> Average out of 5 </text>
-                            }
-                        }
-                        break;
-                        
-                case "Answer_long":
-                <br />
-                <table id="@question.questionID" style="display:none;">
+                    hasTable = "No";
+                    @a.responseScale.ToString("n2")
+                    <text> Average out of 5 </text>
+                }
+            }
+            break;
+
+        case "Answer_long":
+                     <br />
+                     <table id="@question.questionID" style="display:none;" width="300">
                      @foreach (var a in ViewBag.Long)
-                        {
+                     {
                             <tr>
                             @if (question.questionID == a.questionID)
                             {
-                                <td>@a.responseLong</td>
+                                hasTable = "Yes";
+                                <td>* @a.responseLong</td>
                             }
                             </tr>
-                        }
-                </table>
-                <input class="button" type="button" value="Hide/View"   onclick="setTable('@question.questionID');return false" />
-                break;
+                     }
+                    </table>
+                     break;
 
-                case "Answer_short":
+        case "Answer_short":
                 
-                <table id="@question.questionID" style="display:none;">
+                <table id="@question.questionID" style="display:none;" width="300">
+
                      @foreach (var a in ViewBag.Short)
                      {
                             <tr>
                             @if (question.questionID == a.questionID)
                             {
-                                <td>@a.responseShort</td>
+                                hasTable = "Yes";
+                                <td> * @a.responseShort</td>
                             }
                             </tr>
                      }
                 </table>
-                <input class="button" type="button" value="Hide/View"   onclick="setTable('@question.questionID');return false" />
-                     break;
+                 break;
 
-                case "True_False":
+        case "True_False":
                    <br />
                    <table>
                    @foreach (var tf in ViewBag.TF)
@@ -105,36 +104,51 @@ font-weight:bold;
                        <tr>
                        @if (question.questionID == tf.questionID)
                        {
-                                <td>@tf.responseTF</td>
-                                <td>@tf.count</td> 
+                           hasTable = "No";
+                            <td>@tf.responseTF</td>
+                            <td>@tf.count</td> 
                        }
                        </tr>
                    }
                    </table>
                    break;
 
-                case "Multi-Choice":
-                case "Multi-Choice_multi":
-                    <br />
-                    <table>
-                        @foreach (var m in ViewBag.Multi)
+        case "Multi-Choice":
+        case "Multi-Choice_multi":
+                <br />
+                <table>
+                    @foreach (var m in ViewBag.Multi)
+                    {
+                        <tr>
+                        @if (question.questionID == m.questionID)
                         {
-                            <tr>
-                            @if (question.questionID == m.questionID)
-                            {
-                                <td>@m.responseMultiChoice</td>
-                                <td>@m.count</td> 
-                            }
-                            </tr>
+                            hasTable = "No";
+                            <td>@m.responseMultiChoice</td>
+                            <td>@m.count</td> 
                         }
-                        </table>
-                        break;
+                        </tr>
+                    }
+                    </table>
+                    break;
 
-                default:
-                        break;
-                }
+         default:
+         break;
+    }
+
 }
         </td>
+        <td>
+        <strong> @question.questionText </strong>
+        @if (hasTable == "Yes")
+        {
+           <input class="button" id="@buttonName" type="button" value="Hide/View Responses"  style="display:block" onclick="setTable('@question.questionID');return false" />
+        }
+        else
+        {
+          <input class="button" id="@buttonName" type="button" value="Hide/View Responses"  style="display:none" onclick="setTable('@question.questionID');return fales" />
+        }
+        </td>
+
     </tr>
 }
 </table>  

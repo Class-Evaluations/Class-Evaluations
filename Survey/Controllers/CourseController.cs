@@ -75,7 +75,7 @@ namespace Survey.Controllers
             //statusIDs = X=cancelled, A=active, I=incomplete and c=complete
             //Need to start the barcodes >= 120350 which is course is 120965 
             var query = from c in _db.COURSEs
-                        where c.course_id > 110000 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 7) < Today) && c.course_status_id != "X")
+                        where c.course_id > 120350 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 7) < Today) && c.course_status_id != "X")
                         orderby c.barcode_number
                         select c;
 
@@ -83,9 +83,9 @@ namespace Survey.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 if (SearchType == "Barcode")
-                {query = from c in _db.COURSEs where c.course_id > 110000 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 7) < Today) && c.course_status_id != "X") && c.barcode_number == searchString orderby c.barcode_number select c;}
+                { query = from c in _db.COURSEs where c.course_id > 120350 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 7) < Today) && c.course_status_id != "X") && c.barcode_number == searchString orderby c.barcode_number select c; }
                 if (SearchType == "Title")
-                {query = from c in _db.COURSEs where c.course_id > 110000 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 7) < Today) && c.course_status_id != "X") && (c.title).Contains(searchString) orderby c.barcode_number select c;}
+                { query = from c in _db.COURSEs where c.course_id > 120350 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 7) < Today) && c.course_status_id != "X") && (c.title).Contains(searchString) orderby c.barcode_number select c; }
             }
 
             switch (Display)
@@ -96,17 +96,17 @@ namespace Survey.Controllers
                  {
                     if (SearchType == "Barcode")
                     {query = from c in _db.COURSEs
-                             where c.course_id > 110000 && (sent).Contains(c.course_id) && c.barcode_number == searchString
+                             where c.course_id > 120350 && (sent).Contains(c.course_id) && c.barcode_number == searchString
                              orderby c.barcode_number
                              select c;}
                     if (SearchType == "Title")
                     {query = from c in _db.COURSEs
-                             where c.course_id > 110000 && (sent).Contains(c.course_id) && (c.title).Contains(searchString)
+                             where c.course_id > 120350 && (sent).Contains(c.course_id) && (c.title).Contains(searchString)
                              orderby c.barcode_number
                              select c;}
                  }else
                   {query = from c in _db.COURSEs
-                           where c.course_id > 110000 && (sent).Contains(c.course_id)
+                           where c.course_id > 120350 && (sent).Contains(c.course_id)
                            orderby c.barcode_number
                            select c;}
              break;
@@ -120,17 +120,17 @@ namespace Survey.Controllers
                     {
                         if (SearchType == "Barcode")
                         {query = from c in _db.COURSEs
-                                 where c.course_id > 110000 && (inProgress).Contains(c.course_id) && c.barcode_number == searchString
+                                 where c.course_id > 120350 && (inProgress).Contains(c.course_id) && c.barcode_number == searchString
                                  orderby c.barcode_number
                                  select c;}
                         if (SearchType == "Title")
                         {query = from c in _db.COURSEs
-                                    where c.course_id > 110000 && (inProgress).Contains(c.course_id) && (c.title).Contains(searchString)
-                                    orderby c.barcode_number
-                                    select c;}
+                                 where c.course_id > 120350 && (inProgress).Contains(c.course_id) && (c.title).Contains(searchString)
+                                 orderby c.barcode_number
+                                 select c;}
                     }else
                      {query = from c in _db.COURSEs
-                              where c.course_id > 110000 && (inProgress).Contains(c.course_id) 
+                              where c.course_id > 120350 && (inProgress).Contains(c.course_id) 
                               orderby c.barcode_number
                               select c;}
              break;
@@ -145,7 +145,7 @@ namespace Survey.Controllers
                         if (SearchType == "Barcode")
                         {
                             query = from c in _db.COURSEs
-                                    where c.course_id > 110000 && (completed).Contains(c.course_id) && c.barcode_number == searchString
+                                    where c.course_id > 120350 && (completed).Contains(c.course_id) && c.barcode_number == searchString
                                     orderby c.barcode_number
                                     select c;
 
@@ -154,7 +154,7 @@ namespace Survey.Controllers
                         {
 
                             query = from c in _db.COURSEs
-                                    where c.course_id > 110000 && (completed).Contains(c.course_id) && (c.title).Contains(searchString)
+                                    where c.course_id > 120350 && (completed).Contains(c.course_id) && (c.title).Contains(searchString)
                                     orderby c.barcode_number
                                     select c;
 
@@ -163,7 +163,7 @@ namespace Survey.Controllers
                     else
                     {
                         query = from c in _db.COURSEs
-                                where c.course_id > 110000 && (completed).Contains(c.course_id)
+                                where c.course_id > 120350 && (completed).Contains(c.course_id)
                                 orderby c.barcode_number
                                 select c;
                     }
@@ -178,7 +178,7 @@ namespace Survey.Controllers
                         if (SearchType == "Barcode")
                         {
                             query = from c in _db.COURSEs
-                                    where c.course_id > 110000 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 7) < Today) && c.course_status_id != "X" ) && !(notSent).Contains(c.course_id) && c.barcode_number == searchString
+                                    where c.course_id > 120350 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 7) < Today) && c.course_status_id != "X") && !(notSent).Contains(c.course_id) && c.barcode_number == searchString
                                     orderby c.barcode_number
                                     select c;
 
@@ -187,7 +187,7 @@ namespace Survey.Controllers
                         if (SearchType == "Title")
                         {
                             query = from c in _db.COURSEs
-                                    where c.course_id > 110000 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 7) < Today) && c.course_status_id != "X" ) && !(notSent).Contains(c.course_id) && (c.title).Contains(searchString)
+                                    where c.course_id > 120350 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 7) < Today) && c.course_status_id != "X") && !(notSent).Contains(c.course_id) && (c.title).Contains(searchString)
                                     orderby c.barcode_number
                                     select c;
 
@@ -196,7 +196,7 @@ namespace Survey.Controllers
                     else
                     {
                         query = from c in _db.COURSEs
-                                where c.course_id > 110000 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 7) < Today) && c.course_status_id != "X" ) && !(notSent).Contains(c.course_id)
+                                where c.course_id > 120350 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 7) < Today) && c.course_status_id != "X") && !(notSent).Contains(c.course_id)
                                 orderby c.barcode_number
                                 select c;
                     }
@@ -211,7 +211,7 @@ namespace Survey.Controllers
                         if (SearchType == "Barcode")
                         {
                             query = from c in _db.COURSEs
-                                    where c.course_id > 110000 && (doNotsent).Contains(c.course_id) && c.barcode_number == searchString
+                                    where c.course_id > 120350 && (doNotsent).Contains(c.course_id) && c.barcode_number == searchString
                                     orderby c.barcode_number
                                     select c;  
 
@@ -220,7 +220,7 @@ namespace Survey.Controllers
                         {
 
                             query = from c in _db.COURSEs
-                                    where c.course_id > 110000 && (doNotsent).Contains(c.course_id) && (c.title).Contains(searchString)
+                                    where c.course_id > 120350 && (doNotsent).Contains(c.course_id) && (c.title).Contains(searchString)
                                     orderby c.barcode_number
                                     select c;  
 
@@ -229,7 +229,7 @@ namespace Survey.Controllers
                     else
                     {
                         query = from c in _db.COURSEs
-                                where c.course_id > 110000 && (doNotsent).Contains(c.course_id)
+                                where c.course_id > 120350 && (doNotsent).Contains(c.course_id)
                                 orderby c.barcode_number
                                 select c;
                     }
@@ -270,7 +270,7 @@ namespace Survey.Controllers
                                select k;
 
 
-            var SurveyExp = from x in survey_db.SURVEY_REQUEST_SENT
+            var SurveyExp = from x in survey_db.SURVEY_REQUEST_SENT 
                                    select x;
 
             var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
