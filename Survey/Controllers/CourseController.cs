@@ -50,7 +50,9 @@ namespace Survey.Controllers
                         //check to see if the course is already disables and enable it
                         if ((statusUpdate.course_status1).Trim() == "N")
                         {
-                            statusUpdate.course_status1 = " ";
+                            var removeFromCouseStatus = dbContext.COURSE_STATUS.First(s => s.course_id == courseNum);
+                            dbContext.COURSE_STATUS.DeleteObject(removeFromCouseStatus);
+                            dbContext.SaveChanges();
                         }
                         else
                         {
@@ -73,7 +75,8 @@ namespace Survey.Controllers
 
 
             //statusIDs = X=cancelled, A=active, I=incomplete and c=complete
-            //Need to start the barcodes >= 120350 which is course is 120965 
+            //Need to start the barcodes >= 120350 which is course is 120965
+            //testing 110000
             var query = from c in _db.COURSEs
                         where c.course_id > 120350 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 7) < Today) && c.course_status_id != "X")
                         orderby c.barcode_number
