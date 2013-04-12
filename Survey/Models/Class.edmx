@@ -10,8 +10,10 @@
           <EntitySet Name="ACTIVITY" EntityType="CLASSModel.Store.ACTIVITY" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CLIENT" EntityType="CLASSModel.Store.CLIENT" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="COURSE" EntityType="CLASSModel.Store.COURSE" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="FACILITY_MASTER" EntityType="CLASSModel.Store.FACILITY_MASTER" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PERSON" EntityType="CLASSModel.Store.PERSON" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="REGISTRATION" EntityType="CLASSModel.Store.REGISTRATION" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SUPERVISOR" EntityType="CLASSModel.Store.SUPERVISOR" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="ACCOUNT_REF4" Association="CLASSModel.Store.ACCOUNT_REF4">
             <End Role="PERSON" EntitySet="PERSON" />
             <End Role="ACCOUNT" EntitySet="ACCOUNT" />
@@ -26,6 +28,10 @@
           </AssociationSet>
           <AssociationSet Name="COURSE_REF2" Association="CLASSModel.Store.COURSE_REF2">
             <End Role="ACTIVITY" EntitySet="ACTIVITY" />
+            <End Role="COURSE" EntitySet="COURSE" />
+          </AssociationSet>
+          <AssociationSet Name="COURSE_REF4" Association="CLASSModel.Store.COURSE_REF4">
+            <End Role="SUPERVISOR" EntitySet="SUPERVISOR" />
             <End Role="COURSE" EntitySet="COURSE" />
           </AssociationSet>
           <AssociationSet Name="COURSE_REF8" Association="CLASSModel.Store.COURSE_REF8">
@@ -43,6 +49,14 @@
           <AssociationSet Name="REGISTRATION_REF9" Association="CLASSModel.Store.REGISTRATION_REF9">
             <End Role="COURSE" EntitySet="COURSE" />
             <End Role="REGISTRATION" EntitySet="REGISTRATION" />
+          </AssociationSet>
+          <AssociationSet Name="SUPERVISOR_REF1" Association="CLASSModel.Store.SUPERVISOR_REF1">
+            <End Role="FACILITY_MASTER" EntitySet="FACILITY_MASTER" />
+            <End Role="SUPERVISOR" EntitySet="SUPERVISOR" />
+          </AssociationSet>
+          <AssociationSet Name="SUPERVISOR_REF2" Association="CLASSModel.Store.SUPERVISOR_REF2">
+            <End Role="PERSON" EntitySet="PERSON" />
+            <End Role="SUPERVISOR" EntitySet="SUPERVISOR" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="ACCOUNT">
@@ -100,6 +114,8 @@
           <Property Name="alert_text" Type="varchar" MaxLength="4000" />
           <Property Name="subsidy_provider" Type="bit" Nullable="false" />
           <Property Name="last_refreshed_date" Type="datetime" />
+          <Property Name="home_stripped" Type="varchar" MaxLength="12" />
+          <Property Name="business_stripped" Type="varchar" MaxLength="12" />
         </EntityType>
         <EntityType Name="ACTIVITY">
           <Key>
@@ -251,6 +267,43 @@
           <Property Name="eligibility_percent" Type="money" />
           <Property Name="camp_flag" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="FACILITY_MASTER">
+          <Key>
+            <PropertyRef Name="facility_master_id" />
+          </Key>
+          <Property Name="facility_master_id" Type="int" Nullable="false" />
+          <Property Name="person_id" Type="int" />
+          <Property Name="facility_owner_id" Type="int" />
+          <Property Name="address_id" Type="int" />
+          <Property Name="gl_account_id" Type="int" />
+          <Property Name="title" Type="char" Nullable="false" MaxLength="40" />
+          <Property Name="business_area" Type="char" MaxLength="3" />
+          <Property Name="business_phone" Type="char" MaxLength="12" />
+          <Property Name="business_ext" Type="char" MaxLength="5" />
+          <Property Name="emergency_area" Type="char" MaxLength="3" />
+          <Property Name="emergency_phone" Type="char" MaxLength="12" />
+          <Property Name="emergency_ext" Type="char" MaxLength="5" />
+          <Property Name="fax_area" Type="char" MaxLength="3" />
+          <Property Name="fax_phone" Type="char" MaxLength="12" />
+          <Property Name="fax_ext" Type="char" MaxLength="5" />
+          <Property Name="bus_stop_id" Type="int" />
+          <Property Name="x_coordinate" Type="char" MaxLength="10" />
+          <Property Name="y_coordinate" Type="char" MaxLength="10" />
+          <Property Name="datestamp" Type="datetime" Nullable="false" />
+          <Property Name="userstamp" Type="int" Nullable="false" />
+          <Property Name="tax_number" Type="char" MaxLength="20" />
+          <Property Name="gis_map_address" Type="char" MaxLength="200" />
+          <Property Name="internet_availability_flag" Type="tinyint" />
+          <Property Name="internet_query_flag" Type="tinyint" />
+          <Property Name="active" Type="tinyint" />
+          <Property Name="equipment_gl_account_id" Type="int" />
+          <Property Name="equipment_query_flag" Type="tinyint" />
+          <Property Name="quickrez_due_option" Type="tinyint" Nullable="false" />
+          <Property Name="fac_internet_quickrez_flag" Type="bit" Nullable="false" />
+          <Property Name="equip_internet_quickrez_flag" Type="bit" Nullable="false" />
+          <Property Name="equipment_availability_flag" Type="bit" Nullable="false" />
+          <Property Name="light_id" Type="char" MaxLength="8" />
+        </EntityType>
         <EntityType Name="PERSON">
           <Key>
             <PropertyRef Name="person_id" />
@@ -309,6 +362,7 @@
           <Property Name="facility_volunteer" Type="smallint" Nullable="false" />
           <Property Name="alert_text" Type="varchar" MaxLength="4000" />
           <Property Name="disabled_flag_for_fitness" Type="bit" Nullable="false" />
+          <Property Name="home_stripped" Type="varchar" MaxLength="12" />
         </EntityType>
         <EntityType Name="REGISTRATION">
           <Key>
@@ -369,6 +423,16 @@
           <Property Name="cancel_reason" Type="varchar" MaxLength="4000" />
           <Property Name="cut_off_date" Type="datetime" />
         </EntityType>
+        <EntityType Name="SUPERVISOR">
+          <Key>
+            <PropertyRef Name="person_id" />
+          </Key>
+          <Property Name="person_id" Type="int" Nullable="false" />
+          <Property Name="facility_master_id" Type="int" />
+          <Property Name="person_status_id" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="datestamp" Type="datetime" Nullable="false" />
+          <Property Name="userstamp" Type="int" Nullable="false" />
+        </EntityType>
         <Association Name="ACCOUNT_REF4">
           <End Role="PERSON" Type="CLASSModel.Store.PERSON" Multiplicity="1" />
           <End Role="ACCOUNT" Type="CLASSModel.Store.ACCOUNT" Multiplicity="*" />
@@ -414,6 +478,18 @@
             </Principal>
             <Dependent Role="COURSE">
               <PropertyRef Name="activity_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="COURSE_REF4">
+          <End Role="SUPERVISOR" Type="CLASSModel.Store.SUPERVISOR" Multiplicity="1" />
+          <End Role="COURSE" Type="CLASSModel.Store.COURSE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUPERVISOR">
+              <PropertyRef Name="person_id" />
+            </Principal>
+            <Dependent Role="COURSE">
+              <PropertyRef Name="supervisor" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -465,6 +541,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="SUPERVISOR_REF1">
+          <End Role="FACILITY_MASTER" Type="CLASSModel.Store.FACILITY_MASTER" Multiplicity="0..1" />
+          <End Role="SUPERVISOR" Type="CLASSModel.Store.SUPERVISOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACILITY_MASTER">
+              <PropertyRef Name="facility_master_id" />
+            </Principal>
+            <Dependent Role="SUPERVISOR">
+              <PropertyRef Name="facility_master_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SUPERVISOR_REF2">
+          <End Role="PERSON" Type="CLASSModel.Store.PERSON" Multiplicity="1" />
+          <End Role="SUPERVISOR" Type="CLASSModel.Store.SUPERVISOR" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PERSON">
+              <PropertyRef Name="person_id" />
+            </Principal>
+            <Dependent Role="SUPERVISOR">
+              <PropertyRef Name="person_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -507,6 +607,20 @@
           <AssociationSet Name="REGISTRATION_REF9" Association="CLASSModel.REGISTRATION_REF9">
             <End Role="COURSE" EntitySet="COURSEs" />
             <End Role="REGISTRATION" EntitySet="REGISTRATIONs" />
+          </AssociationSet>
+          <EntitySet Name="SUPERVISORs" EntityType="CLASSModel.SUPERVISOR" />
+          <AssociationSet Name="COURSE_REF4" Association="CLASSModel.COURSE_REF4">
+            <End Role="SUPERVISOR" EntitySet="SUPERVISORs" />
+            <End Role="COURSE" EntitySet="COURSEs" />
+          </AssociationSet>
+          <AssociationSet Name="SUPERVISOR_REF2" Association="CLASSModel.SUPERVISOR_REF2">
+            <End Role="PERSON" EntitySet="People" />
+            <End Role="SUPERVISOR" EntitySet="SUPERVISORs" />
+          </AssociationSet>
+          <EntitySet Name="FACILITY_MASTER" EntityType="CLASSModel.FACILITY_MASTER" />
+          <AssociationSet Name="SUPERVISOR_REF1" Association="CLASSModel.SUPERVISOR_REF1">
+            <End Role="FACILITY_MASTER" EntitySet="FACILITY_MASTER" />
+            <End Role="SUPERVISOR" EntitySet="SUPERVISORs" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="ACCOUNT">
@@ -566,6 +680,8 @@
           <Property Name="last_refreshed_date" Type="DateTime" />
           <NavigationProperty Name="PERSON" Relationship="CLASSModel.ACCOUNT_REF4" FromRole="ACCOUNT" ToRole="PERSON" />
           <NavigationProperty Name="CLIENTs" Relationship="CLASSModel.CLIENT_REF2" FromRole="ACCOUNT" ToRole="CLIENT" />
+          <Property Type="String" Name="home_stripped" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="business_stripped" MaxLength="12" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ACTIVITY">
           <Key>
@@ -703,6 +819,8 @@
           <Property Name="disabled_flag_for_fitness" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="ACCOUNTs" Relationship="CLASSModel.ACCOUNT_REF4" FromRole="PERSON" ToRole="ACCOUNT" />
           <NavigationProperty Name="CLIENTs" Relationship="CLASSModel.CLIENT_REF1" FromRole="PERSON" ToRole="CLIENT" />
+          <Property Type="String" Name="home_stripped" MaxLength="12" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SUPERVISOR" Relationship="CLASSModel.SUPERVISOR_REF2" FromRole="PERSON" ToRole="SUPERVISOR" />
         </EntityType>
         <EntityType Name="REGISTRATION">
           <Key>
@@ -896,6 +1014,7 @@
           <NavigationProperty Name="COURSE2" Relationship="CLASSModel.COURSE_REF8" FromRole="COURSE1" ToRole="COURSE" />
           <NavigationProperty Name="REGISTRATIONs" Relationship="CLASSModel.REGISTRATION_REF1" FromRole="COURSE" ToRole="REGISTRATION" />
           <NavigationProperty Name="REGISTRATIONs1" Relationship="CLASSModel.REGISTRATION_REF9" FromRole="COURSE" ToRole="REGISTRATION" />
+          <NavigationProperty Name="SUPERVISOR1" Relationship="CLASSModel.COURSE_REF4" FromRole="COURSE" ToRole="SUPERVISOR" />
         </EntityType>
         <Association Name="COURSE_REF2">
           <End Type="CLASSModel.ACTIVITY" Role="ACTIVITY" Multiplicity="1" />
@@ -945,6 +1064,93 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="SUPERVISOR">
+          <Key>
+            <PropertyRef Name="person_id" />
+          </Key>
+          <Property Type="Int32" Name="person_id" Nullable="false" />
+          <Property Type="Int32" Name="facility_master_id" />
+          <Property Type="String" Name="person_status_id" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="DateTime" Name="datestamp" Nullable="false" />
+          <Property Type="Int32" Name="userstamp" Nullable="false" />
+          <NavigationProperty Name="COURSEs" Relationship="CLASSModel.COURSE_REF4" FromRole="SUPERVISOR" ToRole="COURSE" />
+          <NavigationProperty Name="PERSON" Relationship="CLASSModel.SUPERVISOR_REF2" FromRole="SUPERVISOR" ToRole="PERSON" />
+          <NavigationProperty Name="FACILITY_MASTER" Relationship="CLASSModel.SUPERVISOR_REF1" FromRole="SUPERVISOR" ToRole="FACILITY_MASTER" />
+        </EntityType>
+        <Association Name="COURSE_REF4">
+          <End Type="CLASSModel.SUPERVISOR" Role="SUPERVISOR" Multiplicity="1" />
+          <End Type="CLASSModel.COURSE" Role="COURSE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUPERVISOR">
+              <PropertyRef Name="person_id" />
+            </Principal>
+            <Dependent Role="COURSE">
+              <PropertyRef Name="supervisor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SUPERVISOR_REF2">
+          <End Type="CLASSModel.PERSON" Role="PERSON" Multiplicity="1" />
+          <End Type="CLASSModel.SUPERVISOR" Role="SUPERVISOR" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PERSON">
+              <PropertyRef Name="person_id" />
+            </Principal>
+            <Dependent Role="SUPERVISOR">
+              <PropertyRef Name="person_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="FACILITY_MASTER">
+          <Key>
+            <PropertyRef Name="facility_master_id" />
+          </Key>
+          <Property Type="Int32" Name="facility_master_id" Nullable="false" />
+          <Property Type="Int32" Name="person_id" />
+          <Property Type="Int32" Name="facility_owner_id" />
+          <Property Type="Int32" Name="address_id" />
+          <Property Type="Int32" Name="gl_account_id" />
+          <Property Type="String" Name="title" Nullable="false" MaxLength="40" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="business_area" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="business_phone" MaxLength="12" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="business_ext" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="emergency_area" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="emergency_phone" MaxLength="12" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="emergency_ext" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="fax_area" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="fax_phone" MaxLength="12" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="fax_ext" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Type="Int32" Name="bus_stop_id" />
+          <Property Type="String" Name="x_coordinate" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="y_coordinate" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Type="DateTime" Name="datestamp" Nullable="false" />
+          <Property Type="Int32" Name="userstamp" Nullable="false" />
+          <Property Type="String" Name="tax_number" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="gis_map_address" MaxLength="200" FixedLength="true" Unicode="false" />
+          <Property Type="Byte" Name="internet_availability_flag" />
+          <Property Type="Byte" Name="internet_query_flag" />
+          <Property Type="Byte" Name="active" />
+          <Property Type="Int32" Name="equipment_gl_account_id" />
+          <Property Type="Byte" Name="equipment_query_flag" />
+          <Property Type="Byte" Name="quickrez_due_option" Nullable="false" />
+          <Property Type="Boolean" Name="fac_internet_quickrez_flag" Nullable="false" />
+          <Property Type="Boolean" Name="equip_internet_quickrez_flag" Nullable="false" />
+          <Property Type="Boolean" Name="equipment_availability_flag" Nullable="false" />
+          <Property Type="String" Name="light_id" MaxLength="8" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="SUPERVISORs" Relationship="CLASSModel.SUPERVISOR_REF1" FromRole="FACILITY_MASTER" ToRole="SUPERVISOR" />
+        </EntityType>
+        <Association Name="SUPERVISOR_REF1">
+          <End Type="CLASSModel.FACILITY_MASTER" Role="FACILITY_MASTER" Multiplicity="0..1" />
+          <End Type="CLASSModel.SUPERVISOR" Role="SUPERVISOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACILITY_MASTER">
+              <PropertyRef Name="facility_master_id" />
+            </Principal>
+            <Dependent Role="SUPERVISOR">
+              <PropertyRef Name="facility_master_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -952,7 +1158,9 @@
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="CLASSModelStoreContainer" CdmEntityContainer="CLASSEntities">
           <EntitySetMapping Name="ACCOUNTs"><EntityTypeMapping TypeName="CLASSModel.ACCOUNT"><MappingFragment StoreEntitySet="ACCOUNT">
-            <ScalarProperty Name="account_id" ColumnName="account_id" />
+            <ScalarProperty Name="business_stripped" ColumnName="business_stripped" />
+                <ScalarProperty Name="home_stripped" ColumnName="home_stripped" />
+                <ScalarProperty Name="account_id" ColumnName="account_id" />
             <ScalarProperty Name="account_status_id" ColumnName="account_status_id" />
             <ScalarProperty Name="account_category_id" ColumnName="account_category_id" />
             <ScalarProperty Name="adjustment_id" ColumnName="adjustment_id" />
@@ -1071,7 +1279,8 @@
             <ScalarProperty Name="active_player_flag" ColumnName="active_player_flag" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="People"><EntityTypeMapping TypeName="CLASSModel.PERSON"><MappingFragment StoreEntitySet="PERSON">
-            <ScalarProperty Name="person_id" ColumnName="person_id" />
+            <ScalarProperty Name="home_stripped" ColumnName="home_stripped" />
+                <ScalarProperty Name="person_id" ColumnName="person_id" />
             <ScalarProperty Name="last_name" ColumnName="last_name" />
             <ScalarProperty Name="first_name" ColumnName="first_name" />
             <ScalarProperty Name="person_status_id" ColumnName="person_status_id" />
@@ -1261,6 +1470,55 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="SUPERVISORs">
+            <EntityTypeMapping TypeName="CLASSModel.SUPERVISOR">
+              <MappingFragment StoreEntitySet="SUPERVISOR">
+                <ScalarProperty Name="userstamp" ColumnName="userstamp" />
+                <ScalarProperty Name="datestamp" ColumnName="datestamp" />
+                <ScalarProperty Name="person_status_id" ColumnName="person_status_id" />
+                <ScalarProperty Name="facility_master_id" ColumnName="facility_master_id" />
+                <ScalarProperty Name="person_id" ColumnName="person_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FACILITY_MASTER">
+            <EntityTypeMapping TypeName="CLASSModel.FACILITY_MASTER">
+              <MappingFragment StoreEntitySet="FACILITY_MASTER">
+                <ScalarProperty Name="light_id" ColumnName="light_id" />
+                <ScalarProperty Name="equipment_availability_flag" ColumnName="equipment_availability_flag" />
+                <ScalarProperty Name="equip_internet_quickrez_flag" ColumnName="equip_internet_quickrez_flag" />
+                <ScalarProperty Name="fac_internet_quickrez_flag" ColumnName="fac_internet_quickrez_flag" />
+                <ScalarProperty Name="quickrez_due_option" ColumnName="quickrez_due_option" />
+                <ScalarProperty Name="equipment_query_flag" ColumnName="equipment_query_flag" />
+                <ScalarProperty Name="equipment_gl_account_id" ColumnName="equipment_gl_account_id" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="internet_query_flag" ColumnName="internet_query_flag" />
+                <ScalarProperty Name="internet_availability_flag" ColumnName="internet_availability_flag" />
+                <ScalarProperty Name="gis_map_address" ColumnName="gis_map_address" />
+                <ScalarProperty Name="tax_number" ColumnName="tax_number" />
+                <ScalarProperty Name="userstamp" ColumnName="userstamp" />
+                <ScalarProperty Name="datestamp" ColumnName="datestamp" />
+                <ScalarProperty Name="y_coordinate" ColumnName="y_coordinate" />
+                <ScalarProperty Name="x_coordinate" ColumnName="x_coordinate" />
+                <ScalarProperty Name="bus_stop_id" ColumnName="bus_stop_id" />
+                <ScalarProperty Name="fax_ext" ColumnName="fax_ext" />
+                <ScalarProperty Name="fax_phone" ColumnName="fax_phone" />
+                <ScalarProperty Name="fax_area" ColumnName="fax_area" />
+                <ScalarProperty Name="emergency_ext" ColumnName="emergency_ext" />
+                <ScalarProperty Name="emergency_phone" ColumnName="emergency_phone" />
+                <ScalarProperty Name="emergency_area" ColumnName="emergency_area" />
+                <ScalarProperty Name="business_ext" ColumnName="business_ext" />
+                <ScalarProperty Name="business_phone" ColumnName="business_phone" />
+                <ScalarProperty Name="business_area" ColumnName="business_area" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="gl_account_id" ColumnName="gl_account_id" />
+                <ScalarProperty Name="address_id" ColumnName="address_id" />
+                <ScalarProperty Name="facility_owner_id" ColumnName="facility_owner_id" />
+                <ScalarProperty Name="person_id" ColumnName="person_id" />
+                <ScalarProperty Name="facility_master_id" ColumnName="facility_master_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1281,24 +1539,24 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="Class" ZoomLevel="31">
+      <Diagram Name="Class" ZoomLevel="65">
         <EntityTypeShape EntityType="CLASSModel.ACCOUNT" Width="1.5" PointX="3" PointY="1.625" Height="10.912708500226341" IsExpanded="true" />
         <EntityTypeShape EntityType="CLASSModel.ACTIVITY" Width="1.5" PointX="9.75" PointY="0.75" Height="9.7908334823449437" IsExpanded="true" />
         <EntityTypeShape EntityType="CLASSModel.CLIENT" Width="1.5" PointX="5.25" PointY="5" Height="4.3684375625848766" IsExpanded="true" />
         <EntityTypeShape EntityType="CLASSModel.PERSON" Width="1.5" PointX="0.75" PointY="1.375" Height="11.473646009167034" IsExpanded="true" />
         <EntityTypeShape EntityType="CLASSModel.REGISTRATION" Width="1.5" PointX="7.5" PointY="1.5" Height="11.286666839520137" IsExpanded="true" />
         <AssociationConnector Association="CLASSModel.ACCOUNT_REF4" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="7.08135425011317" />
-          <ConnectorPoint PointX="3" PointY="7.08135425011317" />
+          <ConnectorPoint PointX="2.25" PointY="7.1845096842447917" />
+          <ConnectorPoint PointX="3" PointY="7.1845096842447917" />
         </AssociationConnector>
         <AssociationConnector Association="CLASSModel.CLIENT_REF2" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="7.1842187812924383" />
-          <ConnectorPoint PointX="5.25" PointY="7.1842187812924383" />
+          <ConnectorPoint PointX="4.5" PointY="7.21062255859375" />
+          <ConnectorPoint PointX="5.25" PointY="7.21062255859375" />
         </AssociationConnector>
         <AssociationConnector Association="CLASSModel.CLIENT_REF1" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="12.724427254696687" />
-          <ConnectorPoint PointX="6" PointY="12.724427254696687" />
-          <ConnectorPoint PointX="6" PointY="9.3684375625848766" />
+          <ConnectorPoint PointX="2.25" PointY="13.248006998697916" />
+          <ConnectorPoint PointX="6" PointY="13.248006998697916" />
+          <ConnectorPoint PointX="6" PointY="9.4212451171875" />
         </AssociationConnector>
         <AssociationConnector Association="CLASSModel.REGISTRATION_REF2" ManuallyRouted="false">
           <ConnectorPoint PointX="6.75" PointY="7.1842187812924383" />
@@ -1306,29 +1564,49 @@
         </AssociationConnector>
         <EntityTypeShape EntityType="CLASSModel.COURSE" Width="1.5" PointX="12" PointY="22.125" Height="15.587187741398815" />
         <AssociationConnector Association="CLASSModel.COURSE_REF2" >
-          <ConnectorPoint PointX="10.5" PointY="10.727812651991842" />
-          <ConnectorPoint PointX="10.5" PointY="29.918593870699407" />
-          <ConnectorPoint PointX="12" PointY="29.918593870699407" />
+          <ConnectorPoint PointX="10.03125" PointY="10.856059570312498" />
+          <ConnectorPoint PointX="10.03125" PointY="32.623836081542969" />
+          <ConnectorPoint PointX="12" PointY="32.623836081542969" />
         </AssociationConnector>
         <AssociationConnector Association="CLASSModel.COURSE_REF8" >
-          <ConnectorPoint PointX="12.531923076923077" PointY="37.712187741398814" />
-          <ConnectorPoint PointX="12.531923076923077" PointY="37.962187741398814" />
-          <ConnectorPoint PointX="12.978461538461538" PointY="37.962187741398814" />
-          <ConnectorPoint PointX="12.978461538461538" PointY="37.712187741398814" />
+          <ConnectorPoint PointX="12.531923076923077" PointY="38.105367838541667" />
+          <ConnectorPoint PointX="12.531923076923077" PointY="38.355367838541667" />
+          <ConnectorPoint PointX="12.978461538461538" PointY="38.355367838541667" />
+          <ConnectorPoint PointX="12.978461538461538" PointY="38.105367838541667" />
         </AssociationConnector>
         <AssociationConnector Association="CLASSModel.REGISTRATION_REF1" >
           <ConnectorPoint PointX="12.75" PointY="22.125" />
-          <ConnectorPoint PointX="12.75" PointY="11.975468915402887" />
-          <ConnectorPoint PointX="10.583333333333334" PointY="11.975468915402887" />
-          <ConnectorPoint PointX="10.416666666666666" PointY="11.975468915402887" />
-          <ConnectorPoint PointX="9" PointY="11.975468915402887" />
+          <ConnectorPoint PointX="12.75" PointY="11.553029785156248" />
+          <ConnectorPoint PointX="10.114583333333334" PointY="11.553029785156248" />
+          <ConnectorPoint PointX="9.9479166666666661" PointY="11.553029785156248" />
+          <ConnectorPoint PointX="9" PointY="11.553029785156248" />
         </AssociationConnector>
         <AssociationConnector Association="CLASSModel.REGISTRATION_REF9" >
           <ConnectorPoint PointX="12.3437475" PointY="22.125" />
-          <ConnectorPoint PointX="12.3437475" PointY="12.59929954710841" />
-          <ConnectorPoint PointX="10.583333333333334" PointY="12.59929954710841" />
-          <ConnectorPoint PointX="10.416666666666666" PointY="12.59929954710841" />
-          <ConnectorPoint PointX="9" PointY="12.59929954710841" />
+          <ConnectorPoint PointX="12.3437475" PointY="11.901517392578118" />
+          <ConnectorPoint PointX="10.114583333333334" PointY="11.901517392578118" />
+          <ConnectorPoint PointX="9.9479166666666661" PointY="11.901517392578118" />
+          <ConnectorPoint PointX="9" PointY="11.901517392578118" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="CLASSModel.SUPERVISOR" Width="1.5" PointX="3" PointY="14.25" Height="2.3368131510416674" />
+        <AssociationConnector Association="CLASSModel.COURSE_REF4" >
+          <ConnectorPoint PointX="3.75" PointY="16.776306966145835" />
+          <ConnectorPoint PointX="3.75" PointY="27.343165540771491" />
+          <ConnectorPoint PointX="9.9479166666666661" PointY="27.343165540771491" />
+          <ConnectorPoint PointX="10.114583333333334" PointY="27.343165540771491" />
+          <ConnectorPoint PointX="12" PointY="27.343165540771491" />
+        </AssociationConnector>
+        <AssociationConnector Association="CLASSModel.SUPERVISOR_REF2" >
+          <ConnectorPoint PointX="1.5" PointY="13.375997721354166" />
+          <ConnectorPoint PointX="1.5" PointY="15.513153483072918" />
+          <ConnectorPoint PointX="3" PointY="15.513153483072918" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="CLASSModel.FACILITY_MASTER" Width="1.5" PointX="10.375" PointY="12.25" Height="7.2636523437500031" />
+        <AssociationConnector Association="CLASSModel.SUPERVISOR_REF1" >
+          <ConnectorPoint PointX="10.375" PointY="15.513153483072918" />
+          <ConnectorPoint PointX="10.114583333333334" PointY="15.513153483072918" />
+          <ConnectorPoint PointX="9.9479166666666661" PointY="15.513153483072918" />
+          <ConnectorPoint PointX="4.5" PointY="15.513153483072918" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

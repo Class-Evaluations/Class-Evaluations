@@ -1,4 +1,8 @@
-﻿
+﻿@*@{
+    Layout = null;
+    Response.AddHeader("Content-Type", "application/vnd.ms-excel");    
+}
+*@
 
 <style type="text/css">
 .button {
@@ -18,22 +22,77 @@ font-weight:bold;
             document.getElementById(what).style.display = "none";
         }
     }
+
+    function getChart() {
+        $.ajax({
+            url: ('/Report/Chart'),
+            type: 'GET',
+            cache: false,
+            success: function (result) {
+                alert(result.length);
+                $('#BottomGrid').append('<img id="Chart" />');
+                $('#Chart').attr("src", "/Report/Chart")
+            },
+            error: function () { alert("error"); }
+        });
+    }
 </script>
 
-<h2>@ViewBag.Title</h2>
-<h4>Survey Reponse Stats as of @DateTime.Now</h4>
-<br />
-@*<h3>Survey End Date = @ViewBag.ExpirationDate</h3>*@
-<h5><strong>Survey statistics: </strong></h5>
-    <h5>
-    <ul>
-        Surveys Sent = @ViewBag.Sent<br />
-        Surveys answered = @ViewBag.Answered<br />
-        Percent complete = @ViewBag.Percent %<br />
-    </ul>
-    </h5>
+<html> 
+  <head> 
+    <!--Load the AJAX API--> 
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script> 
+    <script type="text/javascript">
 
-<h3>Answer Details</h3>
+        // Load the Visualization API and the piechart package. 
+        google.load('visualization', '1.0', { 'packages': ['corechart'] });
+
+        // Set a callback to run when the Google Visualization API is loaded. 
+        google.setOnLoadCallback(drawChart);
+
+        // Callback that creates and populates a data table, 
+        // instantiates the pie chart, passes in the data and 
+        // draws it. 
+
+        function drawChart() {
+        
+            // Create the data table. 
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Topping');
+            data.addColumn('number', 'Slices');
+            data.addRows([['Answered',  @ViewBag.Answered], ['No Response', @ViewBag.Sent]]);
+            
+
+            // Set chart options 
+            var options = { 'title': 'Evaluation Reponse',
+                'width': 400,
+                'height': 300,
+                'colors': ['#9900CC', '#00CC00']
+
+            };
+
+            // Instantiate and draw our chart, passing in some options. 
+            var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+
+    </script> 
+  </head> 
+ 
+  <body> 
+    <!--Div that will hold the pie chart--> 
+    <div id="chart_div"></div>
+  </body> 
+
+
+<h2>@ViewBag.title</h2>
+<p></p>
+<h3>Courses Surveyed = @ViewBag.surveyCount</h3>
+<h3>Total Surveys Sent = @ViewBag.Sent</h3>
+<p></p>
+
+
+
 <table>
 <tr>
     <th width=33%><strong> Answer Scale of 1(Unsatisifed) to 5 (Very Satisfied) </strong></th>
@@ -112,7 +171,6 @@ font-weight:bold;
                    </table>
                    break;
 
-
         case "Multi-Choice":
               <br />
                 <table>
@@ -129,7 +187,6 @@ font-weight:bold;
                     }
                     </table>
                     break;
-                    
         case "Multi-Choice-multi":
                 <br />
                 <table>

@@ -9,21 +9,34 @@
     <div class="page">
         <div id="header">
             <div id="title">
-                <h1>Survey Application</h1>
+                <center><img src="../../Content/Images/evaluationsLogo.jpg" width="228" height="70" /></center>
             </div>
             <div id="logindisplay">
                 @Html.Partial("_LogOnPartial")
             </div>
+        @if (User.IsInRole("Admin"))
+        {
             <div id="menucontainer" style=" vertical-align">
                 <ul id="menu">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Surveys", "Index", "Survey")</li>
                     <li>@Html.ActionLink("Question Bank", "Index", "Questions")</li>
                     <li>@Html.ActionLink("Courses", "Index", "Course")</li>
-@*                    <li>@Html.ActionLink("Clients", "Index", "Person")</li>*@
+                    <li>@Html.ActionLink("Reports", "Index", "Reports")</li>
+                    <li>@Html.ActionLink("Manage Users", "Index", "Admin")</li>
                 </ul>
             </div>
-        </div>
+        }
+        else
+        {
+            <div id="menucontainer" style=" vertical-align">
+                <ul id="menu">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Courses", "Index", "Course")</li>
+                    <li>@Html.ActionLink("Reports", "Index", "Reports")</li>
+                </ul>
+            </div>
+        }
         <div id="main">
             @RenderBody()
         </div>

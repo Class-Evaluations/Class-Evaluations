@@ -7,14 +7,9 @@
 @using PagedList.Mvc;
 @using PagedList; 
 
+ <script src="@Url.Content("~/Scripts/jquery-ui-1.8.11.custom.min.js")" type="text/javascript"></script>
 
-<script src="@Url.Content("~/Scripts/jquery-ui-1.8.11.custom.min.js")" type="text/javascript"></script>
-
-<h2>This list of courses are either set to complete or 7 days past the activities last end date. </h2>
-<h3>If you do not wish to have a course surveyed check the <a style="color:Blue"> do not survey </a>box to the left</h3>
-
-<p>
-</p>
+<h2>This list of courses are either set to complete or 1 days past the activities last end date. </h2>
 
 @using (Html.BeginForm())
 {
@@ -57,10 +52,10 @@
         </th>
 
         <th>
-            <strong> Last Start Date </strong>
+            <strong> Start Date & Time </strong>
         </th>
         <th>
-            <strong> Last End Date   </strong>
+            <strong> End Date & Time  </strong>
         </th>
         <th>
             <strong> Course Status </strong>
@@ -87,7 +82,7 @@
     var StatusOfSurvey = "";
     var ExpirationDate = "";
     @*Need to format the date time to a date*@
-    var start_date = (item.last_start_datetime == null ? string.Empty : item.last_start_datetime);
+    var start_date = (item.first_start_datetime == null ? string.Empty : item.first_start_datetime);
     var last_date = (item.last_end_datetime == null ? string.Empty : item.last_end_datetime);
 
     var Title = "";
@@ -98,6 +93,7 @@
     {
         if (item.course_id == survey.course_id)
         {
+            
             ViewBag.course = item.course_id;
             StatusOfSurvey = (survey.course_status1).Trim();
             if (StatusOfSurvey == "N")
@@ -133,9 +129,17 @@
                 </td>
                break;
             default:
-                <td>
-                    @Html.ActionLink("Select", "../Person/Details", new { id = item.course_id })
-                </td>
+               if (User.IsInRole("Admin"))
+               {
+                    <td>
+                        @Html.ActionLink("Select", "../Person/Details", new { id = item.course_id })
+                    </td>
+               }
+               else
+               { <td>
+                    <font style="color:Green">
+                    Select </font>
+                </td>}
                break;
         }
         <td>
@@ -186,13 +190,23 @@
                 {
                     cbDetails = false;
                 }
-               <input type="checkbox" name="applyChanges" value="@item.course_id" onclick="this.form.submit()"/> 
+                if (User.IsInRole("Admin"))
+                {
+                  @*  <input type="checkbox" name="applyChanges" value="@item.course_id" onclick="this.form.submit()"/> *@
+                  <input type="checkbox" name="applyChanges" value="@item.course_id" /> 
+                }
             }
            </strong>
         </td>
     </tr>
 }
+
+    <input type="button" name="Submit" value="Submit Do Not Survey"  style="position: absolute; right: 100px; " onclick="this.form.submit()" />
+    <br />
+    <br />
+<p></p>
 </table>
+ 
 
 }
 

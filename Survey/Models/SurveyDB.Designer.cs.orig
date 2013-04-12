@@ -27,17 +27,13 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("Survey_DBModel", "FK_QUESTION_MULTIPLE_CHOICE_QUESTION", "QUESTION", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Survey.Models.QUESTION), "QUESTION_MULTIPLE_CHOICE", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Survey.Models.QUESTION_MULTIPLE_CHOICE), true)]
 [assembly: EdmRelationshipAttribute("Survey_DBModel", "FK_QUESTION_SCALE_QUESTION", "QUESTION", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Survey.Models.QUESTION), "QUESTION_SCALE", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Survey.Models.QUESTION_SCALE), true)]
 [assembly: EdmRelationshipAttribute("Survey_DBModel", "FK_SURVEY_QUESTIONS_QUESTION", "QUESTION", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Survey.Models.QUESTION), "SURVEY_QUESTIONS", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Survey.Models.SURVEY_QUESTIONS), true)]
+[assembly: EdmRelationshipAttribute("Survey_DBModel", "FK_SURVEY_QUESTIONS_SURVEY", "SURVEY", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Survey.Models.SURVEY), "SURVEY_QUESTIONS", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Survey.Models.SURVEY_QUESTIONS), true)]
+[assembly: EdmRelationshipAttribute("Survey_DBModel", "FK_SURVEY_REQUEST_SENT_SURVEY", "SURVEY", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Survey.Models.SURVEY), "SURVEY_REQUEST_SENT", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Survey.Models.SURVEY_REQUEST_SENT), true)]
 [assembly: EdmRelationshipAttribute("Survey_DBModel", "FK_SURVEY_QUESTIONS_SURVEY_SECTION", "SURVEY_SECTION", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Survey.Models.SURVEY_SECTION), "SURVEY_QUESTIONS", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Survey.Models.SURVEY_QUESTIONS), true)]
+<<<<<<< HEAD
 [assembly: EdmRelationshipAttribute("Survey_DBModel", "FK_ANSWER_LONG_SURVEY_SENT", "SURVEY_REQUEST_SENT", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Survey.Models.SURVEY_REQUEST_SENT), "ANSWER_LONG", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Survey.Models.ANSWER_LONG), true)]
-[assembly: EdmRelationshipAttribute("Survey_DBModel", "FK_Answer_Question1", "QUESTION", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Survey.Models.QUESTION), "ANSWER", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Survey.Models.ANSWER), true)]
-[assembly: EdmRelationshipAttribute("Survey_DBModel", "FK_Answer_SurveySent", "SURVEY_REQUEST_SENT", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Survey.Models.SURVEY_REQUEST_SENT), "ANSWER", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Survey.Models.ANSWER), true)]
-[assembly: EdmRelationshipAttribute("Survey_DBModel", "FK_AnswerMultiChoice_SurveySent", "SURVEY_REQUEST_SENT", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Survey.Models.SURVEY_REQUEST_SENT), "ANSWER_MULTIPLE_CHOICE", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Survey.Models.ANSWER_MULTIPLE_CHOICE), true)]
-[assembly: EdmRelationshipAttribute("Survey_DBModel", "FK_AnswerScale_SurveySent", "SURVEY_REQUEST_SENT", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Survey.Models.SURVEY_REQUEST_SENT), "ANSWER_SCALE", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Survey.Models.ANSWER_SCALE), true)]
-[assembly: EdmRelationshipAttribute("Survey_DBModel", "FK_AnswerShort_SurveySent", "SURVEY_REQUEST_SENT", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Survey.Models.SURVEY_REQUEST_SENT), "ANSWER_SHORT", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Survey.Models.ANSWER_SHORT), true)]
-[assembly: EdmRelationshipAttribute("Survey_DBModel", "FK_AnswerTF_SurveySent", "SURVEY_REQUEST_SENT", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Survey.Models.SURVEY_REQUEST_SENT), "ANSWER_TRUE_FALSE", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Survey.Models.ANSWER_TRUE_FALSE), true)]
-[assembly: EdmRelationshipAttribute("Survey_DBModel", "FK_Question_AnswerType", "ANSWER_TYPE", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Survey.Models.ANSWER_TYPE), "QUESTION", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Survey.Models.QUESTION), true)]
-[assembly: EdmRelationshipAttribute("Survey_DBModel", "FK_SurveyQuestions_Survey", "SURVEY", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Survey.Models.SURVEY), "SURVEY_QUESTIONS", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Survey.Models.SURVEY_QUESTIONS), true)]
-[assembly: EdmRelationshipAttribute("Survey_DBModel", "FK_SurveyRequestSent_Survey", "SURVEY", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Survey.Models.SURVEY), "SURVEY_REQUEST_SENT", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Survey.Models.SURVEY_REQUEST_SENT), true)]
+=======
+>>>>>>> db3851e... First commit
 
 #endregion
 
@@ -188,6 +184,22 @@ namespace Survey.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<ANSWER_TYPE> ANSWER_TYPE
+        {
+            get
+            {
+                if ((_ANSWER_TYPE == null))
+                {
+                    _ANSWER_TYPE = base.CreateObjectSet<ANSWER_TYPE>("ANSWER_TYPE");
+                }
+                return _ANSWER_TYPE;
+            }
+        }
+        private ObjectSet<ANSWER_TYPE> _ANSWER_TYPE;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<COURSE_STATUS> COURSE_STATUS
         {
             get
@@ -252,6 +264,22 @@ namespace Survey.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<SURVEY> SURVEYs
+        {
+            get
+            {
+                if ((_SURVEYs == null))
+                {
+                    _SURVEYs = base.CreateObjectSet<SURVEY>("SURVEYs");
+                }
+                return _SURVEYs;
+            }
+        }
+        private ObjectSet<SURVEY> _SURVEYs;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<SURVEY_QUESTIONS> SURVEY_QUESTIONS
         {
             get
@@ -300,38 +328,25 @@ namespace Survey.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<ANSWER_TYPE> ANSWER_TYPE
+<<<<<<< HEAD
+=======
+        public ObjectSet<sysdiagram> sysdiagrams
         {
             get
             {
-                if ((_ANSWER_TYPE == null))
+                if ((_sysdiagrams == null))
                 {
-                    _ANSWER_TYPE = base.CreateObjectSet<ANSWER_TYPE>("ANSWER_TYPE");
+                    _sysdiagrams = base.CreateObjectSet<sysdiagram>("sysdiagrams");
                 }
-                return _ANSWER_TYPE;
+                return _sysdiagrams;
             }
         }
-        private ObjectSet<ANSWER_TYPE> _ANSWER_TYPE;
+        private ObjectSet<sysdiagram> _sysdiagrams;
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<SURVEY> SURVEYs
-        {
-            get
-            {
-                if ((_SURVEYs == null))
-                {
-                    _SURVEYs = base.CreateObjectSet<SURVEY>("SURVEYs");
-                }
-                return _SURVEYs;
-            }
-        }
-        private ObjectSet<SURVEY> _SURVEYs;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
+>>>>>>> db3851e... First commit
         public ObjectSet<USER> USERS
         {
             get
@@ -397,6 +412,14 @@ namespace Survey.Models
         }
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the ANSWER_TYPE EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToANSWER_TYPE(ANSWER_TYPE aNSWER_TYPE)
+        {
+            base.AddObject("ANSWER_TYPE", aNSWER_TYPE);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the COURSE_STATUS EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToCOURSE_STATUS(COURSE_STATUS cOURSE_STATUS)
@@ -429,6 +452,14 @@ namespace Survey.Models
         }
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the SURVEYs EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToSURVEYs(SURVEY sURVEY)
+        {
+            base.AddObject("SURVEYs", sURVEY);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the SURVEY_QUESTIONS EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToSURVEY_QUESTIONS(SURVEY_QUESTIONS sURVEY_QUESTIONS)
@@ -453,22 +484,17 @@ namespace Survey.Models
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the ANSWER_TYPE EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+<<<<<<< HEAD
+=======
+        /// Deprecated Method for adding a new object to the sysdiagrams EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToANSWER_TYPE(ANSWER_TYPE aNSWER_TYPE)
+        public void AddTosysdiagrams(sysdiagram sysdiagram)
         {
-            base.AddObject("ANSWER_TYPE", aNSWER_TYPE);
+            base.AddObject("sysdiagrams", sysdiagram);
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the SURVEYs EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToSURVEYs(SURVEY sURVEY)
-        {
-            base.AddObject("SURVEYs", sURVEY);
-        }
-    
-        /// <summary>
+>>>>>>> db3851e... First commit
         /// Deprecated Method for adding a new object to the USERS EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToUSERS(USER uSER)
@@ -509,9 +535,23 @@ namespace Survey.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+<<<<<<< HEAD
         public ObjectResult<GetCoursesWithSurveyStatus_Result> GetCoursesWithSurveyStatus()
         {
             return base.ExecuteFunction<GetCoursesWithSurveyStatus_Result>("GetCoursesWithSurveyStatus");
+=======
+        public int spGetCoursesWithSurveyStatus()
+        {
+            return base.ExecuteFunction("spGetCoursesWithSurveyStatus");
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectResult<GetCoursesWithStatus_Result> GetCoursesWithStatus()
+        {
+            return base.ExecuteFunction<GetCoursesWithStatus_Result>("GetCoursesWithStatus");
+>>>>>>> db3851e... First commit
         }
 
         #endregion
@@ -802,82 +842,6 @@ namespace Survey.Models
                 }
             }
         }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Survey_DBModel", "FK_Answer_Question1", "QUESTION")]
-        public QUESTION QUESTION_1
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<QUESTION>("Survey_DBModel.FK_Answer_Question1", "QUESTION").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<QUESTION>("Survey_DBModel.FK_Answer_Question1", "QUESTION").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<QUESTION> QUESTION_1Reference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<QUESTION>("Survey_DBModel.FK_Answer_Question1", "QUESTION");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<QUESTION>("Survey_DBModel.FK_Answer_Question1", "QUESTION", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Survey_DBModel", "FK_Answer_SurveySent", "SURVEY_REQUEST_SENT")]
-        public SURVEY_REQUEST_SENT SURVEY_REQUEST_SENT
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SURVEY_REQUEST_SENT>("Survey_DBModel.FK_Answer_SurveySent", "SURVEY_REQUEST_SENT").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SURVEY_REQUEST_SENT>("Survey_DBModel.FK_Answer_SurveySent", "SURVEY_REQUEST_SENT").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<SURVEY_REQUEST_SENT> SURVEY_REQUEST_SENTReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SURVEY_REQUEST_SENT>("Survey_DBModel.FK_Answer_SurveySent", "SURVEY_REQUEST_SENT");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SURVEY_REQUEST_SENT>("Survey_DBModel.FK_Answer_SurveySent", "SURVEY_REQUEST_SENT", value);
-                }
-            }
-        }
 
         #endregion
     }
@@ -1052,6 +1016,7 @@ namespace Survey.Models
                 }
             }
         }
+<<<<<<< HEAD
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1090,6 +1055,8 @@ namespace Survey.Models
                 }
             }
         }
+=======
+>>>>>>> db3851e... First commit
 
         #endregion
     }
@@ -1261,44 +1228,6 @@ namespace Survey.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ANSWER>("Survey_DBModel.FK_ANSWER_MULTIPLE_CHOIC_ANSWER", "ANSWER", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Survey_DBModel", "FK_AnswerMultiChoice_SurveySent", "SURVEY_REQUEST_SENT")]
-        public SURVEY_REQUEST_SENT SURVEY_REQUEST_SENT
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SURVEY_REQUEST_SENT>("Survey_DBModel.FK_AnswerMultiChoice_SurveySent", "SURVEY_REQUEST_SENT").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SURVEY_REQUEST_SENT>("Survey_DBModel.FK_AnswerMultiChoice_SurveySent", "SURVEY_REQUEST_SENT").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<SURVEY_REQUEST_SENT> SURVEY_REQUEST_SENTReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SURVEY_REQUEST_SENT>("Survey_DBModel.FK_AnswerMultiChoice_SurveySent", "SURVEY_REQUEST_SENT");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SURVEY_REQUEST_SENT>("Survey_DBModel.FK_AnswerMultiChoice_SurveySent", "SURVEY_REQUEST_SENT", value);
                 }
             }
         }
@@ -1476,44 +1405,6 @@ namespace Survey.Models
                 }
             }
         }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Survey_DBModel", "FK_AnswerScale_SurveySent", "SURVEY_REQUEST_SENT")]
-        public SURVEY_REQUEST_SENT SURVEY_REQUEST_SENT
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SURVEY_REQUEST_SENT>("Survey_DBModel.FK_AnswerScale_SurveySent", "SURVEY_REQUEST_SENT").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SURVEY_REQUEST_SENT>("Survey_DBModel.FK_AnswerScale_SurveySent", "SURVEY_REQUEST_SENT").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<SURVEY_REQUEST_SENT> SURVEY_REQUEST_SENTReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SURVEY_REQUEST_SENT>("Survey_DBModel.FK_AnswerScale_SurveySent", "SURVEY_REQUEST_SENT");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SURVEY_REQUEST_SENT>("Survey_DBModel.FK_AnswerScale_SurveySent", "SURVEY_REQUEST_SENT", value);
-                }
-            }
-        }
 
         #endregion
     }
@@ -1685,44 +1576,6 @@ namespace Survey.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ANSWER>("Survey_DBModel.FK_ANSWER_SHORT_ANSWER", "ANSWER", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Survey_DBModel", "FK_AnswerShort_SurveySent", "SURVEY_REQUEST_SENT")]
-        public SURVEY_REQUEST_SENT SURVEY_REQUEST_SENT
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SURVEY_REQUEST_SENT>("Survey_DBModel.FK_AnswerShort_SurveySent", "SURVEY_REQUEST_SENT").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SURVEY_REQUEST_SENT>("Survey_DBModel.FK_AnswerShort_SurveySent", "SURVEY_REQUEST_SENT").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<SURVEY_REQUEST_SENT> SURVEY_REQUEST_SENTReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SURVEY_REQUEST_SENT>("Survey_DBModel.FK_AnswerShort_SurveySent", "SURVEY_REQUEST_SENT");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SURVEY_REQUEST_SENT>("Survey_DBModel.FK_AnswerShort_SurveySent", "SURVEY_REQUEST_SENT", value);
                 }
             }
         }
@@ -1900,44 +1753,6 @@ namespace Survey.Models
                 }
             }
         }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Survey_DBModel", "FK_AnswerTF_SurveySent", "SURVEY_REQUEST_SENT")]
-        public SURVEY_REQUEST_SENT SURVEY_REQUEST_SENT
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SURVEY_REQUEST_SENT>("Survey_DBModel.FK_AnswerTF_SurveySent", "SURVEY_REQUEST_SENT").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SURVEY_REQUEST_SENT>("Survey_DBModel.FK_AnswerTF_SurveySent", "SURVEY_REQUEST_SENT").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<SURVEY_REQUEST_SENT> SURVEY_REQUEST_SENTReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SURVEY_REQUEST_SENT>("Survey_DBModel.FK_AnswerTF_SurveySent", "SURVEY_REQUEST_SENT");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SURVEY_REQUEST_SENT>("Survey_DBModel.FK_AnswerTF_SurveySent", "SURVEY_REQUEST_SENT", value);
-                }
-            }
-        }
 
         #endregion
     }
@@ -1965,8 +1780,7 @@ namespace Survey.Models
         /// <param name="true_false">Initial value of the true_false property.</param>
         /// <param name="datestamp">Initial value of the datestamp property.</param>
         /// <param name="user_stamp">Initial value of the user_stamp property.</param>
-        /// <param name="controlName">Initial value of the controlName property.</param>
-        public static ANSWER_TYPE CreateANSWER_TYPE(global::System.Int32 answer_type_id, global::System.String answer_type_name, global::System.Boolean multi_choice_single, global::System.Boolean multi_choice_multi, global::System.Boolean scale, global::System.Boolean answer_long, global::System.Boolean answer_short, global::System.Boolean true_false, global::System.DateTime datestamp, global::System.Int32 user_stamp, global::System.String controlName)
+        public static ANSWER_TYPE CreateANSWER_TYPE(global::System.Int32 answer_type_id, global::System.String answer_type_name, global::System.Boolean multi_choice_single, global::System.Boolean multi_choice_multi, global::System.Boolean scale, global::System.Boolean answer_long, global::System.Boolean answer_short, global::System.Boolean true_false, global::System.DateTime datestamp, global::System.Int32 user_stamp)
         {
             ANSWER_TYPE aNSWER_TYPE = new ANSWER_TYPE();
             aNSWER_TYPE.answer_type_id = answer_type_id;
@@ -1979,7 +1793,6 @@ namespace Survey.Models
             aNSWER_TYPE.true_false = true_false;
             aNSWER_TYPE.datestamp = datestamp;
             aNSWER_TYPE.user_stamp = user_stamp;
-            aNSWER_TYPE.controlName = controlName;
             return aNSWER_TYPE;
         }
 
@@ -2232,7 +2045,7 @@ namespace Survey.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String controlName
         {
@@ -2244,7 +2057,7 @@ namespace Survey.Models
             {
                 OncontrolNameChanging(value);
                 ReportPropertyChanging("controlName");
-                _controlName = StructuralObject.SetValidValue(value, false);
+                _controlName = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("controlName");
                 OncontrolNameChanged();
             }
@@ -2255,31 +2068,6 @@ namespace Survey.Models
 
         #endregion
     
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Survey_DBModel", "FK_Question_AnswerType", "QUESTION")]
-        public EntityCollection<QUESTION> QUESTIONs
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<QUESTION>("Survey_DBModel.FK_Question_AnswerType", "QUESTION");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<QUESTION>("Survey_DBModel.FK_Question_AnswerType", "QUESTION", value);
-                }
-            }
-        }
-
-        #endregion
     }
     
     /// <summary>
@@ -2384,6 +2172,7 @@ namespace Survey.Models
         private global::System.String _course_status1;
         partial void Oncourse_status1Changing(global::System.String value);
         partial void Oncourse_status1Changed();
+<<<<<<< HEAD
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2408,6 +2197,8 @@ namespace Survey.Models
         private Nullable<global::System.DateTime> _survey_exp_date;
         partial void Onsurvey_exp_dateChanging(Nullable<global::System.DateTime> value);
         partial void Onsurvey_exp_dateChanged();
+=======
+>>>>>>> db3851e... First commit
 
         #endregion
     
@@ -2656,66 +2447,6 @@ namespace Survey.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SURVEY_QUESTIONS>("Survey_DBModel.FK_SURVEY_QUESTIONS_QUESTION", "SURVEY_QUESTIONS", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Survey_DBModel", "FK_Answer_Question1", "ANSWER")]
-        public EntityCollection<ANSWER> ANSWERs_1
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ANSWER>("Survey_DBModel.FK_Answer_Question1", "ANSWER");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ANSWER>("Survey_DBModel.FK_Answer_Question1", "ANSWER", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Survey_DBModel", "FK_Question_AnswerType", "ANSWER_TYPE")]
-        public ANSWER_TYPE ANSWER_TYPE
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ANSWER_TYPE>("Survey_DBModel.FK_Question_AnswerType", "ANSWER_TYPE").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ANSWER_TYPE>("Survey_DBModel.FK_Question_AnswerType", "ANSWER_TYPE").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<ANSWER_TYPE> ANSWER_TYPEReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ANSWER_TYPE>("Survey_DBModel.FK_Question_AnswerType", "ANSWER_TYPE");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ANSWER_TYPE>("Survey_DBModel.FK_Question_AnswerType", "ANSWER_TYPE", value);
                 }
             }
         }
@@ -3112,21 +2843,15 @@ namespace Survey.Models
         /// </summary>
         /// <param name="survey_id">Initial value of the survey_id property.</param>
         /// <param name="title">Initial value of the title property.</param>
-        /// <param name="header_text">Initial value of the header_text property.</param>
-        /// <param name="survey_introduction">Initial value of the survey_introduction property.</param>
-        /// <param name="number_of_sections">Initial value of the number_of_sections property.</param>
         /// <param name="survey_status">Initial value of the survey_status property.</param>
         /// <param name="lifetime">Initial value of the lifetime property.</param>
         /// <param name="datestamp">Initial value of the datestamp property.</param>
         /// <param name="user_stamp">Initial value of the user_stamp property.</param>
-        public static SURVEY CreateSURVEY(global::System.Int32 survey_id, global::System.String title, global::System.String header_text, global::System.String survey_introduction, global::System.Int32 number_of_sections, global::System.String survey_status, global::System.Int32 lifetime, global::System.DateTime datestamp, global::System.Int32 user_stamp)
+        public static SURVEY CreateSURVEY(global::System.Int32 survey_id, global::System.String title, global::System.String survey_status, global::System.Int32 lifetime, global::System.DateTime datestamp, global::System.Int32 user_stamp)
         {
             SURVEY sURVEY = new SURVEY();
             sURVEY.survey_id = survey_id;
             sURVEY.title = title;
-            sURVEY.header_text = header_text;
-            sURVEY.survey_introduction = survey_introduction;
-            sURVEY.number_of_sections = number_of_sections;
             sURVEY.survey_status = survey_status;
             sURVEY.lifetime = lifetime;
             sURVEY.datestamp = datestamp;
@@ -3191,7 +2916,7 @@ namespace Survey.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String header_text
         {
@@ -3203,7 +2928,7 @@ namespace Survey.Models
             {
                 Onheader_textChanging(value);
                 ReportPropertyChanging("header_text");
-                _header_text = StructuralObject.SetValidValue(value, false);
+                _header_text = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("header_text");
                 Onheader_textChanged();
             }
@@ -3215,33 +2940,9 @@ namespace Survey.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String survey_introduction
-        {
-            get
-            {
-                return _survey_introduction;
-            }
-            set
-            {
-                Onsurvey_introductionChanging(value);
-                ReportPropertyChanging("survey_introduction");
-                _survey_introduction = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("survey_introduction");
-                Onsurvey_introductionChanged();
-            }
-        }
-        private global::System.String _survey_introduction;
-        partial void Onsurvey_introductionChanging(global::System.String value);
-        partial void Onsurvey_introductionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 number_of_sections
+        public Nullable<global::System.Int32> number_of_sections
         {
             get
             {
@@ -3256,8 +2957,8 @@ namespace Survey.Models
                 Onnumber_of_sectionsChanged();
             }
         }
-        private global::System.Int32 _number_of_sections;
-        partial void Onnumber_of_sectionsChanging(global::System.Int32 value);
+        private Nullable<global::System.Int32> _number_of_sections;
+        partial void Onnumber_of_sectionsChanging(Nullable<global::System.Int32> value);
         partial void Onnumber_of_sectionsChanged();
     
         /// <summary>
@@ -3355,6 +3056,30 @@ namespace Survey.Models
         private global::System.Int32 _user_stamp;
         partial void Onuser_stampChanging(global::System.Int32 value);
         partial void Onuser_stampChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String survey_introduction
+        {
+            get
+            {
+                return _survey_introduction;
+            }
+            set
+            {
+                Onsurvey_introductionChanging(value);
+                ReportPropertyChanging("survey_introduction");
+                _survey_introduction = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("survey_introduction");
+                Onsurvey_introductionChanged();
+            }
+        }
+        private global::System.String _survey_introduction;
+        partial void Onsurvey_introductionChanging(global::System.String value);
+        partial void Onsurvey_introductionChanged();
 
         #endregion
     
@@ -3366,18 +3091,18 @@ namespace Survey.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Survey_DBModel", "FK_SurveyQuestions_Survey", "SURVEY_QUESTIONS")]
+        [EdmRelationshipNavigationPropertyAttribute("Survey_DBModel", "FK_SURVEY_QUESTIONS_SURVEY", "SURVEY_QUESTIONS")]
         public EntityCollection<SURVEY_QUESTIONS> SURVEY_QUESTIONS
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SURVEY_QUESTIONS>("Survey_DBModel.FK_SurveyQuestions_Survey", "SURVEY_QUESTIONS");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SURVEY_QUESTIONS>("Survey_DBModel.FK_SURVEY_QUESTIONS_SURVEY", "SURVEY_QUESTIONS");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SURVEY_QUESTIONS>("Survey_DBModel.FK_SurveyQuestions_Survey", "SURVEY_QUESTIONS", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SURVEY_QUESTIONS>("Survey_DBModel.FK_SURVEY_QUESTIONS_SURVEY", "SURVEY_QUESTIONS", value);
                 }
             }
         }
@@ -3388,18 +3113,18 @@ namespace Survey.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Survey_DBModel", "FK_SurveyRequestSent_Survey", "SURVEY_REQUEST_SENT")]
+        [EdmRelationshipNavigationPropertyAttribute("Survey_DBModel", "FK_SURVEY_REQUEST_SENT_SURVEY", "SURVEY_REQUEST_SENT")]
         public EntityCollection<SURVEY_REQUEST_SENT> SURVEY_REQUEST_SENT
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SURVEY_REQUEST_SENT>("Survey_DBModel.FK_SurveyRequestSent_Survey", "SURVEY_REQUEST_SENT");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SURVEY_REQUEST_SENT>("Survey_DBModel.FK_SURVEY_REQUEST_SENT_SURVEY", "SURVEY_REQUEST_SENT");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SURVEY_REQUEST_SENT>("Survey_DBModel.FK_SurveyRequestSent_Survey", "SURVEY_REQUEST_SENT", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SURVEY_REQUEST_SENT>("Survey_DBModel.FK_SURVEY_REQUEST_SENT_SURVEY", "SURVEY_REQUEST_SENT", value);
                 }
             }
         }
@@ -3584,6 +3309,44 @@ namespace Survey.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Survey_DBModel", "FK_SURVEY_QUESTIONS_SURVEY", "SURVEY")]
+        public SURVEY SURVEY
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SURVEY>("Survey_DBModel.FK_SURVEY_QUESTIONS_SURVEY", "SURVEY").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SURVEY>("Survey_DBModel.FK_SURVEY_QUESTIONS_SURVEY", "SURVEY").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<SURVEY> SURVEYReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SURVEY>("Survey_DBModel.FK_SURVEY_QUESTIONS_SURVEY", "SURVEY");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SURVEY>("Survey_DBModel.FK_SURVEY_QUESTIONS_SURVEY", "SURVEY", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("Survey_DBModel", "FK_SURVEY_QUESTIONS_SURVEY_SECTION", "SURVEY_SECTION")]
         public SURVEY_SECTION SURVEY_SECTION
         {
@@ -3612,44 +3375,6 @@ namespace Survey.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SURVEY_SECTION>("Survey_DBModel.FK_SURVEY_QUESTIONS_SURVEY_SECTION", "SURVEY_SECTION", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Survey_DBModel", "FK_SurveyQuestions_Survey", "SURVEY")]
-        public SURVEY SURVEY
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SURVEY>("Survey_DBModel.FK_SurveyQuestions_Survey", "SURVEY").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SURVEY>("Survey_DBModel.FK_SurveyQuestions_Survey", "SURVEY").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<SURVEY> SURVEYReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SURVEY>("Survey_DBModel.FK_SurveyQuestions_Survey", "SURVEY");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SURVEY>("Survey_DBModel.FK_SurveyQuestions_Survey", "SURVEY", value);
                 }
             }
         }
@@ -3900,6 +3625,45 @@ namespace Survey.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Survey_DBModel", "FK_SURVEY_REQUEST_SENT_SURVEY", "SURVEY")]
+        public SURVEY SURVEY
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SURVEY>("Survey_DBModel.FK_SURVEY_REQUEST_SENT_SURVEY", "SURVEY").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SURVEY>("Survey_DBModel.FK_SURVEY_REQUEST_SENT_SURVEY", "SURVEY").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<SURVEY> SURVEYReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SURVEY>("Survey_DBModel.FK_SURVEY_REQUEST_SENT_SURVEY", "SURVEY");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SURVEY>("Survey_DBModel.FK_SURVEY_REQUEST_SENT_SURVEY", "SURVEY", value);
+                }
+            }
+        }
+<<<<<<< HEAD
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("Survey_DBModel", "FK_ANSWER_LONG_SURVEY_SENT", "ANSWER_LONG")]
         public EntityCollection<ANSWER_LONG> ANSWER_LONG
         {
@@ -3915,154 +3679,8 @@ namespace Survey.Models
                 }
             }
         }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Survey_DBModel", "FK_Answer_SurveySent", "ANSWER")]
-        public EntityCollection<ANSWER> ANSWERs
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ANSWER>("Survey_DBModel.FK_Answer_SurveySent", "ANSWER");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ANSWER>("Survey_DBModel.FK_Answer_SurveySent", "ANSWER", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Survey_DBModel", "FK_AnswerMultiChoice_SurveySent", "ANSWER_MULTIPLE_CHOICE")]
-        public EntityCollection<ANSWER_MULTIPLE_CHOICE> ANSWER_MULTIPLE_CHOICE
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ANSWER_MULTIPLE_CHOICE>("Survey_DBModel.FK_AnswerMultiChoice_SurveySent", "ANSWER_MULTIPLE_CHOICE");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ANSWER_MULTIPLE_CHOICE>("Survey_DBModel.FK_AnswerMultiChoice_SurveySent", "ANSWER_MULTIPLE_CHOICE", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Survey_DBModel", "FK_AnswerScale_SurveySent", "ANSWER_SCALE")]
-        public EntityCollection<ANSWER_SCALE> ANSWER_SCALE
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ANSWER_SCALE>("Survey_DBModel.FK_AnswerScale_SurveySent", "ANSWER_SCALE");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ANSWER_SCALE>("Survey_DBModel.FK_AnswerScale_SurveySent", "ANSWER_SCALE", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Survey_DBModel", "FK_AnswerShort_SurveySent", "ANSWER_SHORT")]
-        public EntityCollection<ANSWER_SHORT> ANSWER_SHORT
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ANSWER_SHORT>("Survey_DBModel.FK_AnswerShort_SurveySent", "ANSWER_SHORT");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ANSWER_SHORT>("Survey_DBModel.FK_AnswerShort_SurveySent", "ANSWER_SHORT", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Survey_DBModel", "FK_AnswerTF_SurveySent", "ANSWER_TRUE_FALSE")]
-        public EntityCollection<ANSWER_TRUE_FALSE> ANSWER_TRUE_FALSE
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ANSWER_TRUE_FALSE>("Survey_DBModel.FK_AnswerTF_SurveySent", "ANSWER_TRUE_FALSE");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ANSWER_TRUE_FALSE>("Survey_DBModel.FK_AnswerTF_SurveySent", "ANSWER_TRUE_FALSE", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Survey_DBModel", "FK_SurveyRequestSent_Survey", "SURVEY")]
-        public SURVEY SURVEY
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SURVEY>("Survey_DBModel.FK_SurveyRequestSent_Survey", "SURVEY").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SURVEY>("Survey_DBModel.FK_SurveyRequestSent_Survey", "SURVEY").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<SURVEY> SURVEYReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SURVEY>("Survey_DBModel.FK_SurveyRequestSent_Survey", "SURVEY");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SURVEY>("Survey_DBModel.FK_SurveyRequestSent_Survey", "SURVEY", value);
-                }
-            }
-        }
+=======
+>>>>>>> db3851e... First commit
 
         #endregion
     }
@@ -4254,6 +3872,164 @@ namespace Survey.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
+<<<<<<< HEAD
+=======
+    [EdmEntityTypeAttribute(NamespaceName="Survey_DBModel", Name="sysdiagram")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class sysdiagram : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new sysdiagram object.
+        /// </summary>
+        /// <param name="name">Initial value of the name property.</param>
+        /// <param name="principal_id">Initial value of the principal_id property.</param>
+        /// <param name="diagram_id">Initial value of the diagram_id property.</param>
+        public static sysdiagram Createsysdiagram(global::System.String name, global::System.Int32 principal_id, global::System.Int32 diagram_id)
+        {
+            sysdiagram sysdiagram = new sysdiagram();
+            sysdiagram.name = name;
+            sysdiagram.principal_id = principal_id;
+            sysdiagram.diagram_id = diagram_id;
+            return sysdiagram;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                OnnameChanging(value);
+                ReportPropertyChanging("name");
+                _name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("name");
+                OnnameChanged();
+            }
+        }
+        private global::System.String _name;
+        partial void OnnameChanging(global::System.String value);
+        partial void OnnameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 principal_id
+        {
+            get
+            {
+                return _principal_id;
+            }
+            set
+            {
+                Onprincipal_idChanging(value);
+                ReportPropertyChanging("principal_id");
+                _principal_id = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("principal_id");
+                Onprincipal_idChanged();
+            }
+        }
+        private global::System.Int32 _principal_id;
+        partial void Onprincipal_idChanging(global::System.Int32 value);
+        partial void Onprincipal_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 diagram_id
+        {
+            get
+            {
+                return _diagram_id;
+            }
+            set
+            {
+                if (_diagram_id != value)
+                {
+                    Ondiagram_idChanging(value);
+                    ReportPropertyChanging("diagram_id");
+                    _diagram_id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("diagram_id");
+                    Ondiagram_idChanged();
+                }
+            }
+        }
+        private global::System.Int32 _diagram_id;
+        partial void Ondiagram_idChanging(global::System.Int32 value);
+        partial void Ondiagram_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> version
+        {
+            get
+            {
+                return _version;
+            }
+            set
+            {
+                OnversionChanging(value);
+                ReportPropertyChanging("version");
+                _version = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("version");
+                OnversionChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _version;
+        partial void OnversionChanging(Nullable<global::System.Int32> value);
+        partial void OnversionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.Byte[] definition
+        {
+            get
+            {
+                return StructuralObject.GetValidValue(_definition);
+            }
+            set
+            {
+                OndefinitionChanging(value);
+                ReportPropertyChanging("definition");
+                _definition = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("definition");
+                OndefinitionChanged();
+            }
+        }
+        private global::System.Byte[] _definition;
+        partial void OndefinitionChanging(global::System.Byte[] value);
+        partial void OndefinitionChanged();
+
+        #endregion
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+>>>>>>> db3851e... First commit
     [EdmEntityTypeAttribute(NamespaceName="Survey_DBModel", Name="USER")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -4265,17 +4041,15 @@ namespace Survey.Models
         /// Create a new USER object.
         /// </summary>
         /// <param name="user_id">Initial value of the user_id property.</param>
-        /// <param name="userName">Initial value of the UserName property.</param>
-        /// <param name="password">Initial value of the Password property.</param>
-        /// <param name="email">Initial value of the Email property.</param>
+        /// <param name="user_name">Initial value of the user_name property.</param>
+        /// <param name="password">Initial value of the password property.</param>
         /// <param name="datestamp">Initial value of the datestamp property.</param>
-        public static USER CreateUSER(global::System.Int32 user_id, global::System.String userName, global::System.String password, global::System.String email, global::System.DateTime datestamp)
+        public static USER CreateUSER(global::System.Int32 user_id, global::System.String user_name, global::System.String password, global::System.DateTime datestamp)
         {
             USER uSER = new USER();
             uSER.user_id = user_id;
-            uSER.UserName = userName;
-            uSER.Password = password;
-            uSER.Email = email;
+            uSER.user_name = user_name;
+            uSER.password = password;
             uSER.datestamp = datestamp;
             return uSER;
         }
@@ -4315,72 +4089,48 @@ namespace Survey.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String UserName
+        public global::System.String user_name
         {
             get
             {
-                return _UserName;
+                return _user_name;
             }
             set
             {
-                OnUserNameChanging(value);
-                ReportPropertyChanging("UserName");
-                _UserName = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("UserName");
-                OnUserNameChanged();
+                Onuser_nameChanging(value);
+                ReportPropertyChanging("user_name");
+                _user_name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("user_name");
+                Onuser_nameChanged();
             }
         }
-        private global::System.String _UserName;
-        partial void OnUserNameChanging(global::System.String value);
-        partial void OnUserNameChanged();
+        private global::System.String _user_name;
+        partial void Onuser_nameChanging(global::System.String value);
+        partial void Onuser_nameChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String Password
+        public global::System.String password
         {
             get
             {
-                return _Password;
+                return _password;
             }
             set
             {
-                OnPasswordChanging(value);
-                ReportPropertyChanging("Password");
-                _Password = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Password");
-                OnPasswordChanged();
+                OnpasswordChanging(value);
+                ReportPropertyChanging("password");
+                _password = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("password");
+                OnpasswordChanged();
             }
         }
-        private global::System.String _Password;
-        partial void OnPasswordChanging(global::System.String value);
-        partial void OnPasswordChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Email
-        {
-            get
-            {
-                return _Email;
-            }
-            set
-            {
-                OnEmailChanging(value);
-                ReportPropertyChanging("Email");
-                _Email = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Email");
-                OnEmailChanged();
-            }
-        }
-        private global::System.String _Email;
-        partial void OnEmailChanging(global::System.String value);
-        partial void OnEmailChanged();
+        private global::System.String _password;
+        partial void OnpasswordChanging(global::System.String value);
+        partial void OnpasswordChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -4405,30 +4155,6 @@ namespace Survey.Models
         private global::System.DateTime _datestamp;
         partial void OndatestampChanging(global::System.DateTime value);
         partial void OndatestampChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> RememberMe
-        {
-            get
-            {
-                return _RememberMe;
-            }
-            set
-            {
-                OnRememberMeChanging(value);
-                ReportPropertyChanging("RememberMe");
-                _RememberMe = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("RememberMe");
-                OnRememberMeChanged();
-            }
-        }
-        private Nullable<global::System.Boolean> _RememberMe;
-        partial void OnRememberMeChanging(Nullable<global::System.Boolean> value);
-        partial void OnRememberMeChanged();
 
         #endregion
     
@@ -4683,20 +4409,32 @@ namespace Survey.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
+<<<<<<< HEAD
     [EdmComplexTypeAttribute(NamespaceName="Survey_DBModel", Name="GetCoursesWithSurveyStatus_Result")]
     [DataContractAttribute(IsReference=true)]
     [Serializable()]
     public partial class GetCoursesWithSurveyStatus_Result : ComplexObject
+=======
+    [EdmComplexTypeAttribute(NamespaceName="Survey_DBModel", Name="GetCoursesWithStatus_Result")]
+    [DataContractAttribute(IsReference=true)]
+    [Serializable()]
+    public partial class GetCoursesWithStatus_Result : ComplexObject
+>>>>>>> db3851e... First commit
     {
         #region Factory Method
     
         /// <summary>
+<<<<<<< HEAD
         /// Create a new GetCoursesWithSurveyStatus_Result object.
+=======
+        /// Create a new GetCoursesWithStatus_Result object.
+>>>>>>> db3851e... First commit
         /// </summary>
         /// <param name="course_id">Initial value of the course_id property.</param>
         /// <param name="activity_id">Initial value of the activity_id property.</param>
         /// <param name="course_status_id">Initial value of the course_status_id property.</param>
         /// <param name="activityTile">Initial value of the activityTile property.</param>
+<<<<<<< HEAD
         public static GetCoursesWithSurveyStatus_Result CreateGetCoursesWithSurveyStatus_Result(global::System.Int32 course_id, global::System.Int32 activity_id, global::System.String course_status_id, global::System.String activityTile)
         {
             GetCoursesWithSurveyStatus_Result getCoursesWithSurveyStatus_Result = new GetCoursesWithSurveyStatus_Result();
@@ -4705,6 +4443,16 @@ namespace Survey.Models
             getCoursesWithSurveyStatus_Result.course_status_id = course_status_id;
             getCoursesWithSurveyStatus_Result.activityTile = activityTile;
             return getCoursesWithSurveyStatus_Result;
+=======
+        public static GetCoursesWithStatus_Result CreateGetCoursesWithStatus_Result(global::System.Int32 course_id, global::System.Int32 activity_id, global::System.String course_status_id, global::System.String activityTile)
+        {
+            GetCoursesWithStatus_Result getCoursesWithStatus_Result = new GetCoursesWithStatus_Result();
+            getCoursesWithStatus_Result.course_id = course_id;
+            getCoursesWithStatus_Result.activity_id = activity_id;
+            getCoursesWithStatus_Result.course_status_id = course_status_id;
+            getCoursesWithStatus_Result.activityTile = activityTile;
+            return getCoursesWithStatus_Result;
+>>>>>>> db3851e... First commit
         }
 
         #endregion
@@ -4973,6 +4721,7 @@ namespace Survey.Models
         private global::System.String _course_status;
         partial void Oncourse_statusChanging(global::System.String value);
         partial void Oncourse_statusChanged();
+<<<<<<< HEAD
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -4997,6 +4746,8 @@ namespace Survey.Models
         private Nullable<global::System.DateTime> _survey_exp_date;
         partial void Onsurvey_exp_dateChanging(Nullable<global::System.DateTime> value);
         partial void Onsurvey_exp_dateChanged();
+=======
+>>>>>>> db3851e... First commit
 
         #endregion
     }

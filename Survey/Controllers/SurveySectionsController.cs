@@ -17,6 +17,7 @@ namespace Survey.Controllers
         //
         // GET: /SurveySections/
 
+        [Authorize(Roles = "Admin")]        
         public ViewResult Index()
         {
             var survey_questions = db.SURVEY_QUESTIONS.Include("QUESTION").Include("SURVEY").Include("SURVEY_SECTION");
@@ -25,7 +26,7 @@ namespace Survey.Controllers
 
         //
         // GET: /SurveySections/Details/5
-
+        [Authorize(Roles = "Admin")]
         public ViewResult Details(int id)
         {
             SURVEY_QUESTIONS survey_questions = db.SURVEY_QUESTIONS.Single(s => s.survey_questions_id == id);
@@ -35,6 +36,7 @@ namespace Survey.Controllers
 
         //
         // GET: /SurveySections/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create(int? id)
         {
             SURVEY surveys = db.SURVEYs.Single(s => s.survey_id == id);
@@ -48,6 +50,7 @@ namespace Survey.Controllers
         //
         // POST: /SurveySections/Create
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create(SURVEY_QUESTIONS survey_questions)
         {
             if (survey_questions.survey_id == 0)
@@ -83,7 +86,7 @@ namespace Survey.Controllers
         }        
         //
         // GET: /SurveySections/Edit/5
- 
+        [Authorize(Roles = "Admin")] 
         public ActionResult Edit(int id)
         {
             SURVEY_QUESTIONS survey_questions = db.SURVEY_QUESTIONS.Single(s => s.survey_questions_id == id);
@@ -97,6 +100,7 @@ namespace Survey.Controllers
         // POST: /SurveySections/Edit/5
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(SURVEY_QUESTIONS survey_questions)
         {
             if (ModelState.IsValid)
@@ -116,7 +120,7 @@ namespace Survey.Controllers
 
         //
         // GET: /SurveySections/Delete/5
- 
+        [Authorize(Roles = "Admin")] 
         public ActionResult Delete(int id)
         {
             SURVEY_QUESTIONS survey_questions = db.SURVEY_QUESTIONS.Single(s => s.survey_questions_id == id);
@@ -127,6 +131,7 @@ namespace Survey.Controllers
         // POST: /SurveySections/Delete/5
 
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {            
             SURVEY_QUESTIONS survey_questions = db.SURVEY_QUESTIONS.Single(s => s.survey_questions_id == id);

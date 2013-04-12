@@ -12,7 +12,6 @@ namespace Survey.Controllers
     public class AccountController : Controller
     {
 
-        //
         // GET: /Account/LogOn
 
         public ActionResult LogOn()
@@ -20,7 +19,6 @@ namespace Survey.Controllers
             return View();
         }
 
-        //
         // POST: /Account/LogOn
 
         [HttpPost]
@@ -64,6 +62,7 @@ namespace Survey.Controllers
         //
         // GET: /Account/Register
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Register()
         {
             return View();
@@ -73,6 +72,7 @@ namespace Survey.Controllers
         // POST: /Account/Register
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult Register(RegisterModel model)
         {
             if (ModelState.IsValid)

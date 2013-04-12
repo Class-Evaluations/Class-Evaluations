@@ -16,6 +16,7 @@ namespace Survey.Controllers
 
         //
         // GET: /Survey/
+        //[Authorize(Roles = "Admin")]
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             //sorting functionality 
@@ -57,7 +58,7 @@ namespace Survey.Controllers
 
         //
         // GET: /Survey/Details/5
-
+        //[Authorize(Roles = "Admin")]
         public ViewResult Details(int? id)
         {
             var surveyDetails = db.BuildSurvey(id);
@@ -73,7 +74,7 @@ namespace Survey.Controllers
 
         //
         // GET: /Survey/Create
-
+        //[Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -83,6 +84,7 @@ namespace Survey.Controllers
         // POST: /Survey/Create
 
         [HttpPost]
+        //[Authorize(Roles = "Admin")]
         public ActionResult Create(SURVEY survey)
         {
             survey.datestamp = DateTime.Now;
@@ -101,7 +103,7 @@ namespace Survey.Controllers
         
         //
         // GET: /Survey/Edit/5
- 
+        //[Authorize(Roles = "Admin")] 
         public ActionResult Edit(int id)
         {
             SURVEY survey = db.SURVEYs.Single(s => s.survey_id == id);
@@ -113,6 +115,7 @@ namespace Survey.Controllers
         // POST: /Survey/Edit/5
 
         [HttpPost]
+        //[Authorize(Roles = "Admin")]
         public ActionResult Edit(SURVEY survey)
         {
             if (ModelState.IsValid)
@@ -127,7 +130,7 @@ namespace Survey.Controllers
 
         //
         // GET: /Survey/Delete/5
- 
+        //[Authorize(Roles = "Admin")] 
         public ActionResult Delete(int id)
         {
             SURVEY survey = db.SURVEYs.Single(s => s.survey_id == id);
@@ -138,6 +141,7 @@ namespace Survey.Controllers
         // POST: /Survey/Delete/5
 
         [HttpPost, ActionName("Delete")]
+        //[Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {            
             SURVEY survey = db.SURVEYs.Single(s => s.survey_id == id);

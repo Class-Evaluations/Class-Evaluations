@@ -10,7 +10,8 @@ using Survey.ViewModels;
 using System.Data.Objects;
 using System.Data.EntityModel;
 using Survey.App_Data;
-//using Survey.Helper;
+using ExcelHandler.NPOI;
+using ExcelGenerator.SpreadSheet;
 
 
 namespace Survey.Controllers
@@ -31,39 +32,55 @@ namespace Survey.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var courseNum = Convert.ToInt32(checkBox);
-                    Survey_DBEntities dbContext = new Survey_DBEntities();
-                    var rowCount = (from s in survey_db.COURSE_STATUS where s.course_id == courseNum select s).Count();
-                    if (rowCount < 1)
-                    {
-                        //add a row to course status table
-                        COURSE_STATUS courseStatusAdd = new COURSE_STATUS();
-                        courseStatusAdd.course_id = courseNum;
-                        courseStatusAdd.course_status1 = "N";
-                        courseStatusAdd.survey_exp_date = Today;
-                        dbContext.AddToCOURSE_STATUS(courseStatusAdd);
-                        dbContext.SaveChanges();
-                    }   
-                    else 
-                    {
-                        COURSE_STATUS statusUpdate = dbContext.COURSE_STATUS.FirstOrDefault(s => s.course_id == courseNum);
-                        //check to see if the course is already disables and enable it
-                        if ((statusUpdate.course_status1).Trim() == "N")
-                        {
-                            var removeFromCouseStatus = dbContext.COURSE_STATUS.First(s => s.course_id == courseNum);
-                            dbContext.COURSE_STATUS.DeleteObject(removeFromCouseStatus);
-                            dbContext.SaveChanges();
-                        }
-                        else
-                        {
-                            statusUpdate.course_status1 = "N";
-                        }
-                        dbContext.SaveChanges();
-                    }
-                }
 
+                    string checkbox = Request.Form["applyChanges"];
+                    string[] values = checkbox.Split(',');
+                    int itemCount = values.Count();
+
+                        //foreach (var value in checkbox)
+                        //{
+                          while(itemCount > 0)
+                            {
+                                if (itemCount <= values.Count())
+                                {
+                                    itemCount = itemCount - 1;
+                                }
+                                int courseNum = Convert.ToInt32(values[itemCount]);
+
+                                // var courseNum = Convert.ToInt32(checkBox);
+                                Survey_DBEntities dbContext = new Survey_DBEntities();
+                                var rowCount = (from s in survey_db.COURSE_STATUS where s.course_id == courseNum select s).Count();
+                                if (rowCount < 1)
+                                {
+                                    //add a row to course status table
+                                    COURSE_STATUS courseStatusAdd = new COURSE_STATUS();
+                                    courseStatusAdd.course_id = courseNum;
+                                    courseStatusAdd.course_status1 = "N";
+                                    courseStatusAdd.survey_exp_date = Today;
+                                    dbContext.AddToCOURSE_STATUS(courseStatusAdd);
+                                    dbContext.SaveChanges();
+                                }
+                                else
+                                {
+                                    COURSE_STATUS statusUpdate = dbContext.COURSE_STATUS.FirstOrDefault(s => s.course_id == courseNum);
+                                    //check to see if the course is already disables and enable it
+                                    if ((statusUpdate.course_status1).Trim() == "N")
+                                    {
+                                        var removeFromCouseStatus = dbContext.COURSE_STATUS.First(s => s.course_id == courseNum);
+                                        dbContext.COURSE_STATUS.DeleteObject(removeFromCouseStatus);
+                                        dbContext.SaveChanges();
+                                    }
+                                    else
+                                    {
+                                        statusUpdate.course_status1 = "N";
+                                    }
+                                    dbContext.SaveChanges();
+                                }
+                        }
+                    //}
             } 
 
+            }
             if (Request.HttpMethod == "GET")
             {
                 //searchString = currentFilter;
@@ -75,10 +92,17 @@ namespace Survey.Controllers
 
 
             //statusIDs = X=cancelled, A=active, I=incomplete and c=complete
-            //Need to start the barcodes >= 120350 which is course is 120965
-            //testing 110000
+
+            //Get a list of all courses that have been surveyed 
+            var surveyedCourses = (from sc in survey_db.COURSE_STATUS
+                                  select sc.course_id).ToList();
+
+
+            var GreaterThan2013 = Convert.ToDateTime("2013/04/01");
+            
+            //Show only the course that are greater than 2013 or in the above surveyed list
             var query = from c in _db.COURSEs
-                        where c.course_id > 120350 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 7) < Today) && c.course_status_id != "X")
+                        where surveyedCourses.Contains(c.course_id) || (c.last_end_datetime > GreaterThan2013) && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 1) < Today)) && c.course_status_id != "X"
                         orderby c.barcode_number
                         select c;
 
@@ -86,9 +110,9 @@ namespace Survey.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 if (SearchType == "Barcode")
-                { query = from c in _db.COURSEs where c.course_id > 120350 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 7) < Today) && c.course_status_id != "X") && c.barcode_number == searchString orderby c.barcode_number select c; }
+                { query = from c in _db.COURSEs where (c.last_end_datetime > GreaterThan2013) && c.barcode_number == searchString orderby c.barcode_number select c; }
                 if (SearchType == "Title")
-                { query = from c in _db.COURSEs where c.course_id > 120350 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 7) < Today) && c.course_status_id != "X") && (c.title).Contains(searchString) orderby c.barcode_number select c; }
+                { query = from c in _db.COURSEs where (c.last_end_datetime > GreaterThan2013) && (c.title).Contains(searchString) orderby c.barcode_number select c; }
             }
 
             switch (Display)
@@ -99,17 +123,17 @@ namespace Survey.Controllers
                  {
                     if (SearchType == "Barcode")
                     {query = from c in _db.COURSEs
-                             where c.course_id > 120350 && (sent).Contains(c.course_id) && c.barcode_number == searchString
+                             where (sent).Contains(c.course_id) && c.barcode_number == searchString
                              orderby c.barcode_number
                              select c;}
                     if (SearchType == "Title")
                     {query = from c in _db.COURSEs
-                             where c.course_id > 120350 && (sent).Contains(c.course_id) && (c.title).Contains(searchString)
+                             where (sent).Contains(c.course_id) && (c.title).Contains(searchString)
                              orderby c.barcode_number
                              select c;}
                  }else
                   {query = from c in _db.COURSEs
-                           where c.course_id > 120350 && (sent).Contains(c.course_id)
+                           where (sent).Contains(c.course_id)
                            orderby c.barcode_number
                            select c;}
              break;
@@ -123,17 +147,17 @@ namespace Survey.Controllers
                     {
                         if (SearchType == "Barcode")
                         {query = from c in _db.COURSEs
-                                 where c.course_id > 120350 && (inProgress).Contains(c.course_id) && c.barcode_number == searchString
+                                 where (inProgress).Contains(c.course_id) && c.barcode_number == searchString
                                  orderby c.barcode_number
                                  select c;}
                         if (SearchType == "Title")
                         {query = from c in _db.COURSEs
-                                 where c.course_id > 120350 && (inProgress).Contains(c.course_id) && (c.title).Contains(searchString)
+                                 where (inProgress).Contains(c.course_id) && (c.title).Contains(searchString)
                                  orderby c.barcode_number
                                  select c;}
                     }else
                      {query = from c in _db.COURSEs
-                              where c.course_id > 120350 && (inProgress).Contains(c.course_id) 
+                              where (inProgress).Contains(c.course_id) 
                               orderby c.barcode_number
                               select c;}
              break;
@@ -174,14 +198,14 @@ namespace Survey.Controllers
                     break;
 
                 case "notSent":  //not finished
-                    var notSent = (from s in survey_db.COURSE_STATUS where (s.course_status1).Trim() == "S" || (s.course_status1).Trim() == "N" select s.course_id).ToList();
+                    var notSent = (from s in survey_db.COURSE_STATUS select s.course_id).ToList();
 
                     if (!String.IsNullOrEmpty(searchString))
                     {
                         if (SearchType == "Barcode")
                         {
                             query = from c in _db.COURSEs
-                                    where c.course_id > 120350 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 7) < Today) && c.course_status_id != "X") && !(notSent).Contains(c.course_id) && c.barcode_number == searchString
+                                    where c.last_end_datetime > GreaterThan2013 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 1) < Today) && c.course_status_id != "X") && !(notSent).Contains(c.course_id) && c.barcode_number == searchString
                                     orderby c.barcode_number
                                     select c;
 
@@ -190,7 +214,7 @@ namespace Survey.Controllers
                         if (SearchType == "Title")
                         {
                             query = from c in _db.COURSEs
-                                    where c.course_id > 120350 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 7) < Today) && c.course_status_id != "X") && !(notSent).Contains(c.course_id) && (c.title).Contains(searchString)
+                                    where c.last_end_datetime > GreaterThan2013 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 1) < Today) && c.course_status_id != "X") && !(notSent).Contains(c.course_id) && (c.title).Contains(searchString)
                                     orderby c.barcode_number
                                     select c;
 
@@ -199,7 +223,7 @@ namespace Survey.Controllers
                     else
                     {
                         query = from c in _db.COURSEs
-                                where c.course_id > 120350 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 7) < Today) && c.course_status_id != "X") && !(notSent).Contains(c.course_id)
+                                where c.last_end_datetime > GreaterThan2013 && !(notSent).Contains(c.course_id) &&  c.course_status_id != "X" && (EntityFunctions.AddDays(c.last_end_datetime, 1) < Today)
                                 orderby c.barcode_number
                                 select c;
                     }
@@ -214,7 +238,7 @@ namespace Survey.Controllers
                         if (SearchType == "Barcode")
                         {
                             query = from c in _db.COURSEs
-                                    where c.course_id > 120350 && (doNotsent).Contains(c.course_id) && c.barcode_number == searchString
+                                    where c.last_end_datetime > GreaterThan2013 && (doNotsent).Contains(c.course_id) && c.barcode_number == searchString
                                     orderby c.barcode_number
                                     select c;  
 
@@ -223,7 +247,7 @@ namespace Survey.Controllers
                         {
 
                             query = from c in _db.COURSEs
-                                    where c.course_id > 120350 && (doNotsent).Contains(c.course_id) && (c.title).Contains(searchString)
+                                    where c.last_end_datetime > GreaterThan2013 && (doNotsent).Contains(c.course_id) && (c.title).Contains(searchString)
                                     orderby c.barcode_number
                                     select c;  
 
@@ -232,7 +256,7 @@ namespace Survey.Controllers
                     else
                     {
                         query = from c in _db.COURSEs
-                                where c.course_id > 120350 && (doNotsent).Contains(c.course_id)
+                                where c.last_end_datetime > GreaterThan2013 && (doNotsent).Contains(c.course_id)
                                 orderby c.barcode_number
                                 select c;
                     }
@@ -331,7 +355,7 @@ namespace Survey.Controllers
                         where surveyAnswered.Contains(Ans.survey_request_sent_id) && QuestionsUsed.Contains(Ans.question_id) && AnMulti.submitted_answer !="" 
                         orderby Ans.question_id
                         group new {Ans.question_id, AnMulti.submitted_answer} by new {Ans.question_id, AnMulti.submitted_answer}
-                        into grp let ansCount = grp.Select(x => x.submitted_answer).Distinct().Count()
+                        into grp let ansCount = grp.Select(x => x.submitted_answer).Count()
                         select new ReportMultiChoice
                         {
                           questionID = grp.Key.question_id,
@@ -394,10 +418,19 @@ namespace Survey.Controllers
             //ViewBag.ExpirationDate = Xdate;
             ViewBag.Answered = Answered;
             ViewBag.Sent = Sent;
+            double TotalpercentAnswered;
             //calculate the percent answered
-            double TotalpercentAnswered = (Convert.ToDouble(Answered) / Convert.ToDouble(Sent)) * 100;
+            if (Answered <= 0 || Sent <= 0)
+            {
+                TotalpercentAnswered = 0;
+            }
+            else { TotalpercentAnswered = (Convert.ToDouble(Answered) / Convert.ToDouble(Sent)) * 100; }
+
             ViewBag.Percent = Math.Round(TotalpercentAnswered);
 
+
+
+            //return ExcelGenerator.SpreadSheet.Worksheet(ViewBag, "SurveyResults.xls");
             return View();
         }
 

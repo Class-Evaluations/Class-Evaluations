@@ -40,15 +40,33 @@
     <Reference Include="AntiXSSLibrary">
       <HintPath>..\packages\AjaxControlToolkit.4.1.51116\lib\40\SanitizerProviders\AntiXSSLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.4.1.10715.0\lib\EntityFramework.dll</HintPath>
+    <Reference Include="EPPlus">
+      <HintPath>..\packages\EPPlus.2.9.0.1\lib\2.0\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelGenerator">
+      <HintPath>..\packages\ExcelGenerator.1.4\lib\ExcelGenerator.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelHandler">
+      <HintPath>..\packages\ExcelHandler.1.0.0\lib\net40\ExcelHandler.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelService">
+      <HintPath>C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\Excel\ExcelRazor\ExcelRazor\Lib\ExcelService.dll</HintPath>
     </Reference>
     <Reference Include="HtmlSanitizationLibrary">
       <HintPath>..\packages\AjaxControlToolkit.4.1.51116\lib\40\SanitizerProviders\HtmlSanitizationLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\packages\ICSharpCode.SharpZipLib.0.86.0.518\lib\net20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\packages\NPOI.1.2.5\lib\net40\Ionic.Zip.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Mvc.Mailer">
       <HintPath>..\packages\MvcMailer.1.1\lib\40\Mvc.Mailer.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\packages\NPOI.1.2.5\lib\net40\NPOI.dll</HintPath>
     </Reference>
     <Reference Include="PagedList, Version=1.13.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -64,6 +82,8 @@
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web.DataVisualization" />
+    <Reference Include="System.Web.DataVisualization.Design" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -87,9 +107,13 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActiveResults\ExcelResult.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManualResponseEntryController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Models\Class.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -99,6 +123,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SurveyReport.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Survey_DB_20_TestDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Survey_DB_20_TestDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AnswerLong.cs" />
     <Compile Include="ViewModels\AnswerShort.cs" />
@@ -129,10 +158,30 @@
     <Compile Include="ViewModels\QuestionDetails.cs" />
     <Compile Include="ViewModels\Questions_Multiple_Choice.cs" />
     <Compile Include="ViewModels\ReportDate.cs" />
+    <Compile Include="ViewModels\ReportLong.cs" />
+    <Compile Include="ViewModels\ReportMultiChoice.cs" />
+    <Compile Include="ViewModels\ReportQuestions.cs" />
+    <Compile Include="ViewModels\ReportScale.cs" />
+    <Compile Include="ViewModels\ReportShort.cs" />
+    <Compile Include="ViewModels\ReportTF.cs" />
     <Compile Include="ViewModels\SurveyReponses.cs" />
     <Compile Include="ViewModels\SurveySection.cs" />
+    <Compile Include="Views\Reports\AdhocReports.aspx.cs">
+      <DependentUpon>AdhocReports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Reports\AdhocReports.aspx.designer.cs">
+      <DependentUpon>AdhocReports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\SurveyAnswerSummary.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SurveyAnswerSummary.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\evaluationsLogo.JPG" />
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\themes\PagedList.css" />
@@ -172,11 +221,18 @@
     <Content Include="Misc\sp_Evualuation Database update.sql" />
     <Content Include="Misc\sp_GetCourseInfo.sql" />
     <Content Include="Misc\SurveySampleScript.sql" />
+    <Content Include="Scripts\jquery-1.4.4-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.4.4.js" />
+    <Content Include="Scripts\jquery-1.4.4.min.js" />
     <Content Include="Scripts\jquery-1.5.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.5.1.js" />
     <Content Include="Scripts\jquery-1.5.1.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.11.js" />
     <Content Include="Scripts\jquery-ui-1.8.11.min.js" />
+    <Content Include="Scripts\jquery.ui.core.js" />
+    <Content Include="Scripts\jquery.ui.core.min.js" />
+    <Content Include="Scripts\jquery.ui.datepicker.js" />
+    <Content Include="Scripts\jquery.ui.datepicker.min.js" />
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -184,6 +240,7 @@
     <Content Include="Scripts\modernizr-1.7.min.js" />
     <Content Include="Scripts\PagedList\PagedList.Mvc.js" />
     <Content Include="Scripts\PagedList\PagedList.Mvc.Template.html" />
+    <Content Include="Views\Reports\AdhocReports.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -213,7 +270,9 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LogOnPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\.svn\prop-base\" />
@@ -362,14 +421,69 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="Views\SurveySections\Add.cshtml" />
+    <Content Include="Views\Home\ChartSaveXML.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\SurveyManualEntry\Index.cshtml" />
+    <Content Include="Views\Reports\Index.cshtml" />
+    <Content Include="Views\ManualResponseEntry\Details.cshtml" />
+    <None Include="Content\SurveyReportWithCharts.xlt" />
+    <None Include="Survey_DB_20_TestDataSet.xsc">
+      <DependentUpon>Survey_DB_20_TestDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Survey_DB_20_TestDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Survey_DB_20_TestDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Survey_DB_20_TestDataSet.xss">
+      <DependentUpon>Survey_DB_20_TestDataSet.xsd</DependentUpon>
+    </None>
+    <Content Include="Views\Reports\AnswerDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App_Data\SurveyReport.dbml.layout">
       <DependentUpon>SurveyReport.dbml</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Reports\SurveyAnswerSummary.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SurveyAnswerSummary.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Reports\TestReport.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>5</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
@@ -388,7 +502,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>1972</DevelopmentServerPort>
+          <DevelopmentServerPort>1671</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
