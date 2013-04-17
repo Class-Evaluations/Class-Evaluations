@@ -10,7 +10,7 @@ using System.Web.UI.DataVisualization.Charting;
 
 namespace Survey.Controllers
 {
-    
+
     public class HomeController : Controller
     {
         private Survey_DBEntities _db = new Survey_DBEntities();
@@ -19,11 +19,11 @@ namespace Survey.Controllers
         public ActionResult Index()
         {
 
-            var Overallsatisfaction = (from s in _db.ANSWERs 
+            var Overallsatisfaction = (from s in _db.ANSWERs
                                        join d in _db.ANSWER_SCALE on s.answer_id equals d.answer_id
                                        where d.submitted_answer > 0 && s.question_id == 11
                                        select d.submitted_answer).Average();
-            
+
             var totalCoursesSurveyed = (from c in _db.COURSE_STATUS where c.course_status1 == "S" select c).Count();
             var TotalSent = (from requests in _db.SURVEY_REQUEST_SENT select requests).Count();
             var surveyAnswered = from s in _db.SURVEY_REQUEST_SENT select s.survey_request_sent_id;
@@ -34,8 +34,8 @@ namespace Survey.Controllers
             ViewBag.Answered = TotalAnswered;
             ViewBag.Sent = TotalSent;
             ViewBag.Active = activesurveys;
-            ViewBag.Overall = (Convert.ToDouble(Overallsatisfaction) / Convert.ToDouble(5)) * 100;
-            ViewBag.Other = 100 - ViewBag.Overall;
+            ViewBag.Overall = Math.Round((Convert.ToDouble(Overallsatisfaction) / Convert.ToDouble(5)) * 100);
+            ViewBag.Other = Math.Round(100 - ViewBag.Overall);
             ViewBag.OverallPercent = Math.Round((Convert.ToDouble(Overallsatisfaction) / Convert.ToDouble(5)) * 100);
             //calculate the percent answered
             double totpercentAnswered = (Convert.ToDouble(TotalAnswered) / Convert.ToDouble(TotalSent)) * 100;
@@ -46,20 +46,7 @@ namespace Survey.Controllers
             var courseSurveyded = from c in _db.COURSE_STATUS where c.course_status1 == "S" select c.course_id;
 
             return View();
-       }
-
-        //public ActionResult GetRainfallChartPie()
-        //{
-        //    var key = new Chart(width: 400, height: 200)
-        //        .AddSeries(
-        //            chartType: "pie",
-        //            legend: "Rainfall",
-        //            xValue: new[] { "Jan", "Feb", "Mar", "Apr", "May" },
-        //            yValues: new[] { "20", "20", "40", "10", "10" })
-        //        .Write();
-
-        //    return null;
-        //}
+        }
 
         [Authorize]
         public ActionResult About()

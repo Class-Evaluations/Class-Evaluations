@@ -4,8 +4,18 @@
 
 <h2>Manual Survey Entry</h2>
 
-Select the survey used.
 
-Enter the course id
+@using (Html.BeginForm("ManualEntry"))
+{
+    <label>Enter the Barcode:</label>
+    <br />
+    <input type="text" id="txtBarcode" name="txtBarcode" /> 
+    <br />
+    <p></p>
+     <div class="editor-field">
+        @Html.DropDownList("survey_id", ViewBag.survey as SelectList, "Select the survey sent", new { rel = "0", @class = "required" }) 
+     </div>
 
-
+    <br />    
+    <input type="submit" value="Submit Report" />
+}
