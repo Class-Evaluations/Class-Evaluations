@@ -171,6 +171,8 @@ namespace Survey.Controllers
            int EmptyAddresses = 0;
            int EmailsSent = 0; ;
            int EmailPrivacy = 0;
+           string LastAccountEmail = "";
+           string LastPersonalEmail = "";
 
            foreach (var item in person)
            {
@@ -178,115 +180,122 @@ namespace Survey.Controllers
                { EmptyAddresses++; }
                else
                {
-                   if (item.email_private == 0)
+                 if (!(LastAccountEmail == item.account_email) || !(LastPersonalEmail == item.email_address))
                    {
-                       string course;
-                       string personid;
-                       string personhash;
-                       course = Convert.ToString(item.course_id);
-                       personid = Convert.ToString(item.person_id);
-                       personhash = String.Concat(course, personid);
-
-                       SHA1 sha = new SHA1CryptoServiceProvider();
-
-                       // This is one implementation of the abstract class SHA1.
-                       data = sha.ComputeHash(System.Text.Encoding.UTF8.GetBytes(personhash));
-                       personhash = BitConverter.ToString(data);
-
-                       //strip put the dash from person
-                       System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                       for (int i = 0; i < personhash.Length; i++)
+                       if (item.email_private == 0)
                        {
-                           if ((personhash[i] >= '0' && personhash[i] <= '9') || (personhash[i] >= 'A' && personhash[i] <= 'z'))
-                               sb.Append(personhash[i]);
-                       }
+                           string course;
+                           string personid;
+                           string personhash;
+                           course = Convert.ToString(item.course_id);
+                           personid = Convert.ToString(item.person_id);
+                           personhash = String.Concat(course, personid);
 
-                       personhash = sb.ToString();
+                           SHA1 sha = new SHA1CryptoServiceProvider();
 
-                       string emailserver = ConfigurationManager.AppSettings["mailSettings"];
-                       System.Net.Mail.MailMessage devemail = new System.Net.Mail.MailMessage();
-                       System.Net.Mail.SmtpClient mailClient = new System.Net.Mail.SmtpClient(emailserver);
+                           // This is one implementation of the abstract class SHA1.
+                           data = sha.ComputeHash(System.Text.Encoding.UTF8.GetBytes(personhash));
+                           personhash = BitConverter.ToString(data);
 
-                       string subjectline = "Parks and Recreation Survey for ";
+                           //strip put the dash from person
+                           System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                           for (int i = 0; i < personhash.Length; i++)
+                           {
+                               if ((personhash[i] >= '0' && personhash[i] <= '9') || (personhash[i] >= 'A' && personhash[i] <= 'z'))
+                                   sb.Append(personhash[i]);
+                           }
 
-                       //check for nulls or empty names before using Trim
-                       if (!String.IsNullOrEmpty(item.activity_title))
-                       { subjectline = subjectline + (item.activity_title).Trim(); }
-                       if (!String.IsNullOrEmpty(item.course_title))
-                       { subjectline = subjectline + ", " + (item.course_title).Trim(); }
+                           personhash = sb.ToString();
 
-                       string emailBody = "";
-                       devemail.Subject = subjectline;
+                           string emailserver = ConfigurationManager.AppSettings["mailSettings"];
+                           System.Net.Mail.MailMessage devemail = new System.Net.Mail.MailMessage();
+                           System.Net.Mail.SmtpClient mailClient = new System.Net.Mail.SmtpClient(emailserver);
 
-                       devemail.IsBodyHtml = true;
+                           string subjectline = "Parks and Recreation Survey for ";
 
-                       string SurveyUrl = String.Concat("http://reclink.raleighnc.gov/Survey/BuildTheSurvey.aspx/", personhash);
+                           //check for nulls or empty names before using Trim
+                           if (!String.IsNullOrEmpty(item.activity_title))
+                           { subjectline = subjectline + (item.activity_title).Trim(); }
+                           if (!String.IsNullOrEmpty(item.course_title))
+                           { subjectline = subjectline + ", " + (item.course_title).Trim(); }
 
-                       //check id participate email address is NULL, is so change the  email verbage and use the account email address.
-                       var recipients = "";
-                       var toPerson = "";
-                       //var FromAccount = "noreply@raleighnc.gov";
-                       if (string.IsNullOrEmpty(item.email_address))
-                       {
-                           recipients = item.account_email;
-                           toPerson = item.account_owner;
+                           string emailBody = "";
+                           devemail.Subject = subjectline;
+
+                           devemail.IsBodyHtml = true;
+
+                           string SurveyUrl = String.Concat("http://reclink.raleighnc.gov/Survey/BuildTheSurvey.aspx/", personhash);
+
+                           //check id participate email address is NULL, is so change the  email verbage and use the account email address.
+                           var recipients = "";
+                           var toPerson = "";
+                           //var FromAccount = "noreply@raleighnc.gov";
+                           if (string.IsNullOrEmpty(item.email_address))
+                           {
+                               recipients = item.account_email;
+                               toPerson = item.account_owner;
+                           }
+                           else
+                           {
+                               recipients = item.email_address;
+                               toPerson = item.first_name;
+                           }
+
+                           emailBody = "<p> Hello " + (toPerson).Trim() + ": </p> <p></P> <p>The goal of Raleigh Parks and Recreation is to offer the best" +
+                                       " programming possible. The purpose of this survey is to gather information from residents in the community concerning" +
+                                       " various programs offered. We are interested in improving services and programs offered in the future and value your input." +
+                                       " Please take the time to answer the following questions and be as honest as possible. All answers to this survey will" +
+                                       " remain anonymous. If multiple family members participate in the same program and have the same email address, you will" +
+                                       " receive only one survey.</p> </br><p> Click on the link below to begin your survey. If you can not click on the link, copy and paste" + 
+                                       " the link into your browser. </p> " + SurveyUrl;
+                           devemail.Body = emailBody;
+
+                           //FileReader returns an array of recipients from a text file
+
+                           //REMOVE BEFORE SAVING UP TO GIT  TESTING ONLY
+                           recipients = "donna.taylor@raleighnc.gov";
+
+                           devemail.To.Add(recipients);
+                           devemail.From.Address.Equals("noreply@raleighnc.gov");
+
+                           mailClient.Send(devemail);
+
+                           //Insert into tables after email is sent.
+                           SURVEY_REQUEST_SENT EmailSurvey = new SURVEY_REQUEST_SENT();
+
+                           //Get the survey lifetime from Survey
+                           //Get lifetime from database is not working need to working on this
+
+                           var surveyInfo = from a in Surveydb.SURVEYs
+                                            where a.survey_id == survey_id
+                                            select a;
+
+
+                           //int lifetimeInDay = surveyInfo.;
+
+                           EmailSurvey.survey_id = survey_id;
+                           EmailSurvey.person_hash = personhash;
+                           EmailSurvey.expiration_date = DateTime.Now.AddDays(30);
+                           expDate = EmailSurvey.expiration_date;
+                           EmailSurvey.status_flag = "S";
+                           EmailSurvey.date_sent = DateTime.Now;
+                           EmailSurvey.user_stamp = 1;
+                           EmailSurvey.course_id = Convert.ToInt32(id);
+
+
+                           //Check if the hash code is already in the table, email already sent.
+                           Surveydb.AddToSURVEY_REQUEST_SENT(EmailSurvey);
+                           Surveydb.SaveChanges();
+                           EmailsSent++;
+                           LastAccountEmail = item.account_email;
+                           LastPersonalEmail = item.email_address;
                        }
                        else
                        {
-                           recipients = item.email_address;
-                           toPerson = item.first_name;
+                           EmailPrivacy++;
                        }
+               }
 
-                       emailBody = "<p> Hello " + (toPerson).Trim() + ": </p> <p></P> <p>The goal of Raleigh Parks and Recreation is to offer the best" +
-                                   " programming possible. The purpose of this survey is to gather information from residents in the community concerning" +
-                                   " various programs offered. We are interested in improving services and programs offered in the future and value your input." +
-                                   " Please take the time to answer the following questions and be as honest as possible. All answers to this survey will" +
-                                   " remain anonymous. </p> </br><p> Click on the link below to begin your survey. If you can not click on the link, copy and paste" + 
-                                   " the link into your browser. </p> " + SurveyUrl;
-                       devemail.Body = emailBody;
-
-                       //FileReader returns an array of recipients from a text file
-
-                       //REMOVE BEFORE SAVING UP TO GIT  TESTING ONLY
-                       //recipients = "donna.taylor@raleighnc.gov";
-
-                       devemail.To.Add(recipients);
-                       devemail.From.Address.Equals("noreply@raleighnc.gov");
-
-                       mailClient.Send(devemail);
-
-                       //Insert into tables after email is sent.
-                       SURVEY_REQUEST_SENT EmailSurvey = new SURVEY_REQUEST_SENT();
-
-                       //Get the survey lifetime from Survey
-                       //Get lifetime from database is not working need to working on this
-
-                       var surveyInfo = from a in Surveydb.SURVEYs
-                                        where a.survey_id == survey_id
-                                        select a;
-
-
-                       //int lifetimeInDay = surveyInfo.;
-
-                       EmailSurvey.survey_id = survey_id;
-                       EmailSurvey.person_hash = personhash;
-                       EmailSurvey.expiration_date = DateTime.Now.AddDays(30);
-                       expDate = EmailSurvey.expiration_date;
-                       EmailSurvey.status_flag = "S";
-                       EmailSurvey.date_sent = DateTime.Now;
-                       EmailSurvey.user_stamp = 1;
-                       EmailSurvey.course_id = Convert.ToInt32(id);
-
-
-                       //Check if the hash code is already in the table, email already sent.
-                       Surveydb.AddToSURVEY_REQUEST_SENT(EmailSurvey);
-                       Surveydb.SaveChanges();
-                       EmailsSent++;
-                   }
-                   else
-                   {
-                       EmailPrivacy++;
-                   }
                }
 
            }
@@ -325,11 +334,13 @@ namespace Survey.Controllers
            string SurveyUrl = String.Concat("http://reclink.raleighnc.gov/Survey/BuildTheSurvey.aspx/");
            string Greeting = "Hello (First Name)";
 
-           emailBody = " Thank you for participating in a Raleigh Parks and Recreation program.  In an effort to " +
-                       "provide outstanding programs and service, we would appreciate your valuable input.  All " +
-                       "answers will remain anonymous unless you indicate that you would like to be contacted. " +
-                       "                                                                                        " +
-                       "Click on the link below to begin your survey: " + SurveyUrl;
+           emailBody = " The goal of Raleigh Parks and Recreation is to offer the best programming possible. The purpose of this survey is to gather" + 
+                       " information from residents in the community concerning various programs offered. We are interested in improving services and" + 
+                       " programs offered in the future and value your input. Please take the time to answer the following questions and be as honest as" + 
+                       " possible. All answers to this survey will remain anonymous. If multiple family members participate in the same program and have" + 
+                       " the same email address, you will receive only one survey." +
+                       "" +
+                       " Click on the link below to begin your survey. If you can not click on the link, copy and paste the link into your browser. "+ SurveyUrl;
 
            string recipients = "donna.taylor@raleighnc.gov";
 

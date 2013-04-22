@@ -29,60 +29,10 @@ namespace Survey.Controllers
 
             ViewBag.sups = new SelectList((from s in _db.SUPERVISORs.Where(s => s.PERSON.first_name == "Supervisor").ToList() select new { ID =s.PERSON.person_id, FullName = s.PERSON.last_name + " " + s.PERSON.first_name}), "ID", "FullName");
             ViewBag.location = new SelectList((from f in _db.FACILITY_MASTER.ToList() select new { ID = f.facility_master_id, Location = f.title}), "ID", "Location");
-            ViewBag.activity = new SelectList((from c in _db.COURSEs.Where(c => surveyedCourses.Contains(c.course_id)).ToList().Distinct() select new { ID = c.activity_id, Activity = c.ACTIVITY.title }), "ID", "Activity");
+            ViewBag.activity = new SelectList((from c in _db.COURSEs.Where(c => surveyedCourses.Contains(c.course_id)).ToList() select new { ID = c.activity_id, Activity = c.ACTIVITY.title }), "ID", "Activity");
 
             return View();
         }
-
-        // public void ShowGenericRpt()
-        //{
-        //    try
-        //    {
-        //        bool isValid = true;
-
-        //        //string strReportName = System.Web.HttpContext.Current.Session["ReportName"].ToString();    // Setting ReportName
-        //        string strFromDate = System.Web.HttpContext.Current.Session["rptFromDate"].ToString();     // Setting FromDate 
-        //        string strToDate = System.Web.HttpContext.Current.Session["rptToDate"].ToString();         // Setting ToDate    
-        //        string surveyid = System.Web.HttpContext.Current.Session["survey_id"].ToString();
-        //        var rptSource = System.Web.HttpContext.Current.Session["rptSource"];
-        //        string strReportName = "Test Report";
-
-        //        if (string.IsNullOrEmpty(strReportName))
-        //        {
-        //            isValid = false;
-        //        }
-
-        //        if (isValid)
-        //        {
-        //            ReportDocument rd = new ReportDocument();
-        //            string strRptPath = System.Web.HttpContext.Current.Server.MapPath("~/") + "Rpts//" + strReportName;
-        //            rd.Load(strRptPath);
-        //            if (rptSource != null && rptSource.GetType().ToString() != "System.String")
-        //                rd.SetDataSource(rptSource);
-        //            if (!string.IsNullOrEmpty(strFromDate))
-        //                rd.SetParameterValue("fromDate", strFromDate);
-        //            if (!string.IsNullOrEmpty(strToDate))
-        //                rd.SetParameterValue("toDate", strFromDate);
-        //            rd.ExportToHttpResponse(ExportFormatType.PortableDocFormat, System.Web.HttpContext.Current.Response, false, "crReport");
-
-                    
-        //            // Clear all sessions value
-        //            Session["ReportName"] = null;
-        //            Session["rptFromDate"] = null;
-        //            Session["rptToDate"] = null;
-        //            Session["rptSource"] = null;
-        //        }
-        //        else
-        //        {
-        //            Response.Write("<H2>Nothing Found; No Report name found</H2>");
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Response.Write(ex.ToString());
-        //    }
-        //}
-
 
         public ViewResult AnswerDetails(int? id, string txtBarcode, string txtFromDate, string txtToDate, int? person_id, int? location, int? activity, string title)
         {
@@ -298,20 +248,8 @@ namespace Survey.Controllers
                  TotalpercentAnswered = 0;
              }
              else{TotalpercentAnswered = (Convert.ToDouble(Answered) / Convert.ToDouble(Sent)) * 100;}    
-           
              ViewBag.Percent = Math.Round(TotalpercentAnswered);
-
-             //using(System.IO.MemoryStream ms = SummaryReportTemplate.xls) {
-             //       ControllerContext.HttpContext.Response.Clear();
-             //       ControllerContext.HttpContext.Response.AddHeader("cache-control", "private");
-             //       ControllerContext.HttpContext.Response.AddHeader("Content-disposition", "attachment; filename=" + ".../Reports/SummaryReportTemplate.xlsx" + ";");
-             //       ControllerContext.HttpContext.Response.AddHeader("Content-type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-             //       ms.WriteTo(ControllerContext.HttpContext.Response.OutputStream);
-             //       }
-             //   return null;
-
-            //return ExcelGenerator.SpreadSheet.Worksheet(ViewBag, "SurveyResults.xls");
-            return View();
+             return View();
 
 
         }        //
@@ -346,6 +284,12 @@ namespace Survey.Controllers
 
         }
 
+        public ActionResult Export()
+        {
+            Response.AddHeader("Content-Type", "application/vnd.ms-excel");
+            return View();
+        }
+
         public ActionResult Chart()
         {
             var bytes = new Chart(width: 400, height: 200)
@@ -370,66 +314,5 @@ namespace Survey.Controllers
             return null;
         }
 
-        //public ActionResult GetRainfallChartPie()
-        //{
-        //    var key = new Chart(width: 400, height: 200)
-        //        .AddSeries(
-        //            chartType: "pie",
-        //            legend: "Response Rate",
-        //            xValue: new[] { "Sent 28", "Answered 14"},
-        //            yValues: new[] { "28", "14" })
-        //        .Write();
-
-        //    return null;
-        }
-        //public ActionResult GetMonths()
-        //{
-        //    var d = new DateTimeFormatInfo();
-        //    var key = new Chart(width: 600, height: 400)
-        //        .AddSeries(chartType: "column")
-        //        .DataBindTable(d.MonthNames)
-        //        .Write(format: "gif");
-        //    return null;
-        //}
-        //[AcceptVerbs(HttpVerbs.Post)]
-        //public ActionResult NPOICreate()
-         //{
-        //    try
-        //    {
-        //        // Opening the Excel template...
-        //        FileStream fs =
-        //            new FileStream(Server.MapPath(@"\Content\NPOITemplate.xls"), FileMode.Open, FileAccess.Read);
-
-        //        // Getting the complete workbook...
-        //        HSSFWorkbook templateWorkbook = new HSSFWorkbook(fs, true);
-
-        //        // Getting the worksheet by its name...
-        //        HSSFSheet sheet = templateWorkbook.GetSheet("Sheet1");
-
-        //        // Getting the row... 0 is the first row.
-        //        HSSFRow dataRow = sheet.GetRow(4);
-
-        //        // Setting the value 77 at row 5 column 1
-        //        dataRow.GetCell(0).SetCellValue(77);
-
-        //        // Forcing formula recalculation...
-        //        sheet.ForceFormulaRecalculation = true;
-
-        //        MemoryStream ms = new MemoryStream();
-
-        //        // Writing the workbook content to the FileStream...
-        //        templateWorkbook.Write(ms);
-
-        //        TempData["Message"] = "Excel report created successfully!";
-
-        //        // Sending the server processed data back to the user computer...
-        //        return File(ms.ToArray(), "application/vnd.ms-excel", "NPOINewFile.xls");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        TempData["Message"] = "Oops! Something went wrong.";
-
-        //        return RedirectToAction("NPOI");
-        //    }
-        //}
+      }
     }
