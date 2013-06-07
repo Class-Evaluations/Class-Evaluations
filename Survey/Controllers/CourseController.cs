@@ -105,7 +105,7 @@ namespace Survey.Controllers
 
             //Show only the course that are greater than 2013 or in the above surveyed list
             var query = from c in _db.COURSEs
-                        where surveyedCourses.Contains(c.course_id) || (c.last_end_datetime > GreaterThan2013) && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 1) < Today)) && c.course_status_id != "X"
+                        where surveyedCourses.Contains(c.course_id) || (c.last_end_datetime > GreaterThan2013) && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 1) < Today)) && c.course_status_id != "X"  && c.session_title_id != 9
                         orderby c.barcode_number
                         select c;
 
@@ -113,9 +113,9 @@ namespace Survey.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 if (SearchType == "Barcode")
-                { query = from c in _db.COURSEs where (c.last_end_datetime > GreaterThan2013) && c.barcode_number == searchString orderby c.barcode_number select c; }
+                { query = from c in _db.COURSEs where (c.last_end_datetime > GreaterThan2013) && c.session_title_id != 9  && c.barcode_number == searchString orderby c.barcode_number select c; }
                 if (SearchType == "Title")
-                { query = from c in _db.COURSEs where (c.last_end_datetime > GreaterThan2013) && (c.title).Contains(searchString) orderby c.barcode_number select c; }
+                { query = from c in _db.COURSEs where (c.last_end_datetime > GreaterThan2013) && c.session_title_id != 9  && (c.title).Contains(searchString) orderby c.barcode_number select c; }
             }
 
             switch (Display)
@@ -214,7 +214,7 @@ namespace Survey.Controllers
 
                     break;
 
-                case "notSent":  
+                case "notSent":
                     var notSent = (from s in survey_db.COURSE_STATUS select s.course_id).ToList();
 
                     if (!String.IsNullOrEmpty(searchString))
@@ -222,7 +222,7 @@ namespace Survey.Controllers
                         if (SearchType == "Barcode")
                         {
                             query = from c in _db.COURSEs
-                                    where c.last_end_datetime > GreaterThan2013 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 1) < Today) && c.course_status_id != "X") && !(notSent).Contains(c.course_id) && c.barcode_number == searchString
+                                    where c.last_end_datetime > GreaterThan2013 && c.session_title_id != 9 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 1) < Today) && c.course_status_id != "X") && !(notSent).Contains(c.course_id) && c.barcode_number == searchString
                                     orderby c.barcode_number
                                     select c;
 
@@ -231,7 +231,7 @@ namespace Survey.Controllers
                         if (SearchType == "Title")
                         {
                             query = from c in _db.COURSEs
-                                    where c.last_end_datetime > GreaterThan2013 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 1) < Today) && c.course_status_id != "X") && !(notSent).Contains(c.course_id) && (c.title).Contains(searchString)
+                                    where c.last_end_datetime > GreaterThan2013 && c.session_title_id != 9 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 1) < Today) && c.course_status_id != "X") && !(notSent).Contains(c.course_id) && (c.title).Contains(searchString)
                                     orderby c.barcode_number
                                     select c;
 
@@ -240,61 +240,13 @@ namespace Survey.Controllers
                     else
                     {
                         query = from c in _db.COURSEs
-                                where c.last_end_datetime > GreaterThan2013 && !(notSent).Contains(c.course_id) && c.course_status_id != "X" && (EntityFunctions.AddDays(c.last_end_datetime, 1) < Today)
+                                where c.last_end_datetime > GreaterThan2013 && c.session_title_id != 9 && !(notSent).Contains(c.course_id) && c.course_status_id != "X" && (EntityFunctions.AddDays(c.last_end_datetime, 1) < Today)
                                 orderby c.barcode_number
                                 select c;
                     }
 
 
                     break;
-                    //var notSent = (from s in survey_db.COURSE_STATUS select s.course_id).ToList();
-
-                    //if (!String.IsNullOrEmpty(searchString))
-                    //{
-                    //    if (SearchType == "Barcode")
-                    //    {
-                    //        query = from c in _db.COURSEs
-                    //                join s in _db.SUPERVISORs on c.supervisor equals s.person_id
-                    //                join p in _db.People on s.person_id equals p.person_id
-                    //                where c.last_end_datetime > GreaterThan2013 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 1) < Today) && c.course_status_id != "X") && !(notSent).Contains(c.course_id) && c.barcode_number == searchString
-                    //                orderby c.barcode_number
-                    //                select c;
-                    //                // + s.PERSON.last_name + s.PERSON.first_name
-                    //                //select new CourseScreenInfo
-                    //                //{
-                    //                //    person_id = s.person_id,
-                    //                //    first_name = p.first_name,
-                    //                //    last_name = p.last_name,
-                    //                //    activity_title = c.ACTIVITY.title,
-                    //                //    course_title = c.title,
-                    //                //    course_id = c.course_id,
-                    //                //    activity_id = c.activity_id,
-                    //                //    barcode_number = c.barcode_number,
-                    //                //    start_date = c.first_start_datetime,
-                    //                //    end_date = c.last_end_datetime,
-                    //                //    course_status_id = c.course_status_id
-                    //                //};
-
-                    //    }
-                    //    if (SearchType == "Title")
-                    //    {
-                    //        query = from c in _db.COURSEs
-                    //                where c.last_end_datetime > GreaterThan2013 && (c.course_status_id == "C" || (EntityFunctions.AddDays(c.last_end_datetime, 1) < Today) && c.course_status_id != "X") && !(notSent).Contains(c.course_id) && (c.title).Contains(searchString)
-                    //                orderby c.barcode_number
-                    //                select c;
-
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    query = from c in _db.COURSEs
-                    //            where c.last_end_datetime > GreaterThan2013 && !(notSent).Contains(c.course_id) && c.course_status_id != "X" && (EntityFunctions.AddDays(c.last_end_datetime, 1) < Today)
-                    //            orderby c.barcode_number
-                    //            select c;
-                    //}
-
-
-                    //break;
                 case "doNotsent":  //not finished
                     var doNotsent = (from s in survey_db.COURSE_STATUS where s.course_status1 == "N" select s.course_id).ToList();
 
@@ -303,7 +255,7 @@ namespace Survey.Controllers
                         if (SearchType == "Barcode")
                         {
                             query = from c in _db.COURSEs
-                                    where c.last_end_datetime > GreaterThan2013 && (doNotsent).Contains(c.course_id) && c.barcode_number == searchString
+                                    where c.last_end_datetime > GreaterThan2013 && c.session_title_id != 9 && (doNotsent).Contains(c.course_id) && c.barcode_number == searchString
                                     orderby c.barcode_number
                                     select c;
 
@@ -312,7 +264,7 @@ namespace Survey.Controllers
                         {
 
                             query = from c in _db.COURSEs
-                                    where c.last_end_datetime > GreaterThan2013 && (doNotsent).Contains(c.course_id) && (c.title).Contains(searchString)
+                                    where c.last_end_datetime > GreaterThan2013 && c.session_title_id != 9 && (doNotsent).Contains(c.course_id) && (c.title).Contains(searchString)
                                     orderby c.barcode_number
                                     select c;
 
@@ -321,7 +273,7 @@ namespace Survey.Controllers
                     else
                     {
                         query = from c in _db.COURSEs
-                                where c.last_end_datetime > GreaterThan2013 && (doNotsent).Contains(c.course_id)
+                                where c.last_end_datetime > GreaterThan2013 && c.session_title_id != 9 && (doNotsent).Contains(c.course_id)
                                 orderby c.barcode_number
                                 select c;
                     }

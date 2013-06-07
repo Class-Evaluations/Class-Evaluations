@@ -25,11 +25,11 @@
         <br />
         <br />
 
-            @Html.RadioButton("Display", "all", true, new { onclick = "this.form.submit()" }) All
+            @Html.RadioButton("Display", "all", false, new { onclick = "this.form.submit()" }) All
             @Html.RadioButton("Display", "sent", false, new { onclick = "this.form.submit()" }) Surveys sent
             @Html.RadioButton("Display", "inProgress", false, new { onclick = "this.form.submit()" }) Surveys in progress
             @Html.RadioButton("Display", "completed", false, new { onclick = "this.form.submit()" }) Surveys completed
-            @Html.RadioButton("Display", "notSent", false, new { onclick = "this.form.submit()" }) Surveys not sent
+            @Html.RadioButton("Display", "notSent", true, new { onclick = "this.form.submit()" }) Surveys not sent
             @Html.RadioButton("Display", "doNotsent", false, new { onclick = "this.form.submit()" }) Survey marked "Do not send"
    </p>   
              
@@ -45,7 +45,7 @@
             <strong> Activity Title - Course Title </strong>
         </th>   
         <th>
-            <strong> Course Number </strong>
+            <strong> Supervisor Name </strong>
         </th>
         <th>
             <strong> Barcode </strong>
@@ -93,7 +93,7 @@
     {
         if (item.course_id == survey.course_id)
         {
-            
+
             ViewBag.course = item.course_id;
             StatusOfSurvey = (survey.course_status1).Trim();
             if (StatusOfSurvey == "N")
@@ -162,7 +162,7 @@
         }
 
         <td>
-            @item.course_id
+            @item.SUPERVISOR1.PERSON.last_name  @item.SUPERVISOR1.PERSON.first_name
         </td>
         <td>
             @item.barcode_number
@@ -200,8 +200,10 @@
         </td>
     </tr>
 }
-
+ @if (User.IsInRole("Admin"))
+ {
     <input type="button" name="Submit" value="Submit Do Not Survey"  style="position: absolute; right: 100px; " onclick="this.form.submit()" />
+ }
     <br />
     <br />
 <p></p>

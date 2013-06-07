@@ -1,72 +1,26 @@
 ﻿<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 
 
-<h4><a style="color:Maroon">Statistics as of : @DateTime.Now.ToShortDateString() 
+<h2><a style="color:Maroon">Statistics as of: @DateTime.Now.ToShortDateString() 
 <br />
-                            Department Overall Response Rate = @ViewBag.totPercent % of surveys completed</h4>
-@*    <h4><a style="color:blue">
+                            Department Overall Response Rate = @ViewBag.totPercent % of surveys completed</h2>
 
-        Department Overall Satisfaction = @ViewBag.OverallPercent %</h4><br />
-        <br /></a>  *@
-<html> 
-  <head> 
-    <!--Load the AJAX API--> 
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script> 
-    <script type="text/javascript">
+<html>   
+    <head>     
+        <script type='text/javascript' src='https://www.google.com/jsapi'></script>     
+        <script type='text/javascript'>
 
-        // Load the Visualization API and the piechart package. 
-        google.load('visualization', '1.0', { 'packages': ['corechart'] });
+            google.load('visualization', '1', { packages: ['gauge'] });
+            google.setOnLoadCallback(drawChart);
 
-        // Set a callback to run when the Google Visualization API is loaded. 
-        google.setOnLoadCallback(drawChart);
-
-        // Callback that creates and populates a data table, 
-        // instantiates the pie chart, passes in the data and 
-        // draws it. 
-
-        function drawChart() {
-
-            // Create the data table. 
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Topping');
-            data.addColumn('number', 'Slices');
-            data.addRows([['Satisfied', @ViewBag.Overall], ['Other', @ViewBag.Other]]);
-
-            // Set chart options 
-            var options = { 'title': 'Evaluation Response',
-                'width': 400,
-                'height': 300,
-                colors: ["#009933", "#0066FF"],
-                tooltip: {textStyle: {fontSize: 14}},
-                is3D: true
-
-
-            };
-
-            // Instantiate and draw our chart, passing in some options. 
-            var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-            chart.draw(data, options);
-        }
-
-//        var gaugeData = new google.visualization.DataTable(); 
-//        gaugeData.addColumn('number', 'Satification Level');
-//        gaugeData.addRows(2);
-//        gaugeData.setCell(0, 0, @ViewBag.Overall);
-//        var gaugeOptions = { min: 0, max: 100, greenFrom: 80, greenTo: 100, minorTicks: 5 };
-//        var gauge; function drawGauge() { gauge = new google.visualization.Gauge(document.getElementById('gauge_div')); 
-//        gauge.draw(gaugeData, gaugeOptions); }
-
-//        function changeTemp(dir) 
-//        {
-//            gaugeData.setValue(0, 0, gaugeData.getValue(0, 0) + dir * 25); gaugeData.setValue(0, 1, gaugeData.getValue(0, 1) + dir * 20); gauge.draw(gaugeData, gaugeOptions);
-//        } 
-
-
-    </script> 
-  </head> 
- 
-  <body> 
-    <!--Div that will hold the pie chart--> 
-    <div id="chart_div"></div> 
-  </body> 
-</html>
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([['Label', 'Value'], ['Satisfaction', @ViewBag.Overall]]);
+                var options = { width: 700, height: 260, min: 0, max:5, greenFrom: 4, greenTo: 5, yellowFrom: 3, yellowTo: 4, minorTicks: 5 };
+                var chart = new google.visualization.Gauge(document.getElementById('chart_div')); chart.draw(data, options);
+            }     
+                
+        </script>   
+     </head>   
+    <body>     
+    <center><h4>Departmental Overall Satisfaction = @ViewBag.OverallPercent %</h4></center>
+    <div id='chart_div' title="Departmental Overall Satisfaction"></div> 

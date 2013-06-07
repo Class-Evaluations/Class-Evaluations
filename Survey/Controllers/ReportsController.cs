@@ -5,10 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using Survey.Models;
 using System.Data.EntityModel;
-using Survey.App_Data;
 using ExcelHandler.NPOI;
 using ExcelGenerator.SpreadSheet;
-using ExcelService.Writers;
 using Survey.ViewModels;
 using System.Web.Helpers;
 
@@ -29,7 +27,7 @@ namespace Survey.Controllers
 
             ViewBag.sups = new SelectList((from s in _db.SUPERVISORs.Where(s => s.PERSON.first_name == "Supervisor").ToList() select new { ID =s.PERSON.person_id, FullName = s.PERSON.last_name + " " + s.PERSON.first_name}), "ID", "FullName");
             ViewBag.location = new SelectList((from f in _db.FACILITY_MASTER.ToList() select new { ID = f.facility_master_id, Location = f.title}), "ID", "Location");
-            ViewBag.activity = new SelectList((from c in _db.COURSEs.Where(c => surveyedCourses.Contains(c.course_id)).ToList() select new { ID = c.activity_id, Activity = c.ACTIVITY.title }), "ID", "Activity");
+            ViewBag.activity = new SelectList((from c in _db.COURSEs.Where(c => surveyedCourses.Contains(c.course_id)).ToList().Distinct() select new { ID = c.activity_id, Activity = c.ACTIVITY.title }), "ID", "Activity");
 
             return View();
         }
@@ -249,6 +247,7 @@ namespace Survey.Controllers
              }
              else{TotalpercentAnswered = (Convert.ToDouble(Answered) / Convert.ToDouble(Sent)) * 100;}    
              ViewBag.Percent = Math.Round(TotalpercentAnswered);
+             ViewBag.NoResponse = (Convert.ToDouble(Sent) - Convert.ToDouble(Answered));
              return View();
 
 
@@ -282,12 +281,6 @@ namespace Survey.Controllers
             this.HttpContext.Session["ReportName"] = "generic.rpt";
             //this.HttpContext.Session["rptSource"] = GetStudents();
 
-        }
-
-        public ActionResult Export()
-        {
-            Response.AddHeader("Content-Type", "application/vnd.ms-excel");
-            return View();
         }
 
         public ActionResult Chart()

@@ -1,8 +1,10 @@
 ﻿@*@{
     Layout = null;
-    Response.AddHeader("Content-Type", "application/vnd.ms-excel");    
-}
-*@
+    Response.ContentType = "application/vnd.ms-excel";
+    Response.AddHeader("Content-Disposition", "attachment; filename=EvaluationReport.xls"); 
+
+}*@
+
 
 <style type="text/css">
 .button {
@@ -60,11 +62,11 @@ font-weight:bold;
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'Topping');
             data.addColumn('number', 'Slices');
-            data.addRows([['Answered',  @ViewBag.Answered], ['No Response', @ViewBag.Sent]]);
+            data.addRows([['Answered',  @ViewBag.Answered], ['No Response', @ViewBag.NoResponse]]);
             
 
             // Set chart options 
-            var options = { 'title': 'Evaluation Reponse',
+            var options = { 'title': 'Evaluation Response',
                 'width': 400,
                 'height': 300,
                 'colors': ['#9900CC', '#00CC00']
@@ -86,8 +88,11 @@ font-weight:bold;
 
 
 <h2>@ViewBag.title</h2>
+
+<h2>@ViewBag.title</h2>
+<p>Response Rate =  @ViewBag.Percent %<br /></p>
 <p></p>
-<h3>Courses Surveyed = @ViewBag.surveyCount</h3>
+<p>Courses Surveyed = @ViewBag.surveyCount</p>
 <h3>Total Surveys Sent = @ViewBag.Sent</h3>
 <p></p>
 

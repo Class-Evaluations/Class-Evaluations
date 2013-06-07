@@ -9,10 +9,9 @@
     <div class="page">
         <div id="header">
             <div id="title">
-                <center><img src="../../Content/Images/evaluationsLogo.jpg" width="150" height="50" /></center>
+                <center><img src="../../Content/Images/evaluationsLogo.jpg" width="200" height="65" /></center>
             </div>
-            <div></div>
-            <div id="logindisplay">
+           <div id="logindisplay">
                 @Html.Partial("_LogOnPartial")
             </div>
         @if (User.IsInRole("Admin"))
@@ -27,7 +26,7 @@
                     <li>@Html.ActionLink("Manage Users", "Index", "Admin")</li>
                 </ul>
             </div>
-        }
+       }
         else
         {
             <div id="menucontainer" style=" vertical-align">

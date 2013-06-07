@@ -82,8 +82,6 @@ namespace Survey.Controllers
                 db.AddToSURVEY_REQUEST_SENT(UpdateSurveySent);
                 db.SaveChanges();
                 return Redirect("http://reclink.raleighnc.gov/Survey/BuildTheSurvey.aspx/" + personhash);
-                //Test
-                //return Redirect("http://localhost:3038/Survey/BuildTheSurvey.aspx/" + personhash);
 
             }
             return View();

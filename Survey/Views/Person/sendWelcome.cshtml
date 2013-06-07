@@ -6,13 +6,13 @@
 
 <h5>Emails successfully sent out = @(ViewBag.EmailCountSent) </h5>
 
-<h5>Participates that did not have an email = @(ViewBag.NoEmailAdddress)</h5>
+<h5>Participants that did not have an email = @(ViewBag.NoEmailAdddress)</h5>
 
-<h5>Participates that have the email privacy flag set = @(ViewBag.EmailPrivacyFlag)</h5>
+<h5>Participants that have the email privacy flag set = @(ViewBag.EmailPrivacyFlag)</h5>
 
 
 
-<h2>Participates Without Email</h2>
+<h2>Participants Without Email</h2>
 <p></p>
 
 @using (Html.BeginForm("printPDF", "Person", FormMethod.Post))
