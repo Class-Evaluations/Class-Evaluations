@@ -1,5 +1,0 @@
-﻿@model IEnumerable<Survey.ViewModels.CourseStatusGroup>
-@{
-    ViewBag.Title = "Course Counts by Status";
-}
-
