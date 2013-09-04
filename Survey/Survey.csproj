@@ -107,7 +107,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActiveResults\ExcelResult.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
@@ -123,11 +122,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SurveyReport.dbml</DependentUpon>
-    </Compile>
-    <Compile Include="Survey_DB_20_TestDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Survey_DB_20_TestDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AnswerLong.cs" />
     <Compile Include="ViewModels\AnswerShort.cs" />
@@ -166,19 +160,6 @@
     <Compile Include="ViewModels\ReportTF.cs" />
     <Compile Include="ViewModels\SurveyReponses.cs" />
     <Compile Include="ViewModels\SurveySection.cs" />
-    <Compile Include="Views\Reports\AdhocReports.aspx.cs">
-      <DependentUpon>AdhocReports.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Reports\AdhocReports.aspx.designer.cs">
-      <DependentUpon>AdhocReports.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Reports\SurveyAnswerSummary.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SurveyAnswerSummary.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Images\evaluationsLogo.JPG" />
@@ -240,7 +221,6 @@
     <Content Include="Scripts\modernizr-1.7.min.js" />
     <Content Include="Scripts\PagedList\PagedList.Mvc.js" />
     <Content Include="Scripts\PagedList\PagedList.Mvc.Template.html" />
-    <Content Include="Views\Reports\AdhocReports.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -275,6 +255,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ActiveResults\" />
     <Folder Include="Models\.svn\prop-base\" />
     <Folder Include="Models\.svn\props\" />
     <Folder Include="Models\.svn\text-base\" />
@@ -427,17 +408,6 @@
     <Content Include="Views\Reports\Index.cshtml" />
     <Content Include="Views\ManualResponseEntry\Details.cshtml" />
     <None Include="Content\SurveyReportWithCharts.xlt" />
-    <None Include="Survey_DB_20_TestDataSet.xsc">
-      <DependentUpon>Survey_DB_20_TestDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="Survey_DB_20_TestDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>Survey_DB_20_TestDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Survey_DB_20_TestDataSet.xss">
-      <DependentUpon>Survey_DB_20_TestDataSet.xsd</DependentUpon>
-    </None>
     <Content Include="Views\Reports\AnswerDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -448,13 +418,6 @@
     <None Include="App_Data\SurveyReport.dbml.layout">
       <DependentUpon>SurveyReport.dbml</DependentUpon>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\Reports\SurveyAnswerSummary.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>SurveyAnswerSummary.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Reports\TestReport.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">
