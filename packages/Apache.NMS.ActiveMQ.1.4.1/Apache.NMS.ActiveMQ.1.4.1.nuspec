@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Apache.NMS.ActiveMQ</id>
+    <version>1.4.1</version>
+    <title>Apache.NMS.ActiveMQ</title>
+    <authors>Anthony S. Kilhoffer</authors>
+    <owners>Anthony S. Kilhoffer</owners>
+    <projectUrl>http://activemq.apache.org/nms</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>The ActiveMQ NMS client is a .NET client that communicates with the ActiveMQ broker using its native Openwire protocol. This client supports advanced features such as Failover, Discovery, SSL, and Message Compression.</description>
+    <summary>The ActiveMQ NMS client is a .NET client that communicates with the ActiveMQ broker.</summary>
+    <dependencies>
+      <dependency id="Apache.NMS" version="1.4.0" />
+    </dependencies>
+  </metadata>
+</package>

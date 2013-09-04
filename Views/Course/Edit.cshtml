@@ -1,0 +1,603 @@
+﻿@model Evaluations.Models.COURSE
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>COURSE</legend>
+
+        @Html.HiddenFor(model => model.course_id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.deferred_gl_account_id)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.deferred_gl_account_id)
+            @Html.ValidationMessageFor(model => model.deferred_gl_account_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.activity_id, "ACTIVITY")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("activity_id", String.Empty)
+            @Html.ValidationMessageFor(model => model.activity_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.session_year)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.session_year)
+            @Html.ValidationMessageFor(model => model.session_year)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.session_title_id)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.session_title_id)
+            @Html.ValidationMessageFor(model => model.session_title_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.course_number)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.course_number)
+            @Html.ValidationMessageFor(model => model.course_number)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.course_status_id)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.course_status_id)
+            @Html.ValidationMessageFor(model => model.course_status_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.booking_start_date)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.booking_start_date)
+            @Html.ValidationMessageFor(model => model.booking_start_date)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.first_facility)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.first_facility)
+            @Html.ValidationMessageFor(model => model.first_facility)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.first_start_datetime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.first_start_datetime)
+            @Html.ValidationMessageFor(model => model.first_start_datetime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.first_end_datetime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.first_end_datetime)
+            @Html.ValidationMessageFor(model => model.first_end_datetime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.first_num_bookings)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.first_num_bookings)
+            @Html.ValidationMessageFor(model => model.first_num_bookings)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.last_start_datetime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.last_start_datetime)
+            @Html.ValidationMessageFor(model => model.last_start_datetime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.last_end_datetime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.last_end_datetime)
+            @Html.ValidationMessageFor(model => model.last_end_datetime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.days_of_week)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.days_of_week)
+            @Html.ValidationMessageFor(model => model.days_of_week)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.total_minutes)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.total_minutes)
+            @Html.ValidationMessageFor(model => model.total_minutes)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.course_group_id)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.course_group_id)
+            @Html.ValidationMessageFor(model => model.course_group_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.supervisor, "SUPERVISOR1")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("supervisor", String.Empty)
+            @Html.ValidationMessageFor(model => model.supervisor)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.reg_start_date)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.reg_start_date)
+            @Html.ValidationMessageFor(model => model.reg_start_date)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.min_registrants)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.min_registrants)
+            @Html.ValidationMessageFor(model => model.min_registrants)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.max_registrants)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.max_registrants)
+            @Html.ValidationMessageFor(model => model.max_registrants)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.num_reserved)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.num_reserved)
+            @Html.ValidationMessageFor(model => model.num_reserved)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.num_registered)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.num_registered)
+            @Html.ValidationMessageFor(model => model.num_registered)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.num_waitlisted)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.num_waitlisted)
+            @Html.ValidationMessageFor(model => model.num_waitlisted)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.barcode_number)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.barcode_number)
+            @Html.ValidationMessageFor(model => model.barcode_number)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.cancel_datetime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.cancel_datetime)
+            @Html.ValidationMessageFor(model => model.cancel_datetime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.cancel_reason_id)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.cancel_reason_id)
+            @Html.ValidationMessageFor(model => model.cancel_reason_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.increased_demand_flag)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.increased_demand_flag)
+            @Html.ValidationMessageFor(model => model.increased_demand_flag)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.min_age)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.min_age)
+            @Html.ValidationMessageFor(model => model.min_age)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.max_age)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.max_age)
+            @Html.ValidationMessageFor(model => model.max_age)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.min_age_type)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.min_age_type)
+            @Html.ValidationMessageFor(model => model.min_age_type)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.max_age_type)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.max_age_type)
+            @Html.ValidationMessageFor(model => model.max_age_type)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.internet_display_date)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.internet_display_date)
+            @Html.ValidationMessageFor(model => model.internet_display_date)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.userstamp)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.userstamp)
+            @Html.ValidationMessageFor(model => model.userstamp)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.datestamp)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.datestamp)
+            @Html.ValidationMessageFor(model => model.datestamp)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.title)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.title)
+            @Html.ValidationMessageFor(model => model.title)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.schedule_method)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.schedule_method)
+            @Html.ValidationMessageFor(model => model.schedule_method)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.schedule_payments_flag)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.schedule_payments_flag)
+            @Html.ValidationMessageFor(model => model.schedule_payments_flag)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.use_default_points_per_dollar)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.use_default_points_per_dollar)
+            @Html.ValidationMessageFor(model => model.use_default_points_per_dollar)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.points_per_dollar)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.points_per_dollar)
+            @Html.ValidationMessageFor(model => model.points_per_dollar)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.gl_account_id)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.gl_account_id)
+            @Html.ValidationMessageFor(model => model.gl_account_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.nr_reg_start_date)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.nr_reg_start_date)
+            @Html.ValidationMessageFor(model => model.nr_reg_start_date)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.include_in_tax_receipt)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.include_in_tax_receipt)
+            @Html.ValidationMessageFor(model => model.include_in_tax_receipt)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.rollover_course_id, "COURSE2")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("rollover_course_id", String.Empty)
+            @Html.ValidationMessageFor(model => model.rollover_course_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.residential_flag)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.residential_flag)
+            @Html.ValidationMessageFor(model => model.residential_flag)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.internet_display_until_date)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.internet_display_until_date)
+            @Html.ValidationMessageFor(model => model.internet_display_until_date)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.age_as_of)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.age_as_of)
+            @Html.ValidationMessageFor(model => model.age_as_of)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.age_as_of_date)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.age_as_of_date)
+            @Html.ValidationMessageFor(model => model.age_as_of_date)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.member_reg_start_date)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.member_reg_start_date)
+            @Html.ValidationMessageFor(model => model.member_reg_start_date)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.reg_start_time)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.reg_start_time)
+            @Html.ValidationMessageFor(model => model.reg_start_time)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.reg_end_date)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.reg_end_date)
+            @Html.ValidationMessageFor(model => model.reg_end_date)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.subsidy_flag)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.subsidy_flag)
+            @Html.ValidationMessageFor(model => model.subsidy_flag)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.base_instructor_rate_flag)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.base_instructor_rate_flag)
+            @Html.ValidationMessageFor(model => model.base_instructor_rate_flag)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.photo_req_flag)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.photo_req_flag)
+            @Html.ValidationMessageFor(model => model.photo_req_flag)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.auth_pickup_req_flag)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.auth_pickup_req_flag)
+            @Html.ValidationMessageFor(model => model.auth_pickup_req_flag)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.track_attendance)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.track_attendance)
+            @Html.ValidationMessageFor(model => model.track_attendance)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.flexcare_station_enabled)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.flexcare_station_enabled)
+            @Html.ValidationMessageFor(model => model.flexcare_station_enabled)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.dependent_care_flag)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.dependent_care_flag)
+            @Html.ValidationMessageFor(model => model.dependent_care_flag)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.public_access_adj_id)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.public_access_adj_id)
+            @Html.ValidationMessageFor(model => model.public_access_adj_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.race_team_flag)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.race_team_flag)
+            @Html.ValidationMessageFor(model => model.race_team_flag)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.race_team_caption)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.race_team_caption)
+            @Html.ValidationMessageFor(model => model.race_team_caption)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.race_team_min)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.race_team_min)
+            @Html.ValidationMessageFor(model => model.race_team_min)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.race_team_max)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.race_team_max)
+            @Html.ValidationMessageFor(model => model.race_team_max)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.cmf_text_memo_id)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.cmf_text_memo_id)
+            @Html.ValidationMessageFor(model => model.cmf_text_memo_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.race_team_adj_id)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.race_team_adj_id)
+            @Html.ValidationMessageFor(model => model.race_team_adj_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.medal_code_id)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.medal_code_id)
+            @Html.ValidationMessageFor(model => model.medal_code_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.alert_text)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.alert_text)
+            @Html.ValidationMessageFor(model => model.alert_text)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.cancel_reason)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.cancel_reason)
+            @Html.ValidationMessageFor(model => model.cancel_reason)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.confirmation_text)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.confirmation_text)
+            @Html.ValidationMessageFor(model => model.confirmation_text)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.description)
+            @Html.ValidationMessageFor(model => model.description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.programmer_notes)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.programmer_notes)
+            @Html.ValidationMessageFor(model => model.programmer_notes)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.eligibility_percent)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.eligibility_percent)
+            @Html.ValidationMessageFor(model => model.eligibility_percent)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.camp_flag)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.camp_flag)
+            @Html.ValidationMessageFor(model => model.camp_flag)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

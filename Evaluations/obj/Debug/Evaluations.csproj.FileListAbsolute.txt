@@ -1,0 +1,51 @@
+c:\documents and settings\taylordl\my documents\visual studio 2010\Projects\Evaluations\Evaluations\bin\Evaluations.dll
+c:\documents and settings\taylordl\my documents\visual studio 2010\Projects\Evaluations\Evaluations\bin\Evaluations.pdb
+c:\documents and settings\taylordl\my documents\visual studio 2010\Projects\Evaluations\Evaluations\bin\EntityFramework.dll
+c:\documents and settings\taylordl\my documents\visual studio 2010\Projects\Evaluations\Evaluations\bin\EntityFramework.xml
+c:\documents and settings\taylordl\my documents\visual studio 2010\Projects\Evaluations\Evaluations\obj\Debug\ResolveAssemblyReference.cache
+c:\documents and settings\taylordl\my documents\visual studio 2010\Projects\Evaluations\Evaluations\obj\Debug\Evaluations.dll
+c:\documents and settings\taylordl\my documents\visual studio 2010\Projects\Evaluations\Evaluations\obj\Debug\Evaluations.pdb
+C:\Evaluations\Evaluations\bin\Evaluations.dll
+C:\Evaluations\Evaluations\bin\Evaluations.pdb
+C:\Evaluations\Evaluations\bin\EntityFramework.dll
+C:\Evaluations\Evaluations\bin\EntityFramework.xml
+C:\Evaluations\Evaluations\obj\Debug\ResolveAssemblyReference.cache
+C:\Evaluations\Evaluations\obj\Debug\Evaluations.dll
+C:\Evaluations\Evaluations\obj\Debug\Evaluations.pdb
+Y:\Evaluations\Evaluations\bin\Evaluations.dll
+Y:\Evaluations\Evaluations\bin\Evaluations.pdb
+Y:\Evaluations\Evaluations\bin\EntityFramework.dll
+Y:\Evaluations\Evaluations\bin\PagedList.dll
+Y:\Evaluations\Evaluations\bin\PagedList.Mvc.dll
+Y:\Evaluations\Evaluations\bin\EntityFramework.xml
+Y:\Evaluations\Evaluations\bin\PagedList.xml
+Y:\Evaluations\Evaluations\bin\PagedList.Mvc.xml
+Y:\Evaluations\Evaluations\obj\Debug\ResolveAssemblyReference.cache
+Y:\Evaluations\Evaluations\obj\Debug\Evaluations.dll
+Y:\Evaluations\Evaluations\obj\Debug\Evaluations.pdb
+Y:\Evaluations\Evaluations\bin\Apache.NMS.ActiveMQ.dll
+Y:\Evaluations\Evaluations\bin\Apache.NMS.dll
+Y:\Evaluations\Evaluations\bin\FluentMongo.dll
+Y:\Evaluations\Evaluations\bin\Jayrock.Json.dll
+Y:\Evaluations\Evaluations\bin\MongoDB.Bson.dll
+Y:\Evaluations\Evaluations\bin\MongoDB.dll
+Y:\Evaluations\Evaluations\bin\MongoDB.Driver.dll
+Y:\Evaluations\Evaluations\bin\MongoDB.GridFS.dll
+Y:\Evaluations\Evaluations\bin\Jayrock.Json.pdb
+Y:\Evaluations\Evaluations\bin\MongoDB.Bson.xml
+Y:\Evaluations\Evaluations\bin\MongoDB.Driver.xml
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\Evaluations\Evaluations\bin\Apache.NMS.ActiveMQ.dll
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\Evaluations\Evaluations\bin\Apache.NMS.dll
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\Evaluations\Evaluations\bin\FluentMongo.dll
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\Evaluations\Evaluations\bin\Jayrock.Json.dll
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\Evaluations\Evaluations\bin\MongoDB.Bson.dll
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\Evaluations\Evaluations\bin\MongoDB.dll
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\Evaluations\Evaluations\bin\MongoDB.Driver.dll
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\Evaluations\Evaluations\bin\MongoDB.GridFS.dll
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\Evaluations\Evaluations\bin\PagedList.dll
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\Evaluations\Evaluations\bin\PagedList.Mvc.dll
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\Evaluations\Evaluations\bin\Jayrock.Json.pdb
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\Evaluations\Evaluations\bin\MongoDB.Bson.xml
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\Evaluations\Evaluations\bin\MongoDB.Driver.xml
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\Evaluations\Evaluations\bin\PagedList.xml
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\Evaluations\Evaluations\bin\PagedList.Mvc.xml

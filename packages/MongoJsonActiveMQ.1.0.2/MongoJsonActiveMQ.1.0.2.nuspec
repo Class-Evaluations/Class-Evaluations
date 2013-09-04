@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>MongoJsonActiveMQ</id>
+    <version>1.0.2</version>
+    <title>Mongo DB Driver</title>
+    <authors>careld</authors>
+    <owners>careld</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Mongo driver for CSharp. 
+JayRock package and Apache NMS Active MQ, also added a helper for HttpPosts using CodeScales.</description>
+    <summary>Mongo driver for CSharp. JayRock and Active MQ</summary>
+    <releaseNotes />
+    <copyright />
+    <language />
+    <dependencies>
+      <dependency id="Apache.NMS" version="1.4.0" />
+      <dependency id="Apache.NMS.ActiveMQ" version="1.4.1" />
+      <dependency id="jayrock-json" version="0.9.12915" />
+    </dependencies>
+  </metadata>
+</package>
