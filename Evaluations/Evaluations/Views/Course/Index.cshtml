@@ -1,0 +1,208 @@
+﻿@using Evaluations.Models;
+@model IEnumerable<Courses>
+
+
+<h2>This list of courses are either set to complete or 1 days past the activities last end date. </h2>
+
+@using (Html.BeginForm())
+{
+<p>  
+
+        <br />         
+            @Html.TextBox("SearchString", ViewBag.currentFilter as string) &nbsp;
+            @Html.RadioButton("SearchType", "Barcode", true) Barcode
+            @Html.RadioButton("SearchType", "Title", false) Title 
+
+        <input type="submit" value="Search" />  
+
+        <br />
+        <br />
+
+            @Html.RadioButton("Display", "all", false, new { onclick = "this.form.submit()" }) All
+            @Html.RadioButton("Display", "sent", false, new { onclick = "this.form.submit()" }) Surveys sent
+            @Html.RadioButton("Display", "inProgress", false, new { onclick = "this.form.submit()" }) Surveys in progress
+            @Html.RadioButton("Display", "completed", false, new { onclick = "this.form.submit()" }) Surveys completed
+            @Html.RadioButton("Display", "notSent", true, new { onclick = "this.form.submit()" }) Surveys not sent
+            @Html.RadioButton("Display", "doNotsent", false, new { onclick = "this.form.submit()" }) Survey marked "Do not send"
+   </p>   
+             
+<table>
+    <tr>
+        <th>
+            <strong> Select a course </strong>
+        </th>
+        <th>
+            <strong> Activity ID </strong>
+        </th>
+        <th>
+            <strong> Activity Title - Course Title </strong>
+        </th>   
+        <th>
+            <strong> Supervisor Name </strong>
+        </th>
+        <th>
+            <strong> Barcode </strong>
+        </th>
+
+        <th>
+            <strong> Start Date & Time </strong>
+        </th>
+        <th>
+            <strong> End Date & Time  </strong>
+        </th>
+        <th>
+            <strong> Course Status </strong>
+        </th>
+        <th>
+            <strong> Course Survey Status </strong>
+        </th>
+        <th>
+            @if (ViewBag.display == "doNotsent")
+            {
+                <strong> Reactivate Survey </strong>    
+            }
+            else
+            {
+                <strong> Do Not Survey </strong>
+            }
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    var cbDetails = false;
+    var StatusOfSurvey = "";
+    var ExpirationDate = "";
+    @*Need to format the date time to a date*@
+    var start_date = item.StartDate;
+    var last_date = item.EndDate;
+
+    var Title = "";
+    Title = @item.ActivityTitle + "-" + @item.CourseTitle;
+
+
+    //foreach (var survey in ViewBag.SurveyStatus)
+    //{
+    //    if (item.course_id == survey.course_id)
+    //    {
+
+    //        ViewBag.course = item.course_id;
+    //        StatusOfSurvey = (survey.course_status1).Trim();
+    //        if (StatusOfSurvey == "N")
+    //        {
+    //            ViewBag.Disable = true;
+    //        }
+
+    //        ExpirationDate = survey.survey_exp_date.ToString("MM/dd/yyyy");
+    //    }
+
+    //}
+    <tr>
+        @switch (StatusOfSurvey)
+        {
+            case "X":
+                <td>
+                    <font style="color:Red">
+                     Expired</font>
+
+                </td>
+                break;
+            case "S": 
+                <td>
+                    <font style="color:Blue">
+                    Survey expires 
+                    @ExpirationDate </font>
+                </td>
+               break;
+            case "N": 
+                <td>
+                    <font style="color:Red">
+                    Disabled </font>
+                </td>
+               break;
+            default:
+               if (User.IsInRole("Admin"))
+               {
+                    <td>
+                        @Html.ActionLink("Select", "../Person/Details", new { id = item.CourseId })
+                    </td>
+               }
+               else
+               { <td>
+                    <font style="color:Green">
+                    Select </font>
+                </td>}
+               break;
+        }
+        <td>
+            @item.ActivityId
+        </td>
+        
+        @if (StatusOfSurvey == "" || StatusOfSurvey == "N")
+        {
+            <td>
+                @Title
+            </td>
+        }
+        else
+        {
+
+            <td><strong> 
+                @Html.ActionLink(Title, "AnswerDetails", new { id = item.CourseId })
+                </strong>
+            </td>
+        }
+
+        <td>
+            @item.Supervisor
+        </td>
+        <td>
+            @item.Barcode
+        </td>
+        <td>
+            @start_date
+        </td>
+        <td>
+            @last_date
+        </td>
+        <td><strong>
+            @item.CourseStatus</strong>   
+        </td>
+        <td><strong>
+            @StatusOfSurvey</strong>
+        </td>
+        <td><strong>
+            @if (StatusOfSurvey != "S" && StatusOfSurvey != "X")
+            {
+                if (StatusOfSurvey == "N")
+                {
+                    cbDetails = true;
+                }
+                else
+                {
+                    cbDetails = false;
+                }
+                if (User.IsInRole("Admin"))
+                {
+                  @*  <input type="checkbox" name="applyChanges" value="@item.course_id" onclick="this.form.submit()"/> *@
+                  <input type="checkbox" name="applyChanges" value="@item.CourseId" /> 
+                }
+            }
+           </strong>
+        </td>
+    </tr>
+}
+ @if (User.IsInRole("Admin"))
+ {
+    <input type="button" name="Submit" value="Submit Do Not Survey"  style="position: absolute; right: 100px; " onclick="this.form.submit()" />
+ }
+    <br />
+    <br />
+<p></p>
+</table>
+}
+
+ 
+
+

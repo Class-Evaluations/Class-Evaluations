@@ -1,0 +1,375 @@
+﻿@model Evaluations.Models.COURSE
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>COURSE</legend>
+
+    <div class="display-label">deferred_gl_account_id</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.deferred_gl_account_id)
+    </div>
+
+    <div class="display-label">ACTIVITY</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ACTIVITY.name)
+    </div>
+
+    <div class="display-label">session_year</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.session_year)
+    </div>
+
+    <div class="display-label">session_title_id</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.session_title_id)
+    </div>
+
+    <div class="display-label">course_number</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.course_number)
+    </div>
+
+    <div class="display-label">course_status_id</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.course_status_id)
+    </div>
+
+    <div class="display-label">booking_start_date</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.booking_start_date)
+    </div>
+
+    <div class="display-label">first_facility</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.first_facility)
+    </div>
+
+    <div class="display-label">first_start_datetime</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.first_start_datetime)
+    </div>
+
+    <div class="display-label">first_end_datetime</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.first_end_datetime)
+    </div>
+
+    <div class="display-label">first_num_bookings</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.first_num_bookings)
+    </div>
+
+    <div class="display-label">last_start_datetime</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.last_start_datetime)
+    </div>
+
+    <div class="display-label">last_end_datetime</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.last_end_datetime)
+    </div>
+
+    <div class="display-label">days_of_week</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.days_of_week)
+    </div>
+
+    <div class="display-label">total_minutes</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.total_minutes)
+    </div>
+
+    <div class="display-label">course_group_id</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.course_group_id)
+    </div>
+
+    <div class="display-label">SUPERVISOR1</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SUPERVISOR1.person_status_id)
+    </div>
+
+    <div class="display-label">reg_start_date</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.reg_start_date)
+    </div>
+
+    <div class="display-label">min_registrants</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.min_registrants)
+    </div>
+
+    <div class="display-label">max_registrants</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.max_registrants)
+    </div>
+
+    <div class="display-label">num_reserved</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.num_reserved)
+    </div>
+
+    <div class="display-label">num_registered</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.num_registered)
+    </div>
+
+    <div class="display-label">num_waitlisted</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.num_waitlisted)
+    </div>
+
+    <div class="display-label">barcode_number</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.barcode_number)
+    </div>
+
+    <div class="display-label">cancel_datetime</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.cancel_datetime)
+    </div>
+
+    <div class="display-label">cancel_reason_id</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.cancel_reason_id)
+    </div>
+
+    <div class="display-label">increased_demand_flag</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.increased_demand_flag)
+    </div>
+
+    <div class="display-label">min_age</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.min_age)
+    </div>
+
+    <div class="display-label">max_age</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.max_age)
+    </div>
+
+    <div class="display-label">min_age_type</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.min_age_type)
+    </div>
+
+    <div class="display-label">max_age_type</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.max_age_type)
+    </div>
+
+    <div class="display-label">internet_display_date</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.internet_display_date)
+    </div>
+
+    <div class="display-label">userstamp</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.userstamp)
+    </div>
+
+    <div class="display-label">datestamp</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.datestamp)
+    </div>
+
+    <div class="display-label">title</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.title)
+    </div>
+
+    <div class="display-label">schedule_method</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.schedule_method)
+    </div>
+
+    <div class="display-label">schedule_payments_flag</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.schedule_payments_flag)
+    </div>
+
+    <div class="display-label">use_default_points_per_dollar</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.use_default_points_per_dollar)
+    </div>
+
+    <div class="display-label">points_per_dollar</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.points_per_dollar)
+    </div>
+
+    <div class="display-label">gl_account_id</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.gl_account_id)
+    </div>
+
+    <div class="display-label">nr_reg_start_date</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.nr_reg_start_date)
+    </div>
+
+    <div class="display-label">include_in_tax_receipt</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.include_in_tax_receipt)
+    </div>
+
+    <div class="display-label">COURSE2</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.COURSE2.session_year)
+    </div>
+
+    <div class="display-label">residential_flag</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.residential_flag)
+    </div>
+
+    <div class="display-label">internet_display_until_date</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.internet_display_until_date)
+    </div>
+
+    <div class="display-label">age_as_of</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.age_as_of)
+    </div>
+
+    <div class="display-label">age_as_of_date</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.age_as_of_date)
+    </div>
+
+    <div class="display-label">member_reg_start_date</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.member_reg_start_date)
+    </div>
+
+    <div class="display-label">reg_start_time</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.reg_start_time)
+    </div>
+
+    <div class="display-label">reg_end_date</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.reg_end_date)
+    </div>
+
+    <div class="display-label">subsidy_flag</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.subsidy_flag)
+    </div>
+
+    <div class="display-label">base_instructor_rate_flag</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.base_instructor_rate_flag)
+    </div>
+
+    <div class="display-label">photo_req_flag</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.photo_req_flag)
+    </div>
+
+    <div class="display-label">auth_pickup_req_flag</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.auth_pickup_req_flag)
+    </div>
+
+    <div class="display-label">track_attendance</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.track_attendance)
+    </div>
+
+    <div class="display-label">flexcare_station_enabled</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.flexcare_station_enabled)
+    </div>
+
+    <div class="display-label">dependent_care_flag</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.dependent_care_flag)
+    </div>
+
+    <div class="display-label">public_access_adj_id</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.public_access_adj_id)
+    </div>
+
+    <div class="display-label">race_team_flag</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.race_team_flag)
+    </div>
+
+    <div class="display-label">race_team_caption</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.race_team_caption)
+    </div>
+
+    <div class="display-label">race_team_min</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.race_team_min)
+    </div>
+
+    <div class="display-label">race_team_max</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.race_team_max)
+    </div>
+
+    <div class="display-label">cmf_text_memo_id</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.cmf_text_memo_id)
+    </div>
+
+    <div class="display-label">race_team_adj_id</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.race_team_adj_id)
+    </div>
+
+    <div class="display-label">medal_code_id</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.medal_code_id)
+    </div>
+
+    <div class="display-label">alert_text</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.alert_text)
+    </div>
+
+    <div class="display-label">cancel_reason</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.cancel_reason)
+    </div>
+
+    <div class="display-label">confirmation_text</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.confirmation_text)
+    </div>
+
+    <div class="display-label">description</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.description)
+    </div>
+
+    <div class="display-label">programmer_notes</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.programmer_notes)
+    </div>
+
+    <div class="display-label">eligibility_percent</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.eligibility_percent)
+    </div>
+
+    <div class="display-label">camp_flag</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.camp_flag)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.course_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Apache.NMS</id>
+    <version>1.4.0</version>
+    <title>Apache.NMS</title>
+    <authors>Anthony S. Kilhoffer</authors>
+    <owners>Anthony S. Kilhoffer</owners>
+    <projectUrl>http://activemq.apache.org/nms/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Allows you to build .NET applications in C#, VB, or any other .NET language, using a single API to connect to multiple different providers.</description>
+    <summary>Allows you to build .NET applications in C#, VB, or any other .NET language, using a single API to connect to multiple different providers.</summary>
+  </metadata>
+</package>

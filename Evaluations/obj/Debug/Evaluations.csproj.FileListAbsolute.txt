@@ -34,18 +34,25 @@ Y:\Evaluations\Evaluations\bin\MongoDB.GridFS.dll
 Y:\Evaluations\Evaluations\bin\Jayrock.Json.pdb
 Y:\Evaluations\Evaluations\bin\MongoDB.Bson.xml
 Y:\Evaluations\Evaluations\bin\MongoDB.Driver.xml
-C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\Evaluations\Evaluations\bin\Apache.NMS.ActiveMQ.dll
-C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\Evaluations\Evaluations\bin\Apache.NMS.dll
-C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\Evaluations\Evaluations\bin\FluentMongo.dll
-C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\Evaluations\Evaluations\bin\Jayrock.Json.dll
-C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\Evaluations\Evaluations\bin\MongoDB.Bson.dll
-C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\Evaluations\Evaluations\bin\MongoDB.dll
-C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\Evaluations\Evaluations\bin\MongoDB.Driver.dll
-C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\Evaluations\Evaluations\bin\MongoDB.GridFS.dll
-C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\Evaluations\Evaluations\bin\PagedList.dll
-C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\Evaluations\Evaluations\bin\PagedList.Mvc.dll
-C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\Evaluations\Evaluations\bin\Jayrock.Json.pdb
-C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\Evaluations\Evaluations\bin\MongoDB.Bson.xml
-C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\Evaluations\Evaluations\bin\MongoDB.Driver.xml
-C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\Evaluations\Evaluations\bin\PagedList.xml
-C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\Evaluations\Evaluations\bin\PagedList.Mvc.xml
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\SurveyApp_Git\Evaluations\bin\Evaluations.dll
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\SurveyApp_Git\Evaluations\bin\Evaluations.pdb
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\SurveyApp_Git\Evaluations\bin\Apache.NMS.ActiveMQ.dll
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\SurveyApp_Git\Evaluations\bin\Apache.NMS.dll
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\SurveyApp_Git\Evaluations\bin\EntityFramework.dll
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\SurveyApp_Git\Evaluations\bin\FluentMongo.dll
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\SurveyApp_Git\Evaluations\bin\Jayrock.Json.dll
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\SurveyApp_Git\Evaluations\bin\MongoDB.Bson.dll
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\SurveyApp_Git\Evaluations\bin\MongoDB.dll
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\SurveyApp_Git\Evaluations\bin\MongoDB.Driver.dll
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\SurveyApp_Git\Evaluations\bin\MongoDB.GridFS.dll
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\SurveyApp_Git\Evaluations\bin\PagedList.dll
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\SurveyApp_Git\Evaluations\bin\PagedList.Mvc.dll
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\SurveyApp_Git\Evaluations\bin\EntityFramework.xml
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\SurveyApp_Git\Evaluations\bin\Jayrock.Json.pdb
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\SurveyApp_Git\Evaluations\bin\MongoDB.Bson.xml
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\SurveyApp_Git\Evaluations\bin\MongoDB.Driver.xml
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\SurveyApp_Git\Evaluations\bin\PagedList.xml
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\SurveyApp_Git\Evaluations\bin\PagedList.Mvc.xml
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\SurveyApp_Git\Evaluations\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\SurveyApp_Git\Evaluations\obj\Debug\Evaluations.dll
+C:\Documents and Settings\taylordl\My Documents\Visual Studio 2010\Projects\SurveyApp_Git\Evaluations\obj\Debug\Evaluations.pdb

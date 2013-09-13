@@ -1,0 +1,324 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Survey_DB_20ModelStoreContainer" CdmEntityContainer="Survey_DB_20Entities">
+    <EntitySetMapping Name="ANSWERs">
+      <EntityTypeMapping TypeName="Survey_DB_20Model.ANSWER">
+        <MappingFragment StoreEntitySet="ANSWER">
+          <ScalarProperty Name="answer_id" ColumnName="answer_id" />
+          <ScalarProperty Name="question_id" ColumnName="question_id" />
+          <ScalarProperty Name="answer_type_id" ColumnName="answer_type_id" />
+          <ScalarProperty Name="survey_request_sent_id" ColumnName="survey_request_sent_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ANSWER_LONG">
+      <EntityTypeMapping TypeName="Survey_DB_20Model.ANSWER_LONG">
+        <MappingFragment StoreEntitySet="ANSWER_LONG">
+          <ScalarProperty Name="answer_long_id" ColumnName="answer_long_id" />
+          <ScalarProperty Name="answer_id" ColumnName="answer_id" />
+          <ScalarProperty Name="submitted_answer" ColumnName="submitted_answer" />
+          <ScalarProperty Name="survey_request_sent_id" ColumnName="survey_request_sent_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ANSWER_MULTIPLE_CHOICE">
+      <EntityTypeMapping TypeName="Survey_DB_20Model.ANSWER_MULTIPLE_CHOICE">
+        <MappingFragment StoreEntitySet="ANSWER_MULTIPLE_CHOICE">
+          <ScalarProperty Name="answer_multiple_choice_id" ColumnName="answer_multiple_choice_id" />
+          <ScalarProperty Name="answer_id" ColumnName="answer_id" />
+          <ScalarProperty Name="submitted_answer" ColumnName="submitted_answer" />
+          <ScalarProperty Name="survey_request_sent_id" ColumnName="survey_request_sent_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ANSWER_SCALE">
+      <EntityTypeMapping TypeName="Survey_DB_20Model.ANSWER_SCALE">
+        <MappingFragment StoreEntitySet="ANSWER_SCALE">
+          <ScalarProperty Name="answer_scale_id" ColumnName="answer_scale_id" />
+          <ScalarProperty Name="answer_id" ColumnName="answer_id" />
+          <ScalarProperty Name="submitted_answer" ColumnName="submitted_answer" />
+          <ScalarProperty Name="survey_request_sent_id" ColumnName="survey_request_sent_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ANSWER_SHORT">
+      <EntityTypeMapping TypeName="Survey_DB_20Model.ANSWER_SHORT">
+        <MappingFragment StoreEntitySet="ANSWER_SHORT">
+          <ScalarProperty Name="answer_short_id" ColumnName="answer_short_id" />
+          <ScalarProperty Name="answer_id" ColumnName="answer_id" />
+          <ScalarProperty Name="submitted_answer" ColumnName="submitted_answer" />
+          <ScalarProperty Name="survey_request_sent_id" ColumnName="survey_request_sent_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ANSWER_TRUE_FALSE">
+      <EntityTypeMapping TypeName="Survey_DB_20Model.ANSWER_TRUE_FALSE">
+        <MappingFragment StoreEntitySet="ANSWER_TRUE_FALSE">
+          <ScalarProperty Name="answer_true_false_id" ColumnName="answer_true_false_id" />
+          <ScalarProperty Name="answer_id" ColumnName="answer_id" />
+          <ScalarProperty Name="submitted_answer" ColumnName="submitted_answer" />
+          <ScalarProperty Name="survey_request_sent_id" ColumnName="survey_request_sent_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ANSWER_TYPE">
+      <EntityTypeMapping TypeName="Survey_DB_20Model.ANSWER_TYPE">
+        <MappingFragment StoreEntitySet="ANSWER_TYPE">
+          <ScalarProperty Name="answer_type_id" ColumnName="answer_type_id" />
+          <ScalarProperty Name="answer_type_name" ColumnName="answer_type_name" />
+          <ScalarProperty Name="multi_choice_single" ColumnName="multi_choice_single" />
+          <ScalarProperty Name="multi_choice_multi" ColumnName="multi_choice_multi" />
+          <ScalarProperty Name="scale" ColumnName="scale" />
+          <ScalarProperty Name="answer_long" ColumnName="answer_long" />
+          <ScalarProperty Name="answer_short" ColumnName="answer_short" />
+          <ScalarProperty Name="true_false" ColumnName="true_false" />
+          <ScalarProperty Name="datestamp" ColumnName="datestamp" />
+          <ScalarProperty Name="user_stamp" ColumnName="user_stamp" />
+          <ScalarProperty Name="controlName" ColumnName="controlName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_Applications">
+      <EntityTypeMapping TypeName="Survey_DB_20Model.aspnet_Applications">
+        <MappingFragment StoreEntitySet="aspnet_Applications">
+          <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
+          <ScalarProperty Name="LoweredApplicationName" ColumnName="LoweredApplicationName" />
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_Membership">
+      <EntityTypeMapping TypeName="Survey_DB_20Model.aspnet_Membership">
+        <MappingFragment StoreEntitySet="aspnet_Membership">
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="PasswordFormat" ColumnName="PasswordFormat" />
+          <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+          <ScalarProperty Name="MobilePIN" ColumnName="MobilePIN" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="LoweredEmail" ColumnName="LoweredEmail" />
+          <ScalarProperty Name="PasswordQuestion" ColumnName="PasswordQuestion" />
+          <ScalarProperty Name="PasswordAnswer" ColumnName="PasswordAnswer" />
+          <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+          <ScalarProperty Name="IsLockedOut" ColumnName="IsLockedOut" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+          <ScalarProperty Name="LastPasswordChangedDate" ColumnName="LastPasswordChangedDate" />
+          <ScalarProperty Name="LastLockoutDate" ColumnName="LastLockoutDate" />
+          <ScalarProperty Name="FailedPasswordAttemptCount" ColumnName="FailedPasswordAttemptCount" />
+          <ScalarProperty Name="FailedPasswordAttemptWindowStart" ColumnName="FailedPasswordAttemptWindowStart" />
+          <ScalarProperty Name="FailedPasswordAnswerAttemptCount" ColumnName="FailedPasswordAnswerAttemptCount" />
+          <ScalarProperty Name="FailedPasswordAnswerAttemptWindowStart" ColumnName="FailedPasswordAnswerAttemptWindowStart" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_Paths">
+      <EntityTypeMapping TypeName="Survey_DB_20Model.aspnet_Paths">
+        <MappingFragment StoreEntitySet="aspnet_Paths">
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="PathId" ColumnName="PathId" />
+          <ScalarProperty Name="Path" ColumnName="Path" />
+          <ScalarProperty Name="LoweredPath" ColumnName="LoweredPath" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_PersonalizationAllUsers">
+      <EntityTypeMapping TypeName="Survey_DB_20Model.aspnet_PersonalizationAllUsers">
+        <MappingFragment StoreEntitySet="aspnet_PersonalizationAllUsers">
+          <ScalarProperty Name="PathId" ColumnName="PathId" />
+          <ScalarProperty Name="PageSettings" ColumnName="PageSettings" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_PersonalizationPerUser">
+      <EntityTypeMapping TypeName="Survey_DB_20Model.aspnet_PersonalizationPerUser">
+        <MappingFragment StoreEntitySet="aspnet_PersonalizationPerUser">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PathId" ColumnName="PathId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="PageSettings" ColumnName="PageSettings" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_Profile">
+      <EntityTypeMapping TypeName="Survey_DB_20Model.aspnet_Profile">
+        <MappingFragment StoreEntitySet="aspnet_Profile">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="PropertyNames" ColumnName="PropertyNames" />
+          <ScalarProperty Name="PropertyValuesString" ColumnName="PropertyValuesString" />
+          <ScalarProperty Name="PropertyValuesBinary" ColumnName="PropertyValuesBinary" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_Roles">
+      <EntityTypeMapping TypeName="Survey_DB_20Model.aspnet_Roles">
+        <MappingFragment StoreEntitySet="aspnet_Roles">
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="LoweredRoleName" ColumnName="LoweredRoleName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_SchemaVersions">
+      <EntityTypeMapping TypeName="Survey_DB_20Model.aspnet_SchemaVersions">
+        <MappingFragment StoreEntitySet="aspnet_SchemaVersions">
+          <ScalarProperty Name="Feature" ColumnName="Feature" />
+          <ScalarProperty Name="CompatibleSchemaVersion" ColumnName="CompatibleSchemaVersion" />
+          <ScalarProperty Name="IsCurrentVersion" ColumnName="IsCurrentVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_Users">
+      <EntityTypeMapping TypeName="Survey_DB_20Model.aspnet_Users">
+        <MappingFragment StoreEntitySet="aspnet_Users">
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="LoweredUserName" ColumnName="LoweredUserName" />
+          <ScalarProperty Name="MobileAlias" ColumnName="MobileAlias" />
+          <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
+          <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_WebEvent_Events">
+      <EntityTypeMapping TypeName="Survey_DB_20Model.aspnet_WebEvent_Events">
+        <MappingFragment StoreEntitySet="aspnet_WebEvent_Events">
+          <ScalarProperty Name="EventId" ColumnName="EventId" />
+          <ScalarProperty Name="EventTimeUtc" ColumnName="EventTimeUtc" />
+          <ScalarProperty Name="EventTime" ColumnName="EventTime" />
+          <ScalarProperty Name="EventType" ColumnName="EventType" />
+          <ScalarProperty Name="EventSequence" ColumnName="EventSequence" />
+          <ScalarProperty Name="EventOccurrence" ColumnName="EventOccurrence" />
+          <ScalarProperty Name="EventCode" ColumnName="EventCode" />
+          <ScalarProperty Name="EventDetailCode" ColumnName="EventDetailCode" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="ApplicationPath" ColumnName="ApplicationPath" />
+          <ScalarProperty Name="ApplicationVirtualPath" ColumnName="ApplicationVirtualPath" />
+          <ScalarProperty Name="MachineName" ColumnName="MachineName" />
+          <ScalarProperty Name="RequestUrl" ColumnName="RequestUrl" />
+          <ScalarProperty Name="ExceptionType" ColumnName="ExceptionType" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="COURSE_STATUS">
+      <EntityTypeMapping TypeName="Survey_DB_20Model.COURSE_STATUS">
+        <MappingFragment StoreEntitySet="COURSE_STATUS">
+          <ScalarProperty Name="course_status_id" ColumnName="course_status_id" />
+          <ScalarProperty Name="course_id" ColumnName="course_id" />
+          <ScalarProperty Name="course_status1" ColumnName="course_status" />
+          <ScalarProperty Name="survey_exp_date" ColumnName="survey_exp_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QUESTIONs">
+      <EntityTypeMapping TypeName="Survey_DB_20Model.QUESTION">
+        <MappingFragment StoreEntitySet="QUESTION">
+          <ScalarProperty Name="question_id" ColumnName="question_id" />
+          <ScalarProperty Name="answer_type_id" ColumnName="answer_type_id" />
+          <ScalarProperty Name="question_text" ColumnName="question_text" />
+          <ScalarProperty Name="datestamp" ColumnName="datestamp" />
+          <ScalarProperty Name="user_stamp" ColumnName="user_stamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QUESTION_MULTIPLE_CHOICE">
+      <EntityTypeMapping TypeName="Survey_DB_20Model.QUESTION_MULTIPLE_CHOICE">
+        <MappingFragment StoreEntitySet="QUESTION_MULTIPLE_CHOICE">
+          <ScalarProperty Name="question_multiple_choice_id" ColumnName="question_multiple_choice_id" />
+          <ScalarProperty Name="question_id" ColumnName="question_id" />
+          <ScalarProperty Name="choice_text" ColumnName="choice_text" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QUESTION_SCALE">
+      <EntityTypeMapping TypeName="Survey_DB_20Model.QUESTION_SCALE">
+        <MappingFragment StoreEntitySet="QUESTION_SCALE">
+          <ScalarProperty Name="question_scale_id" ColumnName="question_scale_id" />
+          <ScalarProperty Name="question_id" ColumnName="question_id" />
+          <ScalarProperty Name="scale_top_number" ColumnName="scale_top_number" />
+          <ScalarProperty Name="scale_bottom_number" ColumnName="scale_bottom_number" />
+          <ScalarProperty Name="scale_top_text" ColumnName="scale_top_text" />
+          <ScalarProperty Name="scale_bottom_text" ColumnName="scale_bottom_text" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SURVEYs">
+      <EntityTypeMapping TypeName="Survey_DB_20Model.SURVEY">
+        <MappingFragment StoreEntitySet="SURVEY">
+          <ScalarProperty Name="survey_id" ColumnName="survey_id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="header_text" ColumnName="header_text" />
+          <ScalarProperty Name="survey_introduction" ColumnName="survey_introduction" />
+          <ScalarProperty Name="number_of_sections" ColumnName="number_of_sections" />
+          <ScalarProperty Name="survey_status" ColumnName="survey_status" />
+          <ScalarProperty Name="lifetime" ColumnName="lifetime" />
+          <ScalarProperty Name="datestamp" ColumnName="datestamp" />
+          <ScalarProperty Name="user_stamp" ColumnName="user_stamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SURVEY_QUESTIONS">
+      <EntityTypeMapping TypeName="Survey_DB_20Model.SURVEY_QUESTIONS">
+        <MappingFragment StoreEntitySet="SURVEY_QUESTIONS">
+          <ScalarProperty Name="survey_questions_id" ColumnName="survey_questions_id" />
+          <ScalarProperty Name="survey_id" ColumnName="survey_id" />
+          <ScalarProperty Name="question_id" ColumnName="question_id" />
+          <ScalarProperty Name="section_id" ColumnName="section_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SURVEY_REQUEST_SENT">
+      <EntityTypeMapping TypeName="Survey_DB_20Model.SURVEY_REQUEST_SENT">
+        <MappingFragment StoreEntitySet="SURVEY_REQUEST_SENT">
+          <ScalarProperty Name="survey_request_sent_id" ColumnName="survey_request_sent_id" />
+          <ScalarProperty Name="survey_id" ColumnName="survey_id" />
+          <ScalarProperty Name="course_id" ColumnName="course_id" />
+          <ScalarProperty Name="person_hash" ColumnName="person_hash" />
+          <ScalarProperty Name="expiration_date" ColumnName="expiration_date" />
+          <ScalarProperty Name="status_flag" ColumnName="status_flag" />
+          <ScalarProperty Name="date_sent" ColumnName="date_sent" />
+          <ScalarProperty Name="user_stamp" ColumnName="user_stamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SURVEY_SECTION">
+      <EntityTypeMapping TypeName="Survey_DB_20Model.SURVEY_SECTION">
+        <MappingFragment StoreEntitySet="SURVEY_SECTION">
+          <ScalarProperty Name="survey_section_id" ColumnName="survey_section_id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="section_id_order" ColumnName="section_id_order" />
+          <ScalarProperty Name="datestamp" ColumnName="datestamp" />
+          <ScalarProperty Name="user_stamp" ColumnName="user_stamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USERS">
+      <EntityTypeMapping TypeName="Survey_DB_20Model.USER">
+        <MappingFragment StoreEntitySet="USERS">
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="user_name" ColumnName="user_name" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="datestamp" ColumnName="datestamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="aspnet_UsersInRoles" TypeName="Survey_DB_20Model.aspnet_UsersInRoles" StoreEntitySet="aspnet_UsersInRoles">
+      <EndProperty Name="aspnet_Roles">
+        <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+      </EndProperty>
+      <EndProperty Name="aspnet_Users">
+        <ScalarProperty Name="UserId" ColumnName="UserId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

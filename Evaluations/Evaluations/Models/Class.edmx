@@ -1,0 +1,1601 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CLASSModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="CLASSModelStoreContainer">
+          <EntitySet Name="ACCOUNT" EntityType="CLASSModel.Store.ACCOUNT" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ACTIVITY" EntityType="CLASSModel.Store.ACTIVITY" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CLIENT" EntityType="CLASSModel.Store.CLIENT" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="COURSE" EntityType="CLASSModel.Store.COURSE" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="FACILITY_MASTER" EntityType="CLASSModel.Store.FACILITY_MASTER" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PERSON" EntityType="CLASSModel.Store.PERSON" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="REGISTRATION" EntityType="CLASSModel.Store.REGISTRATION" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SUPERVISOR" EntityType="CLASSModel.Store.SUPERVISOR" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="ACCOUNT_REF4" Association="CLASSModel.Store.ACCOUNT_REF4">
+            <End Role="PERSON" EntitySet="PERSON" />
+            <End Role="ACCOUNT" EntitySet="ACCOUNT" />
+          </AssociationSet>
+          <AssociationSet Name="CLIENT_REF1" Association="CLASSModel.Store.CLIENT_REF1">
+            <End Role="PERSON" EntitySet="PERSON" />
+            <End Role="CLIENT" EntitySet="CLIENT" />
+          </AssociationSet>
+          <AssociationSet Name="CLIENT_REF2" Association="CLASSModel.Store.CLIENT_REF2">
+            <End Role="ACCOUNT" EntitySet="ACCOUNT" />
+            <End Role="CLIENT" EntitySet="CLIENT" />
+          </AssociationSet>
+          <AssociationSet Name="COURSE_REF2" Association="CLASSModel.Store.COURSE_REF2">
+            <End Role="ACTIVITY" EntitySet="ACTIVITY" />
+            <End Role="COURSE" EntitySet="COURSE" />
+          </AssociationSet>
+          <AssociationSet Name="COURSE_REF4" Association="CLASSModel.Store.COURSE_REF4">
+            <End Role="SUPERVISOR" EntitySet="SUPERVISOR" />
+            <End Role="COURSE" EntitySet="COURSE" />
+          </AssociationSet>
+          <AssociationSet Name="COURSE_REF8" Association="CLASSModel.Store.COURSE_REF8">
+            <End Role="COURSE" EntitySet="COURSE" />
+            <End Role="COURSE1" EntitySet="COURSE" />
+          </AssociationSet>
+          <AssociationSet Name="REGISTRATION_REF1" Association="CLASSModel.Store.REGISTRATION_REF1">
+            <End Role="COURSE" EntitySet="COURSE" />
+            <End Role="REGISTRATION" EntitySet="REGISTRATION" />
+          </AssociationSet>
+          <AssociationSet Name="REGISTRATION_REF2" Association="CLASSModel.Store.REGISTRATION_REF2">
+            <End Role="CLIENT" EntitySet="CLIENT" />
+            <End Role="REGISTRATION" EntitySet="REGISTRATION" />
+          </AssociationSet>
+          <AssociationSet Name="REGISTRATION_REF9" Association="CLASSModel.Store.REGISTRATION_REF9">
+            <End Role="COURSE" EntitySet="COURSE" />
+            <End Role="REGISTRATION" EntitySet="REGISTRATION" />
+          </AssociationSet>
+          <AssociationSet Name="SUPERVISOR_REF1" Association="CLASSModel.Store.SUPERVISOR_REF1">
+            <End Role="FACILITY_MASTER" EntitySet="FACILITY_MASTER" />
+            <End Role="SUPERVISOR" EntitySet="SUPERVISOR" />
+          </AssociationSet>
+          <AssociationSet Name="SUPERVISOR_REF2" Association="CLASSModel.Store.SUPERVISOR_REF2">
+            <End Role="PERSON" EntitySet="PERSON" />
+            <End Role="SUPERVISOR" EntitySet="SUPERVISOR" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ACCOUNT">
+          <Key>
+            <PropertyRef Name="account_id" />
+          </Key>
+          <Property Name="account_id" Type="int" Nullable="false" />
+          <Property Name="account_status_id" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="account_category_id" Type="int" />
+          <Property Name="adjustment_id" Type="int" />
+          <Property Name="person_id" Type="int" Nullable="false" />
+          <Property Name="organization_flag" Type="bit" Nullable="false" />
+          <Property Name="title" Type="char" MaxLength="40" />
+          <Property Name="address_id" Type="int" />
+          <Property Name="business_area" Type="char" MaxLength="3" />
+          <Property Name="business_phone" Type="char" MaxLength="12" />
+          <Property Name="business_ext" Type="char" MaxLength="5" />
+          <Property Name="home_area" Type="char" MaxLength="3" />
+          <Property Name="home_phone" Type="char" MaxLength="12" />
+          <Property Name="home_ext" Type="char" MaxLength="5" />
+          <Property Name="fax_area" Type="char" MaxLength="3" />
+          <Property Name="fax_phone" Type="char" MaxLength="12" />
+          <Property Name="fax_ext" Type="char" MaxLength="5" />
+          <Property Name="current_balance" Type="money" Nullable="false" />
+          <Property Name="future_balance" Type="money" Nullable="false" />
+          <Property Name="unallocated_balance" Type="money" Nullable="false" />
+          <Property Name="last_statement_date" Type="datetime" />
+          <Property Name="last_statement_balance" Type="money" />
+          <Property Name="pin_number" Type="int" />
+          <Property Name="fee_category_id" Type="int" />
+          <Property Name="email_address" Type="char" MaxLength="50" />
+          <Property Name="creation_datetime" Type="datetime" />
+          <Property Name="creation_user" Type="int" />
+          <Property Name="datestamp" Type="datetime" Nullable="false" />
+          <Property Name="userstamp" Type="int" Nullable="false" />
+          <Property Name="alert_text_flag" Type="tinyint" />
+          <Property Name="current_points_balance" Type="float" />
+          <Property Name="points_member" Type="tinyint" />
+          <Property Name="points_member_datetime" Type="datetime" />
+          <Property Name="lockout_datetime" Type="datetime" />
+          <Property Name="invalid_login_count" Type="smallint" />
+          <Property Name="invalid_login_count_datestamp" Type="datetime" />
+          <Property Name="email_private" Type="tinyint" />
+          <Property Name="third_party_billing" Type="tinyint" />
+          <Property Name="allow_debit_balance" Type="bit" Nullable="false" />
+          <Property Name="common_expiry_date" Type="datetime" />
+          <Property Name="source_type" Type="tinyint" Nullable="false" />
+          <Property Name="internet_update_flag" Type="bit" Nullable="false" />
+          <Property Name="account_type" Type="tinyint" Nullable="false" />
+          <Property Name="account_alt_id" Type="char" MaxLength="45" />
+          <Property Name="iqr_lockout_flag" Type="bit" Nullable="false" />
+          <Property Name="no_show_count" Type="smallint" Nullable="false" />
+          <Property Name="iqr_lockout_datestamp" Type="datetime" />
+          <Property Name="flex_benefit_flag" Type="bit" Nullable="false" />
+          <Property Name="alert_text" Type="varchar" MaxLength="4000" />
+          <Property Name="subsidy_provider" Type="bit" Nullable="false" />
+          <Property Name="last_refreshed_date" Type="datetime" />
+          <Property Name="home_stripped" Type="varchar" MaxLength="12" />
+          <Property Name="business_stripped" Type="varchar" MaxLength="12" />
+        </EntityType>
+        <EntityType Name="ACTIVITY">
+          <Key>
+            <PropertyRef Name="activity_id" />
+          </Key>
+          <Property Name="activity_id" Type="int" Nullable="false" />
+          <Property Name="brochure_subsection_id" Type="int" />
+          <Property Name="brochure_section_id" Type="int" />
+          <Property Name="name" Type="char" Nullable="false" MaxLength="10" />
+          <Property Name="title" Type="char" Nullable="false" MaxLength="60" />
+          <Property Name="min_age_type" Type="char" MaxLength="1" />
+          <Property Name="min_age" Type="int" />
+          <Property Name="max_age_type" Type="char" MaxLength="1" />
+          <Property Name="max_age" Type="int" />
+          <Property Name="default_min_registrants" Type="int" />
+          <Property Name="default_max_registrants" Type="int" />
+          <Property Name="attendance_mandatory_flag" Type="bit" Nullable="false" />
+          <Property Name="attendance_by_class_flag" Type="bit" Nullable="false" />
+          <Property Name="sched_payment_allowed_flag" Type="bit" Nullable="false" />
+          <Property Name="group_registrations_allowed" Type="bit" Nullable="false" />
+          <Property Name="deferred_gl_account_id" Type="int" />
+          <Property Name="bus_stop_id" Type="int" />
+          <Property Name="ttr_flag" Type="tinyint" />
+          <Property Name="internet_query_flag" Type="tinyint" />
+          <Property Name="internet_registration_flag" Type="tinyint" />
+          <Property Name="datestamp" Type="datetime" Nullable="false" />
+          <Property Name="userstamp" Type="int" Nullable="false" />
+          <Property Name="daycare_flag" Type="tinyint" />
+          <Property Name="award_points_flag" Type="tinyint" />
+          <Property Name="allow_point_redemption_flag" Type="tinyint" />
+          <Property Name="allow_third_party_billing" Type="bit" Nullable="false" />
+          <Property Name="include_in_tax_receipt" Type="bit" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+          <Property Name="late_public_reg_flag" Type="bit" Nullable="false" />
+          <Property Name="late_public_withdraw_flag" Type="bit" Nullable="false" />
+          <Property Name="allow_linked_courses" Type="bit" Nullable="false" />
+          <Property Name="linked_registrations_only" Type="bit" Nullable="false" />
+          <Property Name="pub_access_pay_plan" Type="int" />
+          <Property Name="subsidy_flag" Type="bit" Nullable="false" />
+          <Property Name="allow_portal_display_flag" Type="bit" Nullable="false" />
+          <Property Name="flexcare_flag" Type="bit" Nullable="false" />
+          <Property Name="track_attendance_per_reg" Type="bit" Nullable="false" />
+          <Property Name="revenue_deferral_option" Type="tinyint" Nullable="false" />
+          <Property Name="all_prereq_flag" Type="bit" Nullable="false" />
+          <Property Name="race_flag" Type="bit" Nullable="false" />
+          <Property Name="description_memo_id" Type="int" />
+          <Property Name="internet_max_size" Type="int" />
+          <Property Name="alert_text" Type="varchar" MaxLength="1500" />
+          <Property Name="confirmation_text" Type="varchar" MaxLength="2000" />
+          <Property Name="description" Type="varchar" MaxLength="1500" />
+          <Property Name="eligibility_percent" Type="money" />
+          <Property Name="camp_flag" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CLIENT">
+          <Key>
+            <PropertyRef Name="client_id" />
+          </Key>
+          <Property Name="client_id" Type="int" Nullable="false" />
+          <Property Name="client_status_id" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="position_id" Type="int" />
+          <Property Name="person_id" Type="int" Nullable="false" />
+          <Property Name="account_id" Type="int" Nullable="false" />
+          <Property Name="barcode_number" Type="char" MaxLength="15" />
+          <Property Name="datestamp" Type="datetime" Nullable="false" />
+          <Property Name="userstamp" Type="int" Nullable="false" />
+          <Property Name="card_required" Type="tinyint" />
+          <Property Name="card_required_date" Type="datetime" />
+          <Property Name="workstation_location_id" Type="int" />
+          <Property Name="terminal_id" Type="int" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="internet_login_id" Type="char" MaxLength="40" />
+          <Property Name="active_player_flag" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="COURSE">
+          <Key>
+            <PropertyRef Name="course_id" />
+          </Key>
+          <Property Name="course_id" Type="int" Nullable="false" />
+          <Property Name="deferred_gl_account_id" Type="int" />
+          <Property Name="activity_id" Type="int" Nullable="false" />
+          <Property Name="session_year" Type="char" Nullable="false" MaxLength="4" />
+          <Property Name="session_title_id" Type="int" Nullable="false" />
+          <Property Name="course_number" Type="int" Nullable="false" />
+          <Property Name="course_status_id" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="booking_start_date" Type="datetime" />
+          <Property Name="first_facility" Type="int" />
+          <Property Name="first_start_datetime" Type="datetime" />
+          <Property Name="first_end_datetime" Type="datetime" />
+          <Property Name="first_num_bookings" Type="int" />
+          <Property Name="last_start_datetime" Type="datetime" />
+          <Property Name="last_end_datetime" Type="datetime" />
+          <Property Name="days_of_week" Type="int" />
+          <Property Name="total_minutes" Type="int" />
+          <Property Name="course_group_id" Type="int" />
+          <Property Name="supervisor" Type="int" Nullable="false" />
+          <Property Name="reg_start_date" Type="datetime" Nullable="false" />
+          <Property Name="min_registrants" Type="int" Nullable="false" />
+          <Property Name="max_registrants" Type="int" Nullable="false" />
+          <Property Name="num_reserved" Type="int" Nullable="false" />
+          <Property Name="num_registered" Type="int" Nullable="false" />
+          <Property Name="num_waitlisted" Type="int" Nullable="false" />
+          <Property Name="barcode_number" Type="char" MaxLength="15" />
+          <Property Name="cancel_datetime" Type="datetime" />
+          <Property Name="cancel_reason_id" Type="int" />
+          <Property Name="increased_demand_flag" Type="tinyint" />
+          <Property Name="min_age" Type="int" />
+          <Property Name="max_age" Type="int" />
+          <Property Name="min_age_type" Type="char" MaxLength="1" />
+          <Property Name="max_age_type" Type="char" MaxLength="1" />
+          <Property Name="internet_display_date" Type="datetime" />
+          <Property Name="userstamp" Type="int" Nullable="false" />
+          <Property Name="datestamp" Type="datetime" Nullable="false" />
+          <Property Name="title" Type="char" MaxLength="60" />
+          <Property Name="schedule_method" Type="int" />
+          <Property Name="schedule_payments_flag" Type="tinyint" />
+          <Property Name="use_default_points_per_dollar" Type="tinyint" />
+          <Property Name="points_per_dollar" Type="float" />
+          <Property Name="gl_account_id" Type="int" Nullable="false" />
+          <Property Name="nr_reg_start_date" Type="datetime" />
+          <Property Name="include_in_tax_receipt" Type="bit" Nullable="false" />
+          <Property Name="rollover_course_id" Type="int" />
+          <Property Name="residential_flag" Type="bit" Nullable="false" />
+          <Property Name="internet_display_until_date" Type="datetime" />
+          <Property Name="age_as_of" Type="tinyint" Nullable="false" />
+          <Property Name="age_as_of_date" Type="datetime" />
+          <Property Name="member_reg_start_date" Type="datetime" Nullable="false" />
+          <Property Name="reg_start_time" Type="datetime" Nullable="false" />
+          <Property Name="reg_end_date" Type="datetime" />
+          <Property Name="subsidy_flag" Type="bit" Nullable="false" />
+          <Property Name="base_instructor_rate_flag" Type="bit" Nullable="false" />
+          <Property Name="photo_req_flag" Type="bit" Nullable="false" />
+          <Property Name="auth_pickup_req_flag" Type="bit" Nullable="false" />
+          <Property Name="track_attendance" Type="bit" Nullable="false" />
+          <Property Name="flexcare_station_enabled" Type="bit" Nullable="false" />
+          <Property Name="dependent_care_flag" Type="bit" Nullable="false" />
+          <Property Name="public_access_adj_id" Type="int" />
+          <Property Name="race_team_flag" Type="bit" Nullable="false" />
+          <Property Name="race_team_caption" Type="char" MaxLength="15" />
+          <Property Name="race_team_min" Type="smallint" />
+          <Property Name="race_team_max" Type="smallint" />
+          <Property Name="cmf_text_memo_id" Type="int" />
+          <Property Name="race_team_adj_id" Type="int" />
+          <Property Name="medal_code_id" Type="int" />
+          <Property Name="alert_text" Type="varchar" MaxLength="2000" />
+          <Property Name="cancel_reason" Type="varchar" MaxLength="500" />
+          <Property Name="confirmation_text" Type="varchar" MaxLength="2000" />
+          <Property Name="description" Type="varchar" MaxLength="2000" />
+          <Property Name="programmer_notes" Type="varchar" MaxLength="1000" />
+          <Property Name="eligibility_percent" Type="money" />
+          <Property Name="camp_flag" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FACILITY_MASTER">
+          <Key>
+            <PropertyRef Name="facility_master_id" />
+          </Key>
+          <Property Name="facility_master_id" Type="int" Nullable="false" />
+          <Property Name="person_id" Type="int" />
+          <Property Name="facility_owner_id" Type="int" />
+          <Property Name="address_id" Type="int" />
+          <Property Name="gl_account_id" Type="int" />
+          <Property Name="title" Type="char" Nullable="false" MaxLength="40" />
+          <Property Name="business_area" Type="char" MaxLength="3" />
+          <Property Name="business_phone" Type="char" MaxLength="12" />
+          <Property Name="business_ext" Type="char" MaxLength="5" />
+          <Property Name="emergency_area" Type="char" MaxLength="3" />
+          <Property Name="emergency_phone" Type="char" MaxLength="12" />
+          <Property Name="emergency_ext" Type="char" MaxLength="5" />
+          <Property Name="fax_area" Type="char" MaxLength="3" />
+          <Property Name="fax_phone" Type="char" MaxLength="12" />
+          <Property Name="fax_ext" Type="char" MaxLength="5" />
+          <Property Name="bus_stop_id" Type="int" />
+          <Property Name="x_coordinate" Type="char" MaxLength="10" />
+          <Property Name="y_coordinate" Type="char" MaxLength="10" />
+          <Property Name="datestamp" Type="datetime" Nullable="false" />
+          <Property Name="userstamp" Type="int" Nullable="false" />
+          <Property Name="tax_number" Type="char" MaxLength="20" />
+          <Property Name="gis_map_address" Type="char" MaxLength="200" />
+          <Property Name="internet_availability_flag" Type="tinyint" />
+          <Property Name="internet_query_flag" Type="tinyint" />
+          <Property Name="active" Type="tinyint" />
+          <Property Name="equipment_gl_account_id" Type="int" />
+          <Property Name="equipment_query_flag" Type="tinyint" />
+          <Property Name="quickrez_due_option" Type="tinyint" Nullable="false" />
+          <Property Name="fac_internet_quickrez_flag" Type="bit" Nullable="false" />
+          <Property Name="equip_internet_quickrez_flag" Type="bit" Nullable="false" />
+          <Property Name="equipment_availability_flag" Type="bit" Nullable="false" />
+          <Property Name="light_id" Type="char" MaxLength="8" />
+        </EntityType>
+        <EntityType Name="PERSON">
+          <Key>
+            <PropertyRef Name="person_id" />
+          </Key>
+          <Property Name="person_id" Type="int" Nullable="false" />
+          <Property Name="last_name" Type="char" MaxLength="40" />
+          <Property Name="first_name" Type="char" MaxLength="40" />
+          <Property Name="person_status_id" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="birthdate_alternative_id" Type="int" />
+          <Property Name="address_id" Type="int" />
+          <Property Name="business_area" Type="char" MaxLength="3" />
+          <Property Name="business_phone" Type="char" MaxLength="12" />
+          <Property Name="business_ext" Type="char" MaxLength="5" />
+          <Property Name="home_area" Type="char" MaxLength="3" />
+          <Property Name="home_phone" Type="char" MaxLength="12" />
+          <Property Name="home_ext" Type="char" MaxLength="5" />
+          <Property Name="fax_area" Type="char" MaxLength="3" />
+          <Property Name="fax_phone" Type="char" MaxLength="12" />
+          <Property Name="fax_ext" Type="char" MaxLength="5" />
+          <Property Name="birthdate" Type="datetime" />
+          <Property Name="gender_id" Type="char" MaxLength="1" />
+          <Property Name="user_flag" Type="tinyint" />
+          <Property Name="caretaker_flag" Type="tinyint" />
+          <Property Name="instructor_flag" Type="tinyint" />
+          <Property Name="supervisor_flag" Type="tinyint" />
+          <Property Name="sin" Type="char" MaxLength="11" />
+          <Property Name="email_address" Type="char" MaxLength="50" />
+          <Property Name="creation_datetime" Type="datetime" />
+          <Property Name="creation_user" Type="int" />
+          <Property Name="datestamp" Type="datetime" Nullable="false" />
+          <Property Name="userstamp" Type="int" Nullable="false" />
+          <Property Name="school_grade" Type="int" />
+          <Property Name="alert_text_flag" Type="tinyint" />
+          <Property Name="language_id" Type="int" />
+          <Property Name="email_private" Type="tinyint" />
+          <Property Name="initial_join_date" Type="datetime" />
+          <Property Name="continuous_member_date" Type="datetime" />
+          <Property Name="cell_area" Type="char" MaxLength="3" />
+          <Property Name="cell_phone" Type="char" MaxLength="12" />
+          <Property Name="pager_area" Type="char" MaxLength="3" />
+          <Property Name="pager_phone" Type="char" MaxLength="12" />
+          <Property Name="pager_ext" Type="char" MaxLength="5" />
+          <Property Name="source_type" Type="tinyint" Nullable="false" />
+          <Property Name="title1_id" Type="int" />
+          <Property Name="title2_id" Type="int" />
+          <Property Name="suffix1_id" Type="int" />
+          <Property Name="suffix2_id" Type="int" />
+          <Property Name="marital_status_id" Type="int" />
+          <Property Name="ethnicity_id" Type="int" />
+          <Property Name="occupation_id" Type="int" />
+          <Property Name="income_level_id" Type="int" />
+          <Property Name="religion_id" Type="int" />
+          <Property Name="deceased_date" Type="datetime" />
+          <Property Name="policy_volunteer" Type="smallint" Nullable="false" />
+          <Property Name="program_volunteer" Type="smallint" Nullable="false" />
+          <Property Name="facility_volunteer" Type="smallint" Nullable="false" />
+          <Property Name="alert_text" Type="varchar" MaxLength="4000" />
+          <Property Name="disabled_flag_for_fitness" Type="bit" Nullable="false" />
+          <Property Name="home_stripped" Type="varchar" MaxLength="12" />
+        </EntityType>
+        <EntityType Name="REGISTRATION">
+          <Key>
+            <PropertyRef Name="registration_id" />
+          </Key>
+          <Property Name="registration_id" Type="int" Nullable="false" />
+          <Property Name="course_grade_id" Type="int" />
+          <Property Name="registration_status_id" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="course_fee_id" Type="int" />
+          <Property Name="client_id" Type="int" Nullable="false" />
+          <Property Name="course_id" Type="int" Nullable="false" />
+          <Property Name="creation_datetime" Type="datetime" Nullable="false" />
+          <Property Name="attendance" Type="tinyint" />
+          <Property Name="course_grade" Type="char" MaxLength="3" />
+          <Property Name="course_fee_amount" Type="money" Nullable="false" />
+          <Property Name="classes_gone" Type="int" Nullable="false" />
+          <Property Name="total_classes" Type="int" Nullable="false" />
+          <Property Name="fee_amount" Type="money" Nullable="false" />
+          <Property Name="tax_amount" Type="money" Nullable="false" />
+          <Property Name="xfee_amount" Type="money" Nullable="false" />
+          <Property Name="xfee_tax_amount" Type="money" Nullable="false" />
+          <Property Name="net_registration_amount" Type="money" Nullable="false" />
+          <Property Name="num_registered" Type="int" Nullable="false" />
+          <Property Name="tax_flag" Type="bit" Nullable="false" />
+          <Property Name="adjustment_flag" Type="bit" Nullable="false" />
+          <Property Name="xfee_flag" Type="bit" Nullable="false" />
+          <Property Name="cancel_reason_id" Type="int" />
+          <Property Name="cancel_datetime" Type="datetime" />
+          <Property Name="cancel_user" Type="char" MaxLength="30" />
+          <Property Name="pickup_bus_route_id" Type="int" />
+          <Property Name="pickup_bus_stop_id" Type="int" />
+          <Property Name="dropoff_bus_route_id" Type="int" />
+          <Property Name="dropoff_bus_stop_id" Type="int" />
+          <Property Name="source_type" Type="tinyint" />
+          <Property Name="datestamp" Type="datetime" Nullable="false" />
+          <Property Name="userstamp" Type="int" Nullable="false" />
+          <Property Name="billing_flag" Type="bit" Nullable="false" />
+          <Property Name="payment_plan_id" Type="int" />
+          <Property Name="bus_fee_amount" Type="money" Nullable="false" />
+          <Property Name="bus_fee_tax_amount" Type="money" Nullable="false" />
+          <Property Name="pickup_refund_option" Type="tinyint" />
+          <Property Name="dropoff_refund_option" Type="tinyint" />
+          <Property Name="primary_course_id" Type="int" />
+          <Property Name="creation_user_id" Type="int" Nullable="false" />
+          <Property Name="subsidy_flag" Type="bit" Nullable="false" />
+          <Property Name="equiv_resi_fee_amount" Type="money" />
+          <Property Name="equiv_resi_course_fee_amount" Type="money" />
+          <Property Name="equiv_fee_flag" Type="bit" Nullable="false" />
+          <Property Name="member_fee_type" Type="tinyint" />
+          <Property Name="resident_fee_type" Type="tinyint" />
+          <Property Name="withdraw_classes_gone" Type="int" Nullable="false" />
+          <Property Name="race_corral" Type="char" MaxLength="10" />
+          <Property Name="race_bib" Type="char" MaxLength="10" />
+          <Property Name="race_result" Type="char" MaxLength="8" />
+          <Property Name="race_place" Type="int" />
+          <Property Name="race_div_place" Type="int" />
+          <Property Name="race_gender_place" Type="int" />
+          <Property Name="cancel_reason" Type="varchar" MaxLength="4000" />
+          <Property Name="cut_off_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SUPERVISOR">
+          <Key>
+            <PropertyRef Name="person_id" />
+          </Key>
+          <Property Name="person_id" Type="int" Nullable="false" />
+          <Property Name="facility_master_id" Type="int" />
+          <Property Name="person_status_id" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="datestamp" Type="datetime" Nullable="false" />
+          <Property Name="userstamp" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="ACCOUNT_REF4">
+          <End Role="PERSON" Type="CLASSModel.Store.PERSON" Multiplicity="1" />
+          <End Role="ACCOUNT" Type="CLASSModel.Store.ACCOUNT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSON">
+              <PropertyRef Name="person_id" />
+            </Principal>
+            <Dependent Role="ACCOUNT">
+              <PropertyRef Name="person_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CLIENT_REF1">
+          <End Role="PERSON" Type="CLASSModel.Store.PERSON" Multiplicity="1" />
+          <End Role="CLIENT" Type="CLASSModel.Store.CLIENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSON">
+              <PropertyRef Name="person_id" />
+            </Principal>
+            <Dependent Role="CLIENT">
+              <PropertyRef Name="person_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CLIENT_REF2">
+          <End Role="ACCOUNT" Type="CLASSModel.Store.ACCOUNT" Multiplicity="1" />
+          <End Role="CLIENT" Type="CLASSModel.Store.CLIENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="account_id" />
+            </Principal>
+            <Dependent Role="CLIENT">
+              <PropertyRef Name="account_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="COURSE_REF2">
+          <End Role="ACTIVITY" Type="CLASSModel.Store.ACTIVITY" Multiplicity="1" />
+          <End Role="COURSE" Type="CLASSModel.Store.COURSE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACTIVITY">
+              <PropertyRef Name="activity_id" />
+            </Principal>
+            <Dependent Role="COURSE">
+              <PropertyRef Name="activity_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="COURSE_REF4">
+          <End Role="SUPERVISOR" Type="CLASSModel.Store.SUPERVISOR" Multiplicity="1" />
+          <End Role="COURSE" Type="CLASSModel.Store.COURSE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUPERVISOR">
+              <PropertyRef Name="person_id" />
+            </Principal>
+            <Dependent Role="COURSE">
+              <PropertyRef Name="supervisor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="COURSE_REF8">
+          <End Role="COURSE" Type="CLASSModel.Store.COURSE" Multiplicity="0..1" />
+          <End Role="COURSE1" Type="CLASSModel.Store.COURSE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COURSE">
+              <PropertyRef Name="course_id" />
+            </Principal>
+            <Dependent Role="COURSE1">
+              <PropertyRef Name="rollover_course_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="REGISTRATION_REF1">
+          <End Role="COURSE" Type="CLASSModel.Store.COURSE" Multiplicity="1" />
+          <End Role="REGISTRATION" Type="CLASSModel.Store.REGISTRATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COURSE">
+              <PropertyRef Name="course_id" />
+            </Principal>
+            <Dependent Role="REGISTRATION">
+              <PropertyRef Name="course_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="REGISTRATION_REF2">
+          <End Role="CLIENT" Type="CLASSModel.Store.CLIENT" Multiplicity="1" />
+          <End Role="REGISTRATION" Type="CLASSModel.Store.REGISTRATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENT">
+              <PropertyRef Name="client_id" />
+            </Principal>
+            <Dependent Role="REGISTRATION">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="REGISTRATION_REF9">
+          <End Role="COURSE" Type="CLASSModel.Store.COURSE" Multiplicity="0..1" />
+          <End Role="REGISTRATION" Type="CLASSModel.Store.REGISTRATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COURSE">
+              <PropertyRef Name="course_id" />
+            </Principal>
+            <Dependent Role="REGISTRATION">
+              <PropertyRef Name="primary_course_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SUPERVISOR_REF1">
+          <End Role="FACILITY_MASTER" Type="CLASSModel.Store.FACILITY_MASTER" Multiplicity="0..1" />
+          <End Role="SUPERVISOR" Type="CLASSModel.Store.SUPERVISOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACILITY_MASTER">
+              <PropertyRef Name="facility_master_id" />
+            </Principal>
+            <Dependent Role="SUPERVISOR">
+              <PropertyRef Name="facility_master_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SUPERVISOR_REF2">
+          <End Role="PERSON" Type="CLASSModel.Store.PERSON" Multiplicity="1" />
+          <End Role="SUPERVISOR" Type="CLASSModel.Store.SUPERVISOR" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PERSON">
+              <PropertyRef Name="person_id" />
+            </Principal>
+            <Dependent Role="SUPERVISOR">
+              <PropertyRef Name="person_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CLASSModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="CLASSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ACCOUNTs" EntityType="CLASSModel.ACCOUNT" />
+          <EntitySet Name="ACTIVITies" EntityType="CLASSModel.ACTIVITY" />
+          <EntitySet Name="CLIENTs" EntityType="CLASSModel.CLIENT" />
+          <EntitySet Name="COURSEs" EntityType="CLASSModel.COURSE" />
+          <EntitySet Name="FACILITY_MASTER" EntityType="CLASSModel.FACILITY_MASTER" />
+          <EntitySet Name="People" EntityType="CLASSModel.PERSON" />
+          <EntitySet Name="REGISTRATIONs" EntityType="CLASSModel.REGISTRATION" />
+          <EntitySet Name="SUPERVISORs" EntityType="CLASSModel.SUPERVISOR" />
+          <AssociationSet Name="ACCOUNT_REF4" Association="CLASSModel.ACCOUNT_REF4">
+            <End Role="PERSON" EntitySet="People" />
+            <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
+          </AssociationSet>
+          <AssociationSet Name="CLIENT_REF2" Association="CLASSModel.CLIENT_REF2">
+            <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
+            <End Role="CLIENT" EntitySet="CLIENTs" />
+          </AssociationSet>
+          <AssociationSet Name="COURSE_REF2" Association="CLASSModel.COURSE_REF2">
+            <End Role="ACTIVITY" EntitySet="ACTIVITies" />
+            <End Role="COURSE" EntitySet="COURSEs" />
+          </AssociationSet>
+          <AssociationSet Name="CLIENT_REF1" Association="CLASSModel.CLIENT_REF1">
+            <End Role="PERSON" EntitySet="People" />
+            <End Role="CLIENT" EntitySet="CLIENTs" />
+          </AssociationSet>
+          <AssociationSet Name="REGISTRATION_REF2" Association="CLASSModel.REGISTRATION_REF2">
+            <End Role="CLIENT" EntitySet="CLIENTs" />
+            <End Role="REGISTRATION" EntitySet="REGISTRATIONs" />
+          </AssociationSet>
+          <AssociationSet Name="COURSE_REF4" Association="CLASSModel.COURSE_REF4">
+            <End Role="SUPERVISOR" EntitySet="SUPERVISORs" />
+            <End Role="COURSE" EntitySet="COURSEs" />
+          </AssociationSet>
+          <AssociationSet Name="COURSE_REF8" Association="CLASSModel.COURSE_REF8">
+            <End Role="COURSE" EntitySet="COURSEs" />
+            <End Role="COURSE1" EntitySet="COURSEs" />
+          </AssociationSet>
+          <AssociationSet Name="REGISTRATION_REF1" Association="CLASSModel.REGISTRATION_REF1">
+            <End Role="COURSE" EntitySet="COURSEs" />
+            <End Role="REGISTRATION" EntitySet="REGISTRATIONs" />
+          </AssociationSet>
+          <AssociationSet Name="REGISTRATION_REF9" Association="CLASSModel.REGISTRATION_REF9">
+            <End Role="COURSE" EntitySet="COURSEs" />
+            <End Role="REGISTRATION" EntitySet="REGISTRATIONs" />
+          </AssociationSet>
+          <AssociationSet Name="SUPERVISOR_REF1" Association="CLASSModel.SUPERVISOR_REF1">
+            <End Role="FACILITY_MASTER" EntitySet="FACILITY_MASTER" />
+            <End Role="SUPERVISOR" EntitySet="SUPERVISORs" />
+          </AssociationSet>
+          <AssociationSet Name="SUPERVISOR_REF2" Association="CLASSModel.SUPERVISOR_REF2">
+            <End Role="PERSON" EntitySet="People" />
+            <End Role="SUPERVISOR" EntitySet="SUPERVISORs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ACCOUNT">
+          <Key>
+            <PropertyRef Name="account_id" />
+          </Key>
+          <Property Name="account_id" Type="Int32" Nullable="false" />
+          <Property Name="account_status_id" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="account_category_id" Type="Int32" />
+          <Property Name="adjustment_id" Type="Int32" />
+          <Property Name="person_id" Type="Int32" Nullable="false" />
+          <Property Name="organization_flag" Type="Boolean" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="40" Unicode="false" FixedLength="true" />
+          <Property Name="address_id" Type="Int32" />
+          <Property Name="business_area" Type="String" MaxLength="3" Unicode="false" FixedLength="true" />
+          <Property Name="business_phone" Type="String" MaxLength="12" Unicode="false" FixedLength="true" />
+          <Property Name="business_ext" Type="String" MaxLength="5" Unicode="false" FixedLength="true" />
+          <Property Name="home_area" Type="String" MaxLength="3" Unicode="false" FixedLength="true" />
+          <Property Name="home_phone" Type="String" MaxLength="12" Unicode="false" FixedLength="true" />
+          <Property Name="home_ext" Type="String" MaxLength="5" Unicode="false" FixedLength="true" />
+          <Property Name="fax_area" Type="String" MaxLength="3" Unicode="false" FixedLength="true" />
+          <Property Name="fax_phone" Type="String" MaxLength="12" Unicode="false" FixedLength="true" />
+          <Property Name="fax_ext" Type="String" MaxLength="5" Unicode="false" FixedLength="true" />
+          <Property Name="current_balance" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="future_balance" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="unallocated_balance" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="last_statement_date" Type="DateTime" />
+          <Property Name="last_statement_balance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="pin_number" Type="Int32" />
+          <Property Name="fee_category_id" Type="Int32" />
+          <Property Name="email_address" Type="String" MaxLength="50" Unicode="false" FixedLength="true" />
+          <Property Name="creation_datetime" Type="DateTime" />
+          <Property Name="creation_user" Type="Int32" />
+          <Property Name="datestamp" Type="DateTime" Nullable="false" />
+          <Property Name="userstamp" Type="Int32" Nullable="false" />
+          <Property Name="alert_text_flag" Type="Byte" />
+          <Property Name="current_points_balance" Type="Double" />
+          <Property Name="points_member" Type="Byte" />
+          <Property Name="points_member_datetime" Type="DateTime" />
+          <Property Name="lockout_datetime" Type="DateTime" />
+          <Property Name="invalid_login_count" Type="Int16" />
+          <Property Name="invalid_login_count_datestamp" Type="DateTime" />
+          <Property Name="email_private" Type="Byte" />
+          <Property Name="third_party_billing" Type="Byte" />
+          <Property Name="allow_debit_balance" Type="Boolean" Nullable="false" />
+          <Property Name="common_expiry_date" Type="DateTime" />
+          <Property Name="source_type" Type="Byte" Nullable="false" />
+          <Property Name="internet_update_flag" Type="Boolean" Nullable="false" />
+          <Property Name="account_type" Type="Byte" Nullable="false" />
+          <Property Name="account_alt_id" Type="String" MaxLength="45" Unicode="false" FixedLength="true" />
+          <Property Name="iqr_lockout_flag" Type="Boolean" Nullable="false" />
+          <Property Name="no_show_count" Type="Int16" Nullable="false" />
+          <Property Name="iqr_lockout_datestamp" Type="DateTime" />
+          <Property Name="flex_benefit_flag" Type="Boolean" Nullable="false" />
+          <Property Name="alert_text" Type="String" MaxLength="4000" Unicode="false" FixedLength="false" />
+          <Property Name="subsidy_provider" Type="Boolean" Nullable="false" />
+          <Property Name="last_refreshed_date" Type="DateTime" />
+          <Property Name="home_stripped" Type="String" MaxLength="12" Unicode="false" FixedLength="false" />
+          <Property Name="business_stripped" Type="String" MaxLength="12" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="PERSON" Relationship="CLASSModel.ACCOUNT_REF4" FromRole="ACCOUNT" ToRole="PERSON" />
+          <NavigationProperty Name="CLIENTs" Relationship="CLASSModel.CLIENT_REF2" FromRole="ACCOUNT" ToRole="CLIENT" />
+        </EntityType>
+        <EntityType Name="ACTIVITY">
+          <Key>
+            <PropertyRef Name="activity_id" />
+          </Key>
+          <Property Name="activity_id" Type="Int32" Nullable="false" />
+          <Property Name="brochure_subsection_id" Type="Int32" />
+          <Property Name="brochure_section_id" Type="Int32" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="true" />
+          <Property Name="title" Type="String" Nullable="false" MaxLength="60" Unicode="false" FixedLength="true" />
+          <Property Name="min_age_type" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="min_age" Type="Int32" />
+          <Property Name="max_age_type" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="max_age" Type="Int32" />
+          <Property Name="default_min_registrants" Type="Int32" />
+          <Property Name="default_max_registrants" Type="Int32" />
+          <Property Name="attendance_mandatory_flag" Type="Boolean" Nullable="false" />
+          <Property Name="attendance_by_class_flag" Type="Boolean" Nullable="false" />
+          <Property Name="sched_payment_allowed_flag" Type="Boolean" Nullable="false" />
+          <Property Name="group_registrations_allowed" Type="Boolean" Nullable="false" />
+          <Property Name="deferred_gl_account_id" Type="Int32" />
+          <Property Name="bus_stop_id" Type="Int32" />
+          <Property Name="ttr_flag" Type="Byte" />
+          <Property Name="internet_query_flag" Type="Byte" />
+          <Property Name="internet_registration_flag" Type="Byte" />
+          <Property Name="datestamp" Type="DateTime" Nullable="false" />
+          <Property Name="userstamp" Type="Int32" Nullable="false" />
+          <Property Name="daycare_flag" Type="Byte" />
+          <Property Name="award_points_flag" Type="Byte" />
+          <Property Name="allow_point_redemption_flag" Type="Byte" />
+          <Property Name="allow_third_party_billing" Type="Boolean" Nullable="false" />
+          <Property Name="include_in_tax_receipt" Type="Boolean" Nullable="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="late_public_reg_flag" Type="Boolean" Nullable="false" />
+          <Property Name="late_public_withdraw_flag" Type="Boolean" Nullable="false" />
+          <Property Name="allow_linked_courses" Type="Boolean" Nullable="false" />
+          <Property Name="linked_registrations_only" Type="Boolean" Nullable="false" />
+          <Property Name="pub_access_pay_plan" Type="Int32" />
+          <Property Name="subsidy_flag" Type="Boolean" Nullable="false" />
+          <Property Name="allow_portal_display_flag" Type="Boolean" Nullable="false" />
+          <Property Name="flexcare_flag" Type="Boolean" Nullable="false" />
+          <Property Name="track_attendance_per_reg" Type="Boolean" Nullable="false" />
+          <Property Name="revenue_deferral_option" Type="Byte" Nullable="false" />
+          <Property Name="all_prereq_flag" Type="Boolean" Nullable="false" />
+          <Property Name="race_flag" Type="Boolean" Nullable="false" />
+          <Property Name="description_memo_id" Type="Int32" />
+          <Property Name="internet_max_size" Type="Int32" />
+          <Property Name="alert_text" Type="String" MaxLength="1500" Unicode="false" FixedLength="false" />
+          <Property Name="confirmation_text" Type="String" MaxLength="2000" Unicode="false" FixedLength="false" />
+          <Property Name="description" Type="String" MaxLength="1500" Unicode="false" FixedLength="false" />
+          <Property Name="eligibility_percent" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="camp_flag" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="COURSEs" Relationship="CLASSModel.COURSE_REF2" FromRole="ACTIVITY" ToRole="COURSE" />
+        </EntityType>
+        <EntityType Name="CLIENT">
+          <Key>
+            <PropertyRef Name="client_id" />
+          </Key>
+          <Property Name="client_id" Type="Int32" Nullable="false" />
+          <Property Name="client_status_id" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="position_id" Type="Int32" />
+          <Property Name="person_id" Type="Int32" Nullable="false" />
+          <Property Name="account_id" Type="Int32" Nullable="false" />
+          <Property Name="barcode_number" Type="String" MaxLength="15" Unicode="false" FixedLength="true" />
+          <Property Name="datestamp" Type="DateTime" Nullable="false" />
+          <Property Name="userstamp" Type="Int32" Nullable="false" />
+          <Property Name="card_required" Type="Byte" />
+          <Property Name="card_required_date" Type="DateTime" />
+          <Property Name="workstation_location_id" Type="Int32" />
+          <Property Name="terminal_id" Type="Int32" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="internet_login_id" Type="String" MaxLength="40" Unicode="false" FixedLength="true" />
+          <Property Name="active_player_flag" Type="Byte" />
+          <NavigationProperty Name="ACCOUNT" Relationship="CLASSModel.CLIENT_REF2" FromRole="CLIENT" ToRole="ACCOUNT" />
+          <NavigationProperty Name="PERSON" Relationship="CLASSModel.CLIENT_REF1" FromRole="CLIENT" ToRole="PERSON" />
+          <NavigationProperty Name="REGISTRATIONs" Relationship="CLASSModel.REGISTRATION_REF2" FromRole="CLIENT" ToRole="REGISTRATION" />
+        </EntityType>
+        <EntityType Name="COURSE">
+          <Key>
+            <PropertyRef Name="course_id" />
+          </Key>
+          <Property Name="course_id" Type="Int32" Nullable="false" />
+          <Property Name="deferred_gl_account_id" Type="Int32" />
+          <Property Name="activity_id" Type="Int32" Nullable="false" />
+          <Property Name="session_year" Type="String" Nullable="false" MaxLength="4" Unicode="false" FixedLength="true" />
+          <Property Name="session_title_id" Type="Int32" Nullable="false" />
+          <Property Name="course_number" Type="Int32" Nullable="false" />
+          <Property Name="course_status_id" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="booking_start_date" Type="DateTime" />
+          <Property Name="first_facility" Type="Int32" />
+          <Property Name="first_start_datetime" Type="DateTime" />
+          <Property Name="first_end_datetime" Type="DateTime" />
+          <Property Name="first_num_bookings" Type="Int32" />
+          <Property Name="last_start_datetime" Type="DateTime" />
+          <Property Name="last_end_datetime" Type="DateTime" />
+          <Property Name="days_of_week" Type="Int32" />
+          <Property Name="total_minutes" Type="Int32" />
+          <Property Name="course_group_id" Type="Int32" />
+          <Property Name="supervisor" Type="Int32" Nullable="false" />
+          <Property Name="reg_start_date" Type="DateTime" Nullable="false" />
+          <Property Name="min_registrants" Type="Int32" Nullable="false" />
+          <Property Name="max_registrants" Type="Int32" Nullable="false" />
+          <Property Name="num_reserved" Type="Int32" Nullable="false" />
+          <Property Name="num_registered" Type="Int32" Nullable="false" />
+          <Property Name="num_waitlisted" Type="Int32" Nullable="false" />
+          <Property Name="barcode_number" Type="String" MaxLength="15" Unicode="false" FixedLength="true" />
+          <Property Name="cancel_datetime" Type="DateTime" />
+          <Property Name="cancel_reason_id" Type="Int32" />
+          <Property Name="increased_demand_flag" Type="Byte" />
+          <Property Name="min_age" Type="Int32" />
+          <Property Name="max_age" Type="Int32" />
+          <Property Name="min_age_type" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="max_age_type" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="internet_display_date" Type="DateTime" />
+          <Property Name="userstamp" Type="Int32" Nullable="false" />
+          <Property Name="datestamp" Type="DateTime" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="60" Unicode="false" FixedLength="true" />
+          <Property Name="schedule_method" Type="Int32" />
+          <Property Name="schedule_payments_flag" Type="Byte" />
+          <Property Name="use_default_points_per_dollar" Type="Byte" />
+          <Property Name="points_per_dollar" Type="Double" />
+          <Property Name="gl_account_id" Type="Int32" Nullable="false" />
+          <Property Name="nr_reg_start_date" Type="DateTime" />
+          <Property Name="include_in_tax_receipt" Type="Boolean" Nullable="false" />
+          <Property Name="rollover_course_id" Type="Int32" />
+          <Property Name="residential_flag" Type="Boolean" Nullable="false" />
+          <Property Name="internet_display_until_date" Type="DateTime" />
+          <Property Name="age_as_of" Type="Byte" Nullable="false" />
+          <Property Name="age_as_of_date" Type="DateTime" />
+          <Property Name="member_reg_start_date" Type="DateTime" Nullable="false" />
+          <Property Name="reg_start_time" Type="DateTime" Nullable="false" />
+          <Property Name="reg_end_date" Type="DateTime" />
+          <Property Name="subsidy_flag" Type="Boolean" Nullable="false" />
+          <Property Name="base_instructor_rate_flag" Type="Boolean" Nullable="false" />
+          <Property Name="photo_req_flag" Type="Boolean" Nullable="false" />
+          <Property Name="auth_pickup_req_flag" Type="Boolean" Nullable="false" />
+          <Property Name="track_attendance" Type="Boolean" Nullable="false" />
+          <Property Name="flexcare_station_enabled" Type="Boolean" Nullable="false" />
+          <Property Name="dependent_care_flag" Type="Boolean" Nullable="false" />
+          <Property Name="public_access_adj_id" Type="Int32" />
+          <Property Name="race_team_flag" Type="Boolean" Nullable="false" />
+          <Property Name="race_team_caption" Type="String" MaxLength="15" Unicode="false" FixedLength="true" />
+          <Property Name="race_team_min" Type="Int16" />
+          <Property Name="race_team_max" Type="Int16" />
+          <Property Name="cmf_text_memo_id" Type="Int32" />
+          <Property Name="race_team_adj_id" Type="Int32" />
+          <Property Name="medal_code_id" Type="Int32" />
+          <Property Name="alert_text" Type="String" MaxLength="2000" Unicode="false" FixedLength="false" />
+          <Property Name="cancel_reason" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="confirmation_text" Type="String" MaxLength="2000" Unicode="false" FixedLength="false" />
+          <Property Name="description" Type="String" MaxLength="2000" Unicode="false" FixedLength="false" />
+          <Property Name="programmer_notes" Type="String" MaxLength="1000" Unicode="false" FixedLength="false" />
+          <Property Name="eligibility_percent" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="camp_flag" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ACTIVITY" Relationship="CLASSModel.COURSE_REF2" FromRole="COURSE" ToRole="ACTIVITY" />
+          <NavigationProperty Name="SUPERVISOR1" Relationship="CLASSModel.COURSE_REF4" FromRole="COURSE" ToRole="SUPERVISOR" />
+          <NavigationProperty Name="COURSE1" Relationship="CLASSModel.COURSE_REF8" FromRole="COURSE" ToRole="COURSE1" />
+          <NavigationProperty Name="COURSE2" Relationship="CLASSModel.COURSE_REF8" FromRole="COURSE1" ToRole="COURSE" />
+          <NavigationProperty Name="REGISTRATIONs" Relationship="CLASSModel.REGISTRATION_REF1" FromRole="COURSE" ToRole="REGISTRATION" />
+          <NavigationProperty Name="REGISTRATIONs1" Relationship="CLASSModel.REGISTRATION_REF9" FromRole="COURSE" ToRole="REGISTRATION" />
+        </EntityType>
+        <EntityType Name="FACILITY_MASTER">
+          <Key>
+            <PropertyRef Name="facility_master_id" />
+          </Key>
+          <Property Name="facility_master_id" Type="Int32" Nullable="false" />
+          <Property Name="person_id" Type="Int32" />
+          <Property Name="facility_owner_id" Type="Int32" />
+          <Property Name="address_id" Type="Int32" />
+          <Property Name="gl_account_id" Type="Int32" />
+          <Property Name="title" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="true" />
+          <Property Name="business_area" Type="String" MaxLength="3" Unicode="false" FixedLength="true" />
+          <Property Name="business_phone" Type="String" MaxLength="12" Unicode="false" FixedLength="true" />
+          <Property Name="business_ext" Type="String" MaxLength="5" Unicode="false" FixedLength="true" />
+          <Property Name="emergency_area" Type="String" MaxLength="3" Unicode="false" FixedLength="true" />
+          <Property Name="emergency_phone" Type="String" MaxLength="12" Unicode="false" FixedLength="true" />
+          <Property Name="emergency_ext" Type="String" MaxLength="5" Unicode="false" FixedLength="true" />
+          <Property Name="fax_area" Type="String" MaxLength="3" Unicode="false" FixedLength="true" />
+          <Property Name="fax_phone" Type="String" MaxLength="12" Unicode="false" FixedLength="true" />
+          <Property Name="fax_ext" Type="String" MaxLength="5" Unicode="false" FixedLength="true" />
+          <Property Name="bus_stop_id" Type="Int32" />
+          <Property Name="x_coordinate" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+          <Property Name="y_coordinate" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+          <Property Name="datestamp" Type="DateTime" Nullable="false" />
+          <Property Name="userstamp" Type="Int32" Nullable="false" />
+          <Property Name="tax_number" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+          <Property Name="gis_map_address" Type="String" MaxLength="200" Unicode="false" FixedLength="true" />
+          <Property Name="internet_availability_flag" Type="Byte" />
+          <Property Name="internet_query_flag" Type="Byte" />
+          <Property Name="active" Type="Byte" />
+          <Property Name="equipment_gl_account_id" Type="Int32" />
+          <Property Name="equipment_query_flag" Type="Byte" />
+          <Property Name="quickrez_due_option" Type="Byte" Nullable="false" />
+          <Property Name="fac_internet_quickrez_flag" Type="Boolean" Nullable="false" />
+          <Property Name="equip_internet_quickrez_flag" Type="Boolean" Nullable="false" />
+          <Property Name="equipment_availability_flag" Type="Boolean" Nullable="false" />
+          <Property Name="light_id" Type="String" MaxLength="8" Unicode="false" FixedLength="true" />
+          <NavigationProperty Name="SUPERVISORs" Relationship="CLASSModel.SUPERVISOR_REF1" FromRole="FACILITY_MASTER" ToRole="SUPERVISOR" />
+        </EntityType>
+        <EntityType Name="PERSON">
+          <Key>
+            <PropertyRef Name="person_id" />
+          </Key>
+          <Property Name="person_id" Type="Int32" Nullable="false" />
+          <Property Name="last_name" Type="String" MaxLength="40" Unicode="false" FixedLength="true" />
+          <Property Name="first_name" Type="String" MaxLength="40" Unicode="false" FixedLength="true" />
+          <Property Name="person_status_id" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="birthdate_alternative_id" Type="Int32" />
+          <Property Name="address_id" Type="Int32" />
+          <Property Name="business_area" Type="String" MaxLength="3" Unicode="false" FixedLength="true" />
+          <Property Name="business_phone" Type="String" MaxLength="12" Unicode="false" FixedLength="true" />
+          <Property Name="business_ext" Type="String" MaxLength="5" Unicode="false" FixedLength="true" />
+          <Property Name="home_area" Type="String" MaxLength="3" Unicode="false" FixedLength="true" />
+          <Property Name="home_phone" Type="String" MaxLength="12" Unicode="false" FixedLength="true" />
+          <Property Name="home_ext" Type="String" MaxLength="5" Unicode="false" FixedLength="true" />
+          <Property Name="fax_area" Type="String" MaxLength="3" Unicode="false" FixedLength="true" />
+          <Property Name="fax_phone" Type="String" MaxLength="12" Unicode="false" FixedLength="true" />
+          <Property Name="fax_ext" Type="String" MaxLength="5" Unicode="false" FixedLength="true" />
+          <Property Name="birthdate" Type="DateTime" />
+          <Property Name="gender_id" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="user_flag" Type="Byte" />
+          <Property Name="caretaker_flag" Type="Byte" />
+          <Property Name="instructor_flag" Type="Byte" />
+          <Property Name="supervisor_flag" Type="Byte" />
+          <Property Name="sin" Type="String" MaxLength="11" Unicode="false" FixedLength="true" />
+          <Property Name="email_address" Type="String" MaxLength="50" Unicode="false" FixedLength="true" />
+          <Property Name="creation_datetime" Type="DateTime" />
+          <Property Name="creation_user" Type="Int32" />
+          <Property Name="datestamp" Type="DateTime" Nullable="false" />
+          <Property Name="userstamp" Type="Int32" Nullable="false" />
+          <Property Name="school_grade" Type="Int32" />
+          <Property Name="alert_text_flag" Type="Byte" />
+          <Property Name="language_id" Type="Int32" />
+          <Property Name="email_private" Type="Byte" />
+          <Property Name="initial_join_date" Type="DateTime" />
+          <Property Name="continuous_member_date" Type="DateTime" />
+          <Property Name="cell_area" Type="String" MaxLength="3" Unicode="false" FixedLength="true" />
+          <Property Name="cell_phone" Type="String" MaxLength="12" Unicode="false" FixedLength="true" />
+          <Property Name="pager_area" Type="String" MaxLength="3" Unicode="false" FixedLength="true" />
+          <Property Name="pager_phone" Type="String" MaxLength="12" Unicode="false" FixedLength="true" />
+          <Property Name="pager_ext" Type="String" MaxLength="5" Unicode="false" FixedLength="true" />
+          <Property Name="source_type" Type="Byte" Nullable="false" />
+          <Property Name="title1_id" Type="Int32" />
+          <Property Name="title2_id" Type="Int32" />
+          <Property Name="suffix1_id" Type="Int32" />
+          <Property Name="suffix2_id" Type="Int32" />
+          <Property Name="marital_status_id" Type="Int32" />
+          <Property Name="ethnicity_id" Type="Int32" />
+          <Property Name="occupation_id" Type="Int32" />
+          <Property Name="income_level_id" Type="Int32" />
+          <Property Name="religion_id" Type="Int32" />
+          <Property Name="deceased_date" Type="DateTime" />
+          <Property Name="policy_volunteer" Type="Int16" Nullable="false" />
+          <Property Name="program_volunteer" Type="Int16" Nullable="false" />
+          <Property Name="facility_volunteer" Type="Int16" Nullable="false" />
+          <Property Name="alert_text" Type="String" MaxLength="4000" Unicode="false" FixedLength="false" />
+          <Property Name="disabled_flag_for_fitness" Type="Boolean" Nullable="false" />
+          <Property Name="home_stripped" Type="String" MaxLength="12" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="ACCOUNTs" Relationship="CLASSModel.ACCOUNT_REF4" FromRole="PERSON" ToRole="ACCOUNT" />
+          <NavigationProperty Name="CLIENTs" Relationship="CLASSModel.CLIENT_REF1" FromRole="PERSON" ToRole="CLIENT" />
+          <NavigationProperty Name="SUPERVISOR" Relationship="CLASSModel.SUPERVISOR_REF2" FromRole="PERSON" ToRole="SUPERVISOR" />
+        </EntityType>
+        <EntityType Name="REGISTRATION">
+          <Key>
+            <PropertyRef Name="registration_id" />
+          </Key>
+          <Property Name="registration_id" Type="Int32" Nullable="false" />
+          <Property Name="course_grade_id" Type="Int32" />
+          <Property Name="registration_status_id" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="course_fee_id" Type="Int32" />
+          <Property Name="client_id" Type="Int32" Nullable="false" />
+          <Property Name="course_id" Type="Int32" Nullable="false" />
+          <Property Name="creation_datetime" Type="DateTime" Nullable="false" />
+          <Property Name="attendance" Type="Byte" />
+          <Property Name="course_grade" Type="String" MaxLength="3" Unicode="false" FixedLength="true" />
+          <Property Name="course_fee_amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="classes_gone" Type="Int32" Nullable="false" />
+          <Property Name="total_classes" Type="Int32" Nullable="false" />
+          <Property Name="fee_amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="tax_amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="xfee_amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="xfee_tax_amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="net_registration_amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="num_registered" Type="Int32" Nullable="false" />
+          <Property Name="tax_flag" Type="Boolean" Nullable="false" />
+          <Property Name="adjustment_flag" Type="Boolean" Nullable="false" />
+          <Property Name="xfee_flag" Type="Boolean" Nullable="false" />
+          <Property Name="cancel_reason_id" Type="Int32" />
+          <Property Name="cancel_datetime" Type="DateTime" />
+          <Property Name="cancel_user" Type="String" MaxLength="30" Unicode="false" FixedLength="true" />
+          <Property Name="pickup_bus_route_id" Type="Int32" />
+          <Property Name="pickup_bus_stop_id" Type="Int32" />
+          <Property Name="dropoff_bus_route_id" Type="Int32" />
+          <Property Name="dropoff_bus_stop_id" Type="Int32" />
+          <Property Name="source_type" Type="Byte" />
+          <Property Name="datestamp" Type="DateTime" Nullable="false" />
+          <Property Name="userstamp" Type="Int32" Nullable="false" />
+          <Property Name="billing_flag" Type="Boolean" Nullable="false" />
+          <Property Name="payment_plan_id" Type="Int32" />
+          <Property Name="bus_fee_amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="bus_fee_tax_amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="pickup_refund_option" Type="Byte" />
+          <Property Name="dropoff_refund_option" Type="Byte" />
+          <Property Name="primary_course_id" Type="Int32" />
+          <Property Name="creation_user_id" Type="Int32" Nullable="false" />
+          <Property Name="subsidy_flag" Type="Boolean" Nullable="false" />
+          <Property Name="equiv_resi_fee_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="equiv_resi_course_fee_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="equiv_fee_flag" Type="Boolean" Nullable="false" />
+          <Property Name="member_fee_type" Type="Byte" />
+          <Property Name="resident_fee_type" Type="Byte" />
+          <Property Name="withdraw_classes_gone" Type="Int32" Nullable="false" />
+          <Property Name="race_corral" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+          <Property Name="race_bib" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+          <Property Name="race_result" Type="String" MaxLength="8" Unicode="false" FixedLength="true" />
+          <Property Name="race_place" Type="Int32" />
+          <Property Name="race_div_place" Type="Int32" />
+          <Property Name="race_gender_place" Type="Int32" />
+          <Property Name="cancel_reason" Type="String" MaxLength="4000" Unicode="false" FixedLength="false" />
+          <Property Name="cut_off_date" Type="DateTime" />
+          <NavigationProperty Name="CLIENT" Relationship="CLASSModel.REGISTRATION_REF2" FromRole="REGISTRATION" ToRole="CLIENT" />
+          <NavigationProperty Name="COURSE" Relationship="CLASSModel.REGISTRATION_REF1" FromRole="REGISTRATION" ToRole="COURSE" />
+          <NavigationProperty Name="COURSE1" Relationship="CLASSModel.REGISTRATION_REF9" FromRole="REGISTRATION" ToRole="COURSE" />
+        </EntityType>
+        <EntityType Name="SUPERVISOR">
+          <Key>
+            <PropertyRef Name="person_id" />
+          </Key>
+          <Property Name="person_id" Type="Int32" Nullable="false" />
+          <Property Name="facility_master_id" Type="Int32" />
+          <Property Name="person_status_id" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="datestamp" Type="DateTime" Nullable="false" />
+          <Property Name="userstamp" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="COURSEs" Relationship="CLASSModel.COURSE_REF4" FromRole="SUPERVISOR" ToRole="COURSE" />
+          <NavigationProperty Name="FACILITY_MASTER" Relationship="CLASSModel.SUPERVISOR_REF1" FromRole="SUPERVISOR" ToRole="FACILITY_MASTER" />
+          <NavigationProperty Name="PERSON" Relationship="CLASSModel.SUPERVISOR_REF2" FromRole="SUPERVISOR" ToRole="PERSON" />
+        </EntityType>
+        <Association Name="ACCOUNT_REF4">
+          <End Role="PERSON" Type="CLASSModel.PERSON" Multiplicity="1" />
+          <End Role="ACCOUNT" Type="CLASSModel.ACCOUNT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSON">
+              <PropertyRef Name="person_id" />
+            </Principal>
+            <Dependent Role="ACCOUNT">
+              <PropertyRef Name="person_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CLIENT_REF2">
+          <End Role="ACCOUNT" Type="CLASSModel.ACCOUNT" Multiplicity="1" />
+          <End Role="CLIENT" Type="CLASSModel.CLIENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="account_id" />
+            </Principal>
+            <Dependent Role="CLIENT">
+              <PropertyRef Name="account_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="COURSE_REF2">
+          <End Role="ACTIVITY" Type="CLASSModel.ACTIVITY" Multiplicity="1" />
+          <End Role="COURSE" Type="CLASSModel.COURSE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACTIVITY">
+              <PropertyRef Name="activity_id" />
+            </Principal>
+            <Dependent Role="COURSE">
+              <PropertyRef Name="activity_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CLIENT_REF1">
+          <End Role="PERSON" Type="CLASSModel.PERSON" Multiplicity="1" />
+          <End Role="CLIENT" Type="CLASSModel.CLIENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSON">
+              <PropertyRef Name="person_id" />
+            </Principal>
+            <Dependent Role="CLIENT">
+              <PropertyRef Name="person_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="REGISTRATION_REF2">
+          <End Role="CLIENT" Type="CLASSModel.CLIENT" Multiplicity="1" />
+          <End Role="REGISTRATION" Type="CLASSModel.REGISTRATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENT">
+              <PropertyRef Name="client_id" />
+            </Principal>
+            <Dependent Role="REGISTRATION">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="COURSE_REF4">
+          <End Role="SUPERVISOR" Type="CLASSModel.SUPERVISOR" Multiplicity="1" />
+          <End Role="COURSE" Type="CLASSModel.COURSE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUPERVISOR">
+              <PropertyRef Name="person_id" />
+            </Principal>
+            <Dependent Role="COURSE">
+              <PropertyRef Name="supervisor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="COURSE_REF8">
+          <End Role="COURSE" Type="CLASSModel.COURSE" Multiplicity="0..1" />
+          <End Role="COURSE1" Type="CLASSModel.COURSE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COURSE">
+              <PropertyRef Name="course_id" />
+            </Principal>
+            <Dependent Role="COURSE1">
+              <PropertyRef Name="rollover_course_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="REGISTRATION_REF1">
+          <End Role="COURSE" Type="CLASSModel.COURSE" Multiplicity="1" />
+          <End Role="REGISTRATION" Type="CLASSModel.REGISTRATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COURSE">
+              <PropertyRef Name="course_id" />
+            </Principal>
+            <Dependent Role="REGISTRATION">
+              <PropertyRef Name="course_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="REGISTRATION_REF9">
+          <End Role="COURSE" Type="CLASSModel.COURSE" Multiplicity="0..1" />
+          <End Role="REGISTRATION" Type="CLASSModel.REGISTRATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COURSE">
+              <PropertyRef Name="course_id" />
+            </Principal>
+            <Dependent Role="REGISTRATION">
+              <PropertyRef Name="primary_course_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SUPERVISOR_REF1">
+          <End Role="FACILITY_MASTER" Type="CLASSModel.FACILITY_MASTER" Multiplicity="0..1" />
+          <End Role="SUPERVISOR" Type="CLASSModel.SUPERVISOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACILITY_MASTER">
+              <PropertyRef Name="facility_master_id" />
+            </Principal>
+            <Dependent Role="SUPERVISOR">
+              <PropertyRef Name="facility_master_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SUPERVISOR_REF2">
+          <End Role="PERSON" Type="CLASSModel.PERSON" Multiplicity="1" />
+          <End Role="SUPERVISOR" Type="CLASSModel.SUPERVISOR" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PERSON">
+              <PropertyRef Name="person_id" />
+            </Principal>
+            <Dependent Role="SUPERVISOR">
+              <PropertyRef Name="person_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CLASSModelStoreContainer" CdmEntityContainer="CLASSEntities">
+          <EntitySetMapping Name="ACCOUNTs"><EntityTypeMapping TypeName="CLASSModel.ACCOUNT"><MappingFragment StoreEntitySet="ACCOUNT">
+            <ScalarProperty Name="account_id" ColumnName="account_id" />
+            <ScalarProperty Name="account_status_id" ColumnName="account_status_id" />
+            <ScalarProperty Name="account_category_id" ColumnName="account_category_id" />
+            <ScalarProperty Name="adjustment_id" ColumnName="adjustment_id" />
+            <ScalarProperty Name="person_id" ColumnName="person_id" />
+            <ScalarProperty Name="organization_flag" ColumnName="organization_flag" />
+            <ScalarProperty Name="title" ColumnName="title" />
+            <ScalarProperty Name="address_id" ColumnName="address_id" />
+            <ScalarProperty Name="business_area" ColumnName="business_area" />
+            <ScalarProperty Name="business_phone" ColumnName="business_phone" />
+            <ScalarProperty Name="business_ext" ColumnName="business_ext" />
+            <ScalarProperty Name="home_area" ColumnName="home_area" />
+            <ScalarProperty Name="home_phone" ColumnName="home_phone" />
+            <ScalarProperty Name="home_ext" ColumnName="home_ext" />
+            <ScalarProperty Name="fax_area" ColumnName="fax_area" />
+            <ScalarProperty Name="fax_phone" ColumnName="fax_phone" />
+            <ScalarProperty Name="fax_ext" ColumnName="fax_ext" />
+            <ScalarProperty Name="current_balance" ColumnName="current_balance" />
+            <ScalarProperty Name="future_balance" ColumnName="future_balance" />
+            <ScalarProperty Name="unallocated_balance" ColumnName="unallocated_balance" />
+            <ScalarProperty Name="last_statement_date" ColumnName="last_statement_date" />
+            <ScalarProperty Name="last_statement_balance" ColumnName="last_statement_balance" />
+            <ScalarProperty Name="pin_number" ColumnName="pin_number" />
+            <ScalarProperty Name="fee_category_id" ColumnName="fee_category_id" />
+            <ScalarProperty Name="email_address" ColumnName="email_address" />
+            <ScalarProperty Name="creation_datetime" ColumnName="creation_datetime" />
+            <ScalarProperty Name="creation_user" ColumnName="creation_user" />
+            <ScalarProperty Name="datestamp" ColumnName="datestamp" />
+            <ScalarProperty Name="userstamp" ColumnName="userstamp" />
+            <ScalarProperty Name="alert_text_flag" ColumnName="alert_text_flag" />
+            <ScalarProperty Name="current_points_balance" ColumnName="current_points_balance" />
+            <ScalarProperty Name="points_member" ColumnName="points_member" />
+            <ScalarProperty Name="points_member_datetime" ColumnName="points_member_datetime" />
+            <ScalarProperty Name="lockout_datetime" ColumnName="lockout_datetime" />
+            <ScalarProperty Name="invalid_login_count" ColumnName="invalid_login_count" />
+            <ScalarProperty Name="invalid_login_count_datestamp" ColumnName="invalid_login_count_datestamp" />
+            <ScalarProperty Name="email_private" ColumnName="email_private" />
+            <ScalarProperty Name="third_party_billing" ColumnName="third_party_billing" />
+            <ScalarProperty Name="allow_debit_balance" ColumnName="allow_debit_balance" />
+            <ScalarProperty Name="common_expiry_date" ColumnName="common_expiry_date" />
+            <ScalarProperty Name="source_type" ColumnName="source_type" />
+            <ScalarProperty Name="internet_update_flag" ColumnName="internet_update_flag" />
+            <ScalarProperty Name="account_type" ColumnName="account_type" />
+            <ScalarProperty Name="account_alt_id" ColumnName="account_alt_id" />
+            <ScalarProperty Name="iqr_lockout_flag" ColumnName="iqr_lockout_flag" />
+            <ScalarProperty Name="no_show_count" ColumnName="no_show_count" />
+            <ScalarProperty Name="iqr_lockout_datestamp" ColumnName="iqr_lockout_datestamp" />
+            <ScalarProperty Name="flex_benefit_flag" ColumnName="flex_benefit_flag" />
+            <ScalarProperty Name="alert_text" ColumnName="alert_text" />
+            <ScalarProperty Name="subsidy_provider" ColumnName="subsidy_provider" />
+            <ScalarProperty Name="last_refreshed_date" ColumnName="last_refreshed_date" />
+            <ScalarProperty Name="home_stripped" ColumnName="home_stripped" />
+            <ScalarProperty Name="business_stripped" ColumnName="business_stripped" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="ACTIVITies"><EntityTypeMapping TypeName="CLASSModel.ACTIVITY"><MappingFragment StoreEntitySet="ACTIVITY">
+            <ScalarProperty Name="activity_id" ColumnName="activity_id" />
+            <ScalarProperty Name="brochure_subsection_id" ColumnName="brochure_subsection_id" />
+            <ScalarProperty Name="brochure_section_id" ColumnName="brochure_section_id" />
+            <ScalarProperty Name="name" ColumnName="name" />
+            <ScalarProperty Name="title" ColumnName="title" />
+            <ScalarProperty Name="min_age_type" ColumnName="min_age_type" />
+            <ScalarProperty Name="min_age" ColumnName="min_age" />
+            <ScalarProperty Name="max_age_type" ColumnName="max_age_type" />
+            <ScalarProperty Name="max_age" ColumnName="max_age" />
+            <ScalarProperty Name="default_min_registrants" ColumnName="default_min_registrants" />
+            <ScalarProperty Name="default_max_registrants" ColumnName="default_max_registrants" />
+            <ScalarProperty Name="attendance_mandatory_flag" ColumnName="attendance_mandatory_flag" />
+            <ScalarProperty Name="attendance_by_class_flag" ColumnName="attendance_by_class_flag" />
+            <ScalarProperty Name="sched_payment_allowed_flag" ColumnName="sched_payment_allowed_flag" />
+            <ScalarProperty Name="group_registrations_allowed" ColumnName="group_registrations_allowed" />
+            <ScalarProperty Name="deferred_gl_account_id" ColumnName="deferred_gl_account_id" />
+            <ScalarProperty Name="bus_stop_id" ColumnName="bus_stop_id" />
+            <ScalarProperty Name="ttr_flag" ColumnName="ttr_flag" />
+            <ScalarProperty Name="internet_query_flag" ColumnName="internet_query_flag" />
+            <ScalarProperty Name="internet_registration_flag" ColumnName="internet_registration_flag" />
+            <ScalarProperty Name="datestamp" ColumnName="datestamp" />
+            <ScalarProperty Name="userstamp" ColumnName="userstamp" />
+            <ScalarProperty Name="daycare_flag" ColumnName="daycare_flag" />
+            <ScalarProperty Name="award_points_flag" ColumnName="award_points_flag" />
+            <ScalarProperty Name="allow_point_redemption_flag" ColumnName="allow_point_redemption_flag" />
+            <ScalarProperty Name="allow_third_party_billing" ColumnName="allow_third_party_billing" />
+            <ScalarProperty Name="include_in_tax_receipt" ColumnName="include_in_tax_receipt" />
+            <ScalarProperty Name="active" ColumnName="active" />
+            <ScalarProperty Name="late_public_reg_flag" ColumnName="late_public_reg_flag" />
+            <ScalarProperty Name="late_public_withdraw_flag" ColumnName="late_public_withdraw_flag" />
+            <ScalarProperty Name="allow_linked_courses" ColumnName="allow_linked_courses" />
+            <ScalarProperty Name="linked_registrations_only" ColumnName="linked_registrations_only" />
+            <ScalarProperty Name="pub_access_pay_plan" ColumnName="pub_access_pay_plan" />
+            <ScalarProperty Name="subsidy_flag" ColumnName="subsidy_flag" />
+            <ScalarProperty Name="allow_portal_display_flag" ColumnName="allow_portal_display_flag" />
+            <ScalarProperty Name="flexcare_flag" ColumnName="flexcare_flag" />
+            <ScalarProperty Name="track_attendance_per_reg" ColumnName="track_attendance_per_reg" />
+            <ScalarProperty Name="revenue_deferral_option" ColumnName="revenue_deferral_option" />
+            <ScalarProperty Name="all_prereq_flag" ColumnName="all_prereq_flag" />
+            <ScalarProperty Name="race_flag" ColumnName="race_flag" />
+            <ScalarProperty Name="description_memo_id" ColumnName="description_memo_id" />
+            <ScalarProperty Name="internet_max_size" ColumnName="internet_max_size" />
+            <ScalarProperty Name="alert_text" ColumnName="alert_text" />
+            <ScalarProperty Name="confirmation_text" ColumnName="confirmation_text" />
+            <ScalarProperty Name="description" ColumnName="description" />
+            <ScalarProperty Name="eligibility_percent" ColumnName="eligibility_percent" />
+            <ScalarProperty Name="camp_flag" ColumnName="camp_flag" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="CLIENTs"><EntityTypeMapping TypeName="CLASSModel.CLIENT"><MappingFragment StoreEntitySet="CLIENT">
+            <ScalarProperty Name="client_id" ColumnName="client_id" />
+            <ScalarProperty Name="client_status_id" ColumnName="client_status_id" />
+            <ScalarProperty Name="position_id" ColumnName="position_id" />
+            <ScalarProperty Name="person_id" ColumnName="person_id" />
+            <ScalarProperty Name="account_id" ColumnName="account_id" />
+            <ScalarProperty Name="barcode_number" ColumnName="barcode_number" />
+            <ScalarProperty Name="datestamp" ColumnName="datestamp" />
+            <ScalarProperty Name="userstamp" ColumnName="userstamp" />
+            <ScalarProperty Name="card_required" ColumnName="card_required" />
+            <ScalarProperty Name="card_required_date" ColumnName="card_required_date" />
+            <ScalarProperty Name="workstation_location_id" ColumnName="workstation_location_id" />
+            <ScalarProperty Name="terminal_id" ColumnName="terminal_id" />
+            <ScalarProperty Name="user_id" ColumnName="user_id" />
+            <ScalarProperty Name="internet_login_id" ColumnName="internet_login_id" />
+            <ScalarProperty Name="active_player_flag" ColumnName="active_player_flag" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="COURSEs"><EntityTypeMapping TypeName="CLASSModel.COURSE"><MappingFragment StoreEntitySet="COURSE">
+            <ScalarProperty Name="course_id" ColumnName="course_id" />
+            <ScalarProperty Name="deferred_gl_account_id" ColumnName="deferred_gl_account_id" />
+            <ScalarProperty Name="activity_id" ColumnName="activity_id" />
+            <ScalarProperty Name="session_year" ColumnName="session_year" />
+            <ScalarProperty Name="session_title_id" ColumnName="session_title_id" />
+            <ScalarProperty Name="course_number" ColumnName="course_number" />
+            <ScalarProperty Name="course_status_id" ColumnName="course_status_id" />
+            <ScalarProperty Name="booking_start_date" ColumnName="booking_start_date" />
+            <ScalarProperty Name="first_facility" ColumnName="first_facility" />
+            <ScalarProperty Name="first_start_datetime" ColumnName="first_start_datetime" />
+            <ScalarProperty Name="first_end_datetime" ColumnName="first_end_datetime" />
+            <ScalarProperty Name="first_num_bookings" ColumnName="first_num_bookings" />
+            <ScalarProperty Name="last_start_datetime" ColumnName="last_start_datetime" />
+            <ScalarProperty Name="last_end_datetime" ColumnName="last_end_datetime" />
+            <ScalarProperty Name="days_of_week" ColumnName="days_of_week" />
+            <ScalarProperty Name="total_minutes" ColumnName="total_minutes" />
+            <ScalarProperty Name="course_group_id" ColumnName="course_group_id" />
+            <ScalarProperty Name="supervisor" ColumnName="supervisor" />
+            <ScalarProperty Name="reg_start_date" ColumnName="reg_start_date" />
+            <ScalarProperty Name="min_registrants" ColumnName="min_registrants" />
+            <ScalarProperty Name="max_registrants" ColumnName="max_registrants" />
+            <ScalarProperty Name="num_reserved" ColumnName="num_reserved" />
+            <ScalarProperty Name="num_registered" ColumnName="num_registered" />
+            <ScalarProperty Name="num_waitlisted" ColumnName="num_waitlisted" />
+            <ScalarProperty Name="barcode_number" ColumnName="barcode_number" />
+            <ScalarProperty Name="cancel_datetime" ColumnName="cancel_datetime" />
+            <ScalarProperty Name="cancel_reason_id" ColumnName="cancel_reason_id" />
+            <ScalarProperty Name="increased_demand_flag" ColumnName="increased_demand_flag" />
+            <ScalarProperty Name="min_age" ColumnName="min_age" />
+            <ScalarProperty Name="max_age" ColumnName="max_age" />
+            <ScalarProperty Name="min_age_type" ColumnName="min_age_type" />
+            <ScalarProperty Name="max_age_type" ColumnName="max_age_type" />
+            <ScalarProperty Name="internet_display_date" ColumnName="internet_display_date" />
+            <ScalarProperty Name="userstamp" ColumnName="userstamp" />
+            <ScalarProperty Name="datestamp" ColumnName="datestamp" />
+            <ScalarProperty Name="title" ColumnName="title" />
+            <ScalarProperty Name="schedule_method" ColumnName="schedule_method" />
+            <ScalarProperty Name="schedule_payments_flag" ColumnName="schedule_payments_flag" />
+            <ScalarProperty Name="use_default_points_per_dollar" ColumnName="use_default_points_per_dollar" />
+            <ScalarProperty Name="points_per_dollar" ColumnName="points_per_dollar" />
+            <ScalarProperty Name="gl_account_id" ColumnName="gl_account_id" />
+            <ScalarProperty Name="nr_reg_start_date" ColumnName="nr_reg_start_date" />
+            <ScalarProperty Name="include_in_tax_receipt" ColumnName="include_in_tax_receipt" />
+            <ScalarProperty Name="rollover_course_id" ColumnName="rollover_course_id" />
+            <ScalarProperty Name="residential_flag" ColumnName="residential_flag" />
+            <ScalarProperty Name="internet_display_until_date" ColumnName="internet_display_until_date" />
+            <ScalarProperty Name="age_as_of" ColumnName="age_as_of" />
+            <ScalarProperty Name="age_as_of_date" ColumnName="age_as_of_date" />
+            <ScalarProperty Name="member_reg_start_date" ColumnName="member_reg_start_date" />
+            <ScalarProperty Name="reg_start_time" ColumnName="reg_start_time" />
+            <ScalarProperty Name="reg_end_date" ColumnName="reg_end_date" />
+            <ScalarProperty Name="subsidy_flag" ColumnName="subsidy_flag" />
+            <ScalarProperty Name="base_instructor_rate_flag" ColumnName="base_instructor_rate_flag" />
+            <ScalarProperty Name="photo_req_flag" ColumnName="photo_req_flag" />
+            <ScalarProperty Name="auth_pickup_req_flag" ColumnName="auth_pickup_req_flag" />
+            <ScalarProperty Name="track_attendance" ColumnName="track_attendance" />
+            <ScalarProperty Name="flexcare_station_enabled" ColumnName="flexcare_station_enabled" />
+            <ScalarProperty Name="dependent_care_flag" ColumnName="dependent_care_flag" />
+            <ScalarProperty Name="public_access_adj_id" ColumnName="public_access_adj_id" />
+            <ScalarProperty Name="race_team_flag" ColumnName="race_team_flag" />
+            <ScalarProperty Name="race_team_caption" ColumnName="race_team_caption" />
+            <ScalarProperty Name="race_team_min" ColumnName="race_team_min" />
+            <ScalarProperty Name="race_team_max" ColumnName="race_team_max" />
+            <ScalarProperty Name="cmf_text_memo_id" ColumnName="cmf_text_memo_id" />
+            <ScalarProperty Name="race_team_adj_id" ColumnName="race_team_adj_id" />
+            <ScalarProperty Name="medal_code_id" ColumnName="medal_code_id" />
+            <ScalarProperty Name="alert_text" ColumnName="alert_text" />
+            <ScalarProperty Name="cancel_reason" ColumnName="cancel_reason" />
+            <ScalarProperty Name="confirmation_text" ColumnName="confirmation_text" />
+            <ScalarProperty Name="description" ColumnName="description" />
+            <ScalarProperty Name="programmer_notes" ColumnName="programmer_notes" />
+            <ScalarProperty Name="eligibility_percent" ColumnName="eligibility_percent" />
+            <ScalarProperty Name="camp_flag" ColumnName="camp_flag" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="FACILITY_MASTER"><EntityTypeMapping TypeName="CLASSModel.FACILITY_MASTER"><MappingFragment StoreEntitySet="FACILITY_MASTER">
+            <ScalarProperty Name="facility_master_id" ColumnName="facility_master_id" />
+            <ScalarProperty Name="person_id" ColumnName="person_id" />
+            <ScalarProperty Name="facility_owner_id" ColumnName="facility_owner_id" />
+            <ScalarProperty Name="address_id" ColumnName="address_id" />
+            <ScalarProperty Name="gl_account_id" ColumnName="gl_account_id" />
+            <ScalarProperty Name="title" ColumnName="title" />
+            <ScalarProperty Name="business_area" ColumnName="business_area" />
+            <ScalarProperty Name="business_phone" ColumnName="business_phone" />
+            <ScalarProperty Name="business_ext" ColumnName="business_ext" />
+            <ScalarProperty Name="emergency_area" ColumnName="emergency_area" />
+            <ScalarProperty Name="emergency_phone" ColumnName="emergency_phone" />
+            <ScalarProperty Name="emergency_ext" ColumnName="emergency_ext" />
+            <ScalarProperty Name="fax_area" ColumnName="fax_area" />
+            <ScalarProperty Name="fax_phone" ColumnName="fax_phone" />
+            <ScalarProperty Name="fax_ext" ColumnName="fax_ext" />
+            <ScalarProperty Name="bus_stop_id" ColumnName="bus_stop_id" />
+            <ScalarProperty Name="x_coordinate" ColumnName="x_coordinate" />
+            <ScalarProperty Name="y_coordinate" ColumnName="y_coordinate" />
+            <ScalarProperty Name="datestamp" ColumnName="datestamp" />
+            <ScalarProperty Name="userstamp" ColumnName="userstamp" />
+            <ScalarProperty Name="tax_number" ColumnName="tax_number" />
+            <ScalarProperty Name="gis_map_address" ColumnName="gis_map_address" />
+            <ScalarProperty Name="internet_availability_flag" ColumnName="internet_availability_flag" />
+            <ScalarProperty Name="internet_query_flag" ColumnName="internet_query_flag" />
+            <ScalarProperty Name="active" ColumnName="active" />
+            <ScalarProperty Name="equipment_gl_account_id" ColumnName="equipment_gl_account_id" />
+            <ScalarProperty Name="equipment_query_flag" ColumnName="equipment_query_flag" />
+            <ScalarProperty Name="quickrez_due_option" ColumnName="quickrez_due_option" />
+            <ScalarProperty Name="fac_internet_quickrez_flag" ColumnName="fac_internet_quickrez_flag" />
+            <ScalarProperty Name="equip_internet_quickrez_flag" ColumnName="equip_internet_quickrez_flag" />
+            <ScalarProperty Name="equipment_availability_flag" ColumnName="equipment_availability_flag" />
+            <ScalarProperty Name="light_id" ColumnName="light_id" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="People"><EntityTypeMapping TypeName="CLASSModel.PERSON"><MappingFragment StoreEntitySet="PERSON">
+            <ScalarProperty Name="person_id" ColumnName="person_id" />
+            <ScalarProperty Name="last_name" ColumnName="last_name" />
+            <ScalarProperty Name="first_name" ColumnName="first_name" />
+            <ScalarProperty Name="person_status_id" ColumnName="person_status_id" />
+            <ScalarProperty Name="birthdate_alternative_id" ColumnName="birthdate_alternative_id" />
+            <ScalarProperty Name="address_id" ColumnName="address_id" />
+            <ScalarProperty Name="business_area" ColumnName="business_area" />
+            <ScalarProperty Name="business_phone" ColumnName="business_phone" />
+            <ScalarProperty Name="business_ext" ColumnName="business_ext" />
+            <ScalarProperty Name="home_area" ColumnName="home_area" />
+            <ScalarProperty Name="home_phone" ColumnName="home_phone" />
+            <ScalarProperty Name="home_ext" ColumnName="home_ext" />
+            <ScalarProperty Name="fax_area" ColumnName="fax_area" />
+            <ScalarProperty Name="fax_phone" ColumnName="fax_phone" />
+            <ScalarProperty Name="fax_ext" ColumnName="fax_ext" />
+            <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+            <ScalarProperty Name="gender_id" ColumnName="gender_id" />
+            <ScalarProperty Name="user_flag" ColumnName="user_flag" />
+            <ScalarProperty Name="caretaker_flag" ColumnName="caretaker_flag" />
+            <ScalarProperty Name="instructor_flag" ColumnName="instructor_flag" />
+            <ScalarProperty Name="supervisor_flag" ColumnName="supervisor_flag" />
+            <ScalarProperty Name="sin" ColumnName="sin" />
+            <ScalarProperty Name="email_address" ColumnName="email_address" />
+            <ScalarProperty Name="creation_datetime" ColumnName="creation_datetime" />
+            <ScalarProperty Name="creation_user" ColumnName="creation_user" />
+            <ScalarProperty Name="datestamp" ColumnName="datestamp" />
+            <ScalarProperty Name="userstamp" ColumnName="userstamp" />
+            <ScalarProperty Name="school_grade" ColumnName="school_grade" />
+            <ScalarProperty Name="alert_text_flag" ColumnName="alert_text_flag" />
+            <ScalarProperty Name="language_id" ColumnName="language_id" />
+            <ScalarProperty Name="email_private" ColumnName="email_private" />
+            <ScalarProperty Name="initial_join_date" ColumnName="initial_join_date" />
+            <ScalarProperty Name="continuous_member_date" ColumnName="continuous_member_date" />
+            <ScalarProperty Name="cell_area" ColumnName="cell_area" />
+            <ScalarProperty Name="cell_phone" ColumnName="cell_phone" />
+            <ScalarProperty Name="pager_area" ColumnName="pager_area" />
+            <ScalarProperty Name="pager_phone" ColumnName="pager_phone" />
+            <ScalarProperty Name="pager_ext" ColumnName="pager_ext" />
+            <ScalarProperty Name="source_type" ColumnName="source_type" />
+            <ScalarProperty Name="title1_id" ColumnName="title1_id" />
+            <ScalarProperty Name="title2_id" ColumnName="title2_id" />
+            <ScalarProperty Name="suffix1_id" ColumnName="suffix1_id" />
+            <ScalarProperty Name="suffix2_id" ColumnName="suffix2_id" />
+            <ScalarProperty Name="marital_status_id" ColumnName="marital_status_id" />
+            <ScalarProperty Name="ethnicity_id" ColumnName="ethnicity_id" />
+            <ScalarProperty Name="occupation_id" ColumnName="occupation_id" />
+            <ScalarProperty Name="income_level_id" ColumnName="income_level_id" />
+            <ScalarProperty Name="religion_id" ColumnName="religion_id" />
+            <ScalarProperty Name="deceased_date" ColumnName="deceased_date" />
+            <ScalarProperty Name="policy_volunteer" ColumnName="policy_volunteer" />
+            <ScalarProperty Name="program_volunteer" ColumnName="program_volunteer" />
+            <ScalarProperty Name="facility_volunteer" ColumnName="facility_volunteer" />
+            <ScalarProperty Name="alert_text" ColumnName="alert_text" />
+            <ScalarProperty Name="disabled_flag_for_fitness" ColumnName="disabled_flag_for_fitness" />
+            <ScalarProperty Name="home_stripped" ColumnName="home_stripped" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="REGISTRATIONs"><EntityTypeMapping TypeName="CLASSModel.REGISTRATION"><MappingFragment StoreEntitySet="REGISTRATION">
+            <ScalarProperty Name="registration_id" ColumnName="registration_id" />
+            <ScalarProperty Name="course_grade_id" ColumnName="course_grade_id" />
+            <ScalarProperty Name="registration_status_id" ColumnName="registration_status_id" />
+            <ScalarProperty Name="course_fee_id" ColumnName="course_fee_id" />
+            <ScalarProperty Name="client_id" ColumnName="client_id" />
+            <ScalarProperty Name="course_id" ColumnName="course_id" />
+            <ScalarProperty Name="creation_datetime" ColumnName="creation_datetime" />
+            <ScalarProperty Name="attendance" ColumnName="attendance" />
+            <ScalarProperty Name="course_grade" ColumnName="course_grade" />
+            <ScalarProperty Name="course_fee_amount" ColumnName="course_fee_amount" />
+            <ScalarProperty Name="classes_gone" ColumnName="classes_gone" />
+            <ScalarProperty Name="total_classes" ColumnName="total_classes" />
+            <ScalarProperty Name="fee_amount" ColumnName="fee_amount" />
+            <ScalarProperty Name="tax_amount" ColumnName="tax_amount" />
+            <ScalarProperty Name="xfee_amount" ColumnName="xfee_amount" />
+            <ScalarProperty Name="xfee_tax_amount" ColumnName="xfee_tax_amount" />
+            <ScalarProperty Name="net_registration_amount" ColumnName="net_registration_amount" />
+            <ScalarProperty Name="num_registered" ColumnName="num_registered" />
+            <ScalarProperty Name="tax_flag" ColumnName="tax_flag" />
+            <ScalarProperty Name="adjustment_flag" ColumnName="adjustment_flag" />
+            <ScalarProperty Name="xfee_flag" ColumnName="xfee_flag" />
+            <ScalarProperty Name="cancel_reason_id" ColumnName="cancel_reason_id" />
+            <ScalarProperty Name="cancel_datetime" ColumnName="cancel_datetime" />
+            <ScalarProperty Name="cancel_user" ColumnName="cancel_user" />
+            <ScalarProperty Name="pickup_bus_route_id" ColumnName="pickup_bus_route_id" />
+            <ScalarProperty Name="pickup_bus_stop_id" ColumnName="pickup_bus_stop_id" />
+            <ScalarProperty Name="dropoff_bus_route_id" ColumnName="dropoff_bus_route_id" />
+            <ScalarProperty Name="dropoff_bus_stop_id" ColumnName="dropoff_bus_stop_id" />
+            <ScalarProperty Name="source_type" ColumnName="source_type" />
+            <ScalarProperty Name="datestamp" ColumnName="datestamp" />
+            <ScalarProperty Name="userstamp" ColumnName="userstamp" />
+            <ScalarProperty Name="billing_flag" ColumnName="billing_flag" />
+            <ScalarProperty Name="payment_plan_id" ColumnName="payment_plan_id" />
+            <ScalarProperty Name="bus_fee_amount" ColumnName="bus_fee_amount" />
+            <ScalarProperty Name="bus_fee_tax_amount" ColumnName="bus_fee_tax_amount" />
+            <ScalarProperty Name="pickup_refund_option" ColumnName="pickup_refund_option" />
+            <ScalarProperty Name="dropoff_refund_option" ColumnName="dropoff_refund_option" />
+            <ScalarProperty Name="primary_course_id" ColumnName="primary_course_id" />
+            <ScalarProperty Name="creation_user_id" ColumnName="creation_user_id" />
+            <ScalarProperty Name="subsidy_flag" ColumnName="subsidy_flag" />
+            <ScalarProperty Name="equiv_resi_fee_amount" ColumnName="equiv_resi_fee_amount" />
+            <ScalarProperty Name="equiv_resi_course_fee_amount" ColumnName="equiv_resi_course_fee_amount" />
+            <ScalarProperty Name="equiv_fee_flag" ColumnName="equiv_fee_flag" />
+            <ScalarProperty Name="member_fee_type" ColumnName="member_fee_type" />
+            <ScalarProperty Name="resident_fee_type" ColumnName="resident_fee_type" />
+            <ScalarProperty Name="withdraw_classes_gone" ColumnName="withdraw_classes_gone" />
+            <ScalarProperty Name="race_corral" ColumnName="race_corral" />
+            <ScalarProperty Name="race_bib" ColumnName="race_bib" />
+            <ScalarProperty Name="race_result" ColumnName="race_result" />
+            <ScalarProperty Name="race_place" ColumnName="race_place" />
+            <ScalarProperty Name="race_div_place" ColumnName="race_div_place" />
+            <ScalarProperty Name="race_gender_place" ColumnName="race_gender_place" />
+            <ScalarProperty Name="cancel_reason" ColumnName="cancel_reason" />
+            <ScalarProperty Name="cut_off_date" ColumnName="cut_off_date" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="SUPERVISORs"><EntityTypeMapping TypeName="CLASSModel.SUPERVISOR"><MappingFragment StoreEntitySet="SUPERVISOR">
+            <ScalarProperty Name="person_id" ColumnName="person_id" />
+            <ScalarProperty Name="facility_master_id" ColumnName="facility_master_id" />
+            <ScalarProperty Name="person_status_id" ColumnName="person_status_id" />
+            <ScalarProperty Name="datestamp" ColumnName="datestamp" />
+            <ScalarProperty Name="userstamp" ColumnName="userstamp" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Class">
+        <EntityTypeShape EntityType="CLASSModel.ACCOUNT" Width="1.5" PointX="3" PointY="11.125" Height="9.9740201822916674" IsExpanded="true" />
+        <EntityTypeShape EntityType="CLASSModel.ACTIVITY" Width="1.5" PointX="6" PointY="0.75" Height="8.8235888671874978" IsExpanded="true" />
+        <EntityTypeShape EntityType="CLASSModel.CLIENT" Width="1.5" PointX="5.25" PointY="14.25" Height="3.893168945312496" IsExpanded="true" />
+        <EntityTypeShape EntityType="CLASSModel.COURSE" Width="1.5" PointX="8.25" PointY="5.25" Height="13.918356119791667" IsExpanded="true" />
+        <EntityTypeShape EntityType="CLASSModel.FACILITY_MASTER" Width="1.5" PointX="3.75" PointY="4" Height="6.3583789062500014" IsExpanded="true" />
+        <EntityTypeShape EntityType="CLASSModel.PERSON" Width="1.5" PointX="0.75" PointY="10.875" Height="10.467062174479167" IsExpanded="true" />
+        <EntityTypeShape EntityType="CLASSModel.REGISTRATION" Width="1.5" PointX="10.5" PointY="7" Height="10.302714843750003" IsExpanded="true" />
+        <EntityTypeShape EntityType="CLASSModel.SUPERVISOR" Width="1.5" PointX="6" PointY="11" Height="2.2496956380208317" IsExpanded="true" />
+        <AssociationConnector Association="CLASSModel.ACCOUNT_REF4" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="16.112010091145834" />
+          <ConnectorPoint PointX="3" PointY="16.112010091145834" />
+        </AssociationConnector>
+        <AssociationConnector Association="CLASSModel.CLIENT_REF2" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="16.196584472656248" />
+          <ConnectorPoint PointX="5.25" PointY="16.196584472656248" />
+        </AssociationConnector>
+        <AssociationConnector Association="CLASSModel.COURSE_REF2" ManuallyRouted="false">
+          <ConnectorPoint PointX="7.5" PointY="7.4117944335937489" />
+          <ConnectorPoint PointX="8.25" PointY="7.4117944335937489" />
+        </AssociationConnector>
+        <AssociationConnector Association="CLASSModel.CLIENT_REF1" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="21.251791178385417" />
+          <ConnectorPoint PointX="6" PointY="21.251791178385417" />
+          <ConnectorPoint PointX="6" PointY="18.143168945312496" />
+        </AssociationConnector>
+        <AssociationConnector Association="CLASSModel.REGISTRATION_REF2" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="16.196584472656248" />
+          <ConnectorPoint PointX="7.072916666666667" PointY="16.196584472656248" />
+          <ConnectorPoint PointX="7.239583333333333" PointY="16.196584472656248" />
+          <ConnectorPoint PointX="8" PointY="16.196584472656248" />
+          <ConnectorPoint PointX="8" PointY="19.418356119791667" />
+          <ConnectorPoint PointX="8.6985897435897428" PointY="19.418356119791667" />
+          <ConnectorPoint PointX="8.86525641025641" PointY="19.418356119791667" />
+          <ConnectorPoint PointX="9.1451282051282039" PointY="19.418356119791667" />
+          <ConnectorPoint PointX="9.3117948717948718" PointY="19.418356119791667" />
+          <ConnectorPoint PointX="11.25" PointY="19.418356119791667" />
+          <ConnectorPoint PointX="11.25" PointY="17.302714843750003" />
+        </AssociationConnector>
+        <AssociationConnector Association="CLASSModel.COURSE_REF4" ManuallyRouted="false">
+          <ConnectorPoint PointX="7.5" PointY="12.124847819010416" />
+          <ConnectorPoint PointX="8.25" PointY="12.124847819010416" />
+        </AssociationConnector>
+        <AssociationConnector Association="CLASSModel.COURSE_REF8" ManuallyRouted="false">
+          <ConnectorPoint PointX="8.7819230769230767" PointY="19.168356119791667" />
+          <ConnectorPoint PointX="8.7819230769230767" PointY="19.668356119791667" />
+          <ConnectorPoint PointX="9.2284615384615378" PointY="19.668356119791667" />
+          <ConnectorPoint PointX="9.2284615384615378" PointY="19.168356119791667" />
+        </AssociationConnector>
+        <AssociationConnector Association="CLASSModel.REGISTRATION_REF1" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.75" PointY="12.151357421875002" />
+          <ConnectorPoint PointX="10.5" PointY="12.151357421875002" />
+        </AssociationConnector>
+        <AssociationConnector Association="CLASSModel.REGISTRATION_REF9" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.75" PointY="9.5131787109375" />
+          <ConnectorPoint PointX="10.5" PointY="9.5131787109375" />
+        </AssociationConnector>
+        <AssociationConnector Association="CLASSModel.SUPERVISOR_REF1" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.90625" PointY="10.358378906250001" />
+          <ConnectorPoint PointX="4.90625" PointY="11.03125" />
+          <ConnectorPoint PointX="6" PointY="11.03125" />
+        </AssociationConnector>
+        <AssociationConnector Association="CLASSModel.SUPERVISOR_REF2" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="21.220538678385424" />
+          <ConnectorPoint PointX="7.15625" PointY="21.220538678385424" />
+          <ConnectorPoint PointX="7.15625" PointY="13.249695638020832" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -26,6 +26,7 @@ namespace Evaluations.Models
         public String SurveyStatus { get; set; }
         public int CourseId { get; set; }
         public int ActivityId { get; set; }
+        public DateTime? ExpirationDate { get; set; }
 
     }
 }

@@ -1,0 +1,806 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Survey_DB_20Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="Survey_DB_20ModelStoreContainer">
+    <EntitySet Name="ANSWER" EntityType="Survey_DB_20Model.Store.ANSWER" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ANSWER_LONG" EntityType="Survey_DB_20Model.Store.ANSWER_LONG" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ANSWER_MULTIPLE_CHOICE" EntityType="Survey_DB_20Model.Store.ANSWER_MULTIPLE_CHOICE" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ANSWER_SCALE" EntityType="Survey_DB_20Model.Store.ANSWER_SCALE" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ANSWER_SHORT" EntityType="Survey_DB_20Model.Store.ANSWER_SHORT" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ANSWER_TRUE_FALSE" EntityType="Survey_DB_20Model.Store.ANSWER_TRUE_FALSE" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ANSWER_TYPE" EntityType="Survey_DB_20Model.Store.ANSWER_TYPE" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="aspnet_Applications" EntityType="Survey_DB_20Model.Store.aspnet_Applications" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="aspnet_Membership" EntityType="Survey_DB_20Model.Store.aspnet_Membership" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="aspnet_Paths" EntityType="Survey_DB_20Model.Store.aspnet_Paths" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="aspnet_PersonalizationAllUsers" EntityType="Survey_DB_20Model.Store.aspnet_PersonalizationAllUsers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="aspnet_PersonalizationPerUser" EntityType="Survey_DB_20Model.Store.aspnet_PersonalizationPerUser" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="aspnet_Profile" EntityType="Survey_DB_20Model.Store.aspnet_Profile" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="aspnet_Roles" EntityType="Survey_DB_20Model.Store.aspnet_Roles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="aspnet_SchemaVersions" EntityType="Survey_DB_20Model.Store.aspnet_SchemaVersions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="aspnet_Users" EntityType="Survey_DB_20Model.Store.aspnet_Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="aspnet_UsersInRoles" EntityType="Survey_DB_20Model.Store.aspnet_UsersInRoles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="aspnet_WebEvent_Events" EntityType="Survey_DB_20Model.Store.aspnet_WebEvent_Events" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="COURSE_STATUS" EntityType="Survey_DB_20Model.Store.COURSE_STATUS" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="QUESTION" EntityType="Survey_DB_20Model.Store.QUESTION" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="QUESTION_MULTIPLE_CHOICE" EntityType="Survey_DB_20Model.Store.QUESTION_MULTIPLE_CHOICE" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="QUESTION_SCALE" EntityType="Survey_DB_20Model.Store.QUESTION_SCALE" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SURVEY" EntityType="Survey_DB_20Model.Store.SURVEY" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SURVEY_QUESTIONS" EntityType="Survey_DB_20Model.Store.SURVEY_QUESTIONS" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SURVEY_REQUEST_SENT" EntityType="Survey_DB_20Model.Store.SURVEY_REQUEST_SENT" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SURVEY_SECTION" EntityType="Survey_DB_20Model.Store.SURVEY_SECTION" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="USERS" EntityType="Survey_DB_20Model.Store.USERS" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK__aspnet_Me__Appli__4A8310C6" Association="Survey_DB_20Model.Store.FK__aspnet_Me__Appli__4A8310C6">
+      <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+      <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Me__UserI__4B7734FF" Association="Survey_DB_20Model.Store.FK__aspnet_Me__UserI__4B7734FF">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Pa__Appli__7C1A6C5A" Association="Survey_DB_20Model.Store.FK__aspnet_Pa__Appli__7C1A6C5A">
+      <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+      <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Pe__PathI__01D345B0" Association="Survey_DB_20Model.Store.FK__aspnet_Pe__PathI__01D345B0">
+      <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
+      <End Role="aspnet_PersonalizationAllUsers" EntitySet="aspnet_PersonalizationAllUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Pe__PathI__05A3D694" Association="Survey_DB_20Model.Store.FK__aspnet_Pe__PathI__05A3D694">
+      <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
+      <End Role="aspnet_PersonalizationPerUser" EntitySet="aspnet_PersonalizationPerUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Pe__UserI__0697FACD" Association="Survey_DB_20Model.Store.FK__aspnet_Pe__UserI__0697FACD">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="aspnet_PersonalizationPerUser" EntitySet="aspnet_PersonalizationPerUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Pr__UserI__5F7E2DAC" Association="Survey_DB_20Model.Store.FK__aspnet_Pr__UserI__5F7E2DAC">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="aspnet_Profile" EntitySet="aspnet_Profile" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Ro__Appli__690797E6" Association="Survey_DB_20Model.Store.FK__aspnet_Ro__Appli__690797E6">
+      <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+      <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Us__Appli__3A4CA8FD" Association="Survey_DB_20Model.Store.FK__aspnet_Us__Appli__3A4CA8FD">
+      <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Us__RoleI__6DCC4D03" Association="Survey_DB_20Model.Store.FK__aspnet_Us__RoleI__6DCC4D03">
+      <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
+      <End Role="aspnet_UsersInRoles" EntitySet="aspnet_UsersInRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Us__UserI__6CD828CA" Association="Survey_DB_20Model.Store.FK__aspnet_Us__UserI__6CD828CA">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="aspnet_UsersInRoles" EntitySet="aspnet_UsersInRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Answer_Question" Association="Survey_DB_20Model.Store.FK_Answer_Question">
+      <End Role="QUESTION" EntitySet="QUESTION" />
+      <End Role="ANSWER" EntitySet="ANSWER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Answer_SurveySent" Association="Survey_DB_20Model.Store.FK_Answer_SurveySent">
+      <End Role="SURVEY_REQUEST_SENT" EntitySet="SURVEY_REQUEST_SENT" />
+      <End Role="ANSWER" EntitySet="ANSWER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AnswerLong_Answer" Association="Survey_DB_20Model.Store.FK_AnswerLong_Answer">
+      <End Role="ANSWER" EntitySet="ANSWER" />
+      <End Role="ANSWER_LONG" EntitySet="ANSWER_LONG" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AnswerLong_SurveySent" Association="Survey_DB_20Model.Store.FK_AnswerLong_SurveySent">
+      <End Role="SURVEY_REQUEST_SENT" EntitySet="SURVEY_REQUEST_SENT" />
+      <End Role="ANSWER_LONG" EntitySet="ANSWER_LONG" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AnswerMultiChoice_Answer" Association="Survey_DB_20Model.Store.FK_AnswerMultiChoice_Answer">
+      <End Role="ANSWER" EntitySet="ANSWER" />
+      <End Role="ANSWER_MULTIPLE_CHOICE" EntitySet="ANSWER_MULTIPLE_CHOICE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AnswerMultiChoice_SurveySent" Association="Survey_DB_20Model.Store.FK_AnswerMultiChoice_SurveySent">
+      <End Role="SURVEY_REQUEST_SENT" EntitySet="SURVEY_REQUEST_SENT" />
+      <End Role="ANSWER_MULTIPLE_CHOICE" EntitySet="ANSWER_MULTIPLE_CHOICE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AnswerScale_Answer" Association="Survey_DB_20Model.Store.FK_AnswerScale_Answer">
+      <End Role="ANSWER" EntitySet="ANSWER" />
+      <End Role="ANSWER_SCALE" EntitySet="ANSWER_SCALE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AnswerScale_SurveySent" Association="Survey_DB_20Model.Store.FK_AnswerScale_SurveySent">
+      <End Role="SURVEY_REQUEST_SENT" EntitySet="SURVEY_REQUEST_SENT" />
+      <End Role="ANSWER_SCALE" EntitySet="ANSWER_SCALE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AnswerShort_Answer" Association="Survey_DB_20Model.Store.FK_AnswerShort_Answer">
+      <End Role="ANSWER" EntitySet="ANSWER" />
+      <End Role="ANSWER_SHORT" EntitySet="ANSWER_SHORT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AnswerShort_SurveySent" Association="Survey_DB_20Model.Store.FK_AnswerShort_SurveySent">
+      <End Role="SURVEY_REQUEST_SENT" EntitySet="SURVEY_REQUEST_SENT" />
+      <End Role="ANSWER_SHORT" EntitySet="ANSWER_SHORT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AnswerTF_Answer" Association="Survey_DB_20Model.Store.FK_AnswerTF_Answer">
+      <End Role="ANSWER" EntitySet="ANSWER" />
+      <End Role="ANSWER_TRUE_FALSE" EntitySet="ANSWER_TRUE_FALSE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AnswerTF_SurveySent" Association="Survey_DB_20Model.Store.FK_AnswerTF_SurveySent">
+      <End Role="SURVEY_REQUEST_SENT" EntitySet="SURVEY_REQUEST_SENT" />
+      <End Role="ANSWER_TRUE_FALSE" EntitySet="ANSWER_TRUE_FALSE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Question_AnswerType" Association="Survey_DB_20Model.Store.FK_Question_AnswerType">
+      <End Role="ANSWER_TYPE" EntitySet="ANSWER_TYPE" />
+      <End Role="QUESTION" EntitySet="QUESTION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QuestionMultipleChoice_Question" Association="Survey_DB_20Model.Store.FK_QuestionMultipleChoice_Question">
+      <End Role="QUESTION" EntitySet="QUESTION" />
+      <End Role="QUESTION_MULTIPLE_CHOICE" EntitySet="QUESTION_MULTIPLE_CHOICE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QuestionScale_Question" Association="Survey_DB_20Model.Store.FK_QuestionScale_Question">
+      <End Role="QUESTION" EntitySet="QUESTION" />
+      <End Role="QUESTION_SCALE" EntitySet="QUESTION_SCALE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SurveyQuestions_Question" Association="Survey_DB_20Model.Store.FK_SurveyQuestions_Question">
+      <End Role="QUESTION" EntitySet="QUESTION" />
+      <End Role="SURVEY_QUESTIONS" EntitySet="SURVEY_QUESTIONS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SurveyQuestions_Section" Association="Survey_DB_20Model.Store.FK_SurveyQuestions_Section">
+      <End Role="SURVEY_SECTION" EntitySet="SURVEY_SECTION" />
+      <End Role="SURVEY_QUESTIONS" EntitySet="SURVEY_QUESTIONS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SurveyQuestions_Survey" Association="Survey_DB_20Model.Store.FK_SurveyQuestions_Survey">
+      <End Role="SURVEY" EntitySet="SURVEY" />
+      <End Role="SURVEY_QUESTIONS" EntitySet="SURVEY_QUESTIONS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SurveyRequestSent_Survey" Association="Survey_DB_20Model.Store.FK_SurveyRequestSent_Survey">
+      <End Role="SURVEY" EntitySet="SURVEY" />
+      <End Role="SURVEY_REQUEST_SENT" EntitySet="SURVEY_REQUEST_SENT" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ANSWER">
+    <Key>
+      <PropertyRef Name="answer_id" />
+    </Key>
+    <Property Name="answer_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="question_id" Type="int" Nullable="false" />
+    <Property Name="answer_type_id" Type="int" Nullable="false" />
+    <Property Name="survey_request_sent_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ANSWER_LONG">
+    <Key>
+      <PropertyRef Name="answer_long_id" />
+    </Key>
+    <Property Name="answer_long_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="answer_id" Type="int" Nullable="false" />
+    <Property Name="submitted_answer" Type="nchar" MaxLength="2000" />
+    <Property Name="survey_request_sent_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ANSWER_MULTIPLE_CHOICE">
+    <Key>
+      <PropertyRef Name="answer_multiple_choice_id" />
+    </Key>
+    <Property Name="answer_multiple_choice_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="answer_id" Type="int" Nullable="false" />
+    <Property Name="submitted_answer" Type="nchar" MaxLength="200" />
+    <Property Name="survey_request_sent_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ANSWER_SCALE">
+    <Key>
+      <PropertyRef Name="answer_scale_id" />
+    </Key>
+    <Property Name="answer_scale_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="answer_id" Type="int" Nullable="false" />
+    <Property Name="submitted_answer" Type="int" />
+    <Property Name="survey_request_sent_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ANSWER_SHORT">
+    <Key>
+      <PropertyRef Name="answer_short_id" />
+    </Key>
+    <Property Name="answer_short_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="answer_id" Type="int" Nullable="false" />
+    <Property Name="submitted_answer" Type="nchar" MaxLength="250" />
+    <Property Name="survey_request_sent_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ANSWER_TRUE_FALSE">
+    <Key>
+      <PropertyRef Name="answer_true_false_id" />
+    </Key>
+    <Property Name="answer_true_false_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="answer_id" Type="int" Nullable="false" />
+    <Property Name="submitted_answer" Type="bit" />
+    <Property Name="survey_request_sent_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ANSWER_TYPE">
+    <Key>
+      <PropertyRef Name="answer_type_id" />
+    </Key>
+    <Property Name="answer_type_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="answer_type_name" Type="nchar" Nullable="false" MaxLength="40" />
+    <Property Name="multi_choice_single" Type="bit" Nullable="false" />
+    <Property Name="multi_choice_multi" Type="bit" Nullable="false" />
+    <Property Name="scale" Type="bit" Nullable="false" />
+    <Property Name="answer_long" Type="bit" Nullable="false" />
+    <Property Name="answer_short" Type="bit" Nullable="false" />
+    <Property Name="true_false" Type="bit" Nullable="false" />
+    <Property Name="datestamp" Type="datetime" Nullable="false" />
+    <Property Name="user_stamp" Type="int" Nullable="false" />
+    <Property Name="controlName" Type="nchar" Nullable="false" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="aspnet_Applications">
+    <Key>
+      <PropertyRef Name="ApplicationId" />
+    </Key>
+    <Property Name="ApplicationName" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="LoweredApplicationName" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="aspnet_Membership">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="PasswordFormat" Type="int" Nullable="false" />
+    <Property Name="PasswordSalt" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="MobilePIN" Type="nvarchar" MaxLength="16" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="LoweredEmail" Type="nvarchar" MaxLength="256" />
+    <Property Name="PasswordQuestion" Type="nvarchar" MaxLength="256" />
+    <Property Name="PasswordAnswer" Type="nvarchar" MaxLength="128" />
+    <Property Name="IsApproved" Type="bit" Nullable="false" />
+    <Property Name="IsLockedOut" Type="bit" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="LastLoginDate" Type="datetime" Nullable="false" />
+    <Property Name="LastPasswordChangedDate" Type="datetime" Nullable="false" />
+    <Property Name="LastLockoutDate" Type="datetime" Nullable="false" />
+    <Property Name="FailedPasswordAttemptCount" Type="int" Nullable="false" />
+    <Property Name="FailedPasswordAttemptWindowStart" Type="datetime" Nullable="false" />
+    <Property Name="FailedPasswordAnswerAttemptCount" Type="int" Nullable="false" />
+    <Property Name="FailedPasswordAnswerAttemptWindowStart" Type="datetime" Nullable="false" />
+    <Property Name="Comment" Type="ntext" />
+  </EntityType>
+  <EntityType Name="aspnet_Paths">
+    <Key>
+      <PropertyRef Name="PathId" />
+    </Key>
+    <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="PathId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Path" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="LoweredPath" Type="nvarchar" Nullable="false" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="aspnet_PersonalizationAllUsers">
+    <Key>
+      <PropertyRef Name="PathId" />
+    </Key>
+    <Property Name="PathId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="PageSettings" Type="image" Nullable="false" />
+    <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="aspnet_PersonalizationPerUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="PathId" Type="uniqueidentifier" />
+    <Property Name="UserId" Type="uniqueidentifier" />
+    <Property Name="PageSettings" Type="image" Nullable="false" />
+    <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="aspnet_Profile">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="PropertyNames" Type="ntext" Nullable="false" />
+    <Property Name="PropertyValuesString" Type="ntext" Nullable="false" />
+    <Property Name="PropertyValuesBinary" Type="image" Nullable="false" />
+    <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="aspnet_Roles">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="LoweredRoleName" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="Description" Type="nvarchar" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="aspnet_SchemaVersions">
+    <Key>
+      <PropertyRef Name="Feature" />
+      <PropertyRef Name="CompatibleSchemaVersion" />
+    </Key>
+    <Property Name="Feature" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="CompatibleSchemaVersion" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="IsCurrentVersion" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="aspnet_Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="LoweredUserName" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="MobileAlias" Type="nvarchar" MaxLength="16" />
+    <Property Name="IsAnonymous" Type="bit" Nullable="false" />
+    <Property Name="LastActivityDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="aspnet_UsersInRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="aspnet_WebEvent_Events">
+    <Key>
+      <PropertyRef Name="EventId" />
+    </Key>
+    <Property Name="EventId" Type="char" Nullable="false" MaxLength="32" />
+    <Property Name="EventTimeUtc" Type="datetime" Nullable="false" />
+    <Property Name="EventTime" Type="datetime" Nullable="false" />
+    <Property Name="EventType" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="EventSequence" Type="decimal" Nullable="false" Precision="19" />
+    <Property Name="EventOccurrence" Type="decimal" Nullable="false" Precision="19" />
+    <Property Name="EventCode" Type="int" Nullable="false" />
+    <Property Name="EventDetailCode" Type="int" Nullable="false" />
+    <Property Name="Message" Type="nvarchar" MaxLength="1024" />
+    <Property Name="ApplicationPath" Type="nvarchar" MaxLength="256" />
+    <Property Name="ApplicationVirtualPath" Type="nvarchar" MaxLength="256" />
+    <Property Name="MachineName" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="RequestUrl" Type="nvarchar" MaxLength="1024" />
+    <Property Name="ExceptionType" Type="nvarchar" MaxLength="256" />
+    <Property Name="Details" Type="ntext" />
+  </EntityType>
+  <EntityType Name="COURSE_STATUS">
+    <Key>
+      <PropertyRef Name="course_status_id" />
+    </Key>
+    <Property Name="course_status_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="course_id" Type="int" Nullable="false" />
+    <Property Name="course_status" Type="char" Nullable="false" MaxLength="2" />
+    <Property Name="survey_exp_date" Type="datetime" />
+  </EntityType>
+  <EntityType Name="QUESTION">
+    <Key>
+      <PropertyRef Name="question_id" />
+    </Key>
+    <Property Name="question_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="answer_type_id" Type="int" Nullable="false" />
+    <Property Name="question_text" Type="nchar" Nullable="false" MaxLength="200" />
+    <Property Name="datestamp" Type="datetime" Nullable="false" />
+    <Property Name="user_stamp" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="QUESTION_MULTIPLE_CHOICE">
+    <Key>
+      <PropertyRef Name="question_multiple_choice_id" />
+    </Key>
+    <Property Name="question_multiple_choice_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="question_id" Type="int" Nullable="false" />
+    <Property Name="choice_text" Type="nchar" Nullable="false" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="QUESTION_SCALE">
+    <Key>
+      <PropertyRef Name="question_scale_id" />
+    </Key>
+    <Property Name="question_scale_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="question_id" Type="int" Nullable="false" />
+    <Property Name="scale_top_number" Type="int" Nullable="false" />
+    <Property Name="scale_bottom_number" Type="int" Nullable="false" />
+    <Property Name="scale_top_text" Type="nchar" Nullable="false" MaxLength="40" />
+    <Property Name="scale_bottom_text" Type="nchar" Nullable="false" MaxLength="40" />
+  </EntityType>
+  <EntityType Name="SURVEY">
+    <Key>
+      <PropertyRef Name="survey_id" />
+    </Key>
+    <Property Name="survey_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="nchar" Nullable="false" MaxLength="40" />
+    <Property Name="header_text" Type="nchar" Nullable="false" MaxLength="450" />
+    <Property Name="survey_introduction" Type="nchar" Nullable="false" MaxLength="850" />
+    <Property Name="number_of_sections" Type="int" Nullable="false" />
+    <Property Name="survey_status" Type="nchar" Nullable="false" MaxLength="1" />
+    <Property Name="lifetime" Type="int" Nullable="false" />
+    <Property Name="datestamp" Type="datetime" Nullable="false" />
+    <Property Name="user_stamp" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SURVEY_QUESTIONS">
+    <Key>
+      <PropertyRef Name="survey_questions_id" />
+    </Key>
+    <Property Name="survey_questions_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="survey_id" Type="int" Nullable="false" />
+    <Property Name="question_id" Type="int" Nullable="false" />
+    <Property Name="section_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SURVEY_REQUEST_SENT">
+    <Key>
+      <PropertyRef Name="survey_request_sent_id" />
+    </Key>
+    <Property Name="survey_request_sent_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="survey_id" Type="int" Nullable="false" />
+    <Property Name="course_id" Type="int" Nullable="false" />
+    <Property Name="person_hash" Type="nchar" Nullable="false" MaxLength="256" />
+    <Property Name="expiration_date" Type="datetime" Nullable="false" />
+    <Property Name="status_flag" Type="nchar" Nullable="false" MaxLength="1" />
+    <Property Name="date_sent" Type="datetime" Nullable="false" />
+    <Property Name="user_stamp" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SURVEY_SECTION">
+    <Key>
+      <PropertyRef Name="survey_section_id" />
+    </Key>
+    <Property Name="survey_section_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="nchar" Nullable="false" MaxLength="200" />
+    <Property Name="section_id_order" Type="int" Nullable="false" />
+    <Property Name="datestamp" Type="datetime" Nullable="false" />
+    <Property Name="user_stamp" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="USERS">
+    <Key>
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="user_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="user_name" Type="nchar" Nullable="false" MaxLength="20" />
+    <Property Name="password" Type="nchar" Nullable="false" MaxLength="20" />
+    <Property Name="datestamp" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__aspnet_Me__Appli__4A8310C6">
+    <End Role="aspnet_Applications" Type="Survey_DB_20Model.Store.aspnet_Applications" Multiplicity="1" />
+    <End Role="aspnet_Membership" Type="Survey_DB_20Model.Store.aspnet_Membership" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Applications">
+        <PropertyRef Name="ApplicationId" />
+      </Principal>
+      <Dependent Role="aspnet_Membership">
+        <PropertyRef Name="ApplicationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Me__UserI__4B7734FF">
+    <End Role="aspnet_Users" Type="Survey_DB_20Model.Store.aspnet_Users" Multiplicity="1" />
+    <End Role="aspnet_Membership" Type="Survey_DB_20Model.Store.aspnet_Membership" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="aspnet_Membership">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Pa__Appli__7C1A6C5A">
+    <End Role="aspnet_Applications" Type="Survey_DB_20Model.Store.aspnet_Applications" Multiplicity="1" />
+    <End Role="aspnet_Paths" Type="Survey_DB_20Model.Store.aspnet_Paths" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Applications">
+        <PropertyRef Name="ApplicationId" />
+      </Principal>
+      <Dependent Role="aspnet_Paths">
+        <PropertyRef Name="ApplicationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Pe__PathI__01D345B0">
+    <End Role="aspnet_Paths" Type="Survey_DB_20Model.Store.aspnet_Paths" Multiplicity="1" />
+    <End Role="aspnet_PersonalizationAllUsers" Type="Survey_DB_20Model.Store.aspnet_PersonalizationAllUsers" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Paths">
+        <PropertyRef Name="PathId" />
+      </Principal>
+      <Dependent Role="aspnet_PersonalizationAllUsers">
+        <PropertyRef Name="PathId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Pe__PathI__05A3D694">
+    <End Role="aspnet_Paths" Type="Survey_DB_20Model.Store.aspnet_Paths" Multiplicity="0..1" />
+    <End Role="aspnet_PersonalizationPerUser" Type="Survey_DB_20Model.Store.aspnet_PersonalizationPerUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Paths">
+        <PropertyRef Name="PathId" />
+      </Principal>
+      <Dependent Role="aspnet_PersonalizationPerUser">
+        <PropertyRef Name="PathId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Pe__UserI__0697FACD">
+    <End Role="aspnet_Users" Type="Survey_DB_20Model.Store.aspnet_Users" Multiplicity="0..1" />
+    <End Role="aspnet_PersonalizationPerUser" Type="Survey_DB_20Model.Store.aspnet_PersonalizationPerUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="aspnet_PersonalizationPerUser">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Pr__UserI__5F7E2DAC">
+    <End Role="aspnet_Users" Type="Survey_DB_20Model.Store.aspnet_Users" Multiplicity="1" />
+    <End Role="aspnet_Profile" Type="Survey_DB_20Model.Store.aspnet_Profile" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="aspnet_Profile">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Ro__Appli__690797E6">
+    <End Role="aspnet_Applications" Type="Survey_DB_20Model.Store.aspnet_Applications" Multiplicity="1" />
+    <End Role="aspnet_Roles" Type="Survey_DB_20Model.Store.aspnet_Roles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Applications">
+        <PropertyRef Name="ApplicationId" />
+      </Principal>
+      <Dependent Role="aspnet_Roles">
+        <PropertyRef Name="ApplicationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Us__Appli__3A4CA8FD">
+    <End Role="aspnet_Applications" Type="Survey_DB_20Model.Store.aspnet_Applications" Multiplicity="1" />
+    <End Role="aspnet_Users" Type="Survey_DB_20Model.Store.aspnet_Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Applications">
+        <PropertyRef Name="ApplicationId" />
+      </Principal>
+      <Dependent Role="aspnet_Users">
+        <PropertyRef Name="ApplicationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Us__RoleI__6DCC4D03">
+    <End Role="aspnet_Roles" Type="Survey_DB_20Model.Store.aspnet_Roles" Multiplicity="1" />
+    <End Role="aspnet_UsersInRoles" Type="Survey_DB_20Model.Store.aspnet_UsersInRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Roles">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="aspnet_UsersInRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Us__UserI__6CD828CA">
+    <End Role="aspnet_Users" Type="Survey_DB_20Model.Store.aspnet_Users" Multiplicity="1" />
+    <End Role="aspnet_UsersInRoles" Type="Survey_DB_20Model.Store.aspnet_UsersInRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="aspnet_UsersInRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Answer_Question">
+    <End Role="QUESTION" Type="Survey_DB_20Model.Store.QUESTION" Multiplicity="1" />
+    <End Role="ANSWER" Type="Survey_DB_20Model.Store.ANSWER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QUESTION">
+        <PropertyRef Name="question_id" />
+      </Principal>
+      <Dependent Role="ANSWER">
+        <PropertyRef Name="question_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Answer_SurveySent">
+    <End Role="SURVEY_REQUEST_SENT" Type="Survey_DB_20Model.Store.SURVEY_REQUEST_SENT" Multiplicity="1" />
+    <End Role="ANSWER" Type="Survey_DB_20Model.Store.ANSWER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SURVEY_REQUEST_SENT">
+        <PropertyRef Name="survey_request_sent_id" />
+      </Principal>
+      <Dependent Role="ANSWER">
+        <PropertyRef Name="survey_request_sent_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AnswerLong_Answer">
+    <End Role="ANSWER" Type="Survey_DB_20Model.Store.ANSWER" Multiplicity="1" />
+    <End Role="ANSWER_LONG" Type="Survey_DB_20Model.Store.ANSWER_LONG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ANSWER">
+        <PropertyRef Name="answer_id" />
+      </Principal>
+      <Dependent Role="ANSWER_LONG">
+        <PropertyRef Name="answer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AnswerLong_SurveySent">
+    <End Role="SURVEY_REQUEST_SENT" Type="Survey_DB_20Model.Store.SURVEY_REQUEST_SENT" Multiplicity="1" />
+    <End Role="ANSWER_LONG" Type="Survey_DB_20Model.Store.ANSWER_LONG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SURVEY_REQUEST_SENT">
+        <PropertyRef Name="survey_request_sent_id" />
+      </Principal>
+      <Dependent Role="ANSWER_LONG">
+        <PropertyRef Name="survey_request_sent_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AnswerMultiChoice_Answer">
+    <End Role="ANSWER" Type="Survey_DB_20Model.Store.ANSWER" Multiplicity="1" />
+    <End Role="ANSWER_MULTIPLE_CHOICE" Type="Survey_DB_20Model.Store.ANSWER_MULTIPLE_CHOICE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ANSWER">
+        <PropertyRef Name="answer_id" />
+      </Principal>
+      <Dependent Role="ANSWER_MULTIPLE_CHOICE">
+        <PropertyRef Name="answer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AnswerMultiChoice_SurveySent">
+    <End Role="SURVEY_REQUEST_SENT" Type="Survey_DB_20Model.Store.SURVEY_REQUEST_SENT" Multiplicity="1" />
+    <End Role="ANSWER_MULTIPLE_CHOICE" Type="Survey_DB_20Model.Store.ANSWER_MULTIPLE_CHOICE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SURVEY_REQUEST_SENT">
+        <PropertyRef Name="survey_request_sent_id" />
+      </Principal>
+      <Dependent Role="ANSWER_MULTIPLE_CHOICE">
+        <PropertyRef Name="survey_request_sent_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AnswerScale_Answer">
+    <End Role="ANSWER" Type="Survey_DB_20Model.Store.ANSWER" Multiplicity="1" />
+    <End Role="ANSWER_SCALE" Type="Survey_DB_20Model.Store.ANSWER_SCALE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ANSWER">
+        <PropertyRef Name="answer_id" />
+      </Principal>
+      <Dependent Role="ANSWER_SCALE">
+        <PropertyRef Name="answer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AnswerScale_SurveySent">
+    <End Role="SURVEY_REQUEST_SENT" Type="Survey_DB_20Model.Store.SURVEY_REQUEST_SENT" Multiplicity="1" />
+    <End Role="ANSWER_SCALE" Type="Survey_DB_20Model.Store.ANSWER_SCALE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SURVEY_REQUEST_SENT">
+        <PropertyRef Name="survey_request_sent_id" />
+      </Principal>
+      <Dependent Role="ANSWER_SCALE">
+        <PropertyRef Name="survey_request_sent_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AnswerShort_Answer">
+    <End Role="ANSWER" Type="Survey_DB_20Model.Store.ANSWER" Multiplicity="1" />
+    <End Role="ANSWER_SHORT" Type="Survey_DB_20Model.Store.ANSWER_SHORT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ANSWER">
+        <PropertyRef Name="answer_id" />
+      </Principal>
+      <Dependent Role="ANSWER_SHORT">
+        <PropertyRef Name="answer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AnswerShort_SurveySent">
+    <End Role="SURVEY_REQUEST_SENT" Type="Survey_DB_20Model.Store.SURVEY_REQUEST_SENT" Multiplicity="1" />
+    <End Role="ANSWER_SHORT" Type="Survey_DB_20Model.Store.ANSWER_SHORT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SURVEY_REQUEST_SENT">
+        <PropertyRef Name="survey_request_sent_id" />
+      </Principal>
+      <Dependent Role="ANSWER_SHORT">
+        <PropertyRef Name="survey_request_sent_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AnswerTF_Answer">
+    <End Role="ANSWER" Type="Survey_DB_20Model.Store.ANSWER" Multiplicity="1" />
+    <End Role="ANSWER_TRUE_FALSE" Type="Survey_DB_20Model.Store.ANSWER_TRUE_FALSE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ANSWER">
+        <PropertyRef Name="answer_id" />
+      </Principal>
+      <Dependent Role="ANSWER_TRUE_FALSE">
+        <PropertyRef Name="answer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AnswerTF_SurveySent">
+    <End Role="SURVEY_REQUEST_SENT" Type="Survey_DB_20Model.Store.SURVEY_REQUEST_SENT" Multiplicity="1" />
+    <End Role="ANSWER_TRUE_FALSE" Type="Survey_DB_20Model.Store.ANSWER_TRUE_FALSE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SURVEY_REQUEST_SENT">
+        <PropertyRef Name="survey_request_sent_id" />
+      </Principal>
+      <Dependent Role="ANSWER_TRUE_FALSE">
+        <PropertyRef Name="survey_request_sent_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Question_AnswerType">
+    <End Role="ANSWER_TYPE" Type="Survey_DB_20Model.Store.ANSWER_TYPE" Multiplicity="1" />
+    <End Role="QUESTION" Type="Survey_DB_20Model.Store.QUESTION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ANSWER_TYPE">
+        <PropertyRef Name="answer_type_id" />
+      </Principal>
+      <Dependent Role="QUESTION">
+        <PropertyRef Name="answer_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QuestionMultipleChoice_Question">
+    <End Role="QUESTION" Type="Survey_DB_20Model.Store.QUESTION" Multiplicity="1" />
+    <End Role="QUESTION_MULTIPLE_CHOICE" Type="Survey_DB_20Model.Store.QUESTION_MULTIPLE_CHOICE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QUESTION">
+        <PropertyRef Name="question_id" />
+      </Principal>
+      <Dependent Role="QUESTION_MULTIPLE_CHOICE">
+        <PropertyRef Name="question_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QuestionScale_Question">
+    <End Role="QUESTION" Type="Survey_DB_20Model.Store.QUESTION" Multiplicity="1" />
+    <End Role="QUESTION_SCALE" Type="Survey_DB_20Model.Store.QUESTION_SCALE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QUESTION">
+        <PropertyRef Name="question_id" />
+      </Principal>
+      <Dependent Role="QUESTION_SCALE">
+        <PropertyRef Name="question_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SurveyQuestions_Question">
+    <End Role="QUESTION" Type="Survey_DB_20Model.Store.QUESTION" Multiplicity="1" />
+    <End Role="SURVEY_QUESTIONS" Type="Survey_DB_20Model.Store.SURVEY_QUESTIONS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QUESTION">
+        <PropertyRef Name="question_id" />
+      </Principal>
+      <Dependent Role="SURVEY_QUESTIONS">
+        <PropertyRef Name="question_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SurveyQuestions_Section">
+    <End Role="SURVEY_SECTION" Type="Survey_DB_20Model.Store.SURVEY_SECTION" Multiplicity="1" />
+    <End Role="SURVEY_QUESTIONS" Type="Survey_DB_20Model.Store.SURVEY_QUESTIONS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SURVEY_SECTION">
+        <PropertyRef Name="survey_section_id" />
+      </Principal>
+      <Dependent Role="SURVEY_QUESTIONS">
+        <PropertyRef Name="section_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SurveyQuestions_Survey">
+    <End Role="SURVEY" Type="Survey_DB_20Model.Store.SURVEY" Multiplicity="1" />
+    <End Role="SURVEY_QUESTIONS" Type="Survey_DB_20Model.Store.SURVEY_QUESTIONS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SURVEY">
+        <PropertyRef Name="survey_id" />
+      </Principal>
+      <Dependent Role="SURVEY_QUESTIONS">
+        <PropertyRef Name="survey_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SurveyRequestSent_Survey">
+    <End Role="SURVEY" Type="Survey_DB_20Model.Store.SURVEY" Multiplicity="1" />
+    <End Role="SURVEY_REQUEST_SENT" Type="Survey_DB_20Model.Store.SURVEY_REQUEST_SENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SURVEY">
+        <PropertyRef Name="survey_id" />
+      </Principal>
+      <Dependent Role="SURVEY_REQUEST_SENT">
+        <PropertyRef Name="survey_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

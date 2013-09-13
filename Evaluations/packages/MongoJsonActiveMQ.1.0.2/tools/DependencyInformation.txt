@@ -1,0 +1,29 @@
+-----------------------------------------------
+	UnInstall Package
+----------------------------------------------
+	To UnInstall the package and remove dependencies run the following command:
+	
+	UnInstall-Package MongoJsonActiveMQ -RemoveDependencies
+	
+	This will remove all package information and dependencies
+
+----------------------------------------------
+	Mongo DB Drivers
+--------------------------------------------
+	This is the CSharp Drivers for Mongo DB
+	http://www.mongodb.org
+	
+--------------------------------------------
+	Apache Active MQ
+--------------------------------------------
+	To use active MQ to write messages
+
+--------------------------------------------
+	JayRock
+--------------------------------------------
+	CSharp json serialization dll for posting messages
+
+--------------------------------------------
+	CodeScales.Http
+--------------------------------------------
+	Http post client for C# for posting to MUX
