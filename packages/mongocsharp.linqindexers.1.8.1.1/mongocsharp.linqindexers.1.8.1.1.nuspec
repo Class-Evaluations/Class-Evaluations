@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>mongocsharp.linqindexers</id>
+    <version>1.8.1.1</version>
+    <authors>10gen Inc, Roysvork</authors>
+    <owners>10gen Inc, Roysvork</owners>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+    <projectUrl>https://github.com/Roysvork/mongo-csharp-driver</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Unofficial fork of the Mongo C# Driver v1.8.1 that supports loosely typed linq queries and explicit boolean comparisons against method call expressions</description>
+    <copyright>Copyright 2013</copyright>
+    <tags>mongodb mongo nosql linq</tags>
+  </metadata>
+</package>

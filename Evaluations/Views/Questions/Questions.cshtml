@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Evaluations.ViewModels.QuestionDetails>
+
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@using PagedList.Mvc;
+@using PagedList; 
+
+@{
+    ViewBag.Title = "List of all available questions";
+}
+
+<h2>List of all available questions</h2>
+
+<p>
+    @Html.ActionLink("Create New Question" , "Create") 
+</p>
+<table>
+    <tr>
+        <th>
+            Question Text
+        </th>
+        <th>
+            Answer Type
+        </th>
+        <th></th>
+        <th></th>
+         <th>
+            Date Created
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in ViewBag.onePageOfQuestions)
+{
+    var createdDate = item.dateCreated.ToString("MM/dd/yyyy");
+    <tr>
+        <td>
+            @item.questionText
+        </td>
+        <td>
+            @item.answerTypeName
+        </td>
+        <th></th>
+        <th></th>
+        <td>
+            @createdDate
+        </td>
+@*        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.questionID })  
+        </td>*@
+    </tr>
+}
+
+</table>
+@Html.PagedListPager((IPagedList)ViewBag.onePageOfQuestions, page => Url.Action("Index", new { page = page }))

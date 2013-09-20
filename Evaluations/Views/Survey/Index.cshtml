@@ -1,0 +1,66 @@
+﻿@*@model IEnumerable<Survey.Models.SURVEY>
+
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@using PagedList.Mvc;
+@using PagedList; 
+
+<h2>Available Surveys</h2>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<p>
+    @Html.ActionLink("Manually add survey response" , "../ManualResponseEntry/Index") 
+</p>
+ <p>
+      @Html.ActionLink("Create a Survey", "Create")
+ </p>
+
+@using (Html.BeginForm())
+{ 
+    <p> 
+        Find by Title: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string) &nbsp; 
+        <input type="submit" value="Search" />
+    </p> 
+} 
+
+<table>
+    <tr>
+         <th>
+            @Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.TitleSortParm })
+        </th>
+        <th>
+            <strong> Survey Header </strong>
+        </th>
+        <th>
+            <strong> Survey Status </strong>
+        </th>
+        <th>
+            <strong> View Survey </strong>
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in ViewBag.onePageOfSurveys) 
+{
+    <tr>
+        <td>
+            @item.title
+        </td>
+        <td>
+            @item.header_text
+        </td>
+        <td>
+            @item.survey_status
+        </td>
+        <td>
+            @Html.ActionLink("Survey Details", "Details", new { id = item.survey_id })
+        </td> 
+    </tr>
+}
+</table>
+
+   @Html.PagedListPager((IPagedList)ViewBag.onePageOfSurveys, page => Url.Action("Index", new { page = page }))
+*@

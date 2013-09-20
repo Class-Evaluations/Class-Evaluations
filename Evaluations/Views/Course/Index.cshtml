@@ -6,7 +6,7 @@
 <link href="/Content/PagedList.css" rel="stylesheet" type="text/css" /> 
 
 
-<h2>This list of courses are either set to complete or 1 days past the activities last end date. </h2>
+<h2>@ViewBag.PageTitle </h2>
 
 @using (Html.BeginForm())
 {
@@ -73,11 +73,12 @@
         <th></th>
     </tr>
 
-@foreach (var item in ViewBag.onePageOfCourse)
+@foreach (var item in Model)
 {
     var cbDetails = false;
     var StatusOfSurvey = "";
     var ExpirationDate = "";
+    
     @*Need to format the date time to a date*@
     var start_date = item.StartDate;
     var last_date = item.EndDate;
@@ -85,26 +86,17 @@
     var Title = "";
     Title = @item.ActivityTitle + "-" + @item.CourseTitle;
 
-
-    //foreach (var survey in ViewBag.SurveyStatus)
-    //{
-    ////    if (item.course_id == survey.course_id)
-    ////    {
-
-    ////        ViewBag.course = item.course_id;
-    ////        StatusOfSurvey = (survey.course_status1).Trim();
-    ////        if (StatusOfSurvey == "N")
-    ////        {
-    ////            ViewBag.Disable = true;
-    ////        }
-
-    ////        ExpirationDate = survey.survey_exp_date.ToString("MM/dd/yyyy");
-    ////    }
-
-    //}
     ViewBag.course = item.CourseId;
+    StatusOfSurvey = (item.SurveyStatus).Trim();
+    if (StatusOfSurvey == "N")
+    {
+        ViewBag.Disable = true;
+    }
+
+    ExpirationDate = Convert.ToString(@item.ExpirationDate);
+
     <tr>
-        @switch (StatusOfSurvey)
+        @switch (@item.SurveyStatus)
         {
             case "X":
                 <td>
@@ -201,7 +193,6 @@
 @* @if (User.IsInRole("Admin"))
  {*@
     <input type="button" name="Submit" value="Submit Do Not Survey"  style="position: absolute; right: 100px; " onclick="this.form.submit()" />
- //}
     <br />
     <br />
 <p></p>
